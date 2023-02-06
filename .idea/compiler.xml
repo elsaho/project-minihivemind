@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="BubbleTrouble" target="17" />
       <module name="BubbleTrouble.main" target="17" />
       <module name="BubbleTrouble.test" target="17" />
     </bytecodeTargetLevel>
