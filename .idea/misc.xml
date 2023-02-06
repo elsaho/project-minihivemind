@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+=======
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/BubbleTrouble" />
+  </component>
+>>>>>>> 0d8e9965e407937e985db6cf6b1da660eba04a27
   <component name="PDMPlugin">
     <option name="skipTestSources" value="false" />
   </component>
