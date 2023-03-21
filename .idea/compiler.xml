@@ -6,7 +6,11 @@
       <module name="BubbleTrouble.main" target="17" />
       <module name="BubbleTrouble.test" target="17" />
       <module name="Game" target="17" />
+      <module name="Game.main" target="17" />
+      <module name="Game.test" target="17" />
       <module name="MiniHivemind" target="17" />
+      <module name="MiniHivemind.main" target="17" />
+      <module name="MiniHivemind.test" target="17" />
       <module name="Test" target="17" />
       <module name="Test.main" target="17" />
       <module name="Test.test" target="17" />
