@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BubbleTrouble.iml" filepath="$PROJECT_DIR$/.idea/modules/BubbleTrouble.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BubbleTrouble.main.iml" filepath="$PROJECT_DIR$/.idea/modules/BubbleTrouble.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BubbleTrouble.test.iml" filepath="$PROJECT_DIR$/.idea/modules/BubbleTrouble.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/project-minihivemind.iml" filepath="$PROJECT_DIR$/.idea/project-minihivemind.iml" />
     </modules>
   </component>

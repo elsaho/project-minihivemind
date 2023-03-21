@@ -5,6 +5,11 @@
       <module name="BubbleTrouble" target="17" />
       <module name="BubbleTrouble.main" target="17" />
       <module name="BubbleTrouble.test" target="17" />
+      <module name="Game" target="17" />
+      <module name="MiniHivemind" target="17" />
+      <module name="Test" target="17" />
+      <module name="Test.main" target="17" />
+      <module name="Test.test" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
