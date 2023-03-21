@@ -1,7 +1,7 @@
 package org.ca.bcit.comp2522;
 import processing.core.PVector;
 
-public class Sprite {
+public abstract class Sprite implements Drawable {
 
   protected double position;
   protected double size;
