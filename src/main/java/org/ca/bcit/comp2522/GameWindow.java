@@ -8,31 +8,29 @@ import processing.core.PApplet;
 public class GameWindow extends PApplet {
   private Scene scene;
 
-  public GameWindow(Scene scene) {
-    this.scene = scene;
-  }
-
   public void settings() {
-    size(640, 360);
+    size(500, 500);
   }
 
   public void setup() {
-    surface.setTitle("Game Window");
-    frameRate(60);
-    noStroke();
-    fill(255);
-    scene.setParent(this);
+    scene = new Scene(this);
   }
 
   public void draw() {
-    background(0);
     scene.update();
     scene.display();
   }
 
-  public static void main(String[] args) {
-    String[] appArgs = new String[] { "GameWindow" };
-    PApplet.runSketch(appArgs, new GameWindow(new Scene()));
+  public void keyPressed() {
+    if (key == 'w') {
+      scene.getPlayer().setY(scene.getPlayer().getY() - 5);
+    } else if (key == 's') {
+      scene.getPlayer().setY(scene.getPlayer().getY() + 5);
+    }
   }
 
+  public static void main(String[] args) {
+    String[] appArgs = new String[] { "org.ca.bcit.comp2522.GameWindow" };
+    PApplet.runSketch(appArgs, new GameWindow());
+  }
 }

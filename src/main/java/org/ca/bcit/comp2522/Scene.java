@@ -2,23 +2,29 @@ package org.ca.bcit.comp2522;
 
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
+import processing.core.PApplet;
+
 public class Scene {
   private PApplet parent;
+  private Player player;
 
-  public Scene() {
-
-  }
-
-  public void setParent(PApplet parent) {
+  public Scene(PApplet parent) {
     this.parent = parent;
+    player = new Player(100, 100, 50, 50);
   }
 
   public void display() {
-    parent.fill(255, 0, 0);
-    parent.rect(100, 100, 200, 50);
+    parent.background(255);
+    player.display(parent);
   }
 
   public void update() {
+    player.update(parent);
+  }
 
+  public Player getPlayer() {
+    return player;
   }
 }
