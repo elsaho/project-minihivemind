@@ -29,7 +29,10 @@ public class Scene extends PApplet{
 
   public void display() {
     parent.background(255);
-    player.display(parent);
+    sprites.add(player);
+    for (Sprite sprite : sprites) {
+      sprite.display(parent);
+    }
 
   }
 
