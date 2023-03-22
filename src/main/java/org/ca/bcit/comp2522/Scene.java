@@ -14,11 +14,13 @@ public class Scene extends PApplet{
   private Player player;
   ArrayList<Sprite> sprites;
 
+
   public Scene(PApplet parent) {
     this.parent = parent;
     sprites = new ArrayList<Sprite>();
     player = new Player(
         new PVector(this.width/2,460),
+
         new PVector(0,1),
         40,
         2,
