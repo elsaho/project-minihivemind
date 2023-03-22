@@ -1,38 +1,33 @@
 package org.ca.bcit.comp2522;
 import processing.core.PVector;
 
-public abstract class Sprite implements Drawable {
+import processing.core.PApplet;
+import processing.core.PVector;
 
-  protected double position;
-  protected double size;
-  protected double direction;
+public class Sprite {
+  private PVector position;
+  private PVector velocity;
+  private float size;
+  private int color;
 
-  public double getSize() {
-    //TODO
-    return 0.0;
-  }
-
-  public void setSize() {
-    //TODO
-  }
-
-  public double getDirection() {
-    //TODO
-    return 0.0;
-  }
-
-  public void move() {
-    //TODO
-  }
-
-  public double getPosition() {
-    //TODO
-    return 0.0;
+  public Sprite(float x, float y, float size, int color) {
+    position = new PVector(x, y);
+    velocity = new PVector(0, 0);
+    this.size = size;
+    this.color = color;
   }
 
   public void update() {
-    //TODO
+    position.add(velocity);
   }
 
+  public void display(PApplet parent) {
+    parent.fill(color);
+    parent.ellipse(position.x, position.y, size, size);
+  }
 
+  public void setVelocity(float x, float y) {
+    velocity = new PVector(x, y);
+  }
 }
+
