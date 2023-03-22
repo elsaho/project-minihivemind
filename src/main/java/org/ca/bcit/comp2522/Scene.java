@@ -10,9 +10,11 @@ public class Scene {
   private PApplet parent;
   private Player player;
 
+
   public Scene(PApplet parent) {
     this.parent = parent;
-    player = new Player(100, 100, 50, 50);
+//    player = new Player(player.getX(), player.getY(), player.getWidth(), player.getHeight());
+    player = new Player((GameWindow.getX() - 50)/ 2, GameWindow.getY() - 50, 50, 50);
   }
 
   public void display() {

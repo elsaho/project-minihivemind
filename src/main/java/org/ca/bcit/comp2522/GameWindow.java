@@ -7,9 +7,22 @@ import processing.core.PApplet;
  */
 public class GameWindow extends PApplet {
   private Scene scene;
+  private static int x = 500;
+
+  private static int y = 500;
+
+  public static int getX() {
+    return x;
+  }
+
+  public static int getY() {
+    return y;
+  }
+
+
 
   public void settings() {
-    size(500, 500);
+    size(x, y);
   }
 
   public void setup() {
@@ -19,14 +32,6 @@ public class GameWindow extends PApplet {
   public void draw() {
     scene.update();
     scene.display();
-  }
-
-  public void keyPressed() {
-    if (key == 'w') {
-      scene.getPlayer().setY(scene.getPlayer().getY() - 5);
-    } else if (key == 's') {
-      scene.getPlayer().setY(scene.getPlayer().getY() + 5);
-    }
   }
 
   public static void main(String[] args) {
