@@ -14,6 +14,7 @@ public class Scene extends PApplet{
   private Player player;
   ArrayList<Sprite> sprites;
 
+
   public Scene(PApplet parent) {
     this.parent = parent;
     sprites = new ArrayList<Sprite>();
@@ -23,6 +24,7 @@ public class Scene extends PApplet{
         100,
         2,
         new Color(0,255,0), this );
+
   }
 
   public void display() {
