@@ -20,11 +20,11 @@ public class Scene extends PApplet{
     this.parent = parent;
     sprites = new ArrayList<Sprite>();
     player = new Player(
-        new PVector(GameWindow.getX()/2,490),
+        new PVector(this.width/2,460),
         new PVector(0,1),
-        100,
+        40,
         2,
-        new Color(0,255,0), this );
+        new Color(0,255,255), this );
     bubble = new Bubble( //make this array later
             new PVector(GameWindow.getX()/2,0),
             new PVector(0,1),
