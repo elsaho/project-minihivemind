@@ -19,7 +19,7 @@ public class Scene extends PApplet{
     this.parent = parent;
     sprites = new ArrayList<Sprite>();
     player = new Player(
-        new PVector(this.width/2,490),
+        new PVector(GameWindow.getX()/2,490),
         new PVector(0,1),
         100,
         2,
