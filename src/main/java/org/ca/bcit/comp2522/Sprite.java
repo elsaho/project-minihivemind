@@ -43,10 +43,6 @@ public class Sprite implements Comparable<Sprite>, Drawable, Collidable {
     return position.copy();
   }
 
-  public void display(PApplet parent) {
-    parent.fill(0, 255, 0);
-    parent.rect(this.position.x, this.position.y, 10, 10);
-  }
 
   public void update() {
     this.bounce();
@@ -93,6 +89,13 @@ public class Sprite implements Comparable<Sprite>, Drawable, Collidable {
       value = -1;
     }
     return value;
+  }
+
+  public void display(PApplet parent) {
+    parent.pushStyle();
+    parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+    parent.ellipse(this.position.x, this.position.y, size, size);
+    parent.popStyle();
   }
 }
 

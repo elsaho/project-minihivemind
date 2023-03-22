@@ -27,6 +27,13 @@ public class Player extends Sprite{
       }
     }
   }
+  @Override
+  public void display(PApplet parent) {
+    parent.pushStyle();
+    parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+    parent.rect(this.position.x, this.position.y, size, size);
+    parent.popStyle();
+  }
 }
 
 

@@ -19,20 +19,18 @@ public class Scene extends PApplet{
     this.parent = parent;
     sprites = new ArrayList<Sprite>();
     player = new Player(
-        new PVector(GameWindow.getX()/2,490),
-        new PVector(0,1),
-        100,
-        2,
-        new Color(0,255,0), this );
+        new PVector(this.width/2,460),
 
+        new PVector(0,1),
+        40,
+        2,
+        new Color(0,255,255), this );
   }
 
   public void display() {
     parent.background(255);
-    sprites.add(player);
-    for (Sprite sprite : sprites) {
-      sprite.display(parent);
-    }
+    player.display(parent);
+
   }
 
   public void update() {
