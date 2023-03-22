@@ -12,6 +12,7 @@ import processing.event.KeyEvent;
 public class Scene extends PApplet{
   private PApplet parent;
   private Player player;
+  private Bubble bubble;
   ArrayList<Sprite> sprites;
 
 
@@ -24,12 +25,20 @@ public class Scene extends PApplet{
         100,
         2,
         new Color(0,255,0), this );
-
+    bubble = new Bubble( //make this array later
+            new PVector(GameWindow.getX()/2,0),
+            new PVector(0,1),
+            100,
+            2,
+            new Color(0,0,255),
+            this,
+            new PVector (0, 5));
   }
 
   public void display() {
     parent.background(255);
     sprites.add(player);
+    sprites.add(bubble);
     for (Sprite sprite : sprites) {
       sprite.display(parent);
     }
