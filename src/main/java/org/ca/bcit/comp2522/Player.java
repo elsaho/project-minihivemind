@@ -1,51 +1,25 @@
 package org.ca.bcit.comp2522;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 
-public class Player {
-  private float x;
-  private float y;
-  private float width;
-  private float height;
-  private float speed;
+import java.awt.*;
 
-  public Player(float x, float y, float width, float height) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.speed = 5;
-  }
+public class Player extends Sprite{
 
-  public void display(PApplet parent) {
-    parent.fill(0, 255, 0);
-    parent.rect(x, y, width, height);
+  public Player(PVector position, PVector direction, float size, float speed, Color color, Scene scene) {
+    super(position, direction, size, speed, color, scene);
   }
 
   public void update(PApplet parent) {
     if (parent.keyPressed) {
-      if (parent.key == 'a') {
-        x -= speed;
-      } else if (parent.key == 'd') {
-        x += speed;
+      if (parent.keyCode == 37) { // left arrow key
+        position.x -= speed;
+      } else if (parent.keyCode == 39) { // right arrow key
+        position.x += speed;
       }
     }
   }
-
-  public float getX() {
-    return x;
-  }
-
-  public float getY() {
-    return y;
-  }
-
-  public void setX(float x) {
-    this.x = x;
-  }
-
-  public void setY(float y) {
-    this.y = y;
-  }
 }
+
 

@@ -21,13 +21,6 @@ public class GameWindow extends PApplet {
     scene.display();
   }
 
-  public void keyPressed() {
-    if (key == 'w') {
-      scene.getPlayer().setY(scene.getPlayer().getY() - 5);
-    } else if (key == 's') {
-      scene.getPlayer().setY(scene.getPlayer().getY() + 5);
-    }
-  }
 
   public static void main(String[] args) {
     String[] appArgs = new String[] { "org.ca.bcit.comp2522.GameWindow" };
