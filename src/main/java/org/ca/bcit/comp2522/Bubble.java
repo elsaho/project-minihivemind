@@ -13,33 +13,49 @@ public class Bubble extends Sprite implements Poppable {
     this.velocity = velocity;
   }
 
+  /**
+   * Helper method to multiply vectors
+   * @param a as a PVector
+   * @param b as a PVector
+   * @return PVector
+   */
+  public PVector multVector(PVector a, PVector b) {
+    PVector result = new PVector (0, 0);
+    result.x = a.x * b.x;
+    result.y = a.y * b.y;
+    return result;
+  }
 
-  // DO bounce overrirde
-//  public void bounce() {
-//    if (position.y == 0) {
-//      //something with velocity
-//    }
-//  }
+  /**
+   * Bounce method that allows bubbles to bounce off floors and walls
+   */
   @Override
-  public void update() {
+  public void bounce() {
+    if (position.y + velocity.y < GameWindow.getY() - (size/2) &&
+            position.y + velocity.y > 0 + (size/2) &&
+            position.x + velocity.x < GameWindow.getX() - (size/2) &&
+            position.x + velocity.x > 0 + (size/2)) {
+      position = position.add(velocity);
+    } else if (position.y + velocity.y >= GameWindow.getY() - (size/2) ||
+            position.y + velocity.y <= 0 + (size/2)) {
 
-//    if (parent.keyPressed) {
-//      if (parent.keyCode == 37) { // left arrow key
-//        if (position.x - speed < 0) {
-//          position.x = 0;
-//        }
-//        position.x -= speed;
-//      } else if (parent.keyCode == 39) { // right arrow key
-//        if (position.x + speed > GameWindow.getX() - 10) {
-//          position.x = GameWindow.getX() - 10;
-//        }
-//        position.x += speed;
-//      }
-//    }
+      if (velocity.x != 0) {
+        velocity = multVector(velocity, new PVector(1, -1));
+      } else {
+        velocity.x = velocity.y; //initialize
+        velocity = multVector(velocity, new PVector(1, -1));
+      }
+    } else if (position.x + velocity.x >= GameWindow.getX() - (size/2) ||
+            position.x + velocity.x <= 0 + (size/2)) {
+      velocity = multVector(velocity, new PVector(-1, -1));
+    }
+
+
+
   }
 
   @Override
   public void pop() {
-
+    //TODO
   }
 }

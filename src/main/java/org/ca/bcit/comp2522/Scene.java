@@ -23,13 +23,13 @@ public class Scene extends PApplet{
         new PVector(this.width/2,460),
         new PVector(0,1),
         40,
-        2,
+        5,
         new Color(0,255,255), this );
     bubble = new Bubble( //make this array later
-            new PVector(GameWindow.getX()/2,0),
+            new PVector(GameWindow.getX()/2,50),
             new PVector(0,1),
             100,
-            2,
+            5,
             new Color(0,0,255),
             this,
             new PVector (0, 5));
@@ -46,6 +46,7 @@ public class Scene extends PApplet{
 
   public void update() {
     player.update(parent);
+    bubble.bounce();
   }
 
   public Player getPlayer() {
