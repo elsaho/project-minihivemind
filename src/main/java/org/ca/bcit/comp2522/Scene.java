@@ -14,6 +14,7 @@ public class Scene extends PApplet{
   private Player player;
   private Bubble bubble;
   ArrayList<Sprite> sprites;
+  ArrayList<Bubble> bubbles;
 
 
   public Scene(PApplet parent) {
@@ -25,7 +26,9 @@ public class Scene extends PApplet{
         40,
         5,
         new Color(0,255,255), this );
-    bubble = new Bubble( //make this array later
+
+    bubbles = new ArrayList<Bubble>();
+    bubble = new Bubble(
             new PVector(GameWindow.getX()/2,50),
             new PVector(0,1),
             100,
@@ -33,12 +36,15 @@ public class Scene extends PApplet{
             new Color(0,0,255),
             this,
             new PVector (0, 5));
+    bubbles.add(bubble);
   }
 
   public void display() {
     parent.background(255);
     sprites.add(player);
-    sprites.add(bubble);
+    for (Bubble bubble: bubbles) {
+      sprites.add(bubble);
+    }
     for (Sprite sprite : sprites) {
       sprite.display(parent);
     }
@@ -46,7 +52,9 @@ public class Scene extends PApplet{
 
   public void update() {
     player.update(parent);
-    bubble.bounce();
+    for (Bubble bubble: bubbles) {
+      bubble.bounce();
+    }
   }
 
   public Player getPlayer() {
