@@ -7,9 +7,9 @@ import processing.core.PApplet;
  */
 public class GameWindow extends PApplet {
   private Scene scene;
-  private static int x = 500;
+  private static final int x = 800;
 
-  private static int y = 500;
+  private static final int y = 600;
 
   public static int getX() {
     return x;
@@ -19,19 +19,18 @@ public class GameWindow extends PApplet {
     return y;
   }
 
-
-
   public void settings() {
     size(x, y);
   }
 
   public void setup() {
-    scene = new Scene(this);
+    scene = new Scene(this); //init?
+    scene.setup(this);
   }
 
   public void draw() {
-    scene.update();
-    scene.display();
+    scene.display(this);
+    scene.update(this);
   }
   
   public static void main(String[] args) {

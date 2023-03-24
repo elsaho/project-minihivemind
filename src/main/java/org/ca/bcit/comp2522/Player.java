@@ -1,6 +1,7 @@
 package org.ca.bcit.comp2522;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 
@@ -8,8 +9,11 @@ import java.awt.*;
 
 public class Player extends Sprite{
 
-  public Player(PVector position, PVector direction, float size, float speed, Color color, Scene scene) {
-    super(position, direction, size, speed, color, scene);
+  private PImage playerImage;
+  PApplet parent;
+  public Player(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
+    super(position, direction, size, speed, color, window);
+    playerImage = window.loadImage("player.png");
   }
 
   public void update(PApplet parent) {
@@ -31,7 +35,7 @@ public class Player extends Sprite{
   public void display(PApplet parent) {
     parent.pushStyle();
     parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
-    parent.rect(this.position.x, this.position.y, size, size);
+    parent.image(playerImage, this.position.x, this.position.y, size, size);
     parent.popStyle();
   }
 }
