@@ -1,6 +1,5 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.awt.*;
@@ -8,8 +7,8 @@ import java.awt.*;
 public class Bubble extends Sprite implements Poppable {
   private PVector velocity;
 
-  public Bubble(PVector position, PVector direction, float size, float speed, Color color, Scene scene, PVector velocity) {
-    super(position, direction, size, speed, color, scene);
+  public Bubble(PVector position, PVector direction, float size, float speed, Color color, GameWindow window, PVector velocity) {
+    super(position, direction, size, speed, color, window);
     this.velocity = velocity;
   }
 
@@ -29,7 +28,6 @@ public class Bubble extends Sprite implements Poppable {
   /**
    * Bounce method that allows bubbles to bounce off floors and walls
    */
-  @Override
   public void bounce() {
     if (position.y + velocity.y < GameWindow.getY() - (size/2) &&
             position.y + velocity.y > 0 + (size/2) &&

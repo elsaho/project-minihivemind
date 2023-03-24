@@ -4,35 +4,26 @@ import processing.core.PVector;
 import processing.core.PApplet;
 import java.awt.*;
 
-public class Sprite implements Comparable<Sprite>, Drawable, Collidable {
+public class Sprite implements Comparable<Sprite>, Collidable {
   protected PVector position;
   protected PVector direction;
   protected float size;
   protected float speed;
   protected Color color;
-  protected Scene scene;
+  protected GameWindow window;
 
   public boolean collided() {
     return false;
   }
 
 
-  public Sprite(PVector position, PVector direction, float size, float speed, Color color, Scene scene) {
+  public Sprite(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
     this.position = position;
     this.direction = direction;
     this.size = size;
     this.speed = speed;
-    this.scene = scene;
+    this.window = window;
     this.color = color;
-  }
-
-  public void bounce() {
-    if (this.position.x <= 0 ||
-        this.position.x >= scene.width ||
-        this.position.y <= 0 ||
-        this.position.y >= scene.height) {
-      this.direction.rotate(scene.HALF_PI);
-    }
   }
 
   public PVector getDirection() {
@@ -45,7 +36,6 @@ public class Sprite implements Comparable<Sprite>, Drawable, Collidable {
 
 
   public void update() {
-    this.bounce();
     this.position = this.getPosition().add(this.direction.copy().mult(speed));
   }
 
@@ -59,13 +49,6 @@ public class Sprite implements Comparable<Sprite>, Drawable, Collidable {
       return true;
     }
     return false;
-  }
-
-  public void draw() {
-    scene.pushStyle();
-    scene.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
-    scene.ellipse(this.position.x, this.position.y, size, size);
-    scene.popStyle();
   }
 
   public void setDirection(PVector direction) {
@@ -96,6 +79,9 @@ public class Sprite implements Comparable<Sprite>, Drawable, Collidable {
     parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
     parent.ellipse(this.position.x, this.position.y, size, size);
     parent.popStyle();
+  }
+
+  public void setup(PApplet parent) {
   }
 }
 
