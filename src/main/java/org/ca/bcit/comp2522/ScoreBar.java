@@ -3,7 +3,7 @@ package org.ca.bcit.comp2522;
 public class ScoreBar {
 
   private static ScoreBar single_instance = null;
-  private float value;
+  private int value;
 
   public ScoreBar() {
     this.value = 0;
@@ -28,7 +28,7 @@ public class ScoreBar {
     this.value += (100 * time);
   }
 
-  public float getValue() {
+  public int getValue() {
     return value;
   }
 
