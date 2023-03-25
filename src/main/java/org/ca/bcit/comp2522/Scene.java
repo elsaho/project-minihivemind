@@ -48,7 +48,7 @@ public class Scene {
     }
 
     // If you want to change the image, you must make the image the exact size of the window (800 x 600)
-    bg = parent.loadImage("../assets/test.png");
+    bg = parent.loadImage("../assets/SkyBackground.png");
   }
 
   public void display(PApplet parent) {
