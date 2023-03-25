@@ -14,7 +14,7 @@ import static processing.core.PConstants.UP;
 public class Scene {
 
   private final Player player;
-  private int playerSize = 100;
+  private int playerSize = 64;
   private Lives lives;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
@@ -22,6 +22,8 @@ public class Scene {
   private PImage bg;
   private PImage heart;
   private ScoreBar scoreBar;
+  private long start;
+  private long remaining;
 
   public static Line line;
 
@@ -40,7 +42,7 @@ public class Scene {
         new PVector(400, 50),
         new PVector(0, 1),
         100,
-        2,
+        5,
         new Color(0, 0, 255), window,
         new PVector(0, 5)
     );
@@ -58,11 +60,13 @@ public class Scene {
     }
 
     // If you want to change the image, you must make the image the exact size of the window (800 x 600)
-    bg = parent.loadImage("../assets/test.png");
+    bg = parent.loadImage("../assets/SkyBackground.png");
     heart = parent.loadImage("../assets/pixelHeart.png");
 
     lives = Lives.getInstance();
-    scoreBar = ScoreBar.getInstance()
+    scoreBar = ScoreBar.getInstance();
+
+    start = parent.millis() + 90000;
 ;  }
 
   public void display(PApplet parent) {
@@ -77,6 +81,9 @@ public class Scene {
 
 
 
+    remaining = start - parent.millis();
+    String timeString = parent.nf((int) (remaining / 1000), 2);
+
     parent.fill(255, 255, 255);
     parent.textSize(32);
     parent.textAlign(PConstants.LEFT);
@@ -84,6 +91,7 @@ public class Scene {
     for (int i = 0; i < lives.getLives(); i++) {
       parent.image(heart, 110 + (60 * i), 25, 50, 50);
     }
+    parent.text("Time: " + timeString, 350, 55);
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
@@ -113,8 +121,16 @@ public class Scene {
           System.out.println("You lost a life");
         } else {
           //Game Over, need to implement
+          //For now, this is to confirm that the game is over
+          System.out.println("Game Over!");
         }
 
+      }
+
+      if (remaining <= 0) {
+        //Game Over, need to implement
+        //For now, this is to confirm that the game is over
+        System.out.println("Game Over!");
       }
     }
     if(line != null) {
@@ -124,7 +140,7 @@ public class Scene {
   }
 
   public void reset() {
-    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 100);
+    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 64);
     bubbles.clear();
     bubble.position = new PVector(400, 50);
     bubbles.add(bubble);

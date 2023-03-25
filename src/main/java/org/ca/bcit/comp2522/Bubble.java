@@ -1,15 +1,20 @@
 package org.ca.bcit.comp2522;
 
+import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import java.awt.*;
 
 public class Bubble extends Sprite implements Poppable {
   private PVector velocity;
+  public Line line;
+  private PImage bubbleImage;
 
   public Bubble(PVector position, PVector direction, float size, float speed, Color color, GameWindow window, PVector velocity) {
     super(position, direction, size, speed, color, window);
     this.velocity = velocity;
+    bubbleImage = window.loadImage("../assets/bubble.png");
   }
 
   /**
@@ -51,12 +56,19 @@ public class Bubble extends Sprite implements Poppable {
 
   @Override
   public void pop() {
-    //TODO
   }
+
 
   @Override
   public boolean collided() {
     return false;
   }
 
+  @Override
+  public void display(PApplet parent) {
+    parent.pushStyle();
+    parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+    parent.image(bubbleImage, this.position.x, this.position.y, size, size);
+    parent.popStyle();
+  }
 }

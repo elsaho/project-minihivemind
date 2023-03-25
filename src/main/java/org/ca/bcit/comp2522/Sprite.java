@@ -74,7 +74,7 @@ public abstract class Sprite implements Collidable {
     return false;
   }
 
-  private static float clamp(float value, float min, float max) {
+  protected static float clamp(float value, float min, float max) {
     return Math.max(min, Math.min(max, value));
   }
 

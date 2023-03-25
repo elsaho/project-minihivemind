@@ -63,4 +63,3 @@ public class Line extends Sprite implements Drawable, Moveable {
     return false;
   }
 }
-
