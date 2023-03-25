@@ -30,7 +30,7 @@ public class Scene {
         new PVector(400, 50),
         new PVector(0, 1),
         100,
-        2,
+        5,
         new Color(0, 0, 255), window,
         new PVector(0, 5)
     );
