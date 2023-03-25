@@ -5,17 +5,20 @@ import processing.core.PApplet;
 import java.awt.*;
 import java.util.ArrayList;
 
+import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
 
 public class Scene {
   private final Player player;
   private int playerSize = 100;
-  private final Lives lives;
+  private Lives lives;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
   private Bubble bubble;
   private PImage bg;
+  private PImage heart;
+  private ScoreBar scoreBar;
 
   public Scene(GameWindow window){
     sprites = new ArrayList<>();
@@ -49,14 +52,30 @@ public class Scene {
 
     // If you want to change the image, you must make the image the exact size of the window (800 x 600)
     bg = parent.loadImage("../assets/test.png");
-  }
+    heart = parent.loadImage("../assets/pixelHeart.png");
+
+    lives = Lives.getInstance();
+    scoreBar = ScoreBar.getInstance()
+;  }
 
   public void display(PApplet parent) {
     parent.background(bg);
+    parent.fill(0);
+    parent.rect(0, 0, GameWindow.getX(), 100);
+
 
     for (Sprite sprite : sprites) {
       sprite.display(parent);
     }
+
+    parent.fill(255, 255, 255);
+    parent.textSize(32);
+    parent.textAlign(PConstants.LEFT);
+    parent.text("Lives: ", 20, 55);
+    for (int i = 0; i < lives.getLives(); i++) {
+      parent.image(heart, 110 + (60 * i), 25, 50, 50);
+    }
+    parent.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
   public void update(PApplet parent) {
