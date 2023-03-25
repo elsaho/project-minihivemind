@@ -18,17 +18,23 @@ public class Line extends Sprite implements Drawable, Moveable {
 
   private PVector velocity;
   private final float x;
+  private float thickness;
+
+  private final float y;
 
   public Line(PVector position, PVector direction, float size, float speed, Color color, GameWindow window, PVector velocity) {
     super(position, direction, size, speed, color, window);
     this.velocity = velocity;
     this.x = position.x;
+    this.y = GameWindow.getY();
+    this.position.y = GameWindow.getY();
+    this.thickness = GameWindow.getX()/100;
   }
 
   public void display(PApplet parent) {
-    window.strokeWeight(30);
+    window.strokeWeight(thickness);
     window.stroke(204, 102, 0);// Beastly
-    window.line(x, 600, x, 300); //line(x1, y1, x2, y2)
+    window.line(x, y, x, this.position.y); //line(x1, y1, x2, y2)
   }
 
 
@@ -47,6 +53,9 @@ public class Line extends Sprite implements Drawable, Moveable {
 
   public void update(PApplet parent, Player player) {
     this.position.x = player.getPosition().x;
+    if(this.position.y > 0) {
+      this.position.y = this.position.y - speed;
+    }
   }
 }
 
