@@ -5,55 +5,54 @@ import processing.core.PApplet;
 import java.awt.*;
 import java.util.ArrayList;
 
-import processing.core.PApplet;
 import processing.core.PVector;
-import processing.event.KeyEvent;
 
-public class Scene extends PApplet{
-  private PApplet parent;
-  private Player player;
-  private Bubble bubble;
-  ArrayList<Sprite> sprites;
-  ArrayList<Bubble> bubbles;
-  Lives lives;
+public class Scene {
+  private final Player player;
+  private final ArrayList<Sprite> sprites;
+  private final ArrayList<Bubble> bubbles;
 
-
-  public Scene(PApplet parent) {
-    this.parent = parent;
-    sprites = new ArrayList<Sprite>();
+  public Scene(GameWindow window){
+    sprites = new ArrayList<>();
+    int playerSize = 100;
     player = new Player(
-        new PVector(this.width/2,460),
+        new PVector(GameWindow.getX()/2, GameWindow.getY() - playerSize),
+        new PVector(0, 1), playerSize, 5,
+        new Color(0, 255, 255), window
+    );
 
-        new PVector(0,1),
-        40,
+    bubbles = new ArrayList<>();
+    Bubble bubble = new Bubble(
+        new PVector(400, 50),
+        new PVector(0, 1),
+        100,
         5,
-        new Color(0,255,255), this );
-
-    bubbles = new ArrayList<Bubble>();
-    bubble = new Bubble(
-            new PVector(GameWindow.getX()/2,50),
-            new PVector(0,1),
-            100,
-            5,
-            new Color(0,0,255),
-            this,
-            new PVector (0, 5));
+        new Color(0, 0, 255), window,
+        new PVector(0, 5)
+    );
     bubbles.add(bubble);
     lives = new Lives();
   }
 
-  public void display() {
-    parent.background(255);
+  public void setup(PApplet parent) {
+    for (Bubble bubble: bubbles) {
+      bubble.setup(parent);
+    }
     sprites.add(player);
     for (Bubble bubble: bubbles) {
       sprites.add(bubble);
     }
+  }
+
+  public void display(PApplet parent) {
+    parent.background(255);
+
     for (Sprite sprite : sprites) {
       sprite.display(parent);
     }
   }
 
-  public void update() {
+  public void update(PApplet parent) {
     player.update(parent);
     for (Bubble bubble: bubbles) {
       bubble.bounce();
