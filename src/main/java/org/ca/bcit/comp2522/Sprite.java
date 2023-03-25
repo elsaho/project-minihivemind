@@ -85,8 +85,6 @@ public abstract class Sprite implements Collidable {
   }
 
   public void display(PApplet parent) {
-    parent.stroke(0);
-    parent.strokeWeight(1);
     parent.pushStyle();
     parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
     parent.ellipse(this.position.x, this.position.y, size, size);

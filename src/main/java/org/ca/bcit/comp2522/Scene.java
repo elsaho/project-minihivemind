@@ -9,10 +9,7 @@ import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import static processing.core.PConstants.UP;
-
 public class Scene {
-
   private final Player player;
   private int playerSize = 64;
   private Lives lives;
@@ -25,17 +22,13 @@ public class Scene {
   private long start;
   private long remaining;
 
-  public static Line line;
-
   public Scene(GameWindow window){
     sprites = new ArrayList<>();
-    int playerSize = 100;
     player = new Player(
         new PVector(GameWindow.getX()/2, GameWindow.getY() - playerSize),
         new PVector(0, 1), playerSize, 5,
         new Color(0, 255, 255), window
     );
-    line = null;
 
     bubbles = new ArrayList<>();
     bubble = new Bubble(
@@ -70,16 +63,14 @@ public class Scene {
 ;  }
 
   public void display(PApplet parent) {
-    parent.background(255);
+    parent.background(bg);
+    parent.fill(0);
+    parent.rect(0, 0, GameWindow.getX(), 100);
+
 
     for (Sprite sprite : sprites) {
       sprite.display(parent);
     }
-    if(line != null) {
-      line.display(parent);
-    }
-
-
 
     remaining = start - parent.millis();
     String timeString = parent.nf((int) (remaining / 1000), 2);
@@ -93,20 +84,6 @@ public class Scene {
     }
     parent.text("Time: " + timeString, 350, 55);
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
-  }
-
-  void MakeLineInstance(GameWindow window) {
-    if(line == null && window.keyPressed && window.keyCode == UP) {
-      line = new Line(
-          this.player.getPosition(),
-          new PVector(0, 1),
-          100,
-          5,
-          new Color(0, 0, 255),
-          window,
-          new PVector(0, 5)
-      );
-    }
   }
 
   public void update(PApplet parent) {
@@ -133,10 +110,6 @@ public class Scene {
         System.out.println("Game Over!");
       }
     }
-    if(line != null) {
-      line.update(parent, player);
-    }
-
   }
 
   public void reset() {
@@ -149,5 +122,4 @@ public class Scene {
   public Player getPlayer() {
     return player;
   }
-
 }
