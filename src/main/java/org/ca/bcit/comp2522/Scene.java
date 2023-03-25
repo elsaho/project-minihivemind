@@ -15,6 +15,7 @@ public class Scene extends PApplet{
   private Bubble bubble;
   ArrayList<Sprite> sprites;
   ArrayList<Bubble> bubbles;
+  Lives lives;
 
 
   public Scene(PApplet parent) {
@@ -38,6 +39,7 @@ public class Scene extends PApplet{
             this,
             new PVector (0, 5));
     bubbles.add(bubble);
+    lives = new Lives();
   }
 
   public void display() {
@@ -55,6 +57,18 @@ public class Scene extends PApplet{
     player.update(parent);
     for (Bubble bubble: bubbles) {
       bubble.bounce();
+
+      if (Sprite.collided(player, bubble)) {
+        if (lives.getLives() > 0) {
+          lives.loseLife();
+          System.out.println("You lost a life");
+//          new Scene(this);
+          //reset game
+        } else {
+          //game over
+        }
+
+      }
     }
   }
 

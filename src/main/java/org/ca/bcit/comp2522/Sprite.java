@@ -4,7 +4,7 @@ import processing.core.PVector;
 import processing.core.PApplet;
 import java.awt.*;
 
-public class Sprite implements Comparable<Sprite>, Drawable, Collidable {
+public class Sprite implements Drawable, Collidable {
   protected PVector position;
   protected PVector direction;
   protected float size;
