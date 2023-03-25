@@ -6,6 +6,7 @@ import processing.core.PApplet;
  *
  */
 public class GameWindow extends PApplet {
+
   private Scene scene;
   private static final int x = 800;
 
@@ -18,6 +19,7 @@ public class GameWindow extends PApplet {
   public static int getY() {
     return y;
   }
+
 
   public void settings() {
     size(x, y);

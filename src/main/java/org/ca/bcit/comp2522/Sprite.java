@@ -4,17 +4,13 @@ import processing.core.PVector;
 import processing.core.PApplet;
 import java.awt.*;
 
-public class Sprite implements Comparable<Sprite>, Collidable {
+public abstract class Sprite implements Collidable {
   protected PVector position;
   protected PVector direction;
   protected float size;
   protected float speed;
   protected Color color;
   protected GameWindow window;
-
-  public boolean collided() {
-    return false;
-  }
 
 
   public Sprite(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
@@ -43,35 +39,49 @@ public class Sprite implements Comparable<Sprite>, Collidable {
     return size;
   }
 
-  public static boolean collided(Sprite a, Sprite b) {
-    float distance = PVector.dist(a.getPosition(), b.getPosition());
-    if (distance <= (a.getSize() + b.getSize())) {
+//  public static boolean collided(Sprite a, Sprite b) {
+//    float distance = PVector.dist(a.getPosition(), b.getPosition());
+//    System.out.println(distance);
+//    if (distance <= 25) {
+//      System.out.println("collided");
+//      return true;
+//    }
+//    return false;
+//  }
+
+  public static boolean collided(Bubble bubble, Player player) {
+    float bubbleX = bubble.getPosition().x;
+    float bubbleY = bubble.getPosition().y;
+    float playerX = player.getPosition().x;
+    float playerY = player.getPosition().y;
+    float playerWidth = player.getSize();
+    float playerHeight = player.getSize();
+
+    // find the closest point on the player to the bubble
+    float closestX = clamp(bubbleX, playerX, playerX + playerWidth);
+    float closestY = clamp(bubbleY, playerY, playerY + playerHeight);
+
+    // calculate the distance between the closest point and the bubble center
+    float distX = bubbleX - closestX;
+    float distY = bubbleY - closestY;
+    float distance = (float) Math.sqrt((distX * distX) + (distY * distY));
+
+    // check if the bubble collides with the player
+    if (distance <= bubble.getSize() / 2) {
       return true;
     }
+
     return false;
   }
 
+  private static float clamp(float value, float min, float max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+
+
   public void setDirection(PVector direction) {
     this.direction = direction;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Sprite sprite = (Sprite) o;
-    return Float.compare(sprite.size, size) == 0;
-  }
-
-  @Override
-  public int compareTo(Sprite sprite) {
-    int value = 0;
-    if ((this.getSize() - sprite.getSize()) > 0) {
-      value = 1;
-    } else {
-      value = -1;
-    }
-    return value;
   }
 
   public void display(PApplet parent) {
