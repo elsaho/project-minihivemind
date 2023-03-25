@@ -47,13 +47,16 @@ public class Bubble extends Sprite implements Poppable {
             position.x + velocity.x <= 0 + (size/2)) {
       velocity = multVector(velocity, new PVector(-1, -1));
     }
-
-
-
   }
 
   @Override
   public void pop() {
     //TODO
   }
+
+  @Override
+  public boolean collided() {
+    return false;
+  }
+
 }
