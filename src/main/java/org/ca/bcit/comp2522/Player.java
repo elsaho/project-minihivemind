@@ -38,6 +38,13 @@ public class Player extends Sprite{
     parent.image(playerImage, this.position.x, this.position.y, size, size);
     parent.popStyle();
   }
+
+  @Override
+  public boolean collided() {
+    return false;
+  }
+
+
 }
 
 

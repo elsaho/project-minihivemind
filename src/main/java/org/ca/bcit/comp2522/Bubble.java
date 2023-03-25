@@ -53,4 +53,10 @@ public class Bubble extends Sprite implements Poppable {
   public void pop() {
     //TODO
   }
+
+  @Override
+  public boolean collided() {
+    return false;
+  }
+
 }
