@@ -55,7 +55,12 @@ public class Line extends Sprite implements Drawable, Moveable {
     this.position.x = player.getPosition().x;
     if(this.position.y > 0) {
       this.position.y = this.position.y - speed;
-    }
+    } else {Scene.line = null;}
+  }
+
+  @Override
+  public boolean collided() {
+    return false;
   }
 }
 

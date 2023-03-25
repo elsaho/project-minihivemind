@@ -9,7 +9,10 @@ import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import static processing.core.PConstants.UP;
+
 public class Scene {
+
   private final Player player;
   private int playerSize = 100;
   private Lives lives;
@@ -20,7 +23,7 @@ public class Scene {
   private PImage heart;
   private ScoreBar scoreBar;
 
-  private final Line line;
+  public static Line line;
 
   public Scene(GameWindow window){
     sprites = new ArrayList<>();
@@ -30,14 +33,7 @@ public class Scene {
         new PVector(0, 1), playerSize, 5,
         new Color(0, 255, 255), window
     );
-    line = new Line(
-        new PVector(400, 0),
-        new PVector(0, 1),
-        100,
-        5,
-        new Color(0, 0, 255), window,
-        new PVector(0, 5)
-    );
+    line = null;
 
     bubbles = new ArrayList<>();
     bubble = new Bubble(
@@ -75,7 +71,10 @@ public class Scene {
     for (Sprite sprite : sprites) {
       sprite.display(parent);
     }
-    line.display(parent);
+    if(line != null) {
+      line.display(parent);
+    }
+
 
 
     parent.fill(255, 255, 255);
@@ -86,6 +85,20 @@ public class Scene {
       parent.image(heart, 110 + (60 * i), 25, 50, 50);
     }
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
+  }
+
+  void MakeLineInstance(GameWindow window) {
+    if(line == null && window.keyPressed && window.keyCode == UP) {
+      line = new Line(
+          this.player.getPosition(),
+          new PVector(0, 1),
+          100,
+          2,
+          new Color(0, 0, 255),
+          window,
+          new PVector(0, 5)
+      );
+    }
   }
 
   public void update(PApplet parent) {
@@ -104,7 +117,10 @@ public class Scene {
 
       }
     }
-    line.update(parent, player);
+    if(line != null) {
+      line.update(parent, player);
+    }
+
   }
 
   public void reset() {

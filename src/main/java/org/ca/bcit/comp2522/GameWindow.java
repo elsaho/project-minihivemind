@@ -28,11 +28,13 @@ public class GameWindow extends PApplet {
   public void setup() {
     scene = new Scene(this); //init?
     scene.setup(this);
+
   }
 
   public void draw() {
     scene.display(this);
     scene.update(this);
+    scene.MakeLineInstance(this);
   }
   
   public static void main(String[] args) {
