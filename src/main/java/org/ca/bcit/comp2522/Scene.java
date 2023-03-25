@@ -11,7 +11,7 @@ import processing.core.PVector;
 
 public class Scene {
   private final Player player;
-  private int playerSize = 100;
+  private int playerSize = 64;
   private Lives lives;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
@@ -33,7 +33,7 @@ public class Scene {
         new PVector(400, 50),
         new PVector(0, 1),
         100,
-        2,
+        5,
         new Color(0, 0, 255), window,
         new PVector(0, 5)
     );
@@ -51,7 +51,7 @@ public class Scene {
     }
 
     // If you want to change the image, you must make the image the exact size of the window (800 x 600)
-    bg = parent.loadImage("../assets/test.png");
+    bg = parent.loadImage("../assets/SkyBackground.png");
     heart = parent.loadImage("../assets/pixelHeart.png");
 
     lives = Lives.getInstance();
@@ -97,7 +97,7 @@ public class Scene {
   }
 
   public void reset() {
-    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 100);
+    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 64);
     bubbles.clear();
     bubble.position = new PVector(400, 50);
     bubbles.add(bubble);
