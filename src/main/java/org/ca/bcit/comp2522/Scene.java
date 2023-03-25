@@ -93,7 +93,7 @@ public class Scene {
           this.player.getPosition(),
           new PVector(0, 1),
           100,
-          2,
+          5,
           new Color(0, 0, 255),
           window,
           new PVector(0, 5)
