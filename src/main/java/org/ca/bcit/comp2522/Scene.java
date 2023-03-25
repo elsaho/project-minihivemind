@@ -11,7 +11,7 @@ import processing.core.PVector;
 
 public class Scene {
   private final Player player;
-  private int playerSize = 100;
+  private int playerSize = 64;
   private Lives lives;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
@@ -97,7 +97,7 @@ public class Scene {
   }
 
   public void reset() {
-    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 100);
+    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 64);
     bubbles.clear();
     bubble.position = new PVector(400, 50);
     bubbles.add(bubble);

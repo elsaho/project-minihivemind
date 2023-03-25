@@ -14,7 +14,7 @@ public class Bubble extends Sprite implements Poppable {
   public Bubble(PVector position, PVector direction, float size, float speed, Color color, GameWindow window, PVector velocity) {
     super(position, direction, size, speed, color, window);
     this.velocity = velocity;
-    bubbleImage = window.loadImage("bubble.png");
+    bubbleImage = window.loadImage("../assets/bubble.png");
   }
 
   /**
