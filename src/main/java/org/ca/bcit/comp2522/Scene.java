@@ -107,7 +107,7 @@ public class Scene {
       if (remaining <= 0) {
         //Game Over, need to implement
         //For now, this is to confirm that the game is over
-        System.out.println("Game Over!")
+        System.out.println("Game Over!");
       }
     }
   }
