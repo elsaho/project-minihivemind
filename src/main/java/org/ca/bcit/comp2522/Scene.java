@@ -19,6 +19,8 @@ public class Scene {
   private PImage bg;
   private PImage heart;
   private ScoreBar scoreBar;
+  private long start;
+  private long remaining;
 
   public Scene(GameWindow window){
     sprites = new ArrayList<>();
@@ -55,7 +57,9 @@ public class Scene {
     heart = parent.loadImage("../assets/pixelHeart.png");
 
     lives = Lives.getInstance();
-    scoreBar = ScoreBar.getInstance()
+    scoreBar = ScoreBar.getInstance();
+
+    start = parent.millis() + 90000;
 ;  }
 
   public void display(PApplet parent) {
@@ -68,6 +72,9 @@ public class Scene {
       sprite.display(parent);
     }
 
+    remaining = start - parent.millis();
+    String timeString = parent.nf((int) (remaining / 1000), 2);
+
     parent.fill(255, 255, 255);
     parent.textSize(32);
     parent.textAlign(PConstants.LEFT);
@@ -75,6 +82,7 @@ public class Scene {
     for (int i = 0; i < lives.getLives(); i++) {
       parent.image(heart, 110 + (60 * i), 25, 50, 50);
     }
+    parent.text("Time: " + timeString, 350, 55);
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
@@ -90,8 +98,16 @@ public class Scene {
           System.out.println("You lost a life");
         } else {
           //Game Over, need to implement
+          //For now, this is to confirm that the game is over
+          System.out.println("Game Over!");
         }
 
+      }
+
+      if (remaining <= 0) {
+        //Game Over, need to implement
+        //For now, this is to confirm that the game is over
+        System.out.println("Game Over!")
       }
     }
   }
