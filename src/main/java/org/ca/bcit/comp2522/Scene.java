@@ -43,7 +43,7 @@ public class Scene {
 
     bubbles = new ArrayList<>();
     bubble = new Bubble(
-        new PVector(400, 50),
+        new PVector(400, 00),
         new PVector(0, 1),
         100,
         5,
