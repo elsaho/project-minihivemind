@@ -37,7 +37,7 @@ public class GameWindow extends PApplet {
     //sound
     try {
       SoundEffects audio = new SoundEffects();
-      audio.playMusic();
+      audio.playBGM();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (LineUnavailableException e) {
