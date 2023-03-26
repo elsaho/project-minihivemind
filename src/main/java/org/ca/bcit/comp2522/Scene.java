@@ -37,6 +37,8 @@ public class Scene {
         new Color(0, 255, 255), window
     );
 
+    line = null;
+
     bubbles = new ArrayList<>();
     bubble = new Bubble(
         new PVector(400, 50),
@@ -74,6 +76,22 @@ public class Scene {
     start = parent.millis() + 90000;
   }
 
+  void UpdateLineInstance(GameWindow window) {
+    if(line == null) {
+      if(window.keyPressed) {
+        if(window.keyCode == UP) {
+          line = new Line(
+              new PVector(player.position.x, window.getY()),
+              player.direction, 0, 5,
+              new Color(0, 255, 255), window
+          );
+
+        }
+      }
+
+    }
+  }
+
   /**
    * Displays the game.
    *
@@ -87,6 +105,9 @@ public class Scene {
 
     for (Sprite sprite : sprites) {
       sprite.display(parent);
+    }
+    if(line != null) {
+      line.display(parent);
     }
 
     remaining = start - parent.millis();
@@ -110,6 +131,9 @@ public class Scene {
    */
   public void update(PApplet parent) {
     player.update(parent);
+    if(line != null) {
+      line.update(parent);
+    }
     for (Bubble bubble : bubbles) {
       bubble.bounce();
 
@@ -147,4 +171,6 @@ public class Scene {
   public Player getPlayer() {
     return player;
   }
+
+
 }

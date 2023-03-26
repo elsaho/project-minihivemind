@@ -12,6 +12,7 @@ import java.awt.*;
  * 5. make the line appear at the feet of the current player
  * 6. Make the line a singleton, cannot be created until it dissapears.
  * 7 Figure out colliding with the bubbles
+ * 8. just for the push
  */
 
 public class Line extends Sprite implements Drawable, Moveable {
