@@ -36,7 +36,9 @@ public class GameWindow extends PApplet {
 
   public void draw() {
     scene.display(this);
+    scene.UpdateLineInstance(this);
     scene.update(this);
+
   }
   
   public static void main(String[] args) {
