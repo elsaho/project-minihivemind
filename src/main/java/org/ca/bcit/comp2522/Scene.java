@@ -35,6 +35,7 @@ public class Scene {
         new PVector(0, 1), playerSize, 5,
         new Color(0, 255, 255), window
     );
+
     line = null;
 
     bubbles = new ArrayList<>();
