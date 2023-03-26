@@ -27,12 +27,14 @@ public class SoundEffects {
     }
   }
 
-  public void playMusic(){
+  public void playBGM(){
     audio.loop(Clip.LOOP_CONTINUOUSLY);
   }
 
-  public void stopMusic(){
+  public void stopBGM(){
     audio.stop();
     audio.close();
   }
+
+
 }
