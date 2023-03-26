@@ -7,6 +7,7 @@ import processing.event.MouseEvent;
 public class GameOver extends PApplet{
 
   private PImage bg;
+  private PImage gameOverText;
   private Button restart;
 
   public GameOver(GameWindow window) {
@@ -15,12 +16,14 @@ public class GameOver extends PApplet{
 
   public void setup(PApplet parent) {
     bg = parent.loadImage("../assets/NightBackground.png");
-    restart = new Button(100, 100, 100, 50, "Restart");
+    gameOverText = parent.loadImage("../assets/gameover.png");
+    restart = new Button(500, 500, 100, 50, "Restart");
 //    noLoop();
   }
 
   public void display(PApplet parent) {
     parent.background(bg);
+    parent.image(gameOverText, 400, 300, 500, 500);
     restart.display(parent);
   }
 
@@ -36,9 +39,5 @@ public class GameOver extends PApplet{
     background(bg);
     restart.display(this);
   }
-
-//  public void mouseClicked() {
-//    System.out.println("Restart button clicked!");
-//  }
 
 }

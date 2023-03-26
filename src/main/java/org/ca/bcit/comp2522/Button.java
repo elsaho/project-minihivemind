@@ -29,6 +29,9 @@ public class Button extends PApplet{
   public void display(PApplet parent) {
     parent.fill(255, 255, 0);
     parent.rect(xPos, yPos, width, height);
+    parent.textAlign(PApplet.CENTER, PApplet.CENTER);
+    parent.fill(0);
+    parent.text(text, xPos + width / 2, yPos + height / 2);
   }
 
 

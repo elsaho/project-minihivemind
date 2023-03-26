@@ -6,7 +6,6 @@ import processing.core.PImage;
 public class StartPage extends PApplet {
 
   private PImage bg;
-  private PImage title;
 
   public StartPage(GameWindow window) {
   }
@@ -14,7 +13,6 @@ public class StartPage extends PApplet {
   public void setup(PApplet parent) {
     super.setup();
     bg = parent.loadImage("../assets/SkyBackground.png");
-    title = parent.loadImage("../assets/title.png");
   }
 
   public void display(PApplet parent) {
@@ -25,6 +23,5 @@ public class StartPage extends PApplet {
   }
 
   public void draw() {
-    image(title, 50, 50);
   }
 }
