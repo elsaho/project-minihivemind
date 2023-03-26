@@ -40,7 +40,7 @@ public class Line extends Sprite implements Drawable, Moveable {
     window.line(x, y, x, this.position.y); //line(x1, y1, x2, y2)
     window.strokeWeight(1);
     window.stroke(0);
-    parent.image(fireball, this.position.x + size, this.position.y, 100, 100);
+//    parent.image(fireball, this.position.x + (size/3), this.position.y, 100, 100);
   }
 
 
