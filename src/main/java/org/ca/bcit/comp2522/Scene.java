@@ -9,6 +9,14 @@ import processing.core.PVector;
 
 import static processing.core.PConstants.UP;
 
+/**
+ * Scene class. The class that contains all the sprites in the game.
+ * This class is responsible for updating and displaying all the sprites.
+ *
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
+ * @version 2023
+ */
+
 public class Scene {
 
   public static Line line;

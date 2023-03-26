@@ -1,84 +1,89 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.*;
+import java.awt.Color;
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
 
-/**
- * Player. The sprite that the user controls.
- * Can move left and right and shoot bullets.
+/** Player class. The sprite that the user controls.
+ * Can move left and right and shoot bullets. Extends Sprite class.
  *
- * @author Mai Vu
- * @author Elsa Ho
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 public class Player extends Sprite {
+  private final PImage playerLeft;
+  private final PImage playerRight;
+  private boolean isLeft;
+  private final PApplet parent;
 
-  private PImage playerLeft;
-  private PImage playerRight;
-  protected boolean isLeft;
-  PApplet parent;
-
-  /**
-   * Constructor for objects of class Player.
+  /** Constructor for Player class.
    *
-   * @param position as a PVector
-   * @param direction as a PVector
-   * @param size as a float
-   * @param speed as a float
-   * @param color as a Color
-   * @param window as a GameWindow
+   *@param position the position of the player as a PVector.
+   *@param direction the direction of the player as a PVector.
+   *@param size the size of the player as a float.
+   *@param speed the speed of the player as a float.
+   *@param color the color of the player as a Color.
+   *@param window the GameWindow instance.
    */
-  public Player(PVector position, PVector direction,
-                float size, float speed, Color color, GameWindow window) {
+  public Player(final PVector position, final PVector direction, final float size,
+                final float speed, final Color color, final GameWindow window) {
     super(position, direction, size, speed, color, window);
     playerLeft = window.loadImage("../assets/CharLeft.png");
     playerRight = window.loadImage("../assets/CharRight.png");
     isLeft = true;
+    parent = window;
   }
 
-  /**
-   * Updates the player's position.
+  /** Updates the player's position based on the arrow key pressed by the user.
    *
-   * @param parent as a PApplet
+   * @param parent the PApplet instance used to update the player's position.
    */
-  public void update(PApplet parent) {
+  public void update(final PApplet parent) {
     if (parent.keyPressed) {
-    if (parent.keyCode == 37) { // left arrow key
-      isLeft = true;
-      if (position.x - speed < 0) {
-        position.x = 0;
-      }
+      if (parent.keyCode == PConstants.LEFT) {
+        // left arrow key
+        isLeft = true;
+        if (position.x - speed < 0) {
+          position.x = 0;
+        }
         position.x -= speed;
-      } else if (parent.keyCode == 39) { // right arrow key
-      isLeft = false;
-      if (position.x + speed > GameWindow.getX() - 10) {
-        position.x = GameWindow.getX() - 10;
-      }
+      } else if (parent.keyCode == PConstants.RIGHT) {
+        // right arrow key
+        isLeft = false;
+        if (position.x + speed > GameWindow.getX() - size) {
+          position.x = GameWindow.getX() - size;
+        }
         position.x += speed;
       }
     }
   }
 
+  /** Displays the player on the screen.
+   *
+   * @param parent the PApplet instance used to display the player.
+   */
   @Override
-  public void display(PApplet parent) {
+  public void display(final PApplet parent) {
     parent.pushStyle();
-    parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+    parent.fill(color.getRed(), color.getGreen(), color.getBlue());
     if (isLeft) {
-      parent.image(playerLeft, this.position.x, this.position.y, 42, 64);
+      parent.image(playerLeft, position.x, position.y, 42, 64);
     } else {
-      parent.image(playerRight, this.position.x, this.position.y, 42, 64);
+      parent.image(playerRight, position.x, position.y, 42, 64);
     }
     parent.popStyle();
   }
 
+  /** Returns false since the player cannot collide with anything in this game.
+   *
+   * @return false
+   */
   @Override
   public boolean collided() {
     return false;
   }
-
-
 }
 
 

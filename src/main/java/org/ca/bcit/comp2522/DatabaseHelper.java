@@ -13,7 +13,7 @@ import org.bson.Document;
 /**
  * A helper class for connecting to MongoDB.
  *
- * @author Mai Vu
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 public class DatabaseHelper {
