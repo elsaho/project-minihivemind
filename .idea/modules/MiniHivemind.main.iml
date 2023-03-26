@@ -39,5 +39,9 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver-sync:4.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver-core:4.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.mongodb:bson:4.9.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.mongodb:bson-record-codec:4.9.0" level="project" />
   </component>
 </module>
