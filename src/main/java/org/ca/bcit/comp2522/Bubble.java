@@ -1,57 +1,104 @@
 package org.ca.bcit.comp2522;
 
+import java.awt.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import java.awt.*;
 
+/**
+ * Bubble. Creates the bubbles that the player can pop.
+ * Extends Sprite and implements Poppable.
+ *
+ * @author Elsa Ho
+ * @version 2023
+ *
+ */
 public class Bubble extends Sprite implements Poppable {
+  private static final float GRAVITY = 0.1f;
   private PVector velocity;
   public Line line;
   private final PImage bubbleImage;
 
-  public Bubble(PVector position, PVector direction, float size, float speed, Color color, GameWindow window, PVector velocity) {
+  private float startY;
+  /**
+   * Constructor for Bubble.
+   *
+   * @param position as a PVector
+   * @param direction as a PVector
+   * @param size as a float
+   * @param speed as a float
+   * @param color as a Color
+   * @param window as a GameWindow
+   * @param velocity as a PVector
+   */
+  public Bubble(PVector position, PVector direction, float size,
+                float speed, Color color, GameWindow window, PVector velocity) {
+
     super(position, direction, size, speed, color, window);
     this.velocity = velocity;
     bubbleImage = window.loadImage("../assets/bubble.png");
+    this.startY = GameWindow.getY() - position.y;
+
+
   }
 
   /**
-   * Helper method to multiply vectors
+   * Helper method to multiply vectors.
+   *
    * @param a as a PVector
    * @param b as a PVector
    * @return PVector
    */
   public PVector multVector(PVector a, PVector b) {
-    PVector result = new PVector (0, 0);
+    PVector result = new PVector(0, 0);
     result.x = a.x * b.x;
     result.y = a.y * b.y;
     return result;
   }
 
   /**
-   * Bounce method that allows bubbles to bounce off floors and walls
+   * Bounce method that allows bubbles to bounce off floors and walls.
    */
-  public void bounce() {
-    if (position.y + velocity.y < GameWindow.getY() - (size/2) &&
-            position.y + velocity.y > 0 + (size/2) &&
-            position.x + velocity.x < GameWindow.getX() - (size/2) &&
-            position.x + velocity.x > 0 + (size/2)) {
-      position = position.add(velocity);
-    } else if (position.y + velocity.y >= GameWindow.getY() - (size/2) ||
-            position.y + velocity.y <= 0 + (size/2)) {
+  private float currentX = size;
 
-      if (velocity.x != 0) {
-        velocity = multVector(velocity, new PVector(1, -1));
-      } else {
-        velocity.x = velocity.y; //initialize
-        velocity = multVector(velocity, new PVector(1, -1));
-      }
-    } else if (position.x + velocity.x >= GameWindow.getX() - (size/2) ||
-            position.x + velocity.x <= 0 + (size/2)) {
-      velocity = multVector(velocity, new PVector(-1, -1));
+  public void bounce() {
+    if (position.y + velocity.y > startY) {
+      position.y = startY;
+      velocity.y = -velocity.y;
+    } else if (position.y + velocity.y < 0) {
+      position.y = 0;
+      velocity.y = -velocity.y;
     }
+
+    if (position.x + velocity.x > GameWindow.getX() - (size / 2)) {
+      position.x = GameWindow.getX() - (size / 2);
+      velocity.x = -velocity.x;
+      currentX = position.x - size;
+    } else if (position.x + velocity.x < 0) {
+      position.x = 0;
+      velocity.x = -velocity.x;
+    } else {
+      // Add a small amount to the x position
+      if (currentX == size) {
+        position.x += 2;
+        if (position.x == GameWindow.getX() - size) {
+          currentX = position.x;
+        }
+      } else {
+        if (position.x <= 0) {
+          currentX = size;
+        }
+        position.x -= 2;
+      }
+    }
+
+    if (position.y + size / 2 >= GameWindow.getY()) {
+      velocity.y = -velocity.y;
+    }
+
+    velocity.y += GRAVITY;
+    position.add(velocity);
   }
 
   @Override
