@@ -15,8 +15,10 @@ public class Scene {
   private final Player player;
   private int playerSize = 64;
   private Lives lives;
-  private final ArrayList<Sprite> sprites;
-  private final ArrayList<Bubble> bubbles;
+  private ArrayList<Sprite> sprites;
+  private ArrayList<Bubble> bubbles;
+
+
   private Bubble bubble;
   private PImage bg;
   private PImage heart;
@@ -82,7 +84,7 @@ public class Scene {
         if(window.keyCode == UP) {
           line = new Line(
               new PVector(player.position.x, window.getY()),
-              player.direction, 0, 5,
+              player.direction, player.size, 5,
               new Color(0, 255, 255), window
           );
 
@@ -137,6 +139,7 @@ public class Scene {
     for (Bubble bubble : bubbles) {
       bubble.bounce();
 
+
       if (Sprite.collided(bubble, player)) {
         if (lives.getLives() > 0) {
           lives.loseLife();
@@ -147,6 +150,14 @@ public class Scene {
           //For now, this is to confirm that the game is over
           System.out.println("Game Over!");
         }
+
+      }
+      if(line != null && Sprite.collided(line, bubble)) {
+//        line = null;
+        bubbles.remove(bubble);
+//        sprites.remove(bubble);
+//      scoreBar.addScore(100);
+        System.out.println("You popped a bubble!");
 
       }
 
