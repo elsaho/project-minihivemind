@@ -162,10 +162,8 @@ public class Scene {
         line = null;
         removedSprites.add(bubble);
 
-      scoreBar.addScore((int) (bubble.size * remaining / 10000));
-
+        scoreBar.addScore((int) (bubble.size * remaining / 10000));
         System.out.println("You popped a bubble!");
-
       }
 
       if (remaining <= 0) {

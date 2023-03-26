@@ -15,7 +15,7 @@ public class SoundEffects {
 
   public SoundEffects() throws FileNotFoundException, LineUnavailableException {
     try {
-      AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/bgm.au"));
+      AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/bgm.wav"));
       audio = AudioSystem.getClip();
       audio.open(audioInputStream);
     } catch (FileNotFoundException | LineUnavailableException e) {
