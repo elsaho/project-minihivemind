@@ -172,6 +172,5 @@ public class Scene {
   public Player getPlayer() {
     return player;
   }
-
-
 }
+
