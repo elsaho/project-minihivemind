@@ -9,7 +9,11 @@ import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import static processing.core.PConstants.UP;
+
 public class Scene {
+
+  public static Line line;
   private final Player player;
   private int playerSize = 64;
   private Lives lives;
@@ -22,13 +26,17 @@ public class Scene {
   private long start;
   private long remaining;
 
+
+
   public Scene(GameWindow window){
+
     sprites = new ArrayList<>();
     player = new Player(
         new PVector(GameWindow.getX()/2, GameWindow.getY() - playerSize),
         new PVector(0, 1), playerSize, 5,
         new Color(0, 255, 255), window
     );
+    line = null;
 
     bubbles = new ArrayList<>();
     bubble = new Bubble(
@@ -71,6 +79,9 @@ public class Scene {
     for (Sprite sprite : sprites) {
       sprite.display(parent);
     }
+    if(line != null) {
+      line.display(parent);
+    }
 
     remaining = start - parent.millis();
     String timeString = parent.nf((int) (remaining / 1000), 2);
@@ -86,8 +97,28 @@ public class Scene {
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
+void UpdateLineInstance(GameWindow window) {
+    if(line == null) {
+      if(window.keyPressed) {
+        if(window.keyCode == UP) {
+          line = new Line(
+              new PVector(player.position.x, window.getY()),
+              player.direction, 0, 5,
+              new Color(0, 255, 255), window
+          );
+
+        }
+      }
+
+    }
+}
+
   public void update(PApplet parent) {
     player.update(parent);
+    if(line != null) {
+      line.update(parent);
+    }
+
     for (Bubble bubble: bubbles) {
       bubble.bounce();
 
