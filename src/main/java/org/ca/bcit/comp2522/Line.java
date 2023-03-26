@@ -5,32 +5,38 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import java.awt.*;
-/** TODO:
- * 1. Make a basic line
- * 2. update the line so it grows from the floor to the top
- * 3. update the line so it deletes itself when
- * 4. Make the line appear with up or space
- * 5. make the line appear at the feet of the current player
- * 6. Make the line a singleton, cannot be created until it dissapears.
- * 7 Figure out colliding with the bubbles
- * 8. just for the push
+
+/**
+ * Line. The class that creates the line that the player can use to catch the bubbles.
+ *
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
+ * @version 2023
  */
 
-public class Line extends Sprite implements Drawable, Moveable {
-
+public class Line extends Sprite {
+  /** TODO:
+   * 1. Make a basic line
+   * 2. update the line so it grows from the floor to the top
+   * 3. update the line so it deletes itself when
+   * 4. Make the line appear with up or space
+   * 5. make the line appear at the feet of the current player
+   * 6. Make the line a singleton, cannot be created until it dissapears.
+   * 7 Figure out colliding with the bubbles
+   * 8. just for the push
+   */
   private PVector velocity;
-  private final float x;
-  private float thickness;
+  protected final float x;
+  protected float thickness;
 
-  private final float y;
+  protected final float y;
   private PImage fireball;
 
   public Line(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
     super(position, direction, size, speed, color, window);
-    this.x = position.x - (size);
+    this.x = position.x + size/2;
     this.y = GameWindow.getY();
     this.position.y = GameWindow.getY();
-    this.thickness = 21;
+    this.thickness = 10;
     fireball = window.loadImage("../assets/fireball.png");
   }
 
@@ -43,23 +49,10 @@ public class Line extends Sprite implements Drawable, Moveable {
 //    parent.image(fireball, this.position.x + (size/3), this.position.y, 100, 100);
   }
 
-
-
-
-
-  public void move() {
-    // TODO Auto-generated method stub
-    // Move line
-  }
-
-  @Override
-  public void draw() {
-
-  }
-
   public void update(PApplet parent) {
 
-    if(this.position.y > 0) {
+    // hard coded for now, should not go above the scorebar
+    if(this.position.y > 100 + thickness / 2) {
       this.position.y = this.position.y - speed;
     } else {Scene.line = null;}
   }

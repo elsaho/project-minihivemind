@@ -8,8 +8,7 @@ import processing.core.PVector;
  * Sprite. The base class for all sprites in the game.
  * A lot of classes extend this class.
  *
- * @author Mai Vu
- * @author Elsa Ho
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 public abstract class Sprite implements Collidable {
@@ -40,6 +39,22 @@ public abstract class Sprite implements Collidable {
     this.window = window;
     this.color = color;
   }
+
+  public static boolean collided(Line line, Bubble bubble) {
+    PVector lineTemp = new PVector(line.x, line.getPosition().y);
+    float bubbleRadius = bubble.getSize() / 2;
+    PVector bubbleTemp = bubble.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
+    if (lineTemp.y < bubbleTemp.y) {
+      lineTemp.y = bubbleTemp.y;
+    }
+
+    float diff = lineTemp.dist(bubbleTemp);
+    if (diff < bubbleRadius) {
+      return true;
+    }
+    return false;
+  }
+
 
   public PVector getDirection() {
     return direction.copy();

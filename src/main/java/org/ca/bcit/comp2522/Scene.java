@@ -9,6 +9,14 @@ import processing.core.PVector;
 
 import static processing.core.PConstants.UP;
 
+/**
+ * Scene class. The class that contains all the sprites in the game.
+ * This class is responsible for updating and displaying all the sprites.
+ *
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
+ * @version 2023
+ */
+
 public class Scene {
   /**
    * Constants
@@ -25,6 +33,7 @@ public class Scene {
   private Bubble bubble;
   private PImage bg;
   private PImage heart;
+  private ArrayList<Sprite> removedSprites;
 
   /**
    * Scorebar and timer
@@ -55,6 +64,7 @@ public class Scene {
     line = null;
 
     bubbles = new ArrayList<>();
+    removedSprites = new ArrayList<>();
     bubble = new Bubble(
         new PVector(400, 100),
         new PVector(0, 1),
@@ -100,8 +110,8 @@ public class Scene {
       if(window.keyPressed) {
         if(window.keyCode == UP) {
           line = new Line(
-              new PVector((player.position.x + ((float) playerSize / 3)), window.getY()),
-              player.direction, 0, 5,
+              new PVector(player.position.x, player.position.y),
+              player.direction, player.size, 5,
               new Color(0, 255, 255), window
           );
         }
@@ -164,9 +174,21 @@ public class Scene {
           isGameOver = true;
         }
       }
+      if(line != null && Sprite.collided(line, bubble)) {
+        line = null;
+        removedSprites.add(bubble);
+
+        scoreBar.addScore((int) (bubble.size * remaining / 10000));
+        System.out.println("You popped a bubble!");
+      }
+
       if (remaining <= 0) {
         isGameOver = true;
       }
+    }
+    for(Sprite sprite : removedSprites) {
+      sprites.remove(sprite);
+      bubbles.remove(sprite);
     }
   }
 

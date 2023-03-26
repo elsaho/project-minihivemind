@@ -2,11 +2,14 @@ package org.ca.bcit.comp2522;
 
 import processing.core.PApplet;
 
+import javax.sound.sampled.LineUnavailableException;
+import java.applet.*;
+import java.io.FileNotFoundException;
+
 /**
  * The main class for the game.
  *
- * @author Mai Vu
- * @author Elsa Ho
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 public class GameWindow extends PApplet {
@@ -32,6 +35,15 @@ public class GameWindow extends PApplet {
   }
 
   public void setup() {
+    //sound
+    try {
+      SoundEffects audio = new SoundEffects();
+      audio.playBGM();
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    } catch (LineUnavailableException e) {
+      throw new RuntimeException(e);
+    }
     scene = new Scene(this); //init?
     scene.setup(this);
 

@@ -4,6 +4,13 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.event.MouseEvent;
 
+/**
+ * GameOver. The class for the game over screen.
+ *
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
+ * @version 2023
+ */
+
 public class GameOver extends PApplet{
 
   private PImage bg;
