@@ -41,19 +41,20 @@ public abstract class Sprite implements Collidable {
   }
 
   public static boolean collided(Line line, Bubble bubble) {
-    float distance = PVector.dist(line.getPosition(), bubble.getPosition());
-    if (distance <= bubble.getSize() * 0.8) {
+    PVector lineTemp = new PVector(line.x, line.getPosition().y);
+    float bubbleRadius = bubble.getSize() / 2;
+    PVector bubbleTemp = bubble.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
+    if (lineTemp.y < bubbleTemp.y) {
+      lineTemp.y = bubbleTemp.y;
+    }
+
+    float diff = lineTemp.dist(bubbleTemp);
+    if (diff < bubbleRadius) {
       return true;
     }
-//    if(line.getPosition().y > bubble.getPosition().y) {
-//      float absX = Math.abs(line.getPosition().x - bubble.getPosition().x);
-//      if(absX <= bubble.getSize() / 4) {
-//        return true;
-//      }
-
-//    }
     return false;
   }
+
 
   public PVector getDirection() {
     return direction.copy();
