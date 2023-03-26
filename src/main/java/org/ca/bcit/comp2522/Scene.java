@@ -18,6 +18,8 @@ public class Scene {
   private ArrayList<Sprite> sprites;
   private ArrayList<Bubble> bubbles;
 
+  private ArrayList<Sprite> removedSprites;
+
 
   private Bubble bubble;
   private PImage bg;
@@ -41,7 +43,9 @@ public class Scene {
 
     line = null;
 
+
     bubbles = new ArrayList<>();
+    removedSprites = new ArrayList<>();
     bubble = new Bubble(
         new PVector(400, 400),
         new PVector(0, 1),
@@ -83,7 +87,7 @@ public class Scene {
       if(window.keyPressed) {
         if(window.keyCode == UP) {
           line = new Line(
-              new PVector(player.position.x, window.getY()),
+              new PVector(player.position.x, player.position.y),
               player.direction, player.size, 5,
               new Color(0, 255, 255), window
           );
@@ -153,10 +157,11 @@ public class Scene {
 
       }
       if(line != null && Sprite.collided(line, bubble)) {
-//        line = null;
-        bubbles.remove(bubble);
-//        sprites.remove(bubble);
-//      scoreBar.addScore(100);
+        line = null;
+        removedSprites.add(bubble);
+
+      scoreBar.addScore((int) (bubble.size * remaining / 10000));
+
         System.out.println("You popped a bubble!");
 
       }
@@ -166,6 +171,10 @@ public class Scene {
         //For now, this is to confirm that the game is over
         System.out.println("Game Over!");
       }
+    }
+    for(Sprite sprite : removedSprites) {
+      sprites.remove(sprite);
+      bubbles.remove(sprite);
     }
   }
 
