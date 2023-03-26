@@ -1,9 +1,17 @@
 package org.ca.bcit.comp2522;
+
+import java.awt.*;
+import processing.core.PApplet;
 import processing.core.PVector;
 
-import processing.core.PApplet;
-import java.awt.*;
-
+/**
+ * Sprite. The base class for all sprites in the game.
+ * A lot of classes extend this class.
+ *
+ * @author Mai Vu
+ * @author Elsa Ho
+ * @version 2023
+ */
 public abstract class Sprite implements Collidable {
   protected PVector position;
   protected PVector direction;
@@ -13,7 +21,18 @@ public abstract class Sprite implements Collidable {
   protected GameWindow window;
 
 
-  public Sprite(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
+  /**
+   * Constructor for objects of class Sprite.
+   *
+   * @param position as a PVector
+   * @param direction as a PVector
+   * @param size as a float
+   * @param speed as a float
+   * @param color as a Color
+   * @param window as a GameWindow
+   */
+  public Sprite(PVector position, PVector direction,
+                float size, float speed, Color color, GameWindow window) {
     this.position = position;
     this.direction = direction;
     this.size = size;
@@ -39,16 +58,23 @@ public abstract class Sprite implements Collidable {
     return size;
   }
 
-//  public static boolean collided(Sprite a, Sprite b) {
-//    float distance = PVector.dist(a.getPosition(), b.getPosition());
-//    System.out.println(distance);
-//    if (distance <= 25) {
-//      System.out.println("collided");
-//      return true;
-//    }
-//    return false;
-//  }
+  //  public static boolean collided(Sprite a, Sprite b) {
+  //    float distance = PVector.dist(a.getPosition(), b.getPosition());
+  //    System.out.println(distance);
+  //    if (distance <= 25) {
+  //      System.out.println("collided");
+  //      return true;
+  //    }
+  //    return false;
+  //  }
 
+  /**
+   * Checks if a bubble collides with a player.
+   *
+   * @param bubble as a Bubble
+   * @param player as a Player
+   * @return true if the bubble collides with the player, false otherwise
+   */
   public static boolean collided(Bubble bubble, Player player) {
     float bubbleX = bubble.getPosition().x;
     float bubbleY = bubble.getPosition().y;
@@ -84,6 +110,11 @@ public abstract class Sprite implements Collidable {
     this.direction = direction;
   }
 
+  /**
+   * Displays the sprite.
+   *
+   * @param parent as a PApplet
+   */
   public void display(PApplet parent) {
     parent.pushStyle();
     parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
