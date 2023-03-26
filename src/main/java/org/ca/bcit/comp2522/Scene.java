@@ -7,15 +7,11 @@ import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
 
-/**
- * The class that contains all the sprites and displays them.
- *
- * @author Mai Vu
- * @author Elsa Ho
- * @author Troy Calaquian
- * @version 2023
- */
+import static processing.core.PConstants.UP;
+
 public class Scene {
+
+  public static Line line;
   private final Player player;
   private int playerSize = 64;
   private Lives lives;
@@ -45,7 +41,7 @@ public class Scene {
 
     bubbles = new ArrayList<>();
     bubble = new Bubble(
-        new PVector(400, 00),
+        new PVector(400, 400),
         new PVector(0, 1),
         100,
         5,
@@ -115,6 +111,7 @@ public class Scene {
     }
 
     remaining = start - parent.millis();
+    String timeString = parent.nf((int) (remaining / 1000), 2);
 
     parent.fill(255, 255, 255);
     parent.textSize(32);
@@ -165,9 +162,10 @@ public class Scene {
    * Resets the game if a life is lost.
    */
   public void reset() {
-    player.position = new PVector(GameWindow.getX() / 2, GameWindow.getY() - 64);
+    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 64);
     bubbles.clear();
-    bubble.position = new PVector(400, 50);
+    bubble.position = new PVector(400, 400);
+    bubble.velocity = new PVector(0, 5);
     bubbles.add(bubble);
   }
 
