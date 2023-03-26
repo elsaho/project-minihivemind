@@ -54,10 +54,6 @@ public class Player extends Sprite{
     return false;
   }
 
-  public void goLeft() {
-
-  }
-
 
 }
 

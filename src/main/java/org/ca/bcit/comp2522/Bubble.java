@@ -9,7 +9,7 @@ import java.awt.*;
 public class Bubble extends Sprite implements Poppable {
   private PVector velocity;
   public Line line;
-  private PImage bubbleImage;
+  private final PImage bubbleImage;
 
   public Bubble(PVector position, PVector direction, float size, float speed, Color color, GameWindow window, PVector velocity) {
     super(position, direction, size, speed, color, window);

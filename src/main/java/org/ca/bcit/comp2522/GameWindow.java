@@ -19,6 +19,7 @@ public class GameWindow extends PApplet {
   public static int getY() {
     return y;
   }
+  private GameOver gameOver;
 
 
   public void settings() {
@@ -28,11 +29,20 @@ public class GameWindow extends PApplet {
   public void setup() {
     scene = new Scene(this); //init?
     scene.setup(this);
+
+    gameOver = new GameOver(this);
+    gameOver.setup(this);
+
   }
 
   public void draw() {
     scene.display(this);
     scene.update(this);
+
+    if (scene.isGameOver) {
+      gameOver.display(this);
+//      gameOver.draw();
+    }
   }
   
   public static void main(String[] args) {

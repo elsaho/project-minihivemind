@@ -11,7 +11,7 @@ import processing.core.PVector;
 
 public class Scene {
   private final Player player;
-  private int playerSize = 64;
+  private final int playerSize = 64;
   private Lives lives;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
@@ -21,11 +21,12 @@ public class Scene {
   private ScoreBar scoreBar;
   private long start;
   private long remaining;
+  public boolean isGameOver = false;
 
   public Scene(GameWindow window){
     sprites = new ArrayList<>();
     player = new Player(
-        new PVector(GameWindow.getX()/2, GameWindow.getY() - playerSize),
+        new PVector((float) GameWindow.getX()/2, GameWindow.getY() - playerSize),
         new PVector(0, 1), playerSize, 5,
         new Color(0, 255, 255), window
     );
@@ -59,7 +60,7 @@ public class Scene {
     lives = Lives.getInstance();
     scoreBar = ScoreBar.getInstance();
 
-    start = parent.millis() + 90000;
+    start = parent.millis() + 500; //90000
 ;  }
 
   public void display(PApplet parent) {
@@ -100,6 +101,7 @@ public class Scene {
           //Game Over, need to implement
           //For now, this is to confirm that the game is over
           System.out.println("Game Over!");
+          isGameOver = true;
         }
 
       }
@@ -108,12 +110,13 @@ public class Scene {
         //Game Over, need to implement
         //For now, this is to confirm that the game is over
         System.out.println("Game Over!");
+        isGameOver = true;
       }
     }
   }
 
   public void reset() {
-    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 64);
+    player.position = new PVector((float) GameWindow.getX()/2, GameWindow.getY() - 64);
     bubbles.clear();
     bubble.position = new PVector(400, 50);
     bubbles.add(bubble);
