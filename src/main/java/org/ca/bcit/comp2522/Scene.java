@@ -23,8 +23,12 @@ public class Scene {
   private final Player player;
   private final int playerSize = 64;
   private Lives lives;
-  private final ArrayList<Sprite> sprites;
-  private final ArrayList<Bubble> bubbles;
+  private ArrayList<Sprite> sprites;
+  private ArrayList<Bubble> bubbles;
+
+  private ArrayList<Sprite> removedSprites;
+
+
   private Bubble bubble;
   private PImage bg;
   private PImage heart;
@@ -49,6 +53,7 @@ public class Scene {
     line = null;
 
     bubbles = new ArrayList<>();
+    removedSprites = new ArrayList<>();
     bubble = new Bubble(
         new PVector(400, 100),
         new PVector(0, 1),
@@ -90,8 +95,8 @@ public class Scene {
       if(window.keyPressed) {
         if(window.keyCode == UP) {
           line = new Line(
-              new PVector((player.position.x + ((float) playerSize / 3)), window.getY()),
-              player.direction, 0, 5,
+              new PVector(player.position.x, player.position.y),
+              player.direction, player.size, 5,
               new Color(0, 255, 255), window
           );
         }
@@ -115,7 +120,6 @@ public class Scene {
     }
     if(line != null) {
       line.display(parent);
-
     }
 
     remaining = start - parent.millis();
@@ -154,9 +158,23 @@ public class Scene {
           isGameOver = true;
         }
       }
+      if(line != null && Sprite.collided(line, bubble)) {
+        line = null;
+        removedSprites.add(bubble);
+
+      scoreBar.addScore((int) (bubble.size * remaining / 10000));
+
+        System.out.println("You popped a bubble!");
+
+      }
+
       if (remaining <= 0) {
         isGameOver = true;
       }
+    }
+    for(Sprite sprite : removedSprites) {
+      sprites.remove(sprite);
+      bubbles.remove(sprite);
     }
   }
 
@@ -174,6 +192,5 @@ public class Scene {
   public Player getPlayer() {
     return player;
   }
-
-
 }
+
