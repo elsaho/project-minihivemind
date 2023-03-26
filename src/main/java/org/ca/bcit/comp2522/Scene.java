@@ -13,7 +13,7 @@ public class Scene {
 
   public static Line line;
   private final Player player;
-  private int playerSize = 64;
+  private final int playerSize = 64;
   private Lives lives;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
@@ -23,6 +23,7 @@ public class Scene {
   private ScoreBar scoreBar;
   private long start;
   private long remaining;
+  public boolean isGameOver = false;
 
   /**
    * Constructor for objects of class Scene.
@@ -81,14 +82,12 @@ public class Scene {
       if(window.keyPressed) {
         if(window.keyCode == UP) {
           line = new Line(
-              new PVector(player.position.x, window.getY()),
+              new PVector((player.position.x + ((float) playerSize / 3)), window.getY()),
               player.direction, 0, 5,
               new Color(0, 255, 255), window
           );
-
         }
       }
-
     }
   }
 
@@ -108,6 +107,7 @@ public class Scene {
     }
     if(line != null) {
       line.display(parent);
+
     }
 
     remaining = start - parent.millis();
@@ -143,17 +143,11 @@ public class Scene {
           reset();
           System.out.println("You lost a life");
         } else {
-          //Game Over, need to implement
-          //For now, this is to confirm that the game is over
-          System.out.println("Game Over!");
+          isGameOver = true;
         }
-
       }
-
       if (remaining <= 0) {
-        //Game Over, need to implement
-        //For now, this is to confirm that the game is over
-        System.out.println("Game Over!");
+        isGameOver = true;
       }
     }
   }
@@ -162,7 +156,7 @@ public class Scene {
    * Resets the game if a life is lost.
    */
   public void reset() {
-    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 64);
+    player.position = new PVector((float) GameWindow.getX()/2, GameWindow.getY() - 64);
     bubbles.clear();
     bubble.position = new PVector(400, 400);
     bubble.velocity = new PVector(0, 5);
@@ -172,5 +166,6 @@ public class Scene {
   public Player getPlayer() {
     return player;
   }
-}
 
+
+}

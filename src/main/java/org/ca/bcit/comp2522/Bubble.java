@@ -18,7 +18,7 @@ public class Bubble extends Sprite implements Poppable {
   private static final float GRAVITY = 0.1f;
   public PVector velocity;
   public Line line;
-  private PImage bubbleImage;
+  private final PImage bubbleImage;
 
   private float startY;
   /**

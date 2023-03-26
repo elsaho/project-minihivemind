@@ -23,6 +23,7 @@ public class GameWindow extends PApplet {
   public static int getY() {
     return y;
   }
+  private GameOver gameOver;
 
 
   public void settings() {
@@ -32,13 +33,20 @@ public class GameWindow extends PApplet {
   public void setup() {
     scene = new Scene(this); //init?
     scene.setup(this);
+
+    gameOver = new GameOver(this);
+    gameOver.setup(this);
   }
 
   public void draw() {
-    scene.display(this);
-    scene.UpdateLineInstance(this);
-    scene.update(this);
-
+    if (scene.isGameOver) {
+      gameOver.update(this);
+      gameOver.display(this);
+    } else {
+      scene.display(this);
+      scene.UpdateLineInstance(this);
+      scene.update(this);
+    }
   }
   
   public static void main(String[] args) {
