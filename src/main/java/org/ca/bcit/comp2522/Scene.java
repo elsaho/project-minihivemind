@@ -42,7 +42,7 @@ public class Scene {
 
     bubbles = new ArrayList<>();
     bubble = new Bubble(
-        new PVector(400, 0),
+        new PVector(400, 400),
         new PVector(0, 1),
         100,
         5,
@@ -158,7 +158,8 @@ public class Scene {
   public void reset() {
     player.position = new PVector((float) GameWindow.getX()/2, GameWindow.getY() - 64);
     bubbles.clear();
-    bubble.position = new PVector(400, 50);
+    bubble.position = new PVector(400, 400);
+    bubble.velocity = new PVector(0, 5);
     bubbles.add(bubble);
   }
 
