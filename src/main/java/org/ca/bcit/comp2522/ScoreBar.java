@@ -46,4 +46,8 @@ public class ScoreBar {
   public void resetValue() {
     this.value = 0;
   }
+
+  public void reset() {
+    resetValue();
+  }
 }
