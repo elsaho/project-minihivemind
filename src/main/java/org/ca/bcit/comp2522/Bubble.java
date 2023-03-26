@@ -16,7 +16,7 @@ import processing.core.PVector;
  */
 public class Bubble extends Sprite implements Poppable {
   private static final float GRAVITY = 0.1f;
-  private PVector velocity;
+  public PVector velocity;
   public Line line;
   private PImage bubbleImage;
 
@@ -38,9 +38,7 @@ public class Bubble extends Sprite implements Poppable {
     super(position, direction, size, speed, color, window);
     this.velocity = velocity;
     bubbleImage = window.loadImage("../assets/bubble.png");
-    this.startY = GameWindow.getY() - position.y;
-
-
+    this.startY = GameWindow.getY() - (position.y + size/2);
   }
 
   /**
@@ -63,11 +61,12 @@ public class Bubble extends Sprite implements Poppable {
   private float currentX = size;
 
   public void bounce() {
-    if (position.y + velocity.y > startY) {
-      position.y = startY;
+
+    if (position.y + velocity.y > GameWindow.getY() - size) {
+      position.y = GameWindow.getY() - size;
       velocity.y = -velocity.y;
-    } else if (position.y + velocity.y < 0) {
-      position.y = 0;
+    } else if (position.y + velocity.y < startY) {
+      position.y = startY;
       velocity.y = -velocity.y;
     }
 
@@ -93,10 +92,10 @@ public class Bubble extends Sprite implements Poppable {
       }
     }
 
+    //bounce off the floor
     if (position.y + size / 2 >= GameWindow.getY()) {
       velocity.y = -velocity.y;
     }
-
     velocity.y += GRAVITY;
     position.add(velocity);
   }
