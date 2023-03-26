@@ -7,6 +7,7 @@ import processing.core.PApplet;
  *
  * @author Mai Vu
  * @author Elsa Ho
+ * @author Tomasz Stojek
  * @version 2023
  */
 public class GameWindow extends PApplet {

@@ -25,7 +25,7 @@ public class Line extends Sprite implements Drawable, Moveable {
 
   public Line(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
     super(position, direction, size, speed, color, window);
-    this.x = position.x;
+    this.x = position.x + size/2;
     this.y = GameWindow.getY();
     this.position.y = GameWindow.getY();
     this.thickness = GameWindow.getX()/100;
