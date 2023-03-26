@@ -42,7 +42,7 @@ public class Scene {
 
     bubbles = new ArrayList<>();
     bubble = new Bubble(
-        new PVector(400, 00),
+        new PVector(400, 0),
         new PVector(0, 1),
         100,
         5,
@@ -82,14 +82,12 @@ public class Scene {
       if(window.keyPressed) {
         if(window.keyCode == UP) {
           line = new Line(
-              new PVector(player.position.x, window.getY()),
+              new PVector((player.position.x + ((float) playerSize / 3)), window.getY()),
               player.direction, 0, 5,
               new Color(0, 255, 255), window
           );
-
         }
       }
-
     }
   }
 
@@ -109,6 +107,7 @@ public class Scene {
     }
     if(line != null) {
       line.display(parent);
+
     }
 
     remaining = start - parent.millis();

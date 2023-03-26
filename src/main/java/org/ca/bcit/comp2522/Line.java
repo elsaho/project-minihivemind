@@ -1,6 +1,7 @@
 package org.ca.bcit.comp2522;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import java.awt.*;
@@ -22,13 +23,15 @@ public class Line extends Sprite implements Drawable, Moveable {
   private float thickness;
 
   private final float y;
+  private PImage fireball;
 
   public Line(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
     super(position, direction, size, speed, color, window);
-    this.x = position.x;
+    this.x = position.x - (size);
     this.y = GameWindow.getY();
     this.position.y = GameWindow.getY();
-    this.thickness = GameWindow.getX()/100;
+    this.thickness = 21;
+    fireball = window.loadImage("../assets/fireball.png");
   }
 
   public void display(PApplet parent) {
@@ -37,6 +40,7 @@ public class Line extends Sprite implements Drawable, Moveable {
     window.line(x, y, x, this.position.y); //line(x1, y1, x2, y2)
     window.strokeWeight(1);
     window.stroke(0);
+    parent.image(fireball, this.position.x + size, this.position.y, 100, 100);
   }
 
 
