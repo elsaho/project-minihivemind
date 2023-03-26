@@ -9,7 +9,7 @@ import processing.core.PVector;
  * Bubble class creates the bubbles that the player can pop.
  * It extends Sprite and implements Poppable.
  *
- * @author Elsa Ho, Mai Vu
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 public class Bubble extends Sprite implements Poppable {

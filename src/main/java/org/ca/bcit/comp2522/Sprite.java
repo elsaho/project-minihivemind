@@ -8,8 +8,7 @@ import processing.core.PVector;
  * Sprite. The base class for all sprites in the game.
  * A lot of classes extend this class.
  *
- * @author Mai Vu
- * @author Elsa Ho
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 public abstract class Sprite implements Collidable {

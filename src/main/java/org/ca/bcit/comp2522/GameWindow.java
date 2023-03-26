@@ -5,9 +5,7 @@ import processing.core.PApplet;
 /**
  * The main class for the game.
  *
- * @author Mai Vu
- * @author Elsa Ho
- * @author Tomasz Stojek
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 public class GameWindow extends PApplet {
