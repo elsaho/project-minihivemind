@@ -32,16 +32,15 @@ public class GameWindow extends PApplet {
 
     gameOver = new GameOver(this);
     gameOver.setup(this);
-
   }
 
   public void draw() {
-    scene.display(this);
-    scene.update(this);
-
     if (scene.isGameOver) {
+      gameOver.update(this);
       gameOver.display(this);
-//      gameOver.draw();
+    } else {
+      scene.display(this);
+      scene.update(this);
     }
   }
   

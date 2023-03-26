@@ -98,18 +98,10 @@ public class Scene {
           reset();
           System.out.println("You lost a life");
         } else {
-          //Game Over, need to implement
-          //For now, this is to confirm that the game is over
-          System.out.println("Game Over!");
           isGameOver = true;
         }
-
       }
-
       if (remaining <= 0) {
-        //Game Over, need to implement
-        //For now, this is to confirm that the game is over
-        System.out.println("Game Over!");
         isGameOver = true;
       }
     }
