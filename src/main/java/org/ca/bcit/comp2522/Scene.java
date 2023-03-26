@@ -74,7 +74,7 @@ public class Scene {
     lives = Lives.getInstance();
     scoreBar = ScoreBar.getInstance();
 
-    start = parent.millis() + 90000;
+    start = parent.millis() + 100;
   }
 
   void UpdateLineInstance(GameWindow window) {

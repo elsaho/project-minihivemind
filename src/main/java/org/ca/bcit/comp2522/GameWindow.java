@@ -24,6 +24,7 @@ public class GameWindow extends PApplet {
     return y;
   }
   private GameOver gameOver;
+  private StartPage startPage;
 
 
   public void settings() {
@@ -36,6 +37,9 @@ public class GameWindow extends PApplet {
 
     gameOver = new GameOver(this);
     gameOver.setup(this);
+
+    startPage = new StartPage(this);
+    startPage.setup(this);
   }
 
   public void draw() {

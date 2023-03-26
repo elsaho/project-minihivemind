@@ -7,33 +7,38 @@ import processing.event.MouseEvent;
 public class GameOver extends PApplet{
 
   private PImage bg;
+  private Button restart;
 
   public GameOver(GameWindow window) {
 
   }
 
   public void setup(PApplet parent) {
-    super.setup();
     bg = parent.loadImage("../assets/NightBackground.png");
-    parent.registerMethod("mousePressed", this);
+    restart = new Button(100, 100, 100, 50, "Restart");
+//    noLoop();
   }
-
 
   public void display(PApplet parent) {
     parent.background(bg);
+    restart.display(parent);
   }
+
 
   public void update(PApplet parent) {
-  }
-
-  public void draw() {
-  }
-
-  public void mousePressed(MouseEvent event) {
-    System.out.println("Mouse pressed in game over");
-    if (mouseButton == LEFT) {
-      System.out.println("Left mouse button clicked");
+    if (restart.isClicked(parent.mouseX, parent.mouseY, parent.mousePressed)) {
+      System.out.println("Restart button clicked!");
     }
   }
+
+
+  public void draw() {
+    background(bg);
+    restart.display(this);
+  }
+
+//  public void mouseClicked() {
+//    System.out.println("Restart button clicked!");
+//  }
 
 }
