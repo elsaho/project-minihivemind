@@ -13,7 +13,7 @@ public class Scene {
 
   public static Line line;
   private final Player player;
-  private int playerSize = 64;
+  private final int playerSize = 64;
   private Lives lives;
   private ArrayList<Sprite> sprites;
   private ArrayList<Bubble> bubbles;
@@ -27,6 +27,7 @@ public class Scene {
   private ScoreBar scoreBar;
   private long start;
   private long remaining;
+  public boolean isGameOver = false;
 
   /**
    * Constructor for objects of class Scene.
@@ -43,11 +44,10 @@ public class Scene {
 
     line = null;
 
-
     bubbles = new ArrayList<>();
     removedSprites = new ArrayList<>();
     bubble = new Bubble(
-        new PVector(400, 400),
+        new PVector(400, 100),
         new PVector(0, 1),
         100,
         5,
@@ -91,10 +91,8 @@ public class Scene {
               player.direction, player.size, 5,
               new Color(0, 255, 255), window
           );
-
         }
       }
-
     }
   }
 
@@ -143,18 +141,14 @@ public class Scene {
     for (Bubble bubble : bubbles) {
       bubble.bounce();
 
-
       if (Sprite.collided(bubble, player)) {
         if (lives.getLives() > 0) {
           lives.loseLife();
           reset();
           System.out.println("You lost a life");
         } else {
-          //Game Over, need to implement
-          //For now, this is to confirm that the game is over
-          System.out.println("Game Over!");
+          isGameOver = true;
         }
-
       }
       if(line != null && Sprite.collided(line, bubble)) {
         line = null;
@@ -167,9 +161,7 @@ public class Scene {
       }
 
       if (remaining <= 0) {
-        //Game Over, need to implement
-        //For now, this is to confirm that the game is over
-        System.out.println("Game Over!");
+        isGameOver = true;
       }
     }
     for(Sprite sprite : removedSprites) {
@@ -182,9 +174,9 @@ public class Scene {
    * Resets the game if a life is lost.
    */
   public void reset() {
-    player.position = new PVector(GameWindow.getX()/2, GameWindow.getY() - 64);
+    player.position = new PVector((float) GameWindow.getX()/2, GameWindow.getY() - 64);
     bubbles.clear();
-    bubble.position = new PVector(400, 400);
+    bubble.position = new PVector(400, 100);
     bubble.velocity = new PVector(0, 5);
     bubbles.add(bubble);
   }

@@ -50,4 +50,8 @@ public class ScoreBar {
   public void addScore(int i) {
     this.value += i;
   }
+
+  public void reset() {
+    resetValue();
+  }
 }

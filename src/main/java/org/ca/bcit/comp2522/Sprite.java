@@ -73,16 +73,6 @@ public abstract class Sprite implements Collidable {
     return size;
   }
 
-  //  public static boolean collided(Sprite a, Sprite b) {
-  //    float distance = PVector.dist(a.getPosition(), b.getPosition());
-  //    System.out.println(distance);
-  //    if (distance <= 25) {
-  //      System.out.println("collided");
-  //      return true;
-  //    }
-  //    return false;
-  //  }
-
   /**
    * Checks if a bubble collides with a player.
    *
