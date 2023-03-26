@@ -11,6 +11,7 @@ import processing.core.PVector;
  * Extends Sprite and implements Poppable.
  *
  * @author Elsa Ho
+ * @author Mai Vu
  * @version 2023
  *
  */
@@ -38,40 +39,28 @@ public class Bubble extends Sprite implements Poppable {
     super(position, direction, size, speed, color, window);
     this.velocity = velocity;
     bubbleImage = window.loadImage("../assets/bubble.png");
-    this.startY = GameWindow.getY() - (position.y + size/2);
+    startY = position.y;
   }
 
-  /**
-   * Helper method to multiply vectors.
-   *
-   * @param a as a PVector
-   * @param b as a PVector
-   * @return PVector
-   */
-  public PVector multVector(PVector a, PVector b) {
-    PVector result = new PVector(0, 0);
-    result.x = a.x * b.x;
-    result.y = a.y * b.y;
-    return result;
-  }
 
   /**
    * Bounce method that allows bubbles to bounce off floors and walls.
    */
   private float currentX = size;
+  private final float BOUNCE_VELOCITY = - 5f; // Adjust as needed
 
   public void bounce() {
 
-    if (position.y + velocity.y > GameWindow.getY() - size) {
-      position.y = GameWindow.getY() - size;
-      velocity.y = -velocity.y;
-    } else if (position.y + velocity.y < startY) {
-      position.y = startY;
-      velocity.y = -velocity.y;
+    // Check for floor collision
+    if (position.y + size/2 >= GameWindow.getY()) {
+      position.y = GameWindow.getY() - size; // Move bubble to just above the floor
+      velocity.y = BOUNCE_VELOCITY; // Reverse velocity
+    } else {
+      position.y += velocity.y; // Move bubble along y-axis
     }
 
-    if (position.x + velocity.x > GameWindow.getX() - (size / 2)) {
-      position.x = GameWindow.getX() - (size / 2);
+    if (position.x + velocity.x > GameWindow.getX() -size) {
+      position.x = GameWindow.getX() - size;
       velocity.x = -velocity.x;
       currentX = position.x - size;
     } else if (position.x + velocity.x < 0) {
@@ -80,7 +69,7 @@ public class Bubble extends Sprite implements Poppable {
     } else {
       // Add a small amount to the x position
       if (currentX == size) {
-        position.x += 2;
+        position.x += 3;
         if (position.x == GameWindow.getX() - size) {
           currentX = position.x;
         }
@@ -88,14 +77,10 @@ public class Bubble extends Sprite implements Poppable {
         if (position.x <= 0) {
           currentX = size;
         }
-        position.x -= 2;
+        position.x -= 3;
       }
     }
 
-    //bounce off the floor
-    if (position.y + size / 2 >= GameWindow.getY()) {
-      velocity.y = -velocity.y;
-    }
     velocity.y += GRAVITY;
     position.add(velocity);
   }
