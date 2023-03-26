@@ -3,7 +3,11 @@ package org.ca.bcit.comp2522;
 import processing.core.PApplet;
 
 /**
+ * The main class for the game.
  *
+ * @author Mai Vu
+ * @author Elsa Ho
+ * @version 2023
  */
 public class GameWindow extends PApplet {
 
