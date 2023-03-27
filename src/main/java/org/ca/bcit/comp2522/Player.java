@@ -93,6 +93,7 @@ public class Player extends Sprite {
   public boolean collided() {
     return false;
   }
+
 }
 
 
