@@ -1,6 +1,6 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PApplet;
+import  processing.core.PApplet;
 
 import javax.sound.sampled.LineUnavailableException;
 import java.applet.*;
@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
  * @version 2023
  */
 public class GameWindow extends PApplet {
+
 
   private Scene scene;
   private static final int x = 800;

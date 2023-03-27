@@ -13,11 +13,16 @@ import java.io.InputStream;
 public class SoundEffects {
   private Clip audio;
 
+  protected Clip popAudio;
+
   public SoundEffects() throws FileNotFoundException, LineUnavailableException {
     try {
       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/bgm.wav"));
       audio = AudioSystem.getClip();
       audio.open(audioInputStream);
+      audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/pop.wav"));
+      popAudio = AudioSystem.getClip();
+      popAudio.open(audioInputStream);
     } catch (FileNotFoundException | LineUnavailableException e) {
       throw e;
     } catch (UnsupportedAudioFileException e) {
@@ -29,6 +34,11 @@ public class SoundEffects {
 
   public void playBGM(){
     audio.loop(Clip.LOOP_CONTINUOUSLY);
+  }
+
+  public void playPop(){
+    popAudio.setFramePosition(0);
+    popAudio.start();
   }
 
   public void stopBGM(){

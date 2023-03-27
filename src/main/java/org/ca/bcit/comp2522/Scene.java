@@ -1,6 +1,7 @@
 package org.ca.bcit.comp2522;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,6 +10,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import javax.sound.sampled.LineUnavailableException;
 
 import static processing.core.PConstants.UP;
 
@@ -29,6 +32,8 @@ public class Scene {
   /**
    * Gameplay
    */
+
+  protected SoundEffects sounds;
   public static Line line;
   private final Player player;
   private final ArrayList<Sprite> sprites;
@@ -64,6 +69,13 @@ public class Scene {
     );
 
     line = null;
+    try {
+      sounds = new SoundEffects();
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    } catch (LineUnavailableException e) {
+      throw new RuntimeException(e);
+    }
 
     bubbles = new ArrayList<>();
     removedSprites = new ArrayList<>();
@@ -178,6 +190,7 @@ public class Scene {
       }
 
       if(line != null && Sprite.collided(line, bubble)) {
+        sounds.playPop();
         line = null;
         bubblesToRemove.add(bubble);
         if (bubble.size > 25) {
