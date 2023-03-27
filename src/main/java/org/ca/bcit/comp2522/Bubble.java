@@ -101,4 +101,5 @@ public class Bubble extends Sprite {
     parent.image(bubbleImage, this.position.x, this.position.y, size, size);
     parent.popStyle();
   }
+
 }
