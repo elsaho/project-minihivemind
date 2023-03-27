@@ -11,7 +11,7 @@ public class ScoreBar {
   private static ScoreBar single_instance = null;
   private int value;
 
-  public ScoreBar() {
+  private ScoreBar() {
     this.value = 0;
   }
 

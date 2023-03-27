@@ -87,7 +87,7 @@ public class Scene {
         new PVector(2, 5)
     );
     bubbles.add(bubble);
-    lives = new Lives();
+    lives = Lives.getInstance();
   }
 
   /**
