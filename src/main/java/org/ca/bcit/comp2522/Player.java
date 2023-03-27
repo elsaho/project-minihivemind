@@ -5,6 +5,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
+import static processing.core.PConstants.UP;
 
 /** Player class. The sprite that the user controls.
  * Can move left and right and shoot bullets. Extends Sprite class.
@@ -15,6 +16,8 @@ import processing.core.PVector;
 public class Player extends Sprite {
   private final PImage playerLeft;
   private final PImage playerRight;
+  private PImage shootLeft;
+  private PImage shootRight;
   private boolean isLeft;
   private final PApplet parent;
 
@@ -32,6 +35,8 @@ public class Player extends Sprite {
     super(position, direction, size, speed, color, window);
     playerLeft = window.loadImage("../assets/CharLeft.png");
     playerRight = window.loadImage("../assets/CharRight.png");
+    shootLeft = window.loadImage("../assets/ShootLeft.png");
+    shootRight = window.loadImage("../assets/ShootRight.png");
     isLeft = true;
     parent = window;
   }
@@ -68,7 +73,11 @@ public class Player extends Sprite {
   public void display(final PApplet parent) {
     parent.pushStyle();
     parent.fill(color.getRed(), color.getGreen(), color.getBlue());
-    if (isLeft) {
+    if (window.keyCode == UP && isLeft) {
+      parent.image(shootLeft, position.x, position.y, 42, 64);
+    } else if (window.keyCode == UP && !isLeft) {
+      parent.image(shootRight, position.x, position.y, 42, 64);
+    } else if (isLeft) {
       parent.image(playerLeft, position.x, position.y, 42, 64);
     } else {
       parent.image(playerRight, position.x, position.y, 42, 64);

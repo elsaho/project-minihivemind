@@ -21,23 +21,34 @@ import static processing.core.PConstants.UP;
  */
 
 public class Scene {
+  /**
+   * Constants
+   */
+  private final int playerSize = 64;
 
+  /**
+   * Gameplay
+   */
   public static Line line;
   private final Player player;
-  private final int playerSize = 64;
-  private Lives lives;
-  private ArrayList<Sprite> sprites;
-  private ArrayList<Bubble> bubbles;
-
-  private ArrayList<Sprite> removedSprites;
-
-
+  private final ArrayList<Sprite> sprites;
+  private final ArrayList<Bubble> bubbles;
   private Bubble bubble;
   private PImage bg;
   private PImage heart;
+  private ArrayList<Sprite> removedSprites;
+
+  /**
+   * Scorebar and timer
+   */
   private ScoreBar scoreBar;
   private long start;
   private long remaining;
+  private Lives lives;
+
+  /**
+   * Other
+   */
   public boolean isGameOver = false;
 
   /**
@@ -93,6 +104,10 @@ public class Scene {
     start = parent.millis() + 90000;
   }
 
+  /**
+   * Creates a line to shoot bubbles
+   * @param window
+   */
   void UpdateLineInstance(GameWindow window) {
     if(line == null) {
       if(window.keyPressed) {
@@ -123,6 +138,7 @@ public class Scene {
     }
     if(line != null) {
       line.display(parent);
+
     }
 
     remaining = start - parent.millis();
@@ -198,9 +214,4 @@ public class Scene {
     bubble.velocity = new PVector(2, 5);
     bubbles.add(bubble);
   }
-
-  public Player getPlayer() {
-    return player;
-  }
 }
-
