@@ -45,7 +45,4 @@ public class Lives {
     lives++;
   }
 
-  public void reset() {
-    setLives(3);
-  }
 }

@@ -216,11 +216,4 @@ public class Scene {
     }
   }
 
-  /**
-   * Resets the game if a life is lost.
-   */
-  public void reset() {
-  }
-
-
 }
