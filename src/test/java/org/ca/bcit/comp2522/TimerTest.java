@@ -1,3 +1,5 @@
+package org.ca.bcit.comp2522;
+
 import org.ca.bcit.comp2522.Timer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
