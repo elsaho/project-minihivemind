@@ -13,26 +13,44 @@ import processing.event.MouseEvent;
 
 public class GameOver extends PApplet{
 
+  /**
+   * Properties
+   */
   private PImage bg;
   private PImage replayButton;
   private Button restart;
 
+  /**
+   * Constructor
+   * @param window
+   */
   public GameOver(GameWindow window) {
 
   }
 
+  /**
+   * Sets up the game over page
+   * @param parent
+   */
   public void setup(PApplet parent) {
     bg = parent.loadImage("../assets/GameOverScreen.png");
     replayButton = parent.loadImage("../assets/TransparentReplay.png");
     restart = new Button(100, 323, 600, 206, replayButton);
   }
 
+  /**
+   * Displays the game over page
+   * @param parent
+   */
   public void display(PApplet parent) {
     parent.background(bg);
     restart.display(parent);
   }
 
-
+  /**
+   * Updates the game over page
+   * @param parent
+   */
   public void update(PApplet parent) {
     if (restart.isClicked(parent.mouseX, parent.mouseY, parent.mousePressed)) {
       System.out.println("Restart button clicked!");
@@ -40,7 +58,9 @@ public class GameOver extends PApplet{
     }
   }
 
-
+  /**
+   * Draws the game over page
+   */
   public void draw() {
     background(bg);
     restart.display(this);

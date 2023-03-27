@@ -9,12 +9,12 @@ import processing.core.PVector;
 
 /**
  * Bubble class creates the bubbles that the player can pop.
- * It extends Sprite and implements Poppable.
+ * It extends Sprite.
  *
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class Bubble extends Sprite implements Poppable {
+public class Bubble extends Sprite {
   // Constants
   private static final float GRAVITY = 0.1f;
 
@@ -66,12 +66,6 @@ public class Bubble extends Sprite implements Poppable {
     position.add(velocity);
   }
 
-  /** This method removes the top element from the stack.
-   */
-  @Override
-  public void pop() {
-  }
-
   public ArrayList<Bubble> spawnBubbles() {
     ArrayList<Bubble> newBubbles = new ArrayList<>();
     float newSize = size / 2;
@@ -85,8 +79,6 @@ public class Bubble extends Sprite implements Poppable {
     newBubbles.add(bubble2);
     return newBubbles;
   }
-
-
 
   /** This method returns a boolean value indicating if a collision has occurred.
    *

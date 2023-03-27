@@ -42,9 +42,8 @@ public class Scene {
    * Scorebar and timer
    */
   private ScoreBar scoreBar;
-  private long start;
-  private long remaining;
   private Lives lives;
+  private Timer timer;
 
   /**
    * Other
@@ -101,7 +100,8 @@ public class Scene {
     lives = Lives.getInstance();
     scoreBar = ScoreBar.getInstance();
 
-    start = parent.millis() + 90000;
+    timer = Timer.getInstance();
+    timer.setStart(parent.millis() + 90000);
   }
 
   /**
@@ -141,8 +141,7 @@ public class Scene {
 
     }
 
-    remaining = start - parent.millis();
-    String timeString = parent.nf((int) (remaining / 1000), 2);
+    timer.setRemaining(timer.getStart() - parent.millis());
 
     parent.fill(255, 255, 255);
     parent.textSize(32);
@@ -151,7 +150,7 @@ public class Scene {
     for (int i = 0; i < lives.getLives(); i++) {
       parent.image(heart, 110 + (60 * i), 25, 50, 50);
     }
-    parent.text("Time: " + parent.nf((int) (remaining / 1000), 2), 350, 55);
+    parent.text("Time: " + timer.timeToString(), 350, 55);
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
@@ -185,11 +184,11 @@ public class Scene {
           newBubbles.addAll(bubble.spawnBubbles());
         }
 
-        scoreBar.addScore((int) (bubble.size * remaining / 10000));
+        scoreBar.addScore((int) (bubble.size * timer.getRemaining() / 10000));
         System.out.println("You popped a bubble!");
       }
 
-      if (remaining <= 0) {
+      if (timer.getRemaining() <= 0) {
         isGameOver = true;
       }
     }

@@ -4,8 +4,15 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class GameVictory extends PApplet {
+  /**
+   * Properties
+   */
   private PImage bg;
 
+  /**
+   * Constructs the game victory page
+   * @param window
+   */
   public GameVictory(GameWindow window) {
   }
 
