@@ -31,4 +31,5 @@ hs_err_pid*
 build/
 gradle/
 
-
+# include library
+!library/*
