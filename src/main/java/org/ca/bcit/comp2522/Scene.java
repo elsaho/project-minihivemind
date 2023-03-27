@@ -1,5 +1,6 @@
 package org.ca.bcit.comp2522;
 
+
 import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -201,6 +202,7 @@ public class Scene {
       }
 
       if (line != null && Sprite.collided(line, bubble)) {
+
         sounds.playPop();
         line = null;
         bubblesToRemove.add(bubble);
