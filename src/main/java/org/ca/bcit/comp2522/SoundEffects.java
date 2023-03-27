@@ -12,6 +12,7 @@ import java.io.InputStream;
  */
 public class SoundEffects {
   private Clip audio;
+  private Clip fastAudio;
 
   protected Clip popAudio;
 
@@ -23,6 +24,9 @@ public class SoundEffects {
       audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/pop.wav"));
       popAudio = AudioSystem.getClip();
       popAudio.open(audioInputStream);
+      audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/soundfast.wav"));
+      fastAudio = AudioSystem.getClip();
+      fastAudio.open(audioInputStream);
     } catch (FileNotFoundException | LineUnavailableException e) {
       throw e;
     } catch (UnsupportedAudioFileException e) {
@@ -46,5 +50,8 @@ public class SoundEffects {
     audio.close();
   }
 
+  public boolean isPlaying() {
+    return audio.isActive();
+  }
 
 }
