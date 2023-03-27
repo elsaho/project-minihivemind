@@ -28,6 +28,7 @@ public class GameWindow extends PApplet {
   }
   private GameOver gameOver;
   private StartPage startPage;
+  private GameVictory gameVictory;
 
 
   public void settings() {
@@ -52,6 +53,9 @@ public class GameWindow extends PApplet {
 
     startPage = new StartPage(this);
     startPage.setup(this);
+
+    gameVictory = new GameVictory(this);
+    gameVictory.setup(this);
   }
 
   public void draw() {

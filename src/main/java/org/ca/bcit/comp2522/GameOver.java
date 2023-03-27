@@ -14,7 +14,7 @@ import processing.event.MouseEvent;
 public class GameOver extends PApplet{
 
   private PImage bg;
-  private PImage gameOverText;
+  private PImage replayButton;
   private Button restart;
 
   public GameOver(GameWindow window) {
@@ -22,16 +22,13 @@ public class GameOver extends PApplet{
   }
 
   public void setup(PApplet parent) {
-    bg = parent.loadImage("../assets/NightBackground.png");
-    gameOverText = parent.loadImage("../assets/gameover.png");
-    restart = new Button(500, 500, 100, 50, "Restart");
-//    noLoop();
+    bg = parent.loadImage("../assets/GameOverScreen.png");
+    replayButton = parent.loadImage("../assets/TransparentReplay.png");
+    restart = new Button(100, 323, 600, 206, replayButton);
   }
 
   public void display(PApplet parent) {
     parent.background(bg);
-    parent.image(gameOverText, (parent.width - gameOverText.width) / 2, (parent.height - gameOverText.height) / 2,
-            100, 100);
     restart.display(parent);
   }
 
@@ -39,6 +36,7 @@ public class GameOver extends PApplet{
   public void update(PApplet parent) {
     if (restart.isClicked(parent.mouseX, parent.mouseY, parent.mousePressed)) {
       System.out.println("Restart button clicked!");
+      // TODO implement restart feature
     }
   }
 
@@ -47,5 +45,4 @@ public class GameOver extends PApplet{
     background(bg);
     restart.display(this);
   }
-
 }
