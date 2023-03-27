@@ -154,6 +154,8 @@ public class Scene {
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
+  long lastCollisionTime = 0;
+  boolean isImmune = false;
   public void update(PApplet parent) {
     player.update(parent);
     if(line != null) {
@@ -167,14 +169,25 @@ public class Scene {
       bubble.bounce();
       bubble.display(parent);
 
+
+
+
       if (Sprite.collided(bubble, player)) {
-        if (lives.getLives() > 0) {
-          lives.loseLife();
-          reset();
-          System.out.println("You lost a life");
-        } else {
-          isGameOver = true;
+        if (!isImmune) {
+          if (lives.getLives() > 0) {
+            lives.loseLife();
+            System.out.println("You lost a life");
+            isImmune = true;
+            lastCollisionTime = System.currentTimeMillis();
+          } else {
+            isGameOver = true;
+          }
         }
+      }
+
+      // Check if the player's immunity has expired
+      if (isImmune && System.currentTimeMillis() - lastCollisionTime > 1500) {
+        isImmune = false;
       }
 
       if(line != null && Sprite.collided(line, bubble)) {
@@ -208,5 +221,6 @@ public class Scene {
    */
   public void reset() {
   }
+
 
 }
