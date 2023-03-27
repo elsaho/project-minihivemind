@@ -30,6 +30,7 @@ public class GameWindow extends PApplet {
   private GameOver gameOver;
   private StartPage startPage;
   private GameVictory gameVictory;
+  private SoundEffects audio;
 
 
   public void settings() {
@@ -39,7 +40,7 @@ public class GameWindow extends PApplet {
   public void setup() {
     //sound
     try {
-      SoundEffects audio = new SoundEffects();
+      audio = new SoundEffects();
       audio.playBGM();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
@@ -63,9 +64,11 @@ public class GameWindow extends PApplet {
     if (scene.isGameOver) {
       gameOver.update(this);
       gameOver.display(this);
+      audio.stopBGM(); //temp fix
     } else if (scene.isVictory) {
       gameVictory.update(this);
       gameVictory.display(this);
+      audio.stopBGM(); //temp fix
     }
     else {
       scene.display(this);
