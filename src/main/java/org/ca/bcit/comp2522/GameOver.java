@@ -54,7 +54,7 @@ public class GameOver extends PApplet{
   public void update(PApplet parent) {
     if (restart.isClicked(parent.mouseX, parent.mouseY, parent.mousePressed)) {
       System.out.println("Restart button clicked!");
-      // TODO implement restart feature
+      parent.setup();
     }
   }
 

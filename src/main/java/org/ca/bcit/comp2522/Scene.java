@@ -1,6 +1,7 @@
 package org.ca.bcit.comp2522;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,6 +10,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import javax.sound.sampled.LineUnavailableException;
 
 import static processing.core.PConstants.UP;
 
@@ -29,6 +32,8 @@ public class Scene {
   /**
    * Gameplay
    */
+
+  protected SoundEffects sounds;
   public static Line line;
   private final Player player;
   private final ArrayList<Sprite> sprites;
@@ -64,6 +69,13 @@ public class Scene {
     );
 
     line = null;
+    try {
+      sounds = new SoundEffects();
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    } catch (LineUnavailableException e) {
+      throw new RuntimeException(e);
+    }
 
     bubbles = new ArrayList<>();
     removedSprites = new ArrayList<>();
@@ -155,6 +167,8 @@ public class Scene {
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
+  long lastCollisionTime = 0;
+  boolean isImmune = false;
   public void update(PApplet parent) {
     player.update(parent);
     if(line != null) {
@@ -168,17 +182,29 @@ public class Scene {
       bubble.bounce();
       bubble.display(parent);
 
+
+
+
       if (Sprite.collided(bubble, player)) {
-        if (lives.getLives() > 0) {
-          lives.loseLife();
-          reset();
-          System.out.println("You lost a life");
-        } else {
-          isGameOver = true;
+        if (!isImmune) {
+          if (lives.getLives() > 0) {
+            lives.loseLife();
+            System.out.println("You lost a life");
+            isImmune = true;
+            lastCollisionTime = System.currentTimeMillis();
+          } else {
+            isGameOver = true;
+          }
         }
       }
 
+      // Check if the player's immunity has expired
+      if (isImmune && System.currentTimeMillis() - lastCollisionTime > 1500) {
+        isImmune = false;
+      }
+
       if(line != null && Sprite.collided(line, bubble)) {
+        sounds.playPop();
         line = null;
         bubblesToRemove.add(bubble);
         if (bubble.size > 25) {
@@ -202,12 +228,6 @@ public class Scene {
     for(Sprite sprite : removedSprites) {
       sprites.remove(sprite);
     }
-  }
-
-  /**
-   * Resets the game if a life is lost.
-   */
-  public void reset() {
   }
 
 }
