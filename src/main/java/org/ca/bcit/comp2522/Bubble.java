@@ -22,8 +22,7 @@ public class Bubble extends Sprite implements Poppable {
   public PVector velocity;
   private Line line;
   private PImage bubbleImage;
-  private float startY;
-  private float currentX = size;
+  private boolean flag = true;
   private float bounceVelocity;
 
   /**
@@ -42,14 +41,12 @@ public class Bubble extends Sprite implements Poppable {
     super(position, direction, size, speed, color, window);
     this.velocity = velocity;
     this.bubbleImage = window.loadImage("../assets/bubble.png");
-    this.startY = position.y;
   }
 
   /**
    * Bounce method allows bubbles to bounce off floors and walls.
    */
   public void bounce() {
-    System.out.println(position.x + " " + size + " " + velocity.x);
     // Calculate bounce velocity
     this.bounceVelocity = -6f;
 
@@ -62,23 +59,9 @@ public class Bubble extends Sprite implements Poppable {
     }
 
     // Check for wall collision
-    if (this.position.x + this.velocity.x >= GameWindow.getX() - size || this.position.x + this.velocity.x < 0) {
+    if (this.position.x >= GameWindow.getX() - size || this.position.x <= 0) {
       this.velocity.x = -this.velocity.x;
     }
-
-    // Add a small amount to the x position
-    if (currentX == size) {
-      position.x += this.velocity.x;
-      if (position.x >= GameWindow.getX() - size + velocity.x) {
-        currentX = position.x;
-      }
-    } else {
-      if (position.x <= 0) {
-        currentX = size;
-      }
-      position.x -= this.velocity.x;
-    }
-
     velocity.y += GRAVITY;
     position.add(velocity);
   }
