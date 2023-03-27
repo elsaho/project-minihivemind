@@ -28,6 +28,8 @@ public class Line extends Sprite {
   protected final float x;
   protected float thickness;
 
+  protected float increments;
+
   protected final float y;
   private PImage fireball;
 
@@ -38,16 +40,42 @@ public class Line extends Sprite {
     this.position.y = GameWindow.getY();
     this.thickness = 10;
     fireball = window.loadImage("../assets/fireball.png");
+    this.increments = GameWindow.getY() / speed;
+  }
+
+  public void drawWave() {
+
   }
 
   public void display(PApplet parent) {
-    window.strokeWeight(thickness);
-    window.stroke(204, 102, 0);// Beastly
-    window.line(x, y, x, this.position.y); //line(x1, y1, x2, y2)
     window.strokeWeight(1);
+    parent.image(fireball, this.x - thickness * 2, position.y - thickness, 42, 64);
+    PVector currYellow = new PVector(x + thickness /2, y);
+    PVector currRed = new PVector(x - thickness /2, y);
+    PVector prevYellow = new PVector(x - thickness /2, y);
+    PVector prevRed = new PVector(x + thickness /2, y);
+    float maxIncrements = increments - this.getPosition().y / this.speed;
+    for(float i = 0; i < maxIncrements - speed; i++) {
+      currYellow.y = prevYellow.y - this.speed;
+      currRed.y = prevRed.y - this.speed;
+      window.stroke(255, 204, 0);
+      window.line(currYellow.x, currYellow.y, prevYellow.x, prevYellow.y);
+      window.stroke(255, 0, 0);
+      window.line(currRed.x, currRed.y, prevRed.x, prevRed.y);
+      prevYellow.y = currYellow.y;
+      prevRed.y = currRed.y;
+      float tempX = prevYellow.x;
+      float tempX2 = prevRed.x;
+      prevYellow.x = currYellow.x;
+      prevRed.x = currRed.x;
+      currYellow.x = tempX;
+      currRed.x = tempX2;
+
+    }
     window.stroke(0);
-//    parent.image(fireball, this.position.x + (size/3), this.position.y, 100, 100);
+
   }
+
 
   public void update(PApplet parent) {
 
