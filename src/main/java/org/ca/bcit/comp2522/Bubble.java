@@ -1,6 +1,8 @@
 package org.ca.bcit.comp2522;
 
 import java.awt.Color;
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -47,9 +49,9 @@ public class Bubble extends Sprite implements Poppable {
    * Bounce method allows bubbles to bounce off floors and walls.
    */
   public void bounce() {
+    System.out.println(position.x + " " + size + " " + velocity.x);
     // Calculate bounce velocity
     this.bounceVelocity = -6f;
-    //this.bounceVelocity = -sqrt(4 * GRAVITY * (GameWindow.getY() - this.startY + size));
 
     // Check for floor collision
     if (this.position.y + size / 2 >= GameWindow.getY()) {
@@ -60,26 +62,21 @@ public class Bubble extends Sprite implements Poppable {
     }
 
     // Check for wall collision
-    if (this.position.x + this.velocity.x > GameWindow.getX() - size) {
-      this.position.x = GameWindow.getX() - size;
+    if (this.position.x + this.velocity.x >= GameWindow.getX() - size || this.position.x + this.velocity.x < 0) {
       this.velocity.x = -this.velocity.x;
-      this.currentX = this.position.x - size;
-    } else if (this.position.x + this.velocity.x < 0) {
-      this.position.x = 0;
-      this.velocity.x = -this.velocity.x;
-    } else {
-      // Add a small amount to the x position
-      if (currentX == size) {
-        position.x += 3;
-        if (position.x == GameWindow.getX() - size) {
-          currentX = position.x;
-        }
-      } else {
-        if (position.x <= 0) {
-          currentX = size;
-        }
-        position.x -= 3;
+    }
+
+    // Add a small amount to the x position
+    if (currentX == size) {
+      position.x += this.velocity.x;
+      if (position.x >= GameWindow.getX() - size + velocity.x) {
+        currentX = position.x;
       }
+    } else {
+      if (position.x <= 0) {
+        currentX = size;
+      }
+      position.x -= this.velocity.x;
     }
 
     velocity.y += GRAVITY;
@@ -91,6 +88,22 @@ public class Bubble extends Sprite implements Poppable {
   @Override
   public void pop() {
   }
+
+  public ArrayList<Bubble> spawnBubbles() {
+    ArrayList<Bubble> newBubbles = new ArrayList<>();
+    float newSize = size / 2;
+    PVector newVelocity1 = new PVector(-velocity.x, -velocity.y);
+    PVector newVelocity2 = new PVector(velocity.x, -velocity.y);
+    Bubble bubble1 = new Bubble(new PVector(position.x, position.y), new PVector(-1, -1),
+        newSize, speed, color, window, newVelocity1);
+    Bubble bubble2 = new Bubble(new PVector(position.x, position.y), new PVector(1, -1),
+        newSize, speed, color, window, newVelocity2);
+    newBubbles.add(bubble1);
+    newBubbles.add(bubble2);
+    return newBubbles;
+  }
+
+
 
   /** This method returns a boolean value indicating if a collision has occurred.
    *
