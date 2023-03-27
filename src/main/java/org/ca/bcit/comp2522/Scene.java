@@ -52,6 +52,7 @@ public class Scene {
    * Other.
    */
   public boolean isGameOver = false;
+  public boolean isVictory = false;
 
   /**
    * Constructor for objects of class Scene.
@@ -226,6 +227,11 @@ public class Scene {
 
     for (Sprite sprite : removedSprites) {
       sprites.remove(sprite);
+    }
+
+    //Game victory
+    if (bubbles.isEmpty()) {
+      isVictory = true;
     }
   }
 

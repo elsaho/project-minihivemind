@@ -63,7 +63,11 @@ public class GameWindow extends PApplet {
     if (scene.isGameOver) {
       gameOver.update(this);
       gameOver.display(this);
-    } else {
+    } else if (scene.isVictory) {
+      gameVictory.update(this);
+      gameVictory.display(this);
+    }
+    else {
       scene.display(this);
       scene.UpdateLineInstance(this);
       scene.update(this);
