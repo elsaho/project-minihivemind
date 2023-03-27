@@ -11,7 +11,7 @@ public class Lives {
   private static Lives single_instance = null;
   private int lives;
 
-  public Lives() {
+  private Lives() {
     this.lives = 3;
   }
 
