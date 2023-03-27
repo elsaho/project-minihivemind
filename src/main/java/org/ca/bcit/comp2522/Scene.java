@@ -1,7 +1,10 @@
 package org.ca.bcit.comp2522;
 
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
@@ -56,11 +59,11 @@ public class Scene {
     removedSprites = new ArrayList<>();
     bubble = new Bubble(
         new PVector(400, 100),
-        new PVector(0, 1),
+        new PVector(1, 1),
         100,
         5,
         new Color(0, 0, 255), window,
-        new PVector(0, 5)
+        new PVector(2, 5)
     );
     bubbles.add(bubble);
     lives = new Lives();
@@ -136,18 +139,18 @@ public class Scene {
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
-  /**
-   * Updates the game. This includes checking for collisions and resetting the game.
-   *
-   * @param parent as a PApplet
-   */
   public void update(PApplet parent) {
     player.update(parent);
     if(line != null) {
       line.update(parent);
     }
+
+    ArrayList<Bubble> newBubbles = new ArrayList<>();
+    ArrayList<Bubble> bubblesToRemove = new ArrayList<>();
+
     for (Bubble bubble : bubbles) {
       bubble.bounce();
+      bubble.display(parent);
 
       if (Sprite.collided(bubble, player)) {
         if (lives.getLives() > 0) {
@@ -158,9 +161,13 @@ public class Scene {
           isGameOver = true;
         }
       }
+
       if(line != null && Sprite.collided(line, bubble)) {
         line = null;
-        removedSprites.add(bubble);
+        bubblesToRemove.add(bubble);
+        if (bubble.size > 25) {
+          newBubbles.addAll(bubble.spawnBubbles());
+        }
 
         scoreBar.addScore((int) (bubble.size * remaining / 10000));
         System.out.println("You popped a bubble!");
@@ -170,9 +177,14 @@ public class Scene {
         isGameOver = true;
       }
     }
+
+    bubbles.removeAll(bubblesToRemove);
+    bubbles.addAll(newBubbles);
+
+    removedSprites.addAll(bubblesToRemove);
+
     for(Sprite sprite : removedSprites) {
       sprites.remove(sprite);
-      bubbles.remove(sprite);
     }
   }
 
@@ -183,7 +195,7 @@ public class Scene {
     player.position = new PVector((float) GameWindow.getX()/2, GameWindow.getY() - 64);
     bubbles.clear();
     bubble.position = new PVector(400, 100);
-    bubble.velocity = new PVector(0, 5);
+    bubble.velocity = new PVector(2, 5);
     bubbles.add(bubble);
   }
 
