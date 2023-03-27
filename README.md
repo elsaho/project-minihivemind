@@ -1,3 +1,7 @@
+# Bubble Trouble
+
+Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
+
 # Project
 
 ## Technical Project Requirements

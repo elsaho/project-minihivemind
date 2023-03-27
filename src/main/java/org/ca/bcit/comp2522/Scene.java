@@ -209,6 +209,7 @@ public class Scene {
         if (bubble.size > bubble.MIN_SIZE) {
           newBubbles.addAll(bubble.spawnBubbles());
         }
+
         scoreBar.addScore((int) (bubble.size * timer.getRemaining() / 10000));
         System.out.println("You popped a bubble!");
       }
