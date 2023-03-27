@@ -1,6 +1,7 @@
 package org.ca.bcit.comp2522;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Button extends PApplet{
 
@@ -8,14 +9,14 @@ public class Button extends PApplet{
   private int yPos;
   private int width;
   private int height;
-  private String text;
+  private PImage img;
 
-  public Button(int xPos, int yPos, int width, int height, String text) {
+  public Button(int xPos, int yPos, int width, int height, PImage img) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.width = width;
     this.height = height;
-    this.text = text;
+    this.img = img;
   }
 
   public boolean isClicked(float mouseX, float mouseY, boolean mousePressed) {
@@ -27,11 +28,9 @@ public class Button extends PApplet{
   }
 
   public void display(PApplet parent) {
-    parent.fill(255, 255, 0);
-    parent.rect(xPos, yPos, width, height);
+    parent.image(img, xPos, yPos, width, height);
     parent.textAlign(PApplet.CENTER, PApplet.CENTER);
     parent.fill(0);
-    parent.text(text, xPos + width / 2, yPos + height / 2);
   }
 
 
