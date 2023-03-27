@@ -111,6 +111,7 @@ public class Scene {
   void UpdateLineInstance(GameWindow window) {
     if(line == null) {
       if(window.keyPressed) {
+        // up or space bar
         if(window.keyCode == UP) {
           line = new Line(
               new PVector(player.position.x, player.position.y),

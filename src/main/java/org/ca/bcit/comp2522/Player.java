@@ -73,9 +73,9 @@ public class Player extends Sprite {
   public void display(final PApplet parent) {
     parent.pushStyle();
     parent.fill(color.getRed(), color.getGreen(), color.getBlue());
-    if (window.keyCode == UP && isLeft) {
+    if ((window.keyCode == UP) && isLeft) {
       parent.image(shootLeft, position.x, position.y, 42, 64);
-    } else if (window.keyCode == UP && !isLeft) {
+    } else if ((window.keyCode == UP) && !isLeft) {
       parent.image(shootRight, position.x, position.y, 42, 64);
     } else if (isLeft) {
       parent.image(playerLeft, position.x, position.y, 42, 64);
