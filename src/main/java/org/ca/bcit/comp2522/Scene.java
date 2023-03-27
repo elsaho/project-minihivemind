@@ -4,6 +4,7 @@ package org.ca.bcit.comp2522;
 import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.sound.sampled.LineUnavailableException;
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -78,8 +79,14 @@ public class Scene {
 
     bubbles = new ArrayList<>();
     removedSprites = new ArrayList<>();
+    //generate random position for the bubble to start dropping
+    Random rand = new Random();
+    int bubbleStartX = rand.nextInt(700) + 100;
+    int bubbleStartY = rand.nextInt(100) + 100;
+
+
     bubble = new Bubble(
-        new PVector(400, 100),
+        new PVector(bubbleStartX, bubbleStartY),
         new PVector(1, 1),
         100,
         5,
