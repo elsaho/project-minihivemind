@@ -2,6 +2,8 @@ package org.ca.bcit.comp2522;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -23,6 +25,8 @@ public class Bubble extends Sprite {
   // Properties
   public PVector velocity;
   private PImage bubbleImage;
+  Random random = new Random();
+
 
 
   /**
