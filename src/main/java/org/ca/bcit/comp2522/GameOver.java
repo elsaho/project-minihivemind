@@ -30,7 +30,8 @@ public class GameOver extends PApplet{
 
   public void display(PApplet parent) {
     parent.background(bg);
-    parent.image(gameOverText, 400, 300, 500, 500);
+    parent.image(gameOverText, (parent.width - gameOverText.width) / 2, (parent.height - gameOverText.height) / 2,
+            100, 100);
     restart.display(parent);
   }
 
