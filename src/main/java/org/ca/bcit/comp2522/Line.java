@@ -25,10 +25,10 @@ public class Line extends Sprite {
    * 8. just for the push
    */
   private PVector velocity;
-  private final float x;
-  private float thickness;
+  protected final float x;
+  protected float thickness;
 
-  private final float y;
+  protected final float y;
   private PImage fireball;
 
   public Line(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
@@ -36,7 +36,7 @@ public class Line extends Sprite {
     this.x = position.x + size/2;
     this.y = GameWindow.getY();
     this.position.y = GameWindow.getY();
-    this.thickness = 21;
+    this.thickness = 10;
     fireball = window.loadImage("../assets/fireball.png");
   }
 
@@ -51,7 +51,8 @@ public class Line extends Sprite {
 
   public void update(PApplet parent) {
 
-    if(this.position.y > 0) {
+    // hard coded for now, should not go above the scorebar
+    if(this.position.y > 100 + thickness / 2) {
       this.position.y = this.position.y - speed;
     } else {Scene.line = null;}
   }
