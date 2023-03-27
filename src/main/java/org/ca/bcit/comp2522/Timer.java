@@ -3,7 +3,8 @@ package org.ca.bcit.comp2522;
 /**
  * Timer to keep track in game time.
  *
- * @author Elsa Ho
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
+ * @version 2023
  */
 public class Timer {
   /**
@@ -70,6 +71,5 @@ public class Timer {
     int seconds = (int) (single_instance.remaining / 1000);
     return String.format("%02d", seconds);
   }
-
 
 }
