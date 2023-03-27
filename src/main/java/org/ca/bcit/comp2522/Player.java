@@ -74,13 +74,13 @@ public class Player extends Sprite {
     parent.pushStyle();
     parent.fill(color.getRed(), color.getGreen(), color.getBlue());
     if (window.keyCode == UP && isLeft) {
-      parent.image(shootLeft, position.x, position.y, 42, 64);
+      parent.image(shootLeft, position.x + 42, position.y, 42, 64);
     } else if (window.keyCode == UP && !isLeft) {
-      parent.image(shootRight, position.x, position.y, 42, 64);
+      parent.image(shootRight, position.x + 42, position.y, 42, 64);
     } else if (isLeft) {
-      parent.image(playerLeft, position.x, position.y, 42, 64);
+      parent.image(playerLeft, position.x + 42, position.y, 42, 64);
     } else {
-      parent.image(playerRight, position.x, position.y, 42, 64);
+      parent.image(playerRight, position.x + 42, position.y, 42, 64);
     }
     parent.popStyle();
   }

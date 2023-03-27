@@ -62,7 +62,7 @@ public class Scene {
     sprites = new ArrayList<>();
     player = new Player(
         new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize),
-        new PVector(0, 1), playerSize, 5,
+          new PVector(0, 1), playerSize, 5,
         new Color(0, 255, 255), window
     );
 
