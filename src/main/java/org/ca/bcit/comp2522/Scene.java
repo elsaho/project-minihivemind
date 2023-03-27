@@ -1,18 +1,14 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.*;
-import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Iterator;
 
+import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import javax.sound.sampled.LineUnavailableException;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
-
-import javax.sound.sampled.LineUnavailableException;
-
 import static processing.core.PConstants.UP;
 
 /**
@@ -25,12 +21,12 @@ import static processing.core.PConstants.UP;
 
 public class Scene {
   /**
-   * Constants
+   * Constants.
    */
   private final int playerSize = 64;
 
   /**
-   * Gameplay
+   * Gameplay.
    */
 
   protected SoundEffects sounds;
@@ -42,16 +38,18 @@ public class Scene {
   private PImage bg;
   private PImage heart;
   private ArrayList<Sprite> removedSprites;
+  private long lastCollisionTime = 0;
+  private boolean isImmune = false;
 
   /**
-   * Scorebar and timer
+   * Scorebar and timer.
    */
   private ScoreBar scoreBar;
   private Lives lives;
   private Timer timer;
 
   /**
-   * Other
+   * Other.
    */
   public boolean isGameOver = false;
 
@@ -117,14 +115,14 @@ public class Scene {
   }
 
   /**
-   * Creates a line to shoot bubbles
-   * @param window
+   * Creates a line to shoot bubbles.
+   *
+   * @param window game window
    */
   void UpdateLineInstance(GameWindow window) {
-    if(line == null) {
-      if(window.keyPressed) {
-        // up or space bar
-        if(window.keyCode == UP) {
+    if (line == null) {
+      if (window.keyPressed) {
+        if (window.keyCode == UP) {
           line = new Line(
               new PVector(player.position.x, player.position.y),
               player.direction, player.size, 5,
@@ -149,7 +147,7 @@ public class Scene {
     for (Sprite sprite : sprites) {
       sprite.display(parent);
     }
-    if(line != null) {
+    if (line != null) {
       line.display(parent);
 
     }
@@ -167,11 +165,14 @@ public class Scene {
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
-  long lastCollisionTime = 0;
-  boolean isImmune = false;
+  /**
+   * Updates the game.
+   *
+   * @param parent as a PApplet
+   */
   public void update(PApplet parent) {
     player.update(parent);
-    if(line != null) {
+    if (line != null) {
       line.update(parent);
     }
 
@@ -181,9 +182,6 @@ public class Scene {
     for (Bubble bubble : bubbles) {
       bubble.bounce();
       bubble.display(parent);
-
-
-
 
       if (Sprite.collided(bubble, player)) {
         if (!isImmune) {
@@ -203,11 +201,12 @@ public class Scene {
         isImmune = false;
       }
 
-      if(line != null && Sprite.collided(line, bubble)) {
+      if (line != null && Sprite.collided(line, bubble)) {
+
         sounds.playPop();
         line = null;
         bubblesToRemove.add(bubble);
-        if (bubble.size > 25) {
+        if (bubble.size > bubble.MIN_SIZE) {
           newBubbles.addAll(bubble.spawnBubbles());
         }
 
@@ -225,7 +224,7 @@ public class Scene {
 
     removedSprites.addAll(bubblesToRemove);
 
-    for(Sprite sprite : removedSprites) {
+    for (Sprite sprite : removedSprites) {
       sprites.remove(sprite);
     }
   }

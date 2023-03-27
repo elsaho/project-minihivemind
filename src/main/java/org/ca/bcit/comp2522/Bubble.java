@@ -2,7 +2,6 @@ package org.ca.bcit.comp2522;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -18,12 +17,13 @@ public class Bubble extends Sprite {
   // Constants
   private static final float GRAVITY = 0.1f;
 
+  //Minimum size of the bubble
+  public static final float MIN_SIZE = 25f;
+
   // Properties
   public PVector velocity;
-  private Line line;
   private PImage bubbleImage;
-  private boolean flag = true;
-  private float bounceVelocity;
+
 
   /**
    * Constructor for Bubble class.
@@ -47,8 +47,8 @@ public class Bubble extends Sprite {
    * Bounce method allows bubbles to bounce off floors and walls.
    */
   public void bounce() {
-    // Calculate bounce velocity
-    this.bounceVelocity = -6f;
+    // set bounce velocity, change to static final if we don't want to have diff bounce velocity
+    float bounceVelocity = -6f;
 
     // Check for floor collision
     if (this.position.y + size / 2 >= GameWindow.getY()) {
@@ -66,9 +66,13 @@ public class Bubble extends Sprite {
     position.add(velocity);
   }
 
+  /** This method returns an arraylist of bubbles containing 2 smaller bubbles.
+   *
+   * @return newBubbles - arraylist of bubbles
+   */
   public ArrayList<Bubble> spawnBubbles() {
     ArrayList<Bubble> newBubbles = new ArrayList<>();
-    float newSize = size / 2;
+    float newSize = size - MIN_SIZE;
     PVector newVelocity1 = new PVector(-velocity.x, -Math.abs(velocity.y));
     PVector newVelocity2 = new PVector(velocity.x, -Math.abs(velocity.y));
     Bubble bubble1 = new Bubble(new PVector(position.x, position.y), new PVector(-1, -1),
