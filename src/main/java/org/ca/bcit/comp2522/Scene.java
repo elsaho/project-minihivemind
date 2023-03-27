@@ -208,10 +208,6 @@ public class Scene {
    * Resets the game if a life is lost.
    */
   public void reset() {
-    player.position = new PVector((float) GameWindow.getX()/2, GameWindow.getY() - 64);
-    bubbles.clear();
-    bubble.position = new PVector(400, 100);
-    bubble.velocity = new PVector(2, 5);
-    bubbles.add(bubble);
   }
+
 }
