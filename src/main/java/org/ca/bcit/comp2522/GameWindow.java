@@ -1,9 +1,7 @@
 package org.ca.bcit.comp2522;
 
-import  processing.core.PApplet;
-
+import processing.core.PApplet;
 import javax.sound.sampled.LineUnavailableException;
-import java.applet.*;
 import java.io.FileNotFoundException;
 
 /**
@@ -13,32 +11,40 @@ import java.io.FileNotFoundException;
  * @version 2023
  */
 public class GameWindow extends PApplet {
-
-
+  /** Scene class to handle game scenes */
   private Scene scene;
+  /** Game screen width */
   private static final int x = 800;
-
+  /** Game screen height */
   private static final int y = 600;
-
+  /** Getter for screen width */
   public static int getX() {
     return x;
   }
-
+  /** Getter for screen height */
   public static int getY() {
     return y;
   }
+  /** Game over page */
   private GameOver gameOver;
-  private StartPage startPage;
+  /** start page with instructions */
+  private InstructionStart instructionStart;
+  /** Game Win page */
   private GameVictory gameVictory;
+  /** audio class*/
   private SoundEffects audio;
 
-
+  /** Settings of game window */
   public void settings() {
     size(x, y);
   }
 
+
+  /**
+   * Sets up the game window
+   */
   public void setup() {
-    //sound
+    //Game sounds
     try {
       audio = new SoundEffects();
       audio.playBGM();
@@ -47,21 +53,25 @@ public class GameWindow extends PApplet {
     } catch (LineUnavailableException e) {
       throw new RuntimeException(e);
     }
+    //Game start and instructions
+    instructionStart = new InstructionStart(this);
+    instructionStart.setup(this);
+    //Game
     scene = new Scene(this); //init?
     scene.setup(this);
-
+    //Game lose
     gameOver = new GameOver(this);
     gameOver.setup(this);
-
-    startPage = new StartPage(this);
-    startPage.setup(this);
-
+    //Game win
     gameVictory = new GameVictory(this);
     gameVictory.setup(this);
   }
 
   public void draw() {
-    if (scene.isGameOver) {
+    if (!InstructionStart.gameStarted) {
+      instructionStart.update(this);
+      instructionStart.display(this);
+    } else if (scene.isGameOver) {
       gameOver.update(this);
       gameOver.display(this);
       audio.stopBGM(); //temp fix
@@ -69,13 +79,13 @@ public class GameWindow extends PApplet {
       gameVictory.update(this);
       gameVictory.display(this);
       audio.stopBGM(); //temp fix
-    }
-    else {
+    } else {
       scene.display(this);
       scene.UpdateLineInstance(this);
       scene.update(this);
     }
   }
+
   
   public static void main(String[] args) {
     String[] appArgs = new String[] { "org.ca.bcit.comp2522.GameWindow" };
