@@ -11,7 +11,7 @@ import processing.event.MouseEvent;
  * @version 2023
  */
 
-public class GameOver extends PApplet{
+public class GameOver{
 
   /**
    * Properties
@@ -61,8 +61,8 @@ public class GameOver extends PApplet{
   /**
    * Draws the game over page
    */
-  public void draw() {
-    background(bg);
-    restart.display(this);
+  public void draw(PApplet parent) {
+    parent.background(bg);
+    restart.display(parent);
   }
 }

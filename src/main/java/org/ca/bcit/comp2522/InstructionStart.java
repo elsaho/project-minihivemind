@@ -7,7 +7,7 @@ import processing.core.PImage;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class InstructionStart extends PApplet{
+public class InstructionStart{
   /** If player has seen the instruction screen */
   public static boolean gameStarted;
   /** Image imports: background */
@@ -56,8 +56,8 @@ public class InstructionStart extends PApplet{
   /**
    * Draws the game over page
    */
-  public void draw() {
-    background(bg);
-    startGameBtn.display(this);
+  public void draw(PApplet parent) {
+    parent.background(bg);
+    startGameBtn.display(parent);
   }
 }

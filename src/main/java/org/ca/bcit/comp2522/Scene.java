@@ -119,7 +119,7 @@ public class Scene {
     scoreBar = ScoreBar.getInstance();
 
     timer = Timer.getInstance();
-    timer.setStart(parent.millis() + 90000);
+    timer.setStart(parent.millis() + 20000);
   }
 
   /**

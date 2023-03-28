@@ -3,7 +3,7 @@ package org.ca.bcit.comp2522;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class GameVictory extends PApplet {
+public class GameVictory {
   /**
    * Properties
    */
@@ -37,8 +37,8 @@ public class GameVictory extends PApplet {
     }
   }
 
-  public void draw() {
-    background(bg);
-    restart.display(this);
+  public void draw(PApplet parent) {
+    parent.background(bg);
+    restart.display(parent);
   }
 }
