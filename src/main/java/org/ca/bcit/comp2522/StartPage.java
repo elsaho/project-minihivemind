@@ -3,7 +3,7 @@ package org.ca.bcit.comp2522;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class StartPage extends PApplet {
+public class StartPage{
 
   private PImage bg;
 
@@ -11,7 +11,7 @@ public class StartPage extends PApplet {
   }
 
   public void setup(PApplet parent) {
-    super.setup();
+//    super.setup();
     bg = parent.loadImage("../assets/SkyBackground.png");
   }
 
