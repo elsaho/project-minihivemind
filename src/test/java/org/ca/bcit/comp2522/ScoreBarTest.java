@@ -1,6 +1,5 @@
 package org.ca.bcit.comp2522;
 
-import org.ca.bcit.comp2522.ScoreBar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
