@@ -1,9 +1,7 @@
 package org.ca.bcit.comp2522;
 
 import  processing.core.PApplet;
-
 import javax.sound.sampled.LineUnavailableException;
-import java.applet.*;
 import java.io.FileNotFoundException;
 
 /**
@@ -28,7 +26,6 @@ public class GameWindow extends PApplet {
     return y;
   }
   private GameOver gameOver;
-  private StartPage startPage;
   private GameVictory gameVictory;
   private SoundEffects audio;
 
@@ -52,9 +49,6 @@ public class GameWindow extends PApplet {
 
     gameOver = new GameOver(this);
     gameOver.setup(this);
-
-    startPage = new StartPage(this);
-    startPage.setup(this);
 
     gameVictory = new GameVictory(this);
     gameVictory.setup(this);
