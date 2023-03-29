@@ -2,7 +2,6 @@ package org.ca.bcit.comp2522;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
@@ -22,7 +21,7 @@ public class Bubble extends Sprite {
 
   // Properties
   public PVector velocity;
-  private PImage bubbleImage;
+  private final PImage bubbleImage;
 
 
   /**

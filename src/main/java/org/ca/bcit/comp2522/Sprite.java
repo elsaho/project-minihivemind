@@ -43,27 +43,6 @@ public abstract class Sprite implements Collidable {
   }
 
   /**
-   * Checks if the shootLine shot by player has collided with bubble
-   * @param shootLine as a ShootLine
-   * @param bubble as a Bubble
-   * @return boolean
-   */
-  public static boolean collided(ShootLine shootLine, Bubble bubble) {
-    PVector lineTemp = new PVector(shootLine.x, shootLine.getPosition().y);
-    float bubbleRadius = bubble.getSize() / 2;
-    PVector bubbleTemp = bubble.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
-    if (lineTemp.y < bubbleTemp.y) {
-      lineTemp.y = bubbleTemp.y;
-    }
-
-    float diff = lineTemp.dist(bubbleTemp);
-    if (diff < bubbleRadius) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
    * Gets direction of sprite
    * @return PVector
    */
@@ -80,18 +59,35 @@ public abstract class Sprite implements Collidable {
   }
 
   /**
-   * Updates position of sprite
-   */
-  public void update() {
-    this.position = this.getPosition().add(this.direction.copy().mult(speed));
-  }
-
-  /**
    * Gets size of sprite
    * @return size as a float
    */
   public float getSize() {
     return size;
+  }
+
+  /**
+   * Checks if the shootLine shot by player has collided with bubble
+   * @param shootLine as a ShootLine
+   * @param bubble as a Bubble
+   * @return boolean
+   */
+  public static boolean collided(ShootLine shootLine, Bubble bubble) {
+    PVector lineTemp = new PVector(shootLine.x, shootLine.getPosition().y);
+    float bubbleRadius = bubble.getSize() / 2;
+    PVector bubbleTemp = bubble.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
+    if (lineTemp.y < bubbleTemp.y) {
+      lineTemp.y = bubbleTemp.y;
+    }
+    float diff = lineTemp.dist(bubbleTemp);
+    return diff < bubbleRadius;
+  }
+
+  /**
+   * Updates position of sprite
+   */
+  public void update() {
+    this.position = this.getPosition().add(this.direction.copy().mult(speed));
   }
 
   /**
@@ -117,13 +113,7 @@ public abstract class Sprite implements Collidable {
     float distX = bubbleX - closestX;
     float distY = bubbleY - closestY;
     float distance = (float) Math.sqrt((distX * distX) + (distY * distY));
-
-    // check if the bubble collides with the player
-    if (distance <= bubble.getSize() / 2) {
-      return true;
-    }
-
-    return false;
+    return (distance <= bubble.getSize() / 2);
   }
 
   /**
