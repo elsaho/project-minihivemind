@@ -29,7 +29,7 @@ public class Scene {
   /**
    * Gameplay.
    */
-
+  private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
   protected SoundEffects sounds;
   public static Line line;
   private final Player player;
@@ -71,7 +71,8 @@ public class Scene {
     line = null;
     try {
       sounds = new SoundEffects();
-      sounds.playBGM();
+      System.out.println("new sound created");
+//      sounds.playBGM();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (LineUnavailableException e) {
@@ -96,6 +97,9 @@ public class Scene {
     );
     bubbles.add(bubble);
     lives = Lives.getInstance();
+
+    //saves the score 0
+    databaseHelper.put("score", 0);
   }
 
   /**
@@ -171,6 +175,8 @@ public class Scene {
     }
     parent.text("Time: " + timer.timeToString(), 350, 55);
     parent.text("Score: " + scoreBar.getValue(), 600, 55);
+
+
   }
 
   /**
@@ -219,6 +225,10 @@ public class Scene {
         }
 
         scoreBar.addScore((int) (bubble.size * timer.getRemaining() / 10000));
+
+        //save score to database everytime bubble is popped
+        databaseHelper.put("score", scoreBar.getValue());
+
         System.out.println("You popped a bubble!");
       }
 
