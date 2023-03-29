@@ -89,7 +89,7 @@ public class ScoreBar {
     window.textAlign(PConstants.LEFT);
     window.text("Lives: ", 10, 55);
     for (int i = 0; i < lives.getLives(); i++) {
-      window.image(heart, 110 + (60 * i), 25, 50, 50);
+      window.image(heart, 120 + (60 * i), 25, 50, 50);
     }
 
     window.text("Time: " + timer.timeToString(), 350, 55);
