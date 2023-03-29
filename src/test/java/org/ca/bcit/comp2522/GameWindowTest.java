@@ -20,12 +20,12 @@ public class GameWindowTest {
 
   @Test
   public void testGetX() {
-    assertEquals(800, gameWindow.getX());
+    assertEquals(800, GameWindow.getX());
   }
 
   @Test
   public void testGetY() {
-    assertEquals(600, gameWindow.getY());
+    assertEquals(600, GameWindow.getY());
   }
 
   @Test
