@@ -22,6 +22,7 @@ public class SoundEffects {
   private final Clip popAudio;
   private final Clip oofAudio;
   private final Clip loseAudio;
+  private final Clip winAudio;
 
   /**
    * Constructor for the SouneEffects class
@@ -41,6 +42,9 @@ public class SoundEffects {
     //Load lose game sound effect
     Path losePath = Paths.get("assets", "Sound", "loseGame.wav");
     loseAudio = loadAudio(losePath);
+    //Load win game sound effect
+    Path winPath = Paths.get("assets", "Sound", "winGame.wav");
+    winAudio = loadAudio(winPath);
   }
 
 
@@ -73,6 +77,14 @@ public class SoundEffects {
   public void playLoseAudio(){
     loseAudio.setFramePosition(0);
     loseAudio.start();
+  }
+
+  /**
+   * Plays oof sound effect
+   */
+  public void playWinAudio(){
+    winAudio.setFramePosition(0);
+    winAudio.start();
   }
 
   /**

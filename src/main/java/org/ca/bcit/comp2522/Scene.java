@@ -263,6 +263,7 @@ public class Scene {
 
     //Game victory
     if (bubbles.isEmpty()) {
+      sounds.playWinAudio();
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
       isVictory = true;
     }
