@@ -49,8 +49,8 @@ public class Player extends Sprite {
   public void update(final GameWindow window) {
 
     if (window.inputHandler.isLeft()) {
-      if (position.x - speed < 0) {
-        position.x = 0;
+      if (position.x < - size/2) {
+        position.x = -size/2;
 
       }
       this.isLeft = true;
@@ -58,8 +58,8 @@ public class Player extends Sprite {
     }
 
     if (window.inputHandler.isRight()) {
-      if (position.x + speed > GameWindow.getX() - size) {
-        position.x = GameWindow.getX() - size;
+      if (position.x > GameWindow.getX() - size - size/2) {
+        position.x = GameWindow.getX() - size - size/2;
       }
       this.isLeft = false;
       position.x += speed;
