@@ -25,29 +25,29 @@ public class InstructionStart{
 
   /**
    * Sets up the game over page
-   * @param parent PApplet refers to GameWindow
+   * @param window
    */
-  public void setup(PApplet parent) {
-    bg = parent.loadImage("../assets/SkyInstruction.png");
-    PImage startButtonImg = parent.loadImage("../assets/StartButton.png");
+  public void setup(GameWindow window) {
+    bg = window.loadImage("../assets/SkyInstruction.png");
+    PImage startButtonImg = window.loadImage("../assets/StartButton.png");
     startGameBtn = new Button(100, 323, 600, 206, startButtonImg);
   }
 
   /**
    * Displays the game over page
-   * @param parent PApplet refers to GameWindow
+   * @param window
    */
-  public void display(PApplet parent) {
-    parent.background(bg);
-    startGameBtn.display(parent);
+  public void display(GameWindow window) {
+    window.background(bg);
+    startGameBtn.display(window);
   }
 
   /**
    * Updates the game over page
-   * @param parent PApplet refers to GameWindow
+   * @param window
    */
-  public void update(PApplet parent) {
-    if (startGameBtn.isClicked(parent.mouseX, parent.mouseY, parent.mousePressed)) {
+  public void update(GameWindow window) {
+    if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Start Game button clicked!");
       gameStarted = true;
     }
@@ -56,8 +56,8 @@ public class InstructionStart{
   /**
    * Draws the game over page
    */
-  public void draw(PApplet parent) {
-    parent.background(bg);
-    startGameBtn.display(parent);
+  public void draw(GameWindow window) {
+    window.background(bg);
+    startGameBtn.display(window);
   }
 }

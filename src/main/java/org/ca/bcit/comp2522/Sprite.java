@@ -118,16 +118,16 @@ public abstract class Sprite implements Collidable {
   /**
    * Displays the sprite.
    *
-   * @param parent as a PApplet
+   * @param window as a GameWindow
    */
-  public void display(PApplet parent) {
-    parent.pushStyle();
-    parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
-    parent.ellipse(this.position.x, this.position.y, size, size);
-    parent.popStyle();
+  public void display(GameWindow window) {
+    window.pushStyle();
+    window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+    window.ellipse(this.position.x, this.position.y, size, size);
+    window.popStyle();
   }
 
-  public void setup(PApplet parent) {
+  public void setup(GameWindow window) {
   }
 }
 

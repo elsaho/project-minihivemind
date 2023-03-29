@@ -29,39 +29,39 @@ public class GameOver{
 
   /**
    * Sets up the game over page
-   * @param parent
+   * @param window
    */
-  public void setup(PApplet parent) {
-    bg = parent.loadImage("../assets/GameOverScreen.png");
-    replayButton = parent.loadImage("../assets/TransparentReplay.png");
+  public void setup(GameWindow window) {
+    bg = window.loadImage("../assets/GameOverScreen.png");
+    replayButton = window.loadImage("../assets/TransparentReplay.png");
     restart = new Button(100, 323, 600, 206, replayButton);
   }
 
   /**
    * Displays the game over page
-   * @param parent
+   * @param window
    */
-  public void display(PApplet parent) {
-    parent.background(bg);
-    restart.display(parent);
+  public void display(GameWindow window) {
+    window.background(bg);
+    restart.display(window);
   }
 
   /**
    * Updates the game over page
-   * @param parent
+   * @param window
    */
-  public void update(PApplet parent) {
-    if (restart.isClicked(parent.mouseX, parent.mouseY, parent.mousePressed)) {
+  public void update(GameWindow window) {
+    if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Restart button clicked!");
-      parent.setup();
+      window.setup();
     }
   }
 
   /**
    * Draws the game over page
    */
-  public void draw(PApplet parent) {
-    parent.background(bg);
-    restart.display(parent);
+  public void draw(GameWindow window) {
+    window.background(bg);
+    restart.display(window);
   }
 }

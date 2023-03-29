@@ -100,9 +100,9 @@ public class Scene {
   /**
    * Loads up the game and resets everything.
    */
-  public void setup(PApplet parent) {
+  public void setup(GameWindow window) {
     for (Bubble bubble : bubbles) {
-      bubble.setup(parent);
+      bubble.setup(window);
     }
     sprites.add(player);
     for (Bubble bubble : bubbles) {
@@ -112,14 +112,14 @@ public class Scene {
     /* If you want to change the image,
      * you must make the image the exact size of the window (800 x 600)
      */
-    bg = parent.loadImage("../assets/SkyBackground.png");
-    heart = parent.loadImage("../assets/pixelHeart.png");
+    bg = window.loadImage("../assets/SkyBackground.png");
+    heart = window.loadImage("../assets/pixelHeart.png");
 
     lives = Lives.getInstance();
     scoreBar = ScoreBar.getInstance();
 
     timer = Timer.getInstance();
-    timer.setStart(parent.millis() + 20000);
+    timer.setStart(window.millis() + 90000);
   }
 
   /**
@@ -144,44 +144,44 @@ public class Scene {
   /**
    * Displays the game.
    *
-   * @param parent as a PApplet
+   * @param window as a GameWindow
    */
-  public void display(PApplet parent) {
-    parent.background(bg);
-    parent.fill(0);
-    parent.rect(0, 0, GameWindow.getX(), 100);
+  public void display(GameWindow window) {
+    window.background(bg);
+    window.fill(0);
+    window.rect(0, 0, GameWindow.getX(), 100);
 
 
     for (Sprite sprite : sprites) {
-      sprite.display(parent);
+      sprite.display(window);
     }
     if (line != null) {
-      line.display(parent);
+      line.display(window);
 
     }
 
-    timer.setRemaining(timer.getStart() - parent.millis());
+    timer.setRemaining(timer.getStart() - window.millis());
 
-    parent.fill(255, 255, 255);
-    parent.textSize(32);
-    parent.textAlign(PConstants.LEFT);
-    parent.text("Lives: ", 20, 55);
+    window.fill(255, 255, 255);
+    window.textSize(32);
+    window.textAlign(PConstants.LEFT);
+    window.text("Lives: ", 20, 55);
     for (int i = 0; i < lives.getLives(); i++) {
-      parent.image(heart, 110 + (60 * i), 25, 50, 50);
+      window.image(heart, 110 + (60 * i), 25, 50, 50);
     }
-    parent.text("Time: " + timer.timeToString(), 350, 55);
-    parent.text("Score: " + scoreBar.getValue(), 600, 55);
+    window.text("Time: " + timer.timeToString(), 350, 55);
+    window.text("Score: " + scoreBar.getValue(), 600, 55);
   }
 
   /**
    * Updates the game.
    *
-   * @param parent as a PApplet
+   * @param window as a GameWindow
    */
-  public void update(PApplet parent) {
-    player.update(parent);
+  public void update(GameWindow window) {
+    player.update(window);
     if (line != null) {
-      line.update(parent);
+      line.update(window);
     }
 
     ArrayList<Bubble> newBubbles = new ArrayList<>();
@@ -189,7 +189,7 @@ public class Scene {
 
     for (Bubble bubble : bubbles) {
       bubble.bounce();
-      bubble.display(parent);
+      bubble.display(window);
 
       if (Sprite.collided(bubble, player)) {
         if (!isImmune) {

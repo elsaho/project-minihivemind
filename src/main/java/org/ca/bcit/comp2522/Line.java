@@ -42,9 +42,9 @@ public class Line extends Sprite {
     this.increments = GameWindow.getY() / speed;
   }
 
-  public void display(PApplet parent) {
+  public void display(GameWindow window) {
     window.strokeWeight(1);
-    parent.image(fireball, this.x - thickness * 2, position.y - thickness, 42, 64);
+    window.image(fireball, this.x - thickness * 2, position.y - thickness, 42, 64);
     PVector currYellow = new PVector(x + thickness /2, y);
     PVector currRed = new PVector(x - thickness /2, y);
     PVector prevYellow = new PVector(x - thickness /2, y);
@@ -72,7 +72,7 @@ public class Line extends Sprite {
   }
 
 
-  public void update(PApplet parent) {
+  public void update(GameWindow window) {
 
     // hard coded for now, should not go above the scorebar
     if(this.position.y > 100 + thickness / 2) {

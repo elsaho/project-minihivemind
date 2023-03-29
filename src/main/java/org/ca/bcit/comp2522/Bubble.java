@@ -94,16 +94,16 @@ public class Bubble extends Sprite {
   }
 
   /** This method displays the bubble on the screen
-   *  using the PApplet instance provided as a parameter.
+   *  using the GameWindow instance provided as a parameter.
    *
-   *  @param parent the PApplet instance used to display the bubble.
+   *  @param window the GameWindow instance used to display the bubble.
    */
   @Override
-  public void display(PApplet parent) {
-    parent.pushStyle();
-    parent.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
-    parent.image(bubbleImage, this.position.x, this.position.y, size, size);
-    parent.popStyle();
+  public void display(GameWindow window) {
+    window.pushStyle();
+    window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+    window.image(bubbleImage, this.position.x, this.position.y, size, size);
+    window.popStyle();
   }
 
 }
