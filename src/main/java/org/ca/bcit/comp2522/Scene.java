@@ -118,13 +118,16 @@ public class Scene {
    * Loads up the game and resets everything.
    */
   public void setup(GameWindow window) {
+    sprites.add(player);
+
     for (Bubble bubble : bubbles) {
       bubble.setup(window);
-    }
-    sprites.add(player);
-    for (Bubble bubble : bubbles) {
       sprites.add(bubble);
     }
+
+//    for (Bubble bubble : bubbles) {
+//      sprites.add(bubble);
+//    }
 
     /* If you want to change the image,
      * you must make the image the exact size of the window (800 x 600)
