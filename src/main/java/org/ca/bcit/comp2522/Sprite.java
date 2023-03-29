@@ -12,6 +12,8 @@ import processing.core.PVector;
  * @version 2023
  */
 public abstract class Sprite implements Collidable {
+
+  //Sprite properties
   protected PVector position;
   protected PVector direction;
   protected float size;
@@ -40,6 +42,12 @@ public abstract class Sprite implements Collidable {
     this.color = color;
   }
 
+  /**
+   * Checks if the line shot by player has collided with bubble
+   * @param line as a Line
+   * @param bubble as a Bubble
+   * @return boolean
+   */
   public static boolean collided(Line line, Bubble bubble) {
     PVector lineTemp = new PVector(line.x, line.getPosition().y);
     float bubbleRadius = bubble.getSize() / 2;
@@ -55,20 +63,33 @@ public abstract class Sprite implements Collidable {
     return false;
   }
 
-
+  /**
+   * Gets direction of sprite
+   * @return PVector
+   */
   public PVector getDirection() {
     return direction.copy();
   }
 
+  /**
+   * Gets position of sprite
+   * @return PVector
+   */
   public PVector getPosition() {
     return position.copy();
   }
 
-
+  /**
+   * Updates position of sprite
+   */
   public void update() {
     this.position = this.getPosition().add(this.direction.copy().mult(speed));
   }
 
+  /**
+   * Gets size of sprite
+   * @return size as a float
+   */
   public float getSize() {
     return size;
   }
@@ -105,12 +126,21 @@ public abstract class Sprite implements Collidable {
     return false;
   }
 
+  /**
+   * Helper method for the collided function to find the closest point of player to bubble
+   * @param value as a float
+   * @param min as a float
+   * @param max as a float
+   * @return float
+   */
   protected static float clamp(float value, float min, float max) {
     return Math.max(min, Math.min(max, value));
   }
 
-
-
+  /**
+   * Sets sprite direction
+   * @param direction as a PVector
+   */
   public void setDirection(PVector direction) {
     this.direction = direction;
   }
@@ -127,6 +157,10 @@ public abstract class Sprite implements Collidable {
     window.popStyle();
   }
 
+  /**
+   * Sets up the sprite, fully implemented in the child classes
+   * @param window as a GameWindow
+   */
   public void setup(GameWindow window) {
   }
 }

@@ -52,8 +52,8 @@ public class Button{
   }
 
   /**
-   *
-   * @param window
+   * Displays buttons onto the window
+   * @param window as a GameWindow
    */
   public void display(GameWindow window) {
     window.image(img, xPos, yPos, width, height);

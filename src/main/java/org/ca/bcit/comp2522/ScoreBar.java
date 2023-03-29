@@ -10,7 +10,6 @@ public class ScoreBar {
 
   private static ScoreBar single_instance = null;
   private int value;
-
   private ScoreBar() {
     this.value = 0;
   }
@@ -29,29 +28,34 @@ public class ScoreBar {
     return single_instance;
   }
 
-  public void poppedBubble(int size) {
-    //Add to scoreboard value based on bubble size
-    this.value += (300 - ((size - 1) * 50));
-  }
-
+  /**
+   * Add to scoreboard value based on time
+   * @param time as an int
+   */
   public void finishedLevel(int time) {
-    //Add to scoreboard value based on time
     this.value += (100 * time);
   }
 
+  /**
+   * Gets score value
+   * @return value as an int
+   */
   public int getValue() {
     return value;
   }
 
+  /**
+   * Resets score value
+   */
   public void resetValue() {
     this.value = 0;
   }
 
+  /**
+   * Adds to score value
+   * @param i as an int
+   */
   public void addScore(int i) {
     this.value += i;
-  }
-
-  public void reset() {
-    resetValue();
   }
 }

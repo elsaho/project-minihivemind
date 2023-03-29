@@ -50,7 +50,7 @@ public class Scene {
   private Timer timer;
 
   /**
-   * Other.
+   * Game state
    */
   public boolean isGameOver = false;
   public boolean isVictory = false;
@@ -239,7 +239,6 @@ public class Scene {
     //Game victory
     if (bubbles.isEmpty()) {
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
-      System.out.println("Final score is: " + scoreBar.getValue());
       isVictory = true;
     }
   }
