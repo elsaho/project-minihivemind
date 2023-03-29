@@ -93,7 +93,7 @@ public class DatabaseHelper {
 
     // Sort the scores by timestamp in descending order
     Document sortCriteria = new Document("timestamp", -1);
-    ArrayList<Document> sortedScores = collection.find().sort(sortCriteria).limit(1).into(new ArrayList<>());
+    ArrayList<Document> sortedScores = scoresCollection.find().sort(sortCriteria).limit(1).into(new ArrayList<>());
 
     //get the score
     Document mostRecentScore = sortedScores.get(0);
