@@ -5,8 +5,6 @@ import processing.core.PVector;
 
 import java.awt.*;
 
-import static processing.core.PConstants.UP;
-
 /** Player class. The sprite that the user controls.
  * Can move left and right and shoot bullets. Extends Sprite class.
  *
@@ -53,7 +51,9 @@ public class Player extends Sprite {
     if (window.inputHandler.isLeft()) {
       if (position.x - speed < 0) {
         position.x = 0;
+
       }
+      this.isLeft = true;
       position.x -= speed;
     }
 
@@ -61,6 +61,7 @@ public class Player extends Sprite {
       if (position.x + speed > GameWindow.getX() - size) {
         position.x = GameWindow.getX() - size;
       }
+      this.isLeft = false;
       position.x += speed;
     }
 
@@ -78,15 +79,16 @@ public class Player extends Sprite {
   public void display(final GameWindow window) {
     window.pushStyle();
     window.fill(color.getRed(), color.getGreen(), color.getBlue());
-    if (window.keyCode == UP && isLeft) {
+    if (window.inputHandler.isUp() && window.inputHandler.isLeft()) {
       window.image(shootLeft, position.x + 42, position.y, 42, 64);
-    } else if (window.keyCode == UP && !isLeft) {
+    } else if (window.inputHandler.isUp() && window.inputHandler.isRight()) {
       window.image(shootRight, position.x + 42, position.y, 42, 64);
-    } else if (isLeft) {
+    } else if (window.inputHandler.isLeft() || this.isLeft) {
       window.image(playerLeft, position.x + 42, position.y, 42, 64);
-    } else {
+    } else if (window.inputHandler.isRight() || !this.isLeft){
       window.image(playerRight, position.x + 42, position.y, 42, 64);
     }
+
     window.popStyle();
   }
 
