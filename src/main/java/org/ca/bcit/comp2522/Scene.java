@@ -246,10 +246,10 @@ public class Scene {
 
         System.out.println("You popped a bubble!");
       }
+    }
 
-      if (timer.getRemaining() <= 0) {
-        isGameOver = true;
-      }
+    if (timer.getRemaining() <= 0) {
+      isGameOver = true;
     }
 
     bubbles.removeAll(bubblesToRemove);
