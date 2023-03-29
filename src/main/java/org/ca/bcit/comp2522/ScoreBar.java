@@ -1,5 +1,9 @@
 package org.ca.bcit.comp2522;
 
+import processing.core.PConstants;
+import processing.core.PFont;
+import processing.core.PImage;
+
 /**
  * ScoreBar. Singleton class that keeps track of the player's score.
  *
@@ -10,6 +14,14 @@ public class ScoreBar {
 
   private static ScoreBar single_instance = null;
   private int value;
+
+  private PImage heart;
+
+  private PFont myFont;
+
+  private Lives lives;
+  private Timer timer;
+
   private ScoreBar() {
     this.value = 0;
   }
@@ -57,5 +69,47 @@ public class ScoreBar {
    */
   public void addScore(int i) {
     this.value += i;
+  }
+
+  /** Displays the score bar on the screen.
+   *
+   * @param window the GameWindow object
+   */
+  public void display(GameWindow window) {
+
+    heart = window.loadImage("../assets/pixelHeart.png");
+    lives = Lives.getInstance();
+
+    timer = Timer.getInstance();
+    timer.setRemaining(timer.getStart() - window.millis());
+
+    myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 18);
+    window.fill(255, 255, 255);
+    window.textFont(myFont);
+    window.textAlign(PConstants.LEFT);
+    window.text("Lives: ", 10, 55);
+    for (int i = 0; i < lives.getLives(); i++) {
+      window.image(heart, 110 + (60 * i), 25, 50, 50);
+    }
+
+    window.text("Time: " + timer.timeToString(), 350, 55);
+    window.text("Score: " + this.getValue(), 550, 55);
+  }
+
+  /**
+   * Updates the score bar.
+   * @param window the GameWindow object
+   * @param bubble the Bubble object
+   * @param popped whether the bubble has been popped
+   * @param isHit whether the bubble has been hit
+   */
+  public void update(GameWindow window, Bubble bubble, boolean popped, boolean isHit) {
+    if (popped) {
+      this.addScore((int) (bubble.size * timer.getRemaining() / 10000));
+    }
+    if (isHit) {
+      lives.loseLife();
+      System.out.println("Lives: " + lives.getLives());
+    }
   }
 }
