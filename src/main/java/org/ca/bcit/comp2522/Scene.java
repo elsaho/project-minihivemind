@@ -83,8 +83,6 @@ public class Scene {
     shootLine = null;
     try {
       sounds = new SoundEffects();
-      System.out.println("new sound created");
-//      sounds.playBGM();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (LineUnavailableException e) {
@@ -215,11 +213,13 @@ public class Scene {
       if (Sprite.collided(bubble, player)) {
         if (!isImmune) {
           if (lives.getLives() > 0) {
+            sounds.playOof();
             lives.loseLife();
             System.out.println("You lost a life");
             isImmune = true;
             lastCollisionTime = System.currentTimeMillis();
           } else {
+            sounds.playLoseAudio();
             isGameOver = true;
           }
         }
@@ -263,6 +263,7 @@ public class Scene {
 
     //Game victory
     if (bubbles.isEmpty()) {
+      sounds.playWinAudio();
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
       isVictory = true;
     }

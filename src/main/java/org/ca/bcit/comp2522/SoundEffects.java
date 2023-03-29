@@ -1,9 +1,15 @@
 package org.ca.bcit.comp2522;
 
-import javax.sound.sampled.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
-import java. io. FileNotFoundException;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 /**
  * Class for handling background music.
@@ -12,39 +18,41 @@ import java.io.IOException;
 public class SoundEffects {
 
   //Audio clips
-  final private Clip audio;
-  final private Clip popAudio;
+  private final Clip bgm;
+  private final Clip popAudio;
+  private final Clip oofAudio;
+  private final Clip loseAudio;
+  private final Clip winAudio;
 
   /**
    * Constructor for the SouneEffects class
    * @throws FileNotFoundException e
-   * @throws LineUnavailableException e
+   * @throws LineUnavailableException
    */
   public SoundEffects() throws FileNotFoundException, LineUnavailableException {
-    try {
-      // Load the background music
-      AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/sound.wav"));
-      audio = AudioSystem.getClip();
-      audio.open(audioInputStream);
-
-      // Load the pop sound effect
-      audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/pop.wav"));
-      popAudio = AudioSystem.getClip();
-      popAudio.open(audioInputStream);
-    } catch (FileNotFoundException | LineUnavailableException e) {
-      throw e;
-    } catch (UnsupportedAudioFileException e) {
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    // Load the background music
+    Path bgmPath = Paths.get("assets", "Sound", "sound.wav");
+    bgm = loadAudio(bgmPath);
+    // Load the pop sound effect
+    Path popPath = Paths.get("assets", "Sound", "pop.wav");
+    popAudio = loadAudio(popPath);
+    //Load lose life sound effect
+    Path oofPath = Paths.get("assets", "Sound", "oof.wav");
+    oofAudio = loadAudio(oofPath);
+    //Load lose game sound effect
+    Path losePath = Paths.get("assets", "Sound", "loseGame.wav");
+    loseAudio = loadAudio(losePath);
+    //Load win game sound effect
+    Path winPath = Paths.get("assets", "Sound", "winGame.wav");
+    winAudio = loadAudio(winPath);
   }
+
 
   /**
    * Starts playing the background music
    */
   public void playBGM(){
-    audio.loop(Clip.LOOP_CONTINUOUSLY);
+    bgm.loop(Clip.LOOP_CONTINUOUSLY);
   }
 
   /**
@@ -56,10 +64,34 @@ public class SoundEffects {
   }
 
   /**
+   * Plays oof sound effect
+   */
+  public void playOof(){
+    oofAudio.setFramePosition(0);
+    oofAudio.start();
+  }
+
+  /**
+   * Plays oof sound effect
+   */
+  public void playLoseAudio(){
+    loseAudio.setFramePosition(0);
+    loseAudio.start();
+  }
+
+  /**
+   * Plays oof sound effect
+   */
+  public void playWinAudio(){
+    winAudio.setFramePosition(0);
+    winAudio.start();
+  }
+
+  /**
    * Stops playing the background music
    */
   public void stopBGM(){
-    audio.stop();
+    bgm.stop();
   }
 
   /**
@@ -67,7 +99,18 @@ public class SoundEffects {
    * @return boolean
    */
   public boolean isPlaying() {
-    return audio.isActive();
+    return bgm.isActive();
+  }
+
+  private Clip loadAudio(Path path) throws FileNotFoundException, LineUnavailableException {
+    try {
+      AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path.toFile().toURI()));
+      Clip clip = AudioSystem.getClip();
+      clip.open(audioInputStream);
+      return clip;
+    } catch (UnsupportedAudioFileException | IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 }
