@@ -2,6 +2,17 @@
 
 Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
 
+We are the bane of bubbles!
+
+## Instructions
+
+## Contributions
+
+## References and Citations
+
+
+--------------------
+
 # Project
 
 ## Technical Project Requirements
