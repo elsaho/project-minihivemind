@@ -49,6 +49,7 @@ public class GameOver{
   public void display(GameWindow window) {
     window.background(bg);
     window.textSize(32); // Set text size to 16 pixels
+    window.fill(255, 255, 255);
     window.textAlign(PConstants.LEFT);
     window.textFont(myFont);
     window.text("High Score: " + databaseHelper.getHighestScore() + "\n"
