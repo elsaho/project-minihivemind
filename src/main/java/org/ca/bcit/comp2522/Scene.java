@@ -1,15 +1,16 @@
 package org.ca.bcit.comp2522;
 
 
-import java.awt.Color;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Random;
-import javax.sound.sampled.LineUnavailableException;
-import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import javax.sound.sampled.LineUnavailableException;
+import java.awt.*;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Random;
+
 import static processing.core.PConstants.UP;
 
 /**
@@ -21,6 +22,9 @@ import static processing.core.PConstants.UP;
  */
 
 public class Scene {
+
+  InputHandler inputHandler;
+
   /**
    * Constants.
    */
@@ -61,12 +65,14 @@ public class Scene {
    * @param window as a GameWindow
    */
   public Scene(GameWindow window) {
+    inputHandler = window.inputHandler;
     sprites = new ArrayList<>();
     player = new Player(
         new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize),
           new PVector(0, 1), playerSize, 5,
         new Color(0, 255, 255), window
     );
+
 
     line = null;
     try {
@@ -179,6 +185,7 @@ public class Scene {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
+
     player.update(window);
     if (line != null) {
       line.update(window);

@@ -3,46 +3,63 @@ package org.ca.bcit.comp2522;
 import processing.core.PConstants;
 
 public class InputHandler {
-  private GameWindow gameWindow;
-  private Thread inputThread;
-  private boolean leftPressed;
-  private boolean rightPressed;
 
-  private boolean upPressed;
+  public static InputHandler inputHandler;
 
-  public InputHandler(GameWindow gameWindow) {
-    // GameWindow should be a singleton.
-    this.gameWindow = gameWindowGetInstance();
-    inputThread = new Thread(() -> {
-      while (true) {
+  protected static GameWindow window;
+  private boolean isLeft;
+  private boolean isRight;
+  private boolean isUp;
 
-        if (gameWindow.keyPressed()) {
-          if (gameWindow.keyCode == PConstants.LEFT) {
-            leftPressed = true;
-          } else if (gameWindow.keyCode == PConstants.RIGHT) {
-            rightPressed = true;
-          } else if (gameWindow.keyCode() == PConstants.UP) {
-            upPressed = true;
-          }
-        } else if (gameWindow.keyReleased()) {
-          if (gameWindow.keyCode() == PConstants.LEFT) {
-            leftPressed = false;
-          } else if (gameWindow.keyCode() == PConstants.RIGHT) {
-            rightPressed = false;
-          }  else if (gameWindow.keyCode() == PConstants.UP) {
-          upPressed = false;
-        }
-        }
-      }
-    });
-    inputThread.start();
+  public InputHandler(GameWindow window) {
+    System.out.println("inputhandler object constructor was invoked");
+    this.window = window;
+    this.isLeft = false;
+    this.isRight = false;
+    this.isUp = false;
   }
 
-  public boolean isLeftPressed() {
-    return leftPressed;
+  public static InputHandler GetInputHandlerInstance() {
+    System.out.println("getInputinstance was called");
+    if (inputHandler == null) {
+      inputHandler = new InputHandler(window);
+    }
+    return inputHandler;
+  }
+  public boolean isLeft() {
+    return isLeft;
   }
 
-  public boolean isRightPressed() {
-    return rightPressed;
+  public boolean isRight() {
+    return isRight;
   }
+
+  public boolean isUp() {
+    return isUp;
+  }
+
+  public void update(boolean newState) {
+    System.out.println("in update was called");
+    switch (window.keyCode) {
+      case PConstants.UP:
+        isUp = newState;
+        break;
+
+      case PConstants.LEFT:
+        System.out.println("in update was called");
+        isLeft = newState;
+        break;
+
+      case PConstants.RIGHT:
+        System.out.println("in update was called");
+        isRight = newState;
+        break;
+
+      default: break;
+
+    }
+
+
+  }
+
 }

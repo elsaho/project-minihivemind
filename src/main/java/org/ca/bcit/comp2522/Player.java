@@ -1,10 +1,10 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.Color;
-import processing.core.PApplet;
-import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import java.awt.*;
+
 import static processing.core.PConstants.UP;
 
 /** Player class. The sprite that the user controls.
@@ -46,24 +46,26 @@ public class Player extends Sprite {
    * @param window the GameWindow instance used to update the player's position.
    */
   public void update(final GameWindow window) {
-    if (window.keyPressed) {
-      if (window.keyCode == PConstants.LEFT) {
-        // left arrow key
-        isLeft = true;
-        if (position.x - speed < 0) {
-          position.x = 0;
-        }
-        position.x -= speed;
-      } else if (window.keyCode == PConstants.RIGHT) {
-        // right arrow key
-        isLeft = false;
-        if (position.x + speed > GameWindow.getX() - size) {
-          position.x = GameWindow.getX() - size;
-        }
-        position.x += speed;
+
+    if (window.inputHandler.isLeft()) {
+      if (position.x - speed < 0) {
+        position.x = 0;
+      }
+      position.x -= speed;
+    }
+
+    if (window.inputHandler.isRight()) {
+      if (position.x + speed > GameWindow.getX() - size) {
+        position.x = GameWindow.getX() - size;
+      }
+      position.x += speed;
+    }
+
+      if (window.inputHandler.isUp()) {
+        // Shoot a projectile or perform some other action
       }
     }
-  }
+
 
   /** Displays the player on the screen.
    *
