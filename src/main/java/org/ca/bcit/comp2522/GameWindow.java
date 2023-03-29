@@ -21,12 +21,16 @@ public class GameWindow extends PApplet {
   public static int getX() {
     return x;
   }
+
   /** Getter for screen height */
   public static int getY() {
     return y;
   }
+  /** Start page, with instructions */
+  InstructionStart instructionStart;
   /** Game over page */
   private GameOver gameOver;
+  /** Game Victory page */
   private GameVictory gameVictory;
   /** audio class*/
   private SoundEffects audio;
