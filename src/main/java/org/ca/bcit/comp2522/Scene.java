@@ -215,6 +215,7 @@ public class Scene {
       if (Sprite.collided(bubble, player)) {
         if (!isImmune) {
           if (lives.getLives() > 0) {
+            sounds.playOof();
             lives.loseLife();
             System.out.println("You lost a life");
             isImmune = true;

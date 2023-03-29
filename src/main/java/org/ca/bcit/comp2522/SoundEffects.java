@@ -20,6 +20,7 @@ public class SoundEffects {
   //Audio clips
   private final Clip bgm;
   private final Clip popAudio;
+  private final Clip oofAudio;
 
   /**
    * Constructor for the SouneEffects class
@@ -33,6 +34,9 @@ public class SoundEffects {
     // Load the pop sound effect
     Path popPath = Paths.get("assets", "Sound", "pop.wav");
     popAudio = loadAudio(popPath);
+    //Load lose life sound effect
+    Path oofPath = Paths.get("assets", "Sound", "oof.wav");
+    oofAudio = loadAudio(oofPath);
   }
 
 
@@ -49,6 +53,14 @@ public class SoundEffects {
   public void playPop(){
     popAudio.setFramePosition(0);
     popAudio.start();
+  }
+
+  /**
+   * Plays oof sound effect
+   */
+  public void playOof(){
+    oofAudio.setFramePosition(0);
+    oofAudio.start();
   }
 
   /**
