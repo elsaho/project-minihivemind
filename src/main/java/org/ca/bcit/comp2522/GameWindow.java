@@ -48,7 +48,6 @@ public class GameWindow extends PApplet {
     //Game sounds
     try {
       audio = new SoundEffects();
-      audio.playBGM();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (LineUnavailableException e) {
@@ -76,6 +75,7 @@ public class GameWindow extends PApplet {
     if (!InstructionStart.gameStarted) {
       instructionStart.update(this);
       instructionStart.display(this);
+      audio.playBGM();
     } else if (scene.isGameOver) {
       gameOver.update(this);
       gameOver.display(this);
