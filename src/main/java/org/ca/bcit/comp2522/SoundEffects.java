@@ -12,13 +12,13 @@ import java.io.IOException;
 public class SoundEffects {
 
   //Audio clips
-  private Clip audio;
-  private Clip popAudio;
+  final private Clip audio;
+  final private Clip popAudio;
 
   /**
    * Constructor for the SouneEffects class
-   * @throws FileNotFoundException
-   * @throws LineUnavailableException
+   * @throws FileNotFoundException e
+   * @throws LineUnavailableException e
    */
   public SoundEffects() throws FileNotFoundException, LineUnavailableException {
     try {
@@ -60,7 +60,6 @@ public class SoundEffects {
    */
   public void stopBGM(){
     audio.stop();
-    audio.close();
   }
 
   /**
