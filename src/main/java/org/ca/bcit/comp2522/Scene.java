@@ -21,21 +21,23 @@ import static processing.core.PConstants.UP;
 
 public class Scene {
   /**
-   * Player constants
+   * Player constants.
    */
   private final int playerSize = 64;
   private final int playerSpeed = 5;
 
   /**
-   * Bubble constants
+   * Bubble constants.
    */
   private final int bubbleStartSize = 100;
   private final int bubbleStartSpeed = 5;
 
   /**
-   * Gameplay constants
+   * Gameplay constants.
    */
-  private final int time = 90000; //length of game in milliseconds
+  private Lives lives;
+
+  private Timer timer;
 
   /**
    * Gameplay.
@@ -47,22 +49,22 @@ public class Scene {
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
   private Bubble bubble;
+
   private PImage bg;
-  private PImage heart;
-  private PFont myFont;
+
   private ArrayList<Sprite> removedSprites;
   private long lastCollisionTime = 0;
+  private final int time = 90000;
   private boolean isImmune = false;
 
   /**
-   * Scorebar and timer.
+   * Scorebar.
    */
   private ScoreBar scoreBar;
-  private Lives lives;
-  private Timer timer;
+
 
   /**
-   * Game state
+   * Game state.
    */
   public boolean isGameOver = false;
   public boolean isVictory = false;
@@ -96,7 +98,6 @@ public class Scene {
     int bubbleStartX = 700;
     int bubbleStartY = rand.nextInt(100) + 100;
 
-
     bubble = new Bubble(
         new PVector(bubbleStartX, bubbleStartY),
         new PVector(1, 1),
@@ -106,7 +107,9 @@ public class Scene {
         new PVector(2, 5)
     );
     bubbles.add(bubble);
-    lives = Lives.getInstance();
+    this.scoreBar = ScoreBar.getInstance();
+    this.timer = Timer.getInstance();
+    this.lives = Lives.getInstance();
 
     //saves the score 0
     databaseHelper.put("score", 0);
@@ -116,6 +119,7 @@ public class Scene {
    * Loads up the game and resets everything.
    */
   public void setup(GameWindow window) {
+
     sprites.add(player);
 
     for (Bubble bubble : bubbles) {
@@ -123,21 +127,14 @@ public class Scene {
       sprites.add(bubble);
     }
 
-
     /* If you want to change the image,
      * you must make the image the exact size of the window (800 x 600)
      */
-
-    myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 18);
-
     bg = window.loadImage("../assets/SkyBackground.png");
-    heart = window.loadImage("../assets/pixelHeart.png");
 
-    lives = Lives.getInstance();
-    scoreBar = ScoreBar.getInstance();
-
-    timer = Timer.getInstance();
+    //starts the timer
     timer.setStart(window.millis() + time);
+
   }
 
   /**
@@ -174,22 +171,10 @@ public class Scene {
     }
     if (shootLine != null) {
       shootLine.display(window);
-
     }
 
-    timer.setRemaining(timer.getStart() - window.millis());
-
-    window.fill(255, 255, 255);
-    window.textFont(myFont);
-    window.textAlign(PConstants.LEFT);
-    window.text("Lives: ", 10, 55);
-    for (int i = 0; i < lives.getLives(); i++) {
-      window.image(heart, 110 + (60 * i), 25, 50, 50);
-    }
-
-    window.text("Time: " + timer.timeToString(), 350, 55);
-    window.text("Score: " + scoreBar.getValue(), 550, 55);
-
+    // Displays the scoreBar
+    scoreBar.display(window);
   }
 
   /**
@@ -198,6 +183,7 @@ public class Scene {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
+    timer.setRemaining(timer.getStart() - window.millis());
     player.update(window);
     if (shootLine != null) {
       shootLine.update(window);
@@ -214,8 +200,8 @@ public class Scene {
         if (!isImmune) {
           if (lives.getLives() > 0) {
             sounds.playOof();
-            lives.loseLife();
-            System.out.println("You lost a life");
+            scoreBar.update(window, bubble, false, true);
+            System.out.println("You lost a life " + lives.getLives());
             isImmune = true;
             lastCollisionTime = System.currentTimeMillis();
           } else {
@@ -231,15 +217,14 @@ public class Scene {
       }
 
       if (shootLine != null && Sprite.collided(shootLine, bubble)) {
-
         sounds.playPop();
         shootLine = null;
         bubblesToRemove.add(bubble);
         if (bubble.size > bubble.MIN_SIZE) {
           newBubbles.addAll(bubble.spawnBubbles());
         }
-
-        scoreBar.addScore((int) (bubble.size * timer.getRemaining() / 10000));
+        //update score
+        scoreBar.update(window, bubble, true, false );
 
         //save score to database everytime bubble is popped
         databaseHelper.put("score", scoreBar.getValue());
@@ -248,7 +233,7 @@ public class Scene {
       }
     }
 
-    if (timer.getRemaining() <= 0) {
+    if (timer.getRemaining() <= 0 || lives.getLives() <= 0) {
       isGameOver = true;
     }
 
@@ -268,5 +253,4 @@ public class Scene {
       isVictory = true;
     }
   }
-
 }
