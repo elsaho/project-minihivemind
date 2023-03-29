@@ -42,7 +42,7 @@ public class Scene {
    */
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
   protected SoundEffects sounds;
-  public static Line line;
+  public static ShootLine shootLine;
   private final Player player;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
@@ -80,7 +80,7 @@ public class Scene {
         new Color(0, 255, 255), window
     );
 
-    line = null;
+    shootLine = null;
     try {
       sounds = new SoundEffects();
     } catch (FileNotFoundException e) {
@@ -141,15 +141,15 @@ public class Scene {
   }
 
   /**
-   * Creates a line to shoot bubbles.
+   * Creates a shootLine to shoot bubbles.
    *
    * @param window game window
    */
   void UpdateLineInstance(GameWindow window) {
-    if (line == null) {
+    if (shootLine == null) {
       if (window.keyPressed) {
         if (window.keyCode == UP) {
-          line = new Line(
+          shootLine = new ShootLine(
               new PVector(player.position.x, player.position.y),
               player.direction, player.size, playerSpeed,
               new Color(0, 255, 255), window
@@ -172,8 +172,8 @@ public class Scene {
     for (Sprite sprite : sprites) {
       sprite.display(window);
     }
-    if (line != null) {
-      line.display(window);
+    if (shootLine != null) {
+      shootLine.display(window);
 
     }
 
@@ -199,8 +199,8 @@ public class Scene {
    */
   public void update(GameWindow window) {
     player.update(window);
-    if (line != null) {
-      line.update(window);
+    if (shootLine != null) {
+      shootLine.update(window);
     }
 
     ArrayList<Bubble> newBubbles = new ArrayList<>();
@@ -230,10 +230,10 @@ public class Scene {
         isImmune = false;
       }
 
-      if (line != null && Sprite.collided(line, bubble)) {
+      if (shootLine != null && Sprite.collided(shootLine, bubble)) {
 
         sounds.playPop();
-        line = null;
+        shootLine = null;
         bubblesToRemove.add(bubble);
         if (bubble.size > bubble.MIN_SIZE) {
           newBubbles.addAll(bubble.spawnBubbles());

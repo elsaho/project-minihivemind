@@ -27,10 +27,12 @@ public class Bubble extends Sprite {
    * Bubble velocity
    */
   public PVector velocity;
+
   /**
    * image of bubble
    */
   private final PImage bubbleImage;
+
 
   /**
    * Constructor for Bubble class.
