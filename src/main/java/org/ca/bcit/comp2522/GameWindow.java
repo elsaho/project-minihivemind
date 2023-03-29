@@ -11,9 +11,11 @@ import java.io.FileNotFoundException;
  * @version 2023
  */
 public class GameWindow extends PApplet {
+
   /** Scene class to handle game scenes */
   private Scene scene;
   /** Game screen width */
+  protected InputHandler inputHandler = new InputHandler(this);
   private static final int x = 800;
   /** Game screen height */
   private static final int y = 600;
@@ -91,6 +93,14 @@ public class GameWindow extends PApplet {
       scene.UpdateLineInstance(this);
       scene.update(this);
     }
+  }
+
+  public void keyPressed() {
+    inputHandler.update(true);
+  }
+
+  public void keyReleased() {
+    inputHandler.update(false);
   }
 
   public static void main(String[] args) {
