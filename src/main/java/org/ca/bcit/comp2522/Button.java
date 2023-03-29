@@ -52,13 +52,13 @@ public class Button{
   }
 
   /**
-   * Displays button
-   * @param parent
+   * Displays buttons onto the window
+   * @param window as a GameWindow
    */
-  public void display(PApplet parent) {
-    parent.image(img, xPos, yPos, width, height);
-    parent.textAlign(PApplet.CENTER, PApplet.CENTER);
-    parent.fill(0);
+  public void display(GameWindow window) {
+    window.image(img, xPos, yPos, width, height);
+    window.textAlign(PApplet.CENTER, PApplet.CENTER);
+    window.fill(0);
   }
 
 

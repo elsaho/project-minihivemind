@@ -19,7 +19,7 @@ public class Player extends Sprite {
   private PImage shootLeft;
   private PImage shootRight;
   private boolean isLeft;
-  private final PApplet parent;
+  private final GameWindow window;
 
   /** Constructor for Player class.
    *
@@ -38,23 +38,23 @@ public class Player extends Sprite {
     shootLeft = window.loadImage("../assets/ShootLeft.png");
     shootRight = window.loadImage("../assets/ShootRight.png");
     isLeft = true;
-    parent = window;
+    this.window = window;
   }
 
   /** Updates the player's position based on the arrow key pressed by the user.
    *
-   * @param parent the PApplet instance used to update the player's position.
+   * @param window the GameWindow instance used to update the player's position.
    */
-  public void update(final PApplet parent) {
-    if (parent.keyPressed) {
-      if (parent.keyCode == PConstants.LEFT) {
+  public void update(final GameWindow window) {
+    if (window.keyPressed) {
+      if (window.keyCode == PConstants.LEFT) {
         // left arrow key
         isLeft = true;
         if (position.x - speed < 0) {
           position.x = 0;
         }
         position.x -= speed;
-      } else if (parent.keyCode == PConstants.RIGHT) {
+      } else if (window.keyCode == PConstants.RIGHT) {
         // right arrow key
         isLeft = false;
         if (position.x + speed > GameWindow.getX() - size) {
@@ -67,22 +67,22 @@ public class Player extends Sprite {
 
   /** Displays the player on the screen.
    *
-   * @param parent the PApplet instance used to display the player.
+   * @param window the GameWindow instance used to display the player.
    */
   @Override
-  public void display(final PApplet parent) {
-    parent.pushStyle();
-    parent.fill(color.getRed(), color.getGreen(), color.getBlue());
+  public void display(final GameWindow window) {
+    window.pushStyle();
+    window.fill(color.getRed(), color.getGreen(), color.getBlue());
     if (window.keyCode == UP && isLeft) {
-      parent.image(shootLeft, position.x + 42, position.y, 42, 64);
+      window.image(shootLeft, position.x + 42, position.y, 42, 64);
     } else if (window.keyCode == UP && !isLeft) {
-      parent.image(shootRight, position.x + 42, position.y, 42, 64);
+      window.image(shootRight, position.x + 42, position.y, 42, 64);
     } else if (isLeft) {
-      parent.image(playerLeft, position.x + 42, position.y, 42, 64);
+      window.image(playerLeft, position.x + 42, position.y, 42, 64);
     } else {
-      parent.image(playerRight, position.x + 42, position.y, 42, 64);
+      window.image(playerRight, position.x + 42, position.y, 42, 64);
     }
-    parent.popStyle();
+    window.popStyle();
   }
 
   /** Returns false since the player cannot collide with anything in this game.

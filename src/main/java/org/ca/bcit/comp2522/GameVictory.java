@@ -13,32 +13,48 @@ public class GameVictory {
 
   /**
    * Constructs the game victory page
-   * @param window
+   * @param window as a GameWindow
    */
   public GameVictory(GameWindow window) {
   }
 
-  public void setup(PApplet parent) {
-    bg = parent.loadImage("../assets/VictoryScreen.png");
-    replayButton = parent.loadImage("../assets/TransparentReplay.png");
+  /**
+   * Sets up the game victory page
+   * @param window as a GameWindow
+   */
+  public void setup(GameWindow window) {
+    bg = window.loadImage("../assets/VictoryScreen.png");
+    replayButton = window.loadImage("../assets/TransparentReplay.png");
     restart = new Button(100, 280, 600, 206, replayButton);
   }
 
-  public void display(PApplet parent) {
-    parent.background(bg);
-    restart.display(parent);
+  /**
+   * Displays the victory page
+   * @param window as a Game Window
+   */
+  public void display(GameWindow window) {
+    window.background(bg);
+    restart.display(window);
   }
 
-
-  public void update(PApplet parent) {
-    if (restart.isClicked(parent.mouseX, parent.mouseY, parent.mousePressed)) {
+  /**
+   * Updates the victory page
+   * @param window as a GameWindow
+   */
+  public void update(GameWindow window) {
+    if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Restart button clicked!");
-      parent.setup();
+      window.setup();
     }
   }
 
-  public void draw(PApplet parent) {
-    parent.background(bg);
-    restart.display(parent);
-  }
+  /**
+   * Draws the victory page
+   * @param window as a GameWindow
+   */
+  //Commented out for now as it is not being used, consider for deletion
+//  public void draw(GameWindow window) {
+//    window.background(bg);
+//    restart.display(window);
+//  }
 }

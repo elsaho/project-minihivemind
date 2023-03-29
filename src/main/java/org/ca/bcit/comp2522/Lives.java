@@ -29,19 +29,34 @@ public class Lives {
     return single_instance;
   }
 
+  /**
+   * Gets lives
+   * @return lives as an int
+   */
   public int getLives() {
     return lives;
   }
 
+  /**
+   * Sets lives
+   * @param lives as an int
+   */
   public void setLives(int lives) {
     this.lives = lives;
   }
 
+  /**
+   * Removes one life
+   */
   public void loseLife() {
     lives--;
   }
 
+  /**
+   * Adds one life
+   */
   public void gainLife() {
+    //implement in future power-up class
     lives++;
   }
 

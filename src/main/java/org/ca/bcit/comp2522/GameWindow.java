@@ -69,6 +69,9 @@ public class GameWindow extends PApplet {
     gameVictory.setup(this);
   }
 
+  /**
+   * Draws the game window
+   */
   public void draw() {
     if (!InstructionStart.gameStarted) {
       instructionStart.update(this);

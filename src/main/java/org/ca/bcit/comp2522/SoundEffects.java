@@ -7,14 +7,19 @@ import java.io.IOException;
 
 /**
  * Class for handling background music.
- * @author Haurence Li
+ * @author Haurence Li, Elsa Ho, Mai Vu, Tomek Stojek, and Troy Calaquian
  */
 public class SoundEffects {
-  private Clip audio;
-  private Clip fastAudio;
 
+  //Audio clips
+  private Clip audio;
   protected Clip popAudio;
 
+  /**
+   * Constructor for the SouneEffects class
+   * @throws FileNotFoundException
+   * @throws LineUnavailableException
+   */
   public SoundEffects() throws FileNotFoundException, LineUnavailableException {
     try {
       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/sound.wav"));
@@ -23,9 +28,6 @@ public class SoundEffects {
       audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/pop.wav"));
       popAudio = AudioSystem.getClip();
       popAudio.open(audioInputStream);
-      audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/soundfast.wav"));
-      fastAudio = AudioSystem.getClip();
-      fastAudio.open(audioInputStream);
     } catch (FileNotFoundException | LineUnavailableException e) {
       throw e;
     } catch (UnsupportedAudioFileException e) {
@@ -35,20 +37,33 @@ public class SoundEffects {
     }
   }
 
+  /**
+   * Starts playing the background music
+   */
   public void playBGM(){
     audio.loop(Clip.LOOP_CONTINUOUSLY);
   }
 
+  /**
+   * Plays pop sound effect
+   */
   public void playPop(){
     popAudio.setFramePosition(0);
     popAudio.start();
   }
 
+  /**
+   * Stops playing the background music
+   */
   public void stopBGM(){
     audio.stop();
     audio.close();
   }
 
+  /**
+   * Returns true if background music is playing
+   * @return boolean
+   */
   public boolean isPlaying() {
     return audio.isActive();
   }

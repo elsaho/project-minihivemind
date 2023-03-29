@@ -13,16 +13,7 @@ import java.awt.*;
  */
 
 public class Line extends Sprite {
-  /** TODO:
-   * 1. Make a basic line
-   * 2. update the line so it grows from the floor to the top
-   * 3. update the line so it deletes itself when
-   * 4. Make the line appear with up or space
-   * 5. make the line appear at the feet of the current player
-   * 6. Make the line a singleton, cannot be created until it dissapears.
-   * 7 Figure out colliding with the bubbles
-   * 8. just for the push
-   */
+
   private PVector velocity;
   protected final float x;
   protected float thickness;
@@ -32,6 +23,15 @@ public class Line extends Sprite {
   protected final float y;
   private PImage fireball;
 
+  /**
+   * Constructor for Line shot by the player to pop bubbles
+   * @param position as a PVector
+   * @param direction as a PVector
+   * @param size as a float
+   * @param speed as a float
+   * @param color as a Color
+   * @param window as a GameWindow
+   */
   public Line(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
     super(position, direction, size, speed, color, window);
     this.x = position.x + size/2;
@@ -42,9 +42,13 @@ public class Line extends Sprite {
     this.increments = GameWindow.getY() / speed;
   }
 
-  public void display(PApplet parent) {
+  /**
+   * Displays line onto the window
+   * @param window as a GameWindow
+   */
+  public void display(GameWindow window) {
     window.strokeWeight(1);
-    parent.image(fireball, this.x - thickness * 2, position.y - thickness, 42, 64);
+    window.image(fireball, this.x - thickness * 2, position.y - thickness, 42, 64);
     PVector currYellow = new PVector(x + thickness /2, y);
     PVector currRed = new PVector(x - thickness /2, y);
     PVector prevYellow = new PVector(x - thickness /2, y);
@@ -71,8 +75,11 @@ public class Line extends Sprite {
 
   }
 
-
-  public void update(PApplet parent) {
+  /**
+   * Updates the line
+   * @param window as a GameWindow
+   */
+  public void update(GameWindow window) {
 
     // hard coded for now, should not go above the scorebar
     if(this.position.y > 100 + thickness / 2) {
@@ -80,6 +87,10 @@ public class Line extends Sprite {
     } else {Scene.line = null;}
   }
 
+  /**
+   * Collided method
+   * @return boolean
+   */
   @Override
   public boolean collided() {
     return false;
