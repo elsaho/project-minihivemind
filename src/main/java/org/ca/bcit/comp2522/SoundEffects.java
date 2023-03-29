@@ -13,7 +13,7 @@ public class SoundEffects {
 
   //Audio clips
   private Clip audio;
-  protected Clip popAudio;
+  private Clip popAudio;
 
   /**
    * Constructor for the SouneEffects class
