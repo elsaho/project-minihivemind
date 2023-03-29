@@ -1,6 +1,6 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PApplet;
+import  processing.core.PApplet;
 import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 
@@ -21,15 +21,16 @@ public class GameWindow extends PApplet {
   public static int getX() {
     return x;
   }
+
   /** Getter for screen height */
   public static int getY() {
     return y;
   }
+  /** Start page, with instructions */
+  InstructionStart instructionStart;
   /** Game over page */
   private GameOver gameOver;
-  /** start page with instructions */
-  private InstructionStart instructionStart;
-  /** Game Win page */
+  /** Game Victory page */
   private GameVictory gameVictory;
   /** audio class*/
   private SoundEffects audio;
@@ -62,6 +63,7 @@ public class GameWindow extends PApplet {
     //Game lose
     gameOver = new GameOver(this);
     gameOver.setup(this);
+
     //Game win
     gameVictory = new GameVictory(this);
     gameVictory.setup(this);
@@ -86,7 +88,6 @@ public class GameWindow extends PApplet {
     }
   }
 
-  
   public static void main(String[] args) {
     String[] appArgs = new String[] { "org.ca.bcit.comp2522.GameWindow" };
     PApplet.runSketch(appArgs, new GameWindow());

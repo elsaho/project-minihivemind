@@ -2,7 +2,6 @@ package org.ca.bcit.comp2522;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.event.MouseEvent;
 
 /**
  * GameOver. The class for the game over screen.

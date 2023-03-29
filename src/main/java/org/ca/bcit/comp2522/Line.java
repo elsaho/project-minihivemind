@@ -3,7 +3,6 @@ package org.ca.bcit.comp2522;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
-
 import java.awt.*;
 
 /**
@@ -41,10 +40,6 @@ public class Line extends Sprite {
     this.thickness = 10;
     fireball = window.loadImage("../assets/fireball.png");
     this.increments = GameWindow.getY() / speed;
-  }
-
-  public void drawWave() {
-
   }
 
   public void display(PApplet parent) {
