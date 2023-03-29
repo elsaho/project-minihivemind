@@ -1,28 +1,18 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 import java.awt.*;
 
 /**
- * Line. The class that creates the line that the player can use to catch the bubbles.
+ * ShootLine. The class that creates the shootLine that the player can use to catch the bubbles.
  *
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 
-public class Line extends Sprite {
-  /** TODO:
-   * 1. Make a basic line
-   * 2. update the line so it grows from the floor to the top
-   * 3. update the line so it deletes itself when
-   * 4. Make the line appear with up or space
-   * 5. make the line appear at the feet of the current player
-   * 6. Make the line a singleton, cannot be created until it dissapears.
-   * 7 Figure out colliding with the bubbles
-   * 8. just for the push
-   */
+public class ShootLine extends Sprite {
+
   private PVector velocity;
   protected final float x;
   protected float thickness;
@@ -32,7 +22,16 @@ public class Line extends Sprite {
   protected final float y;
   private PImage fireball;
 
-  public Line(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
+  /**
+   * Constructor for ShootLine shot by the player to pop bubbles
+   * @param position as a PVector
+   * @param direction as a PVector
+   * @param size as a float
+   * @param speed as a float
+   * @param color as a Color
+   * @param window as a GameWindow
+   */
+  public ShootLine(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
     super(position, direction, size, speed, color, window);
     this.x = position.x + size/2;
     this.y = GameWindow.getY();
@@ -42,6 +41,10 @@ public class Line extends Sprite {
     this.increments = GameWindow.getY() / speed;
   }
 
+  /**
+   * Displays shootLine onto the window
+   * @param window as a GameWindow
+   */
   public void display(GameWindow window) {
     window.strokeWeight(1);
     window.image(fireball, this.x - thickness * 2, position.y - thickness, 42, 64);
@@ -71,15 +74,22 @@ public class Line extends Sprite {
 
   }
 
-
+  /**
+   * Updates the shootLine
+   * @param window as a GameWindow
+   */
   public void update(GameWindow window) {
 
     // hard coded for now, should not go above the scorebar
     if(this.position.y > 100 + thickness / 2) {
       this.position.y = this.position.y - speed;
-    } else {Scene.line = null;}
+    } else {Scene.shootLine = null;}
   }
 
+  /**
+   * Collided method
+   * @return boolean
+   */
   @Override
   public boolean collided() {
     return false;

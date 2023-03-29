@@ -2,6 +2,17 @@
 
 Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
 
+We are the bane of bubbles!
+
+## Instructions
+
+## Contributions
+
+## References and Citations
+
+
+--------------------
+
 # Project
 
 ## Technical Project Requirements
@@ -56,7 +67,7 @@ Submission is here, on GitHub, in the `README.md` file.
 
 ## Final Product (group, 5%)
 
-The Final Product will be evaluated for overall code design and documentation and evaluated on the same design principles as individual contributions. If you are below the 1000 line minimum contribution, your mark will be scaled down for this portion.
+The Final Product will be evaluated for overall code design and documentation and evaluated on the same design principles as individual contributions. If you are below the 1000 shootLine minimum contribution, your mark will be scaled down for this portion.
 
 Submission is here, on GitHub.
 
@@ -111,7 +122,7 @@ You must use pull requests to manage your code integration:
 - make your commits, e.g., `git add .` and `git commit -m "fixed issue 71 by reloading gradle for the 100th time"` and `git push origin pb_71_demo`.
 - merge `main` into your branch, and NOT the other way around. E.g., `git merge main`. YOU fix all the merge conflicts or problems that arise. Commit and push again.
 - go to GitHub.com and make a pull request
-- one other person (NOT YOU) needs to review the code and either approve or reject your changes with detailed line-by-line comments.
+- one other person (NOT YOU) needs to review the code and either approve or reject your changes with detailed shootLine-by-shootLine comments.
 - If needed, make the requested fixes and commit and push again.
 - the other person (NOT YOU) will merge your PR into `main`
 - the other person (NOT YOU) will delete your branch

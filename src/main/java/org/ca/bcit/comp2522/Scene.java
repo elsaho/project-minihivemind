@@ -26,35 +26,50 @@ public class Scene {
   InputHandler inputHandler;
 
   /**
-   * Constants.
+   * Player constants.
    */
   private final int playerSize = 64;
+  private final int playerSpeed = 5;
+
+  /**
+   * Bubble constants.
+   */
+  private final int bubbleStartSize = 100;
+  private final int bubbleStartSpeed = 5;
+
+  /**
+   * Gameplay constants.
+   */
+  private Lives lives;
+
+  private Timer timer;
 
   /**
    * Gameplay.
    */
-
+  private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
   protected SoundEffects sounds;
-  public static Line line;
+  public static ShootLine shootLine;
   private final Player player;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
   private Bubble bubble;
+
   private PImage bg;
-  private PImage heart;
+
   private ArrayList<Sprite> removedSprites;
   private long lastCollisionTime = 0;
+  private final int time = 90000;
   private boolean isImmune = false;
 
   /**
-   * Scorebar and timer.
+   * Scorebar.
    */
   private ScoreBar scoreBar;
-  private Lives lives;
-  private Timer timer;
+
 
   /**
-   * Other.
+   * Game state.
    */
   public boolean isGameOver = false;
   public boolean isVictory = false;
@@ -69,15 +84,14 @@ public class Scene {
     sprites = new ArrayList<>();
     player = new Player(
         new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize),
-          new PVector(0, 1), playerSize, 5,
+          new PVector(0, 1), playerSize, playerSpeed,
         new Color(0, 255, 255), window
     );
 
+    shootLine = null;
 
-    line = null;
     try {
       sounds = new SoundEffects();
-      sounds.playBGM();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (LineUnavailableException e) {
@@ -91,28 +105,31 @@ public class Scene {
     int bubbleStartX = 700;
     int bubbleStartY = rand.nextInt(100) + 100;
 
-
     bubble = new Bubble(
         new PVector(bubbleStartX, bubbleStartY),
         new PVector(1, 1),
-        100,
-        5,
+        bubbleStartSize,
+        bubbleStartSpeed,
         new Color(0, 0, 255), window,
         new PVector(2, 5)
     );
     bubbles.add(bubble);
-    lives = Lives.getInstance();
+    this.scoreBar = ScoreBar.getInstance();
+    this.timer = Timer.getInstance();
+    this.lives = Lives.getInstance();
+
+    //saves the score 0
+    databaseHelper.put("score", 0);
   }
 
   /**
    * Loads up the game and resets everything.
    */
   public void setup(GameWindow window) {
+    sprites.add(player);
+
     for (Bubble bubble : bubbles) {
       bubble.setup(window);
-    }
-    sprites.add(player);
-    for (Bubble bubble : bubbles) {
       sprites.add(bubble);
     }
 
@@ -120,27 +137,24 @@ public class Scene {
      * you must make the image the exact size of the window (800 x 600)
      */
     bg = window.loadImage("../assets/SkyBackground.png");
-    heart = window.loadImage("../assets/pixelHeart.png");
 
-    lives = Lives.getInstance();
-    scoreBar = ScoreBar.getInstance();
+    //starts the timer
+    timer.setStart(window.millis() + time);
 
-    timer = Timer.getInstance();
-    timer.setStart(window.millis() + 90000);
   }
 
   /**
-   * Creates a line to shoot bubbles.
+   * Creates a shootLine to shoot bubbles.
    *
    * @param window game window
    */
   void UpdateLineInstance(GameWindow window) {
-    if (line == null) {
+    if (shootLine == null) {
       if (window.keyPressed) {
         if (window.keyCode == UP) {
-          line = new Line(
+          shootLine = new ShootLine(
               new PVector(player.position.x, player.position.y),
-              player.direction, player.size, 5,
+              player.direction, player.size, playerSpeed,
               new Color(0, 255, 255), window
           );
         }
@@ -161,22 +175,12 @@ public class Scene {
     for (Sprite sprite : sprites) {
       sprite.display(window);
     }
-    if (line != null) {
-      line.display(window);
-
+    if (shootLine != null) {
+      shootLine.display(window);
     }
 
-    timer.setRemaining(timer.getStart() - window.millis());
-
-    window.fill(255, 255, 255);
-    window.textSize(32);
-    window.textAlign(PConstants.LEFT);
-    window.text("Lives: ", 20, 55);
-    for (int i = 0; i < lives.getLives(); i++) {
-      window.image(heart, 110 + (60 * i), 25, 50, 50);
-    }
-    window.text("Time: " + timer.timeToString(), 350, 55);
-    window.text("Score: " + scoreBar.getValue(), 600, 55);
+    // Displays the scoreBar
+    scoreBar.display(window);
   }
 
   /**
@@ -187,8 +191,8 @@ public class Scene {
   public void update(GameWindow window) {
 
     player.update(window);
-    if (line != null) {
-      line.update(window);
+    if (shootLine != null) {
+      shootLine.update(window);
     }
 
     ArrayList<Bubble> newBubbles = new ArrayList<>();
@@ -201,11 +205,13 @@ public class Scene {
       if (Sprite.collided(bubble, player)) {
         if (!isImmune) {
           if (lives.getLives() > 0) {
-            lives.loseLife();
-            System.out.println("You lost a life");
+            sounds.playOof();
+            scoreBar.update(window, bubble, false, true);
+            System.out.println("You lost a life " + lives.getLives());
             isImmune = true;
             lastCollisionTime = System.currentTimeMillis();
           } else {
+            sounds.playLoseAudio();
             isGameOver = true;
           }
         }
@@ -216,22 +222,25 @@ public class Scene {
         isImmune = false;
       }
 
-      if (line != null && Sprite.collided(line, bubble)) {
-
+      if (shootLine != null && Sprite.collided(shootLine, bubble)) {
         sounds.playPop();
-        line = null;
+        shootLine = null;
         bubblesToRemove.add(bubble);
         if (bubble.size > bubble.MIN_SIZE) {
           newBubbles.addAll(bubble.spawnBubbles());
         }
+        //update score
+        scoreBar.update(window, bubble, true, false );
 
-        scoreBar.addScore((int) (bubble.size * timer.getRemaining() / 10000));
+        //save score to database everytime bubble is popped
+        databaseHelper.put("score", scoreBar.getValue());
+
         System.out.println("You popped a bubble!");
       }
+    }
 
-      if (timer.getRemaining() <= 0) {
-        isGameOver = true;
-      }
+    if (timer.getRemaining() <= 0 || lives.getLives() <= 0) {
+      isGameOver = true;
     }
 
     bubbles.removeAll(bubblesToRemove);
@@ -245,8 +254,12 @@ public class Scene {
 
     //Game victory
     if (bubbles.isEmpty()) {
+      sounds.playWinAudio();
+      scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
+      scoreBar.addScore(lives.getLives() * 1000);
+      //for test
+      System.out.println("Final score is: " + scoreBar.getValue());
       isVictory = true;
     }
   }
-
 }

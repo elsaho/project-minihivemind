@@ -18,6 +18,9 @@ public class Player extends Sprite {
   private final PImage playerRight;
   private PImage shootLeft;
   private PImage shootRight;
+  /**
+   * If player's last input is facing the left arrow key
+   */
   private boolean isLeft;
   private final GameWindow window;
 

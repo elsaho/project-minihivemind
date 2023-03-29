@@ -3,7 +3,7 @@ package org.ca.bcit.comp2522;
 /**
  * Lives. Singleton class that keeps track of the number of lives the player has.
  *
- * @author Troy Calaquian
+ * @author Troy Calaquian, Mai Vu
  * @version 2023
  */
 public class Lives {
@@ -24,24 +24,39 @@ public class Lives {
     if (single_instance == null) {
       single_instance = new Lives();
     } else {
-      single_instance.setLives(3);
+      single_instance.getLives();
     }
     return single_instance;
   }
 
+  /**
+   * Gets lives
+   * @return lives as an int
+   */
   public int getLives() {
     return lives;
   }
 
+  /**
+   * Sets lives.
+   * @param lives as an int
+   */
   public void setLives(int lives) {
     this.lives = lives;
   }
 
+  /**
+   * Removes one life.
+   */
   public void loseLife() {
     lives--;
   }
 
+  /**
+   * Adds one life.
+   */
   public void gainLife() {
+    //implement in future power-up class
     lives++;
   }
 

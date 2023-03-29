@@ -1,7 +1,7 @@
 package org.ca.bcit.comp2522;
 
 import java.awt.*;
-import processing.core.PApplet;
+
 import processing.core.PVector;
 
 /**
@@ -12,6 +12,8 @@ import processing.core.PVector;
  * @version 2023
  */
 public abstract class Sprite implements Collidable {
+
+  //Sprite properties
   protected PVector position;
   protected PVector direction;
   protected float size;
@@ -40,37 +42,52 @@ public abstract class Sprite implements Collidable {
     this.color = color;
   }
 
-  public static boolean collided(Line line, Bubble bubble) {
-    PVector lineTemp = new PVector(line.x, line.getPosition().y);
+  /**
+   * Gets direction of sprite
+   * @return PVector
+   */
+  public PVector getDirection() {
+    return direction.copy();
+  }
+
+  /**
+   * Gets position of sprite
+   * @return PVector
+   */
+  public PVector getPosition() {
+    return position.copy();
+  }
+
+  /**
+   * Gets size of sprite
+   * @return size as a float
+   */
+  public float getSize() {
+    return size;
+  }
+
+  /**
+   * Checks if the shootLine shot by player has collided with bubble
+   * @param shootLine as a ShootLine
+   * @param bubble as a Bubble
+   * @return boolean
+   */
+  public static boolean collided(ShootLine shootLine, Bubble bubble) {
+    PVector lineTemp = new PVector(shootLine.x, shootLine.getPosition().y);
     float bubbleRadius = bubble.getSize() / 2;
     PVector bubbleTemp = bubble.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
     if (lineTemp.y < bubbleTemp.y) {
       lineTemp.y = bubbleTemp.y;
     }
-
     float diff = lineTemp.dist(bubbleTemp);
-    if (diff < bubbleRadius) {
-      return true;
-    }
-    return false;
+    return diff < bubbleRadius;
   }
 
-
-  public PVector getDirection() {
-    return direction.copy();
-  }
-
-  public PVector getPosition() {
-    return position.copy();
-  }
-
-
+  /**
+   * Updates position of sprite
+   */
   public void update() {
     this.position = this.getPosition().add(this.direction.copy().mult(speed));
-  }
-
-  public float getSize() {
-    return size;
   }
 
   /**
@@ -96,23 +113,18 @@ public abstract class Sprite implements Collidable {
     float distX = bubbleX - closestX;
     float distY = bubbleY - closestY;
     float distance = (float) Math.sqrt((distX * distX) + (distY * distY));
-
-    // check if the bubble collides with the player
-    if (distance <= bubble.getSize() / 2) {
-      return true;
-    }
-
-    return false;
+    return (distance <= bubble.getSize() / 2);
   }
 
+  /**
+   * Helper method for the collided function to find the closest point of player to bubble
+   * @param value as a float
+   * @param min as a float
+   * @param max as a float
+   * @return float
+   */
   protected static float clamp(float value, float min, float max) {
     return Math.max(min, Math.min(max, value));
-  }
-
-
-
-  public void setDirection(PVector direction) {
-    this.direction = direction;
   }
 
   /**
@@ -127,6 +139,10 @@ public abstract class Sprite implements Collidable {
     window.popStyle();
   }
 
+  /**
+   * Sets up the sprite, fully implemented in the child classes
+   * @param window as a GameWindow
+   */
   public void setup(GameWindow window) {
   }
 }
