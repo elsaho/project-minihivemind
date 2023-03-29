@@ -13,14 +13,24 @@ import processing.core.PVector;
  * @version 2023
  */
 public class Bubble extends Sprite {
-  // Constants
+  /**
+   * Gravity constant
+   */
   private static final float GRAVITY = 0.1f;
 
-  //Minimum size of the bubble
+  /**
+   * Minimum size of a bubble
+   */
   public static final float MIN_SIZE = 25f;
 
-  // Properties
+  /**
+   * Bubble velocity
+   */
   public PVector velocity;
+
+  /**
+   * image of bubble
+   */
   private final PImage bubbleImage;
 
 
