@@ -1,7 +1,7 @@
 package org.ca.bcit.comp2522;
 
 import java.awt.*;
-import processing.core.PApplet;
+
 import processing.core.PVector;
 
 /**
@@ -43,13 +43,13 @@ public abstract class Sprite implements Collidable {
   }
 
   /**
-   * Checks if the line shot by player has collided with bubble
-   * @param line as a Line
+   * Checks if the shootLine shot by player has collided with bubble
+   * @param shootLine as a ShootLine
    * @param bubble as a Bubble
    * @return boolean
    */
-  public static boolean collided(Line line, Bubble bubble) {
-    PVector lineTemp = new PVector(line.x, line.getPosition().y);
+  public static boolean collided(ShootLine shootLine, Bubble bubble) {
+    PVector lineTemp = new PVector(shootLine.x, shootLine.getPosition().y);
     float bubbleRadius = bubble.getSize() / 2;
     PVector bubbleTemp = bubble.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
     if (lineTemp.y < bubbleTemp.y) {
