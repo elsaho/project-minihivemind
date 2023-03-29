@@ -22,9 +22,12 @@ public class SoundEffects {
    */
   public SoundEffects() throws FileNotFoundException, LineUnavailableException {
     try {
+      // Load the background music
       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/sound.wav"));
       audio = AudioSystem.getClip();
       audio.open(audioInputStream);
+
+      // Load the pop sound effect
       audioInputStream = AudioSystem.getAudioInputStream(new File("assets/Sound/pop.wav"));
       popAudio = AudioSystem.getClip();
       popAudio.open(audioInputStream);
