@@ -75,7 +75,9 @@ public class GameWindow extends PApplet {
     if (!InstructionStart.gameStarted) {
       instructionStart.update(this);
       instructionStart.display(this);
-      audio.playBGM();
+      if (!audio.isPlaying()) {
+        audio.playBGM();
+      }
     } else if (scene.isGameOver) {
       gameOver.update(this);
       gameOver.display(this);
