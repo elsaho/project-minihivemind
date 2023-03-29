@@ -138,14 +138,6 @@ public abstract class Sprite implements Collidable {
   }
 
   /**
-   * Sets sprite direction
-   * @param direction as a PVector
-   */
-  public void setDirection(PVector direction) {
-    this.direction = direction;
-  }
-
-  /**
    * Displays the sprite.
    *
    * @param window as a GameWindow
