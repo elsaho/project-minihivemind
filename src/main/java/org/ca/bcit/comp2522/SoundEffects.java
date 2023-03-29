@@ -18,16 +18,16 @@ import java.io.FileNotFoundException;
 public class SoundEffects {
 
   //Audio clips
-  private final Clip bgm;
-  private final Clip popAudio;
-  private final Clip oofAudio;
-  private final Clip loseAudio;
-  private final Clip winAudio;
+  protected final Clip bgm;
+  protected final Clip popAudio;
+  protected final Clip oofAudio;
+  protected final Clip loseAudio;
+  protected final Clip winAudio;
 
   /**
    * Constructor for the SouneEffects class
    * @throws FileNotFoundException e
-   * @throws LineUnavailableException
+   * @throws LineUnavailableException e
    */
   public SoundEffects() throws FileNotFoundException, LineUnavailableException {
     // Load the background music
@@ -98,11 +98,11 @@ public class SoundEffects {
    * Returns true if background music is playing
    * @return boolean
    */
-  public boolean isPlaying() {
+  public boolean isBGMPlaying() {
     return bgm.isActive();
   }
 
-  private Clip loadAudio(Path path) throws FileNotFoundException, LineUnavailableException {
+  Clip loadAudio(Path path) throws  LineUnavailableException {
     try {
       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path.toFile().toURI()));
       Clip clip = AudioSystem.getClip();
