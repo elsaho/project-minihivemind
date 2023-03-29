@@ -6,10 +6,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.sound.sampled.LineUnavailableException;
-import processing.core.PApplet;
-import processing.core.PConstants;
-import processing.core.PImage;
-import processing.core.PVector;
+
+import processing.core.*;
+
 import static processing.core.PConstants.UP;
 
 /**
@@ -50,6 +49,7 @@ public class Scene {
   private Bubble bubble;
   private PImage bg;
   private PImage heart;
+  private PFont myFont;
   private ArrayList<Sprite> removedSprites;
   private long lastCollisionTime = 0;
   private boolean isImmune = false;
@@ -125,13 +125,13 @@ public class Scene {
       sprites.add(bubble);
     }
 
-//    for (Bubble bubble : bubbles) {
-//      sprites.add(bubble);
-//    }
 
     /* If you want to change the image,
      * you must make the image the exact size of the window (800 x 600)
      */
+
+    myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 18);
+
     bg = window.loadImage("../assets/SkyBackground.png");
     heart = window.loadImage("../assets/pixelHeart.png");
 
@@ -182,15 +182,15 @@ public class Scene {
     timer.setRemaining(timer.getStart() - window.millis());
 
     window.fill(255, 255, 255);
-    window.textSize(32);
+    window.textFont(myFont);
     window.textAlign(PConstants.LEFT);
-    window.text("Lives: ", 20, 55);
+    window.text("Lives: ", 10, 55);
     for (int i = 0; i < lives.getLives(); i++) {
       window.image(heart, 110 + (60 * i), 25, 50, 50);
     }
 
     window.text("Time: " + timer.timeToString(), 350, 55);
-    window.text("Score: " + scoreBar.getValue(), 600, 55);
+    window.text("Score: " + scoreBar.getValue(), 550, 55);
 
   }
 
