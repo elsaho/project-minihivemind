@@ -119,7 +119,6 @@ public class Scene {
    * Loads up the game and resets everything.
    */
   public void setup(GameWindow window) {
-
     sprites.add(player);
 
     for (Bubble bubble : bubbles) {
@@ -183,7 +182,6 @@ public class Scene {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
-    timer.setRemaining(timer.getStart() - window.millis());
     player.update(window);
     if (shootLine != null) {
       shootLine.update(window);
