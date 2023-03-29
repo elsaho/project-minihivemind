@@ -50,7 +50,7 @@ public class Scene {
   private Timer timer;
 
   /**
-   * Other.
+   * Game state
    */
   public boolean isGameOver = false;
   public boolean isVictory = false;
