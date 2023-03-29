@@ -21,7 +21,7 @@ public class Bubble extends Sprite {
   /**
    * Minimum size of a bubble
    */
-  public static final float MIN_SIZE = 25f;
+  public static final float MIN_SIZE = 100f;
 
   /**
    * Bubble velocity
