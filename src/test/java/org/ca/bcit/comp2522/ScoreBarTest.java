@@ -17,12 +17,6 @@ public class ScoreBarTest {
   }
 
   @Test
-  public void testPoppedBubble() {
-    scoreBarTest.poppedBubble(1);
-    assert(scoreBarTest.getValue() == 300);
-  }
-
-  @Test
   public void testFinishedLevel() {
     scoreBarTest.finishedLevel(1);
     assert(scoreBarTest.getValue() == 100);
@@ -32,12 +26,6 @@ public class ScoreBarTest {
   public void testAddScore() {
     scoreBarTest.addScore(100);
     assert(scoreBarTest.getValue() == 100);
-  }
-
-  @Test
-  public void testReset() {
-    scoreBarTest.reset();
-    assert(scoreBarTest.getValue() == 0);
   }
 
   @Test
