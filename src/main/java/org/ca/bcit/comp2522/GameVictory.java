@@ -1,8 +1,13 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * Manages game victory page for the game.
+ *
+ * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
+ * @version 2023
+ */
 public class GameVictory {
   /**
    * Properties
@@ -52,9 +57,10 @@ public class GameVictory {
    * Draws the victory page
    * @param window as a GameWindow
    */
+
   //Commented out for now as it is not being used, consider for deletion
-//  public void draw(GameWindow window) {
-//    window.background(bg);
-//    restart.display(window);
-//  }
+  //  public void draw(GameWindow window) {
+  //    window.background(bg);
+  //    restart.display(window);
+  //  }
 }

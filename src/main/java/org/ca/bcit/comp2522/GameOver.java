@@ -1,12 +1,11 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PImage;
 
 /**
- * GameOver. The class for the game over screen.
+ * Manages game over screen.
  *
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
@@ -25,7 +24,7 @@ public class GameOver{
 
   /**
    * Constructor
-   * @param window
+   * @param window GameWindow
    */
   public GameOver(GameWindow window) {
 
@@ -33,7 +32,7 @@ public class GameOver{
 
   /**
    * Sets up the game over page
-   * @param window
+   * @param window GameWindow
    */
   public void setup(GameWindow window) {
     bg = window.loadImage("../assets/GameOverScreen.png");
@@ -45,7 +44,7 @@ public class GameOver{
   /**
    * Displays the game over page
    *
-   * @param window
+   * @param window GameWindow
    */
   public void display(GameWindow window) {
     window.background(bg);
@@ -60,7 +59,7 @@ public class GameOver{
   /**
    * Updates the game over page
    *
-   * @param window
+   * @param window GameWindow
    */
   public void update(GameWindow window) {
     if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
