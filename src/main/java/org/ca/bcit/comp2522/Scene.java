@@ -1,7 +1,6 @@
 package org.ca.bcit.comp2522;
 
 
-import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
 
@@ -153,7 +152,7 @@ public class Scene {
       if (window.keyPressed) {
         if (window.keyCode == UP) {
           shootLine = new ShootLine(
-              new PVector(player.position.x, player.position.y),
+              new PVector(player.position.x + player.size / 2, player.position.y),
               player.direction, player.size, playerSpeed,
               new Color(0, 255, 255), window
           );
