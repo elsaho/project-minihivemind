@@ -83,8 +83,6 @@ public class Scene {
     line = null;
     try {
       sounds = new SoundEffects();
-      System.out.println("new sound created");
-//      sounds.playBGM();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (LineUnavailableException e) {
@@ -221,6 +219,7 @@ public class Scene {
             isImmune = true;
             lastCollisionTime = System.currentTimeMillis();
           } else {
+            sounds.playLoseAudio();
             isGameOver = true;
           }
         }
