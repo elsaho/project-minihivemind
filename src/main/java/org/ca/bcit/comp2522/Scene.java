@@ -250,6 +250,9 @@ public class Scene {
     if (bubbles.isEmpty()) {
       sounds.playWinAudio();
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
+      scoreBar.addScore(lives.getLives() * 1000);
+      //for test
+      System.out.println("Final score is: " + scoreBar.getValue());
       isVictory = true;
     }
   }
