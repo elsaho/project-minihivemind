@@ -22,9 +22,21 @@ import static processing.core.PConstants.UP;
 
 public class Scene {
   /**
-   * Constants.
+   * Player constants
    */
   private final int playerSize = 64;
+  private final int playerSpeed = 5;
+
+  /**
+   * Bubble constants
+   */
+  private final int bubbleStartSize = 100;
+  private final int bubbleStartSpeed = 5;
+
+  /**
+   * Gameplay constants
+   */
+  private final int time = 90000; //length of game in milliseconds
 
   /**
    * Gameplay.
@@ -64,7 +76,7 @@ public class Scene {
     sprites = new ArrayList<>();
     player = new Player(
         new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize),
-          new PVector(0, 1), playerSize, 5,
+          new PVector(0, 1), playerSize, playerSpeed,
         new Color(0, 255, 255), window
     );
 
@@ -90,8 +102,8 @@ public class Scene {
     bubble = new Bubble(
         new PVector(bubbleStartX, bubbleStartY),
         new PVector(1, 1),
-        100,
-        5,
+        bubbleStartSize,
+        bubbleStartSpeed,
         new Color(0, 0, 255), window,
         new PVector(2, 5)
     );
@@ -124,7 +136,7 @@ public class Scene {
     scoreBar = ScoreBar.getInstance();
 
     timer = Timer.getInstance();
-    timer.setStart(window.millis() + 90000);
+    timer.setStart(window.millis() + time);
   }
 
   /**
@@ -138,7 +150,7 @@ public class Scene {
         if (window.keyCode == UP) {
           line = new Line(
               new PVector(player.position.x, player.position.y),
-              player.direction, player.size, 5,
+              player.direction, player.size, playerSpeed,
               new Color(0, 255, 255), window
           );
         }
