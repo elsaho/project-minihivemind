@@ -71,6 +71,7 @@ public class Scene {
     line = null;
     try {
       sounds = new SoundEffects();
+      sounds.playBGM();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (LineUnavailableException e) {
@@ -81,7 +82,7 @@ public class Scene {
     removedSprites = new ArrayList<>();
     //generate random position for the bubble to start dropping
     Random rand = new Random();
-    int bubbleStartX = rand.nextInt(700) + 100;
+    int bubbleStartX = 700;
     int bubbleStartY = rand.nextInt(100) + 100;
 
 
@@ -150,7 +151,6 @@ public class Scene {
     parent.background(bg);
     parent.fill(0);
     parent.rect(0, 0, GameWindow.getX(), 100);
-
 
     for (Sprite sprite : sprites) {
       sprite.display(parent);
