@@ -2,7 +2,6 @@ package org.ca.bcit.comp2522;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
@@ -14,16 +13,24 @@ import processing.core.PVector;
  * @version 2023
  */
 public class Bubble extends Sprite {
-  // Constants
+  /**
+   * Gravity constant
+   */
   private static final float GRAVITY = 0.1f;
 
-  //Minimum size of the bubble
+  /**
+   * Minimum size of a bubble
+   */
   public static final float MIN_SIZE = 25f;
 
-  // Properties
+  /**
+   * Bubble velocity
+   */
   public PVector velocity;
-  private PImage bubbleImage;
-
+  /**
+   * image of bubble
+   */
+  private final PImage bubbleImage;
 
   /**
    * Constructor for Bubble class.
