@@ -47,15 +47,10 @@ public class GameOver{
    * @param window GameWindow
    */
   public void display(GameWindow window) {
-    window.background(bg);
-    window.textSize(32); // Set text size to 16 pixels
-    window.fill(255, 255, 255);
-    window.textAlign(PConstants.LEFT);
-    window.textFont(myFont);
-    window.text("High Score: " + databaseHelper.getHighestScore() + "\n"
-            + "Your Score: " +databaseHelper.getPlayerScore(), 20, 55);
-    restart.display(window);
+    window.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
+
+
 
   /**
    * Updates the game over page
