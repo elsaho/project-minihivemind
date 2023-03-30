@@ -82,8 +82,8 @@ public class Bubble extends Sprite {
   public ArrayList<Bubble> spawnBubbles() {
     ArrayList<Bubble> newBubbles = new ArrayList<>();
     float newSize = size - MIN_SIZE;
-    PVector newVelocity1 = new PVector(-velocity.x, -Math.abs(velocity.y));
-    PVector newVelocity2 = new PVector(velocity.x, -Math.abs(velocity.y));
+    PVector newVelocity1 = new PVector(-velocity.x, velocity.y < 0 ? velocity.y : -velocity.y);
+    PVector newVelocity2 = new PVector(velocity.x, velocity.y < 0 ? velocity.y : -velocity.y);
     Bubble bubble1 = new Bubble(new PVector(position.x, position.y), new PVector(-1, -1),
         newSize, speed, color, window, newVelocity1);
     Bubble bubble2 = new Bubble(new PVector(position.x, position.y), new PVector(1, -1),
