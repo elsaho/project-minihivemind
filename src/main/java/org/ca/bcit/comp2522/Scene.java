@@ -156,6 +156,7 @@ public class Scene {
               player.direction, player.size, playerSpeed,
               new Color(0, 255, 255), window
           );
+          sounds.playShoot();
         }
       }
     }
