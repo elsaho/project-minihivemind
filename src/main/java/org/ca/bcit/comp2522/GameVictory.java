@@ -1,5 +1,7 @@
 package org.ca.bcit.comp2522;
 
+import processing.core.PConstants;
+import processing.core.PFont;
 import processing.core.PImage;
 
 /**
@@ -14,7 +16,9 @@ public class GameVictory {
    */
   private PImage bg;
   private PImage replayButton;
+  private PFont myFont;
   private Button restart;
+  private DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
   /**
    * Constructs the game victory page
@@ -31,6 +35,7 @@ public class GameVictory {
     bg = window.loadImage("../assets/VictoryScreen.png");
     replayButton = window.loadImage("../assets/TransparentReplay.png");
     restart = new Button(100, 280, 600, 206, replayButton);
+    myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
   }
 
   /**
@@ -38,8 +43,7 @@ public class GameVictory {
    * @param window as a Game Window
    */
   public void display(GameWindow window) {
-    window.background(bg);
-    restart.display(window);
+    window.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
 
   /**
