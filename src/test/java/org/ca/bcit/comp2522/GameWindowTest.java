@@ -20,11 +20,40 @@ public class GameWindowTest {
 
   @Test
   public void testGetX() {
-    assertEquals(800, gameWindow.getX());
+    assertEquals(800, GameWindow.getX());
   }
 
   @Test
   public void testGetY() {
-    assertEquals(600, gameWindow.getY());
+    assertEquals(600, GameWindow.getY());
   }
+
+  @Test
+  public void testSettings() {
+    gameWindow.settings();
+    assertEquals(800, gameWindow.width);
+    assertEquals(600, gameWindow.height);
+  }
+
+  @Test
+  public void testSetup() {
+    gameWindow.setup();
+    assertNotNull(gameWindow.getScene());
+    assertNotNull(gameWindow.getAudio());
+    assertNotNull(gameWindow.getInstructionStart());
+    assertNotNull(gameWindow.getGameOver());
+    assertNotNull(gameWindow.getGameVictory());
+  }
+
+  @Test
+  public void testDraw() {
+    gameWindow.setup();
+    gameWindow.draw();
+    assertNotNull(gameWindow.getScene());
+    assertNotNull(gameWindow.getAudio());
+    assertNotNull(gameWindow.getInstructionStart());
+    assertNotNull(gameWindow.getGameOver());
+    assertNotNull(gameWindow.getGameVictory());
+  }
+
 }
