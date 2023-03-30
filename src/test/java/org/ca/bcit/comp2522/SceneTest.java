@@ -19,19 +19,17 @@ public class SceneTest {
     gameWindow = new GameWindow();
     // Set up the PApplet instance
     PApplet.runSketch(new String[]{"GameWindowTest"}, gameWindow);
+    gameWindow.setup();
+    sceneTest = gameWindow.getScene();
   }
 
   @Test
   public void testExistence() {
-    gameWindow.setup();
-    sceneTest = gameWindow.getScene();
     assertNotNull(sceneTest);
   }
 
   @Test
   public void testSceneConstructor() {
-    gameWindow.setup();
-    sceneTest = gameWindow.getScene();
     assertNotNull(sceneTest.getInputHandler());
     assertNotNull(sceneTest.getSounds());
     assertNull(Scene.getShootLine());
@@ -45,15 +43,19 @@ public class SceneTest {
 
   @Test
   public void testSetup() {
-    gameWindow.setup();
-    sceneTest = gameWindow.getScene();
     sceneTest.setup(gameWindow);
     assertNotNull(sceneTest.getBg());
     ArrayList<Sprite> sprites = sceneTest.getSprites();
     assertEquals(sceneTest.getPlayer(), sprites.get(0));
+    assertEquals(2, sprites.size());
     ArrayList<Bubble> bubbles = sceneTest.getBubbles();
     assertNotNull(bubbles.get(0));
     assertEquals(1, bubbles.size());
+  }
+
+  @Test
+  public void testUpdateLineInstance() {
+
   }
 
 }
