@@ -202,7 +202,7 @@ public class Scene {
       bubble.bounce();
       bubble.display(window);
 
-      if (Sprite.collided(bubble, player)) {
+      if (bubble.collided(player)) {
         if (!isImmune) {
           if (lives.getLives() > 0) {
             sounds.playOof();
@@ -222,7 +222,7 @@ public class Scene {
         isImmune = false;
       }
 
-      if (shootLine != null && Sprite.collided(shootLine, bubble)) {
+      if (shootLine != null && bubble.collided(shootLine)) {
         sounds.playPop();
         shootLine = null;
         bubblesToRemove.add(bubble);
@@ -237,6 +237,22 @@ public class Scene {
 
         System.out.println("You popped a bubble!");
       }
+
+//      if (shootLine != null && Sprite.collided(shootLine, bubble)) {
+//        sounds.playPop();
+//        shootLine = null;
+//        bubblesToRemove.add(bubble);
+//        if (bubble.size > bubble.MIN_SIZE) {
+//          newBubbles.addAll(bubble.spawnBubbles());
+//        }
+//        //update score
+//        scoreBar.update(window, bubble, true, false );
+//
+//        //save score to database everytime bubble is popped
+//        databaseHelper.put("score", scoreBar.getValue());
+//
+//        System.out.println("You popped a bubble!");
+//      }
     }
 
     if (timer.getRemaining() <= 0 || lives.getLives() <= 0) {

@@ -12,7 +12,7 @@ import processing.core.PVector;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class Bubble extends Sprite {
+public class Bubble extends Sprite implements Collidable{
   /**
    * Gravity constant
    */
@@ -93,15 +93,6 @@ public class Bubble extends Sprite {
     return newBubbles;
   }
 
-  /** This method returns a boolean value indicating if a collision has occurred.
-   *
-   * @return true if a collision has occurred, false otherwise.
-   */
-  @Override
-  public boolean collided() {
-    return false;
-  }
-
   /** This method displays the bubble on the screen
    *  using the GameWindow instance provided as a parameter.
    *
@@ -113,6 +104,44 @@ public class Bubble extends Sprite {
     window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
     window.image(bubbleImage, this.position.x, this.position.y, size, size);
     window.popStyle();
+  }
+
+  /**
+   * Handles collisions between bubbles and other objects
+   * @param o as an Object
+   * @return true if collided
+   */
+  @Override
+  public boolean collided(Object o) {
+    if (o instanceof Player player) {
+      // Handle collision with player
+      float playerX = player.getPosition().x;
+      float playerY = player.getPosition().y;
+      float playerWidth = player.getSize();
+      float playerHeight = player.getSize();
+
+      // find the closest point on the player to the bubble
+      float closestX = clamp(this.getPosition().x, playerX, playerX + playerWidth);
+      float closestY = clamp(this.getPosition().y, playerY, playerY + playerHeight);
+
+      // calculate the distance between the closest point and the bubble center
+      float distX = this.getPosition().x - closestX;
+      float distY = this.getPosition().y - closestY;
+      float distance = (float) Math.sqrt((distX * distX) + (distY * distY));
+
+      return (distance <= this.getSize() / 2);
+
+    } else if (o instanceof ShootLine shootLine) {
+      PVector lineTemp = new PVector(shootLine.x, shootLine.getPosition().y);
+      float bubbleRadius = this.getSize() / 2;
+      PVector bubbleTemp = this.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
+      if (lineTemp.y < bubbleTemp.y) {
+        lineTemp.y = bubbleTemp.y;
+      }
+      float diff = lineTemp.dist(bubbleTemp);
+      return diff < bubbleRadius;
+    }
+    return false;
   }
 
 }
