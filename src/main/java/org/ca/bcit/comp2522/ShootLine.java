@@ -16,9 +16,7 @@ public class ShootLine extends Sprite {
   private PVector velocity;
   protected final float x;
   protected float thickness;
-
   protected float increments;
-
   protected final float y;
   private PImage fireball;
 
