@@ -261,4 +261,53 @@ public class Scene {
       isVictory = true;
     }
   }
+
+  public InputHandler getInputHandler() {
+    return inputHandler;
+  }
+
+  public SoundEffects getSounds() {
+    return sounds;
+  }
+
+  public static ShootLine getShootLine() {
+    return shootLine;
+  }
+
+  public Player getPlayer() {
+    return player;
+  }
+
+  public ArrayList<Sprite> getSprites() {
+    return sprites;
+  }
+
+  public Bubble getBubble() {
+    return bubble;
+  }
+
+  public ArrayList<Sprite> getRemovedSprites() {
+    return removedSprites;
+  }
+
+  public Lives getLives() {
+    return lives;
+  }
+
+  public Timer getTimer() {
+    return timer;
+  }
+
+  public ScoreBar getScoreBar() {
+    return scoreBar;
+  }
+
+  public PImage getBg() {
+    return bg;
+  }
+
+  public ArrayList<Bubble> getBubbles() {
+    return bubbles;
+  }
+
 }
