@@ -18,18 +18,14 @@
 *.zip
 *.tar.gz
 *.rar
-*.gradle
-previous-compilation-data.bin
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
 # folders
-.github/
-.gradle/
-.idea/
-build/
-gradle/
+.idea/*
+build/*
+.gradle/*
 
 # include library
 !library/*
