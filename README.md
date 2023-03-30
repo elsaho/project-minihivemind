@@ -1,14 +1,51 @@
 # Bubble Trouble
 
-Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
+*We are the bane of bubbles!*
 
-We are the bane of bubbles!
+Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
 
 ## Instructions
 
+1. Run GameWindow.java
+2. Pop all the bubbles! Use the up arrow to shoot the bubbles and the L/R keys to avoid getting hit
+
 ## Contributions
 
+**Mai Vu**
+- Gameplay mechanics
+- Backend 
+- Debugger
+
+**Elsa Ho**
+- Gameplay mechanics
+- UI/UX
+- Soundtrack composer
+- Debugger
+
+**Tomek Stojek**
+- Gameplay mechanics
+- Debugger
+
+**Troy Calaquian**
+- Gameplay mechanics
+- Test maker
+- Debugger
+
+**Haurence Li**
+- Gameplay mechanics
+- Sound specialist
+- Test maker
+- Debugger
+- Git issues go-to 
+
+
 ## References and Citations
+
+Soundtrack composed by Elsa Ho
+
+Sound effects credit - 
+
+Background art and character art credit -
 
 
 --------------------
