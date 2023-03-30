@@ -3,7 +3,6 @@ package org.ca.bcit.comp2522;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import processing.core.PApplet;
-import processing.core.PImage;
 
 import java.util.ArrayList;
 
