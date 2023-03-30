@@ -83,14 +83,5 @@ public class ShootLine extends Sprite {
       this.position.y = this.position.y - speed;
     } else {Scene.shootLine = null;}
   }
-
-  /**
-   * Collided method
-   * @return boolean
-   */
-  @Override
-  public boolean collided() {
-    return false;
-  }
 }
 

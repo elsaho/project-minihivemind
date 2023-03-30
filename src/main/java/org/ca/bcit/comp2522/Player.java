@@ -91,16 +91,6 @@ public class Player extends Sprite {
 
     window.popStyle();
   }
-
-  /** Returns false since the player cannot collide with anything in this game.
-   *
-   * @return false
-   */
-  @Override
-  public boolean collided() {
-    return false;
-  }
-
 }
 
 

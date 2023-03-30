@@ -10,5 +10,5 @@ package org.ca.bcit.comp2522;
  */
 public interface Collidable {
 
-  boolean collided();
+  boolean collided(Object o);
 }
