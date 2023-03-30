@@ -61,17 +61,15 @@ public class GameWindow extends PApplet {
     }
     //Game start and instructions
     instructionStart = new InstructionStart(this);
-    instructionStart.setup(this);
+
     //Game
-    scene = new Scene(this); //init?
+    scene = new Scene(this);
     scene.setup(this);
     //Game lose
     gameOver = new GameOver(this);
-    gameOver.setup(this);
 
     //Game win
     gameVictory = new GameVictory(this);
-    gameVictory.setup(this);
   }
 
   /**

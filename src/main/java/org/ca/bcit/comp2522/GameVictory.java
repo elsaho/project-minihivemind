@@ -25,13 +25,6 @@ public class GameVictory {
    * @param window as a GameWindow
    */
   public GameVictory(GameWindow window) {
-  }
-
-  /**
-   * Sets up the game victory page
-   * @param window as a GameWindow
-   */
-  public void setup(GameWindow window) {
     bg = window.loadImage("../assets/VictoryScreen.png");
     replayButton = window.loadImage("../assets/TransparentReplay.png");
     restart = new Button(100, 280, 600, 206, replayButton);

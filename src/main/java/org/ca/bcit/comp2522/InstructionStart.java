@@ -21,13 +21,6 @@ public class InstructionStart{
    */
   public InstructionStart(GameWindow window) {
     gameStarted = false;
-  }
-
-  /**
-   * Sets up the game over page
-   * @param window
-   */
-  public void setup(GameWindow window) {
     bg = window.loadImage("../assets/SkyInstruction.png");
     PImage startButtonImg = window.loadImage("../assets/StartButton.png");
     startGameBtn = new Button(100, 323, 600, 206, startButtonImg);

@@ -27,14 +27,6 @@ public class GameOver{
    * @param window GameWindow
    */
   public GameOver(GameWindow window) {
-
-  }
-
-  /**
-   * Sets up the game over page
-   * @param window GameWindow
-   */
-  public void setup(GameWindow window) {
     bg = window.loadImage("../assets/GameOverScreen.png");
     replayButton = window.loadImage("../assets/TransparentReplay.png");
     restart = new Button(100, 323, 600, 206, replayButton);
