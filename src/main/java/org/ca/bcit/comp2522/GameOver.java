@@ -29,7 +29,7 @@ public class GameOver{
   public GameOver(GameWindow window) {
     bg = window.loadImage("../assets/GameOverScreen.png");
     replayButton = window.loadImage("../assets/TransparentReplay.png");
-    restart = new Button(100, 323, 600, 206, replayButton);
+    restart = new Button(100, 340, 600, 206, replayButton);
     myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
   }
 

@@ -19,6 +19,9 @@ public class GameWindow extends PApplet {
   private static final int x = 800;
   /** Game screen height */
   private static final int y = 600;
+  /** Enum representing game state*/
+  static Screen screen = Screen.landing;
+
   /** Getter for screen width */
   public static int getX() {
     return x;
@@ -107,31 +110,41 @@ public class GameWindow extends PApplet {
    * Draws the game window
    */
   public void draw() {
-    if (!LandingPage.gameStarted) {
-      landingPage.update(this);
-      landingPage.display(this);
-      if (!audio.isBGMPlaying()) {
-        audio.playBGM();
-      }
+    switch(screen) {
+      case landing:
+        landingPage.update(this);
+        landingPage.display(this);
+        if (!audio.isBGMPlaying()) {
+          audio.playBGM();
+        }
+        break;
 
-//    if (!InstructionStart.gameStarted) {
-//      instructionStart.update(this);
-//      instructionStart.display(this);
-//      if (!audio.isBGMPlaying()) {
-//        audio.playBGM();
-//      }
-    } else if (scene.isGameOver) {
-      gameOver.update(this);
-      gameOver.display(this);
-      audio.stopBGM(); //temp fix
-    } else if (scene.isVictory) {
-      gameVictory.update(this);
-      gameVictory.display(this);
-      audio.stopBGM(); //temp fix
-    } else {
-      scene.display(this);
-      scene.update(this);
-      audio.stopBGM();
+      case instruction:
+        instructionStart.update(this);
+        instructionStart.display(this);
+        break;
+
+      case win:
+        gameVictory.update(this);
+        gameVictory.display(this);
+        audio.stopBGM(); //temp fix
+        break;
+
+      case lose:
+        gameOver.update(this);
+        gameOver.display(this);
+        audio.stopBGM(); //temp fix
+        break;
+
+      case level1:
+        scene.display(this);
+        scene.update(this);
+//        audio.stopBGM();
+        break;
+
+      default:
+        landingPage.update(this);
+        landingPage.display(this);
     }
   }
 

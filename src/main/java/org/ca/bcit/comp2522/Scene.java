@@ -68,8 +68,8 @@ public class Scene {
   /**
    * Game state.
    */
-  public static boolean isGameOver = false;
-  public static boolean isVictory = false;
+//  public static boolean isGameOver = false;
+//  public static boolean isVictory = false;
 
   /**
    * Constructor for objects of class Scene.
@@ -196,7 +196,7 @@ public class Scene {
     }
 
     if (timer.getRemaining() <= 0 || lives.getLives() <= 0) {
-      isGameOver = true;
+      GameWindow.screen = Screen.lose;
       if (databaseHelper != null) {
         databaseHelper.put("score", scoreBar.getValue());
       }
@@ -220,7 +220,7 @@ public class Scene {
       if (databaseHelper != null) {
         databaseHelper.put("score", scoreBar.getValue());
       }
-      isVictory = true;
+      GameWindow.screen = Screen.win;
     }
   }
 

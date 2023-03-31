@@ -21,7 +21,7 @@ public class Bubble extends Sprite implements Collidable{
   /**
    * Minimum size of a bubble
    */
-  public static final float MIN_SIZE = 25f;
+  public static final float MIN_SIZE = 100f;
 
   /**
    * Bubble velocity
@@ -157,7 +157,8 @@ public class Bubble extends Sprite implements Collidable{
       Scene.lastCollisionTime = System.currentTimeMillis();
     } else {
       Scene.sounds.playLoseAudio();
-      Scene.isGameOver = true;
+//      Scene.isGameOver = true;
+      GameWindow.screen = Screen.lose;
     }
   }
 
