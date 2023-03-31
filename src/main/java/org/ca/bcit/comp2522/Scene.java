@@ -47,7 +47,7 @@ public class Scene {
    * Gameplay.
    */
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
-  protected SoundEffects sounds;
+  public static SoundEffects sounds;
   public static ShootLine shootLine;
   private final Player player;
   private final ArrayList<Sprite> sprites;
@@ -57,9 +57,9 @@ public class Scene {
   private PImage bg;
 
   private ArrayList<Sprite> removedSprites;
-  private long lastCollisionTime = 0;
+  public static long lastCollisionTime = 0;
   private final int time = 90000;
-  private boolean isImmune = false;
+  public static boolean isImmune = false;
 
   /**
    * Scorebar.
@@ -70,7 +70,7 @@ public class Scene {
   /**
    * Game state.
    */
-  public boolean isGameOver = false;
+  public static boolean isGameOver = false;
   public boolean isVictory = false;
 
   /**
@@ -202,17 +202,8 @@ public class Scene {
     for (Bubble bubble : bubbles) {
       bubble.bounce();
       bubble.display(window);
-
       if (bubble.collided(player) && !isImmune) {
-        if (lives.getLives() > 0) {
-          sounds.playOof();
-          scoreBar.update(window, bubble, false, true);
-          isImmune = true;
-          lastCollisionTime = System.currentTimeMillis();
-        } else {
-          sounds.playLoseAudio();
-          isGameOver = true;
-        }
+        bubble.update(window, bubble);
       }
 
       // Check if the player's immunity has expired
@@ -245,11 +236,10 @@ public class Scene {
       System.out.println("Final score is: " + scoreBar.getValue());
     }
 
+    //Remove bubbles that have been popped, and add new bubbles
     bubbles.removeAll(bubblesToRemove);
     bubbles.addAll(newBubbles);
-
     removedSprites.addAll(bubblesToRemove);
-
     for (Sprite sprite : removedSprites) {
       sprites.remove(sprite);
     }
