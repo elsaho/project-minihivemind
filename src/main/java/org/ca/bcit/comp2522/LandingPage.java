@@ -35,7 +35,7 @@ public class LandingPage {
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Start Game button clicked!");
       gameStarted = true;
-      window.setup();
+      window.init();
     }
     if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Instruct button clicked! Doesn't do anything yet");

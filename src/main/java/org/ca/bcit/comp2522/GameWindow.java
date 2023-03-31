@@ -73,9 +73,13 @@ public class GameWindow extends PApplet {
   }
 
   /**
-   * Sets up the game window
+   * Sets up the game window.
    */
   public void setup() {
+    this.init();
+  }
+
+  public void init() {
     //Game sounds
     try {
       audio = new SoundEffects();
