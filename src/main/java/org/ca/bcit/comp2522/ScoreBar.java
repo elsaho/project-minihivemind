@@ -1,6 +1,5 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PImage;
 
@@ -73,25 +72,32 @@ public class ScoreBar {
    *
    * @param window the GameWindow object
    */
-  public void display(GameWindow window) {
+  public void display(final GameWindow window) {
 
     heart = window.loadImage("../assets/pixelHeart.png");
     lives = Lives.getInstance();
-
     timer = Timer.getInstance();
     timer.setRemaining(timer.getStart() - window.millis());
 
+    //Creates font
     myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 18);
-    window.fill(255, 255, 255);
-    window.textFont(myFont);
-    window.textAlign(PConstants.LEFT);
-    window.text("Lives: ", 10, 55);
+
+    //Text for lives
+    Text livesText = new Text("Lives: ", 10, 55, myFont);
+    livesText.display(window);
     for (int i = 0; i < lives.getLives(); i++) {
       window.image(heart, 120 + (60 * i), 25, 50, 50);
     }
 
-    window.text("Time: " + timer.timeToString(), 350, 55);
-    window.text("Score: " + this.getValue(), 550, 55);
+    //Text for timer
+    Text timerText = new Text("Time: " + timer.timeToString(), 350, 55, myFont);
+    timerText.display(window);
+
+    //Text for score tracker
+    Text scoreText = new Text("Score: " + this.getValue(), 550, 55, myFont);
+    scoreText.display(window);
+
+
   }
 
   /**
