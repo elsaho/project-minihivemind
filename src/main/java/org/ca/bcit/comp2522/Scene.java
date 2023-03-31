@@ -203,18 +203,15 @@ public class Scene {
       bubble.bounce();
       bubble.display(window);
 
-      if (bubble.collided(player)) {
-        if (!isImmune) {
-          if (lives.getLives() > 0) {
-            sounds.playOof();
-            scoreBar.update(window, bubble, false, true);
-            System.out.println("You lost a life " + lives.getLives());
-            isImmune = true;
-            lastCollisionTime = System.currentTimeMillis();
-          } else {
-            sounds.playLoseAudio();
-            isGameOver = true;
-          }
+      if (bubble.collided(player) && !isImmune) {
+        if (lives.getLives() > 0) {
+          sounds.playOof();
+          scoreBar.update(window, bubble, false, true);
+          isImmune = true;
+          lastCollisionTime = System.currentTimeMillis();
+        } else {
+          sounds.playLoseAudio();
+          isGameOver = true;
         }
       }
 
@@ -237,7 +234,6 @@ public class Scene {
           //save score to database everytime bubble is popped
           databaseHelper.put("score", scoreBar.getValue());
         }
-        System.out.println("You popped a bubble!");
       }
     }
 
@@ -271,6 +267,7 @@ public class Scene {
     }
   }
 
+  /** Methods for testing purposes. */
   public InputHandler getInputHandler() {
     return inputHandler;
   }
