@@ -3,7 +3,9 @@ package org.ca.bcit.comp2522;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import javax.sound.sampled.LineUnavailableException;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 /** Player class. The sprite that the user controls.
  * Can move left and right and shoot bullets. Extends Sprite class.
@@ -19,6 +21,7 @@ public class Player extends Sprite {
   private final PImage shootLeft;
   private final PImage shootRight;
   private boolean playerFaceLeft;
+  private final SoundEffects sounds = new SoundEffects();
 
   /** Constructor for Player class.
    *
@@ -30,7 +33,7 @@ public class Player extends Sprite {
    *@param window the GameWindow instance.
    */
   public Player(final PVector position, final PVector direction, final float size,
-                final float speed, final Color color, final GameWindow window) {
+                final float speed, final Color color, final GameWindow window) throws LineUnavailableException, FileNotFoundException {
     super(position, direction, size, speed, color, window);
     playerLeft = window.loadImage("../assets/CharLeft.png");
     playerRight = window.loadImage("../assets/CharRight.png");
@@ -73,16 +76,10 @@ public class Player extends Sprite {
               new PVector(this.position.x + this.size / 2, this.position.y),
               this.size, this.speed, window
           );
-//          sounds.playShoot();
+          sounds.playShoot();
         }
 
     }
-
-
-
-
-
-
 
   /** Displays the player on the screen.
    *

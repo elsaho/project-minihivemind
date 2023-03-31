@@ -90,7 +90,11 @@ public class GameWindow extends PApplet {
     //Game start and instructions
     instructionStart = new InstructionStart(this);
     //Game
-    scene = new Scene(this);
+    try {
+      scene = new Scene(this);
+    } catch (LineUnavailableException | FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
     scene.setup(this);
     //Game lose
     gameOver = new GameOver(this);
