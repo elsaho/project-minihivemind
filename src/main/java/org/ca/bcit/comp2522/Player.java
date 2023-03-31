@@ -16,13 +16,9 @@ public class Player extends Sprite {
   ShootLine playersLine;
   private final PImage playerLeft;
   private final PImage playerRight;
-  private PImage shootLeft;
-  private PImage shootRight;
-  /**
-   * If player's last input is facing the left arrow key
-   */
-  private boolean isLeft;
-  private final GameWindow window;
+  private final PImage shootLeft;
+  private final PImage shootRight;
+  private boolean playerFaceLeft;
 
   /** Constructor for Player class.
    *
@@ -40,7 +36,7 @@ public class Player extends Sprite {
     playerRight = window.loadImage("../assets/CharRight.png");
     shootLeft = window.loadImage("../assets/ShootLeft.png");
     shootRight = window.loadImage("../assets/ShootRight.png");
-    isLeft = true;
+    playerFaceLeft = true;
     this.window = window;
     playersLine = null;
   }
@@ -50,22 +46,19 @@ public class Player extends Sprite {
    * @param window the GameWindow instance used to update the player's position.
    */
   public void update(final GameWindow window) {
+    setPlayerDirection(window);
+    boolean moveLeft = window.inputHandler.isLeft();
 
-
-    if (window.inputHandler.isLeft()) {
-      if (position.x < - size/2) {
+    // Code to prevent player from moving outside of window bounds
+    if (moveLeft) {
+      if (position.x < -size/2) {
         position.x = -size/2;
-
       }
-      this.isLeft = true;
       position.x -= speed;
-    }
-
-    if (window.inputHandler.isRight()) {
+    } else if (window.inputHandler.isRight()) {
       if (position.x > GameWindow.getX() - size - size/2) {
         position.x = GameWindow.getX() - size - size/2;
       }
-      this.isLeft = false;
       position.x += speed;
     }
 
@@ -102,14 +95,13 @@ public class Player extends Sprite {
   public void display(final GameWindow window) {
     window.pushStyle();
     window.fill(color.getRed(), color.getGreen(), color.getBlue());
-    if (window.inputHandler.isUp() && window.inputHandler.isLeft()) {
-      window.image(shootLeft, position.x + 42, position.y, 42, 64);
-    } else if (window.inputHandler.isUp() && window.inputHandler.isRight()) {
-      window.image(shootRight, position.x + 42, position.y, 42, 64);
-    } else if (window.inputHandler.isLeft() || this.isLeft) {
-      window.image(playerLeft, position.x + 42, position.y, 42, 64);
-    } else if (window.inputHandler.isRight() || !this.isLeft){
-      window.image(playerRight, position.x + 42, position.y, 42, 64);
+    boolean isUp = window.inputHandler.isUp();
+
+
+    if (isUp) {
+      window.image(playerFaceLeft ? shootLeft : shootRight, position.x + 42, position.y, 42, 64);
+    } else {
+      window.image(playerFaceLeft ? playerLeft : playerRight, position.x + 42, position.y, 42, 64);
     }
     if (playersLine != null) {
       playersLine.update(window);
@@ -121,6 +113,21 @@ public class Player extends Sprite {
 
     window.popStyle();
   }
+
+  /** Sets the player's facing direction
+   *
+   * @param window GameWindow instance used to get the user input.
+   */
+  private void setPlayerDirection(final GameWindow window) {
+    if (window.inputHandler.isLeft()) {
+      playerFaceLeft = true;
+    } else if (window.inputHandler.isRight()) {
+      playerFaceLeft = false;
+    } else {
+      //do nothing (this is on purpose!)
+    }
+  }
+
 
   public ShootLine getPlayersLine() {
     return playersLine;

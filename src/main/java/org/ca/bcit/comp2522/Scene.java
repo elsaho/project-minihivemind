@@ -178,18 +178,15 @@ public class Scene {
       bubble.bounce();
       bubble.display(window);
 
-      if (bubble.collided(player)) {
-        if (!isImmune) {
-          if (lives.getLives() > 0) {
-            sounds.playOof();
-            scoreBar.update(window, bubble, false, true);
-            System.out.println("You lost a life " + lives.getLives());
-            isImmune = true;
-            lastCollisionTime = System.currentTimeMillis();
-          } else {
-            sounds.playLoseAudio();
-            isGameOver = true;
-          }
+      if (bubble.collided(player) && !isImmune) {
+        if (lives.getLives() > 0) {
+          sounds.playOof();
+          scoreBar.update(window, bubble, false, true);
+          isImmune = true;
+          lastCollisionTime = System.currentTimeMillis();
+        } else {
+          sounds.playLoseAudio();
+          isGameOver = true;
         }
       }
 
@@ -212,13 +209,14 @@ public class Scene {
           //save score to database everytime bubble is popped
           databaseHelper.put("score", scoreBar.getValue());
         }
-        System.out.println("You popped a bubble!");
       }
     }
 
     if (timer.getRemaining() <= 0 || lives.getLives() <= 0) {
       isGameOver = true;
-      databaseHelper.put("score", scoreBar.getValue());
+      if (databaseHelper != null) {
+        databaseHelper.put("score", scoreBar.getValue());
+      }
       System.out.println("Final score is: " + scoreBar.getValue());
     }
 
@@ -237,11 +235,14 @@ public class Scene {
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
       scoreBar.addScore(lives.getLives() * 1000);
       System.out.println("Final score is: " + scoreBar.getValue()); //for test
-      databaseHelper.put("score", scoreBar.getValue());
+      if (databaseHelper != null) {
+        databaseHelper.put("score", scoreBar.getValue());
+      }
       isVictory = true;
     }
   }
 
+  /** Methods for testing purposes. */
   public InputHandler getInputHandler() {
     return inputHandler;
   }
