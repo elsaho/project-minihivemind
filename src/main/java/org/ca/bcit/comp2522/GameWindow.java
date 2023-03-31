@@ -129,7 +129,7 @@ public class GameWindow extends PApplet {
     window.textFont(myFont);
     if (databaseHelper != null) {
       window.text("High Score: " + databaseHelper.getHighestScore() + "\n"
-              + "Your Score: " + databaseHelper.getPlayerScore(), 20, 55);
+              + "Your Score: " + ScoreBar.getInstance().getValue(), 20, 55);
     }
     restart.display(window);
   }
