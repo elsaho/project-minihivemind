@@ -36,7 +36,7 @@ public class GameVictory {
    * @param window as a Game Window
    */
   public void display(GameWindow window) {
-    GameWindow.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
+    Text.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
 
   /**

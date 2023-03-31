@@ -39,7 +39,7 @@ public class GameOver{
    * @param window GameWindow
    */
   public void display(GameWindow window) {
-    GameWindow.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
+    Text.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
 
 
