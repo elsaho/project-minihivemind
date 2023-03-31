@@ -123,13 +123,11 @@ public class GameWindow extends PApplet {
 
   public static void EndGameDisplay(GameWindow window, PImage bg, PFont myFont, DatabaseHelper databaseHelper, Button restart) {
     window.background(bg);
-    window.textSize(32); // Set text size to 16 pixels
-    window.fill(255, 255, 255);
-    window.textAlign(PConstants.LEFT);
     window.textFont(myFont);
+    Text highScoreText = new Text("High Score: " + databaseHelper.getHighestScore() + "\n"
+      + "Your Score: " + ScoreBar.getInstance().getValue(), 20, 55, myFont);
     if (databaseHelper != null) {
-      window.text("High Score: " + databaseHelper.getHighestScore() + "\n"
-              + "Your Score: " + ScoreBar.getInstance().getValue(), 20, 55);
+      highScoreText.display(window);
     }
     restart.display(window);
   }
