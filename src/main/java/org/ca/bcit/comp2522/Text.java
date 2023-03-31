@@ -3,9 +3,6 @@ package org.ca.bcit.comp2522;
 import processing.core.PConstants;
 import processing.core.PFont;
 
-import java.awt.*;
-
-import static java.awt.Font.createFont;
 
 /**
  * The main class for the game.

@@ -1,7 +1,6 @@
 package org.ca.bcit.comp2522;
 
 import  processing.core.PApplet;
-import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PImage;
 
