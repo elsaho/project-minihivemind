@@ -32,8 +32,10 @@ public class GameWindow extends PApplet {
   public static int getY() {
     return y;
   }
+  /** Landing page */
+  private LandingPage landingPage;
   /** Start page, with instructions */
-  InstructionStart instructionStart;
+  private InstructionStart instructionStart;
   /** Game over page */
   private GameOver gameOver;
   /** Game Victory page */
@@ -56,9 +58,10 @@ public class GameWindow extends PApplet {
     } catch (FileNotFoundException | LineUnavailableException e) {
       throw new RuntimeException(e);
     }
+    // Landing page
+    landingPage = new LandingPage(this);
     //Game start and instructions
     instructionStart = new InstructionStart(this);
-
     //Game
     scene = new Scene(this);
     scene.setup(this);
@@ -72,12 +75,19 @@ public class GameWindow extends PApplet {
    * Draws the game window
    */
   public void draw() {
-    if (!InstructionStart.gameStarted) {
-      instructionStart.update(this);
-      instructionStart.display(this);
+    if (!LandingPage.gameStarted) {
+      landingPage.update(this);
+      landingPage.display(this);
       if (!audio.isBGMPlaying()) {
         audio.playBGM();
       }
+
+//    if (!InstructionStart.gameStarted) {
+//      instructionStart.update(this);
+//      instructionStart.display(this);
+//      if (!audio.isBGMPlaying()) {
+//        audio.playBGM();
+//      }
     } else if (scene.isGameOver) {
       gameOver.update(this);
       gameOver.display(this);
