@@ -10,11 +10,11 @@ import processing.core.PFont;
  * @version 2023
  */
 public class Text {
-  private PFont font;
-  private String text;
-  private float x;
-  private float y;
-  private int colour;
+  private final PFont font;
+  private final String text;
+  private final float x;
+  private final float y;
+  private final int colour;
 
   /**
    * Constructor for Text object.
