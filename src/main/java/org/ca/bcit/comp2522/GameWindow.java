@@ -64,7 +64,6 @@ public class GameWindow extends PApplet {
     scene.setup(this);
     //Game lose
     gameOver = new GameOver(this);
-
     //Game win
     gameVictory = new GameVictory(this);
   }

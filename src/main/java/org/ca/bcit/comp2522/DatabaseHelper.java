@@ -56,10 +56,15 @@ public class DatabaseHelper {
    */
   public static DatabaseHelper getInstance() {
     if (instance == null) {
-      instance = new DatabaseHelper("mongodb+srv://Bubble:comp2522@2522.w2dd0ev.mongodb.net/?retryWrites=true&w=majority");
+      try {
+        instance = new DatabaseHelper("mongodb+srv://Bubble:comp2522@2522.w2dd0ev.mongodb.net/?retryWrites=true&w=majority");
+      } catch (Exception e) {
+        System.out.println("Unable to connect to MongoDB: " + e.getMessage());
+      }
     }
     return instance;
   }
+
 
   /**
    * Puts a key-value pair into the database.
@@ -68,37 +73,42 @@ public class DatabaseHelper {
    * @param value the value
    */
   public void put(String key, int value) {
-    Document document = new Document(key, value)
-        .append("timestamp", new Date());
-    new Thread(() -> database.getCollection("scores").insertOne(document)).start();
+    if (instance != null) {
+      Document document = new Document(key, value)
+              .append("timestamp", new Date());
+      new Thread(() -> database.getCollection("scores").insertOne(document)).start();
+    }
   }
-
-
-
 
   /** Get the highest score from the database
    *
    * @return
    */
   public int getHighestScore() {
-    MongoCollection<Document> scoresCollection = database.getCollection("scores");
-    Document highestScoreDocument = scoresCollection.find().sort(new Document("score", -1)).limit(1).first();
-    int highestScore = (int) highestScoreDocument.getInteger("score");
-    return highestScore;
+    if (instance != null) {
+      MongoCollection<Document> scoresCollection = database.getCollection("scores");
+      Document highestScoreDocument = scoresCollection.find().sort(new Document("score", -1)).limit(1).first();
+      int highestScore = (int) highestScoreDocument.getInteger("score");
+      return highestScore;
+    }
+    return 0;
   }
 
   public int getPlayerScore() {
-    // Get the scores collection
-    MongoCollection<Document> scoresCollection = database.getCollection("scores");
+    if (instance != null) {
+      // Get the scores collection
+      MongoCollection<Document> scoresCollection = database.getCollection("scores");
 
-    // Sort the scores by timestamp in descending order
-    Document sortCriteria = new Document("timestamp", -1);
-    ArrayList<Document> sortedScores = scoresCollection.find().sort(sortCriteria).limit(1).into(new ArrayList<>());
+      // Sort the scores by timestamp in descending order
+      Document sortCriteria = new Document("timestamp", -1);
+      ArrayList<Document> sortedScores = scoresCollection.find().sort(sortCriteria).limit(1).into(new ArrayList<>());
 
-    //get the score
-    Document mostRecentScore = sortedScores.get(0);
-    int score = mostRecentScore.getInteger("score");
-    return score;
+      //get the score
+      Document mostRecentScore = sortedScores.get(0);
+      int score = mostRecentScore.getInteger("score");
+      return score;
+    }
+    return 0;
   }
 
 
