@@ -45,6 +45,34 @@ public class GameWindow extends PApplet {
     size(x, y);
   }
 
+  public void keyPressed() {
+    inputHandler.update(true);
+  }
+
+  public void keyReleased() {
+    inputHandler.update(false);
+  }
+
+  public InstructionStart getInstructionStart() {
+    return instructionStart;
+  }
+
+  public Scene getScene() {
+    return scene;
+  }
+
+  public GameOver getGameOver() {
+    return gameOver;
+  }
+
+  public GameVictory getGameVictory() {
+    return gameVictory;
+  }
+
+  public SoundEffects getAudio() {
+    return audio;
+  }
+
   /**
    * Sets up the game window
    */
@@ -89,34 +117,6 @@ public class GameWindow extends PApplet {
       scene.display(this);
       scene.update(this);
     }
-  }
-
-  public void keyPressed() {
-    inputHandler.update(true);
-  }
-
-  public void keyReleased() {
-    inputHandler.update(false);
-  }
-
-  public InstructionStart getInstructionStart() {
-    return instructionStart;
-  }
-
-  public Scene getScene() {
-    return scene;
-  }
-
-  public GameOver getGameOver() {
-    return gameOver;
-  }
-
-  public GameVictory getGameVictory() {
-    return gameVictory;
-  }
-
-  public SoundEffects getAudio() {
-    return audio;
   }
 
   public static void EndGameDisplay(GameWindow window, PImage bg, PFont myFont, DatabaseHelper databaseHelper, Button restart) {

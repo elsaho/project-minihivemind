@@ -5,12 +5,13 @@ import processing.core.PFont;
 
 
 /**
- * The main class for the game.
+ * Text wrapper class for all in-game text needs.
  *
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 public class Text {
+
   private final PFont font;
   private final String text;
   private final float x;
@@ -29,6 +30,27 @@ public class Text {
     this.y = y;
     this.font = font;
   }
+
+  /** Getter for font stored */
+  public PFont getFont() {
+    return font;
+  }
+
+  /** Getter for text stored position */
+  public String getText() {
+    return text;
+  }
+
+  /** Getter for x position */
+  public float getX() {
+    return x;
+  }
+
+  /** Getter for y position */
+  public float getY() {
+    return y;
+  }
+
 
   /**
    * Displays text in window
