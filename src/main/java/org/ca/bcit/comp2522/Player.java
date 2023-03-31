@@ -12,7 +12,7 @@ import java.awt.*;
  * @version 2023
  */
 public class Player extends Sprite {
-
+  private static Player instance = null;
   ShootLine playersLine;
   private final PImage playerLeft;
   private final PImage playerRight;
@@ -29,7 +29,7 @@ public class Player extends Sprite {
    *@param color the color of the player as a Color.
    *@param window the GameWindow instance.
    */
-  public Player(final PVector position, final PVector direction, final float size,
+  private Player(final PVector position, final PVector direction, final float size,
                 final float speed, final Color color, final GameWindow window) {
     super(position, direction, size, speed, color, window);
     playerLeft = window.loadImage("../assets/CharLeft.png");
@@ -40,6 +40,15 @@ public class Player extends Sprite {
     this.window = window;
     playersLine = null;
   }
+
+  public static Player getInstance(final PVector position, final PVector direction, final float size,
+                                   final float speed, final Color color, final GameWindow window) {
+    if (instance == null) {
+      instance = new Player(position, direction, size, speed, color, window);
+    }
+    return instance;
+  }
+
 
   /** Updates the player's position based on the arrow key pressed by the user.
    *

@@ -79,10 +79,10 @@ public class Scene {
   public Scene(GameWindow window) {
     inputHandler = window.inputHandler;
     sprites = new ArrayList<>();
-    player = new Player(
-        new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize),
-          new PVector(0, 1), playerSize, playerSpeed,
-        new Color(0, 255, 255), window
+    player = Player.getInstance(
+      new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize),
+      new PVector(0, 1), playerSize, playerSpeed,
+      new Color(0, 255, 255), window
     );
 
 
