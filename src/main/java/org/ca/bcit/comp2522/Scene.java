@@ -243,7 +243,9 @@ public class Scene {
 
     if (timer.getRemaining() <= 0 || lives.getLives() <= 0) {
       isGameOver = true;
-      databaseHelper.put("score", scoreBar.getValue());
+      if (databaseHelper != null) {
+        databaseHelper.put("score", scoreBar.getValue());
+      }
       System.out.println("Final score is: " + scoreBar.getValue());
     }
 
@@ -262,7 +264,9 @@ public class Scene {
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
       scoreBar.addScore(lives.getLives() * 1000);
       System.out.println("Final score is: " + scoreBar.getValue()); //for test
-      databaseHelper.put("score", scoreBar.getValue());
+      if (databaseHelper != null) {
+        databaseHelper.put("score", scoreBar.getValue());
+      }
       isVictory = true;
     }
   }
