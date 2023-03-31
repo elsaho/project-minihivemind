@@ -46,7 +46,7 @@ public class Player extends Sprite {
   }
 
   public static Player getInstance(final PVector position, final PVector direction, final float size,
-                                   final float speed, final Color color, final GameWindow window) {
+                                   final float speed, final Color color, final GameWindow window) throws LineUnavailableException, FileNotFoundException {
     if (instance == null) {
       instance = new Player(position, direction, size, speed, color, window);
     }
