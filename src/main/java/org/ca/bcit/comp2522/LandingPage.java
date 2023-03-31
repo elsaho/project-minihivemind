@@ -7,7 +7,6 @@ public class LandingPage {
   private final PImage bg;
   private final Button startGameBtn;
   private final Button instructBtn;
-  public static boolean gameStarted = false;
 
   public LandingPage(GameWindow window) {
     bg = window.loadImage("../assets/Landing.png");
@@ -34,11 +33,12 @@ public class LandingPage {
   public void update(GameWindow window) {
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Start Game button clicked!");
-      gameStarted = true;
+      GameWindow.screen = Screen.level1;
       window.init();
-    }
-    if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      System.out.println("Instruct button clicked! Doesn't do anything yet");
+    } else if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
+      System.out.println("Instruct button clicked!");
+      GameWindow.screen = Screen.instruction;
+      window.init();
     }
   }
 

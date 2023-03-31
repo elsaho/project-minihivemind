@@ -73,9 +73,7 @@ public class Button{
       Lives lives = Lives.getInstance();
       lives.setLives(3);
       ScoreBar.getInstance().resetValue();
-      LandingPage.gameStarted = true;
-      Scene.isGameOver = false;
-      Scene.isVictory = false;
+      GameWindow.screen = Screen.level1;
       window.init();
     }
   }
