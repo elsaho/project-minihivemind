@@ -69,7 +69,7 @@ public class Scene {
    * Game state.
    */
   public static boolean isGameOver = false;
-  public boolean isVictory = false;
+  public static boolean isVictory = false;
 
   /**
    * Constructor for objects of class Scene.

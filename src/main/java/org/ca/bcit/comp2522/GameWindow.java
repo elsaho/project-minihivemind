@@ -1,9 +1,6 @@
 package org.ca.bcit.comp2522;
 
 import  processing.core.PApplet;
-import processing.core.PFont;
-import processing.core.PImage;
-
 import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 
@@ -130,6 +127,7 @@ public class GameWindow extends PApplet {
     } else {
       scene.display(this);
       scene.update(this);
+      audio.stopBGM();
     }
   }
 

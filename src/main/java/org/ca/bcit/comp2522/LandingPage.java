@@ -7,10 +7,9 @@ public class LandingPage {
   private final PImage bg;
   private final Button startGameBtn;
   private final Button instructBtn;
-  public static boolean gameStarted;
+  public static boolean gameStarted = false;
 
   public LandingPage(GameWindow window) {
-    gameStarted = false;
     bg = window.loadImage("../assets/Landing.png");
     PImage startButtonImg = window.loadImage("../assets/playBtn.png");
     PImage instructBtnImg = window.loadImage("../assets/instructBtn.png");
@@ -36,6 +35,7 @@ public class LandingPage {
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Start Game button clicked!");
       gameStarted = true;
+      window.setup();
     }
     if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Instruct button clicked! Doesn't do anything yet");
