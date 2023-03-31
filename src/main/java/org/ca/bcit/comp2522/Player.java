@@ -16,7 +16,6 @@ public class Player extends Sprite {
   private final PImage playerRight;
   private final PImage shootLeft;
   private final PImage shootRight;
-  private final GameWindow window;
   private boolean playerFaceLeft;
 
   /** Constructor for Player class.
@@ -36,7 +35,6 @@ public class Player extends Sprite {
     shootLeft = window.loadImage("../assets/ShootLeft.png");
     shootRight = window.loadImage("../assets/ShootRight.png");
     playerFaceLeft = true;
-    this.window = window;
   }
 
   /** Updates the player's position based on the arrow key pressed by the user.
