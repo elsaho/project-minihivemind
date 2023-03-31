@@ -46,7 +46,6 @@ public class GameWindow extends PApplet {
     size(x, y);
   }
 
-
   /**
    * Sets up the game window
    */
