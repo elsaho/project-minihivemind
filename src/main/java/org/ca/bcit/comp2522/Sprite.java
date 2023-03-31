@@ -1,8 +1,8 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.*;
-
 import processing.core.PVector;
+
+import java.awt.*;
 
 /**
  * Sprite. The base class for all sprites in the game.
@@ -42,6 +42,11 @@ public abstract class Sprite {
     this.color = color;
   }
 
+  public Sprite() {
+
+  }
+
+
   /**
    * Gets direction of sprite
    * @return PVector
@@ -66,55 +71,11 @@ public abstract class Sprite {
     return size;
   }
 
-//  /**
-//   * Checks if the shootLine shot by player has collided with bubble
-//   * @param shootLine as a ShootLine
-//   * @param bubble as a Bubble
-//   * @return boolean
-//   */
-//  public static boolean collided(ShootLine shootLine, Bubble bubble) {
-//    PVector lineTemp = new PVector(shootLine.x, shootLine.getPosition().y);
-//    float bubbleRadius = bubble.getSize() / 2;
-//    PVector bubbleTemp = bubble.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
-//    if (lineTemp.y < bubbleTemp.y) {
-//      lineTemp.y = bubbleTemp.y;
-//    }
-//    float diff = lineTemp.dist(bubbleTemp);
-//    return diff < bubbleRadius;
-//  }
-
   /**
    * Updates position of sprite
+   *
+   * @return
    */
-  public void update() {
-    this.position = this.getPosition().add(this.direction.copy().mult(speed));
-  }
-
-//  /**
-//   * Checks if a bubble collides with a player.
-//   *
-//   * @param bubble as a Bubble
-//   * @param player as a Player
-//   * @return true if the bubble collides with the player, false otherwise
-//   */
-//  public static boolean collided(Bubble bubble, Player player) {
-//    float bubbleX = bubble.getPosition().x;
-//    float bubbleY = bubble.getPosition().y;
-//    float playerX = player.getPosition().x;
-//    float playerY = player.getPosition().y;
-//    float playerWidth = player.getSize();
-//    float playerHeight = player.getSize();
-//
-//    // find the closest point on the player to the bubble
-//    float closestX = clamp(bubbleX, playerX, playerX + playerWidth);
-//    float closestY = clamp(bubbleY, playerY, playerY + playerHeight);
-//
-//    // calculate the distance between the closest point and the bubble center
-//    float distX = bubbleX - closestX;
-//    float distY = bubbleY - closestY;
-//    float distance = (float) Math.sqrt((distX * distX) + (distY * distY));
-//    return (distance <= bubble.getSize() / 2);
-//  }
 
   /**
    * Helper method for the collided function to find the closest point of player to bubble

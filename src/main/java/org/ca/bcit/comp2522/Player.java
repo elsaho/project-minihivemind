@@ -12,6 +12,8 @@ import java.awt.*;
  * @version 2023
  */
 public class Player extends Sprite {
+
+  ShootLine playersLine;
   private final PImage playerLeft;
   private final PImage playerRight;
   private final PImage shootLeft;
@@ -35,6 +37,8 @@ public class Player extends Sprite {
     shootLeft = window.loadImage("../assets/ShootLeft.png");
     shootRight = window.loadImage("../assets/ShootRight.png");
     playerFaceLeft = true;
+    this.window = window;
+    playersLine = null;
   }
 
   /** Updates the player's position based on the arrow key pressed by the user.
@@ -58,11 +62,27 @@ public class Player extends Sprite {
       position.x += speed;
     }
 
-    if (window.inputHandler.isUp()) {
-      // Shoot a projectile or perform some other action
-      //Currently unused, ideally used for refactor in future
+      if (window.inputHandler.isUp()) {
+        makeLine(window);
+        }
+      }
+
+  void makeLine(GameWindow window) {
+    if (playersLine == null) {
+          playersLine = new ShootLine(
+              new PVector(this.position.x + this.size / 2, this.position.y),
+              this.size, this.speed, window
+          );
+//          sounds.playShoot();
+        }
+
     }
-  }
+
+
+
+
+
+
 
   /** Displays the player on the screen.
    *
@@ -79,6 +99,13 @@ public class Player extends Sprite {
       window.image(playerFaceLeft ? shootLeft : shootRight, position.x + 42, position.y, 42, 64);
     } else {
       window.image(playerFaceLeft ? playerLeft : playerRight, position.x + 42, position.y, 42, 64);
+    }
+    if (playersLine != null) {
+      playersLine.update(window);
+      playersLine.display(window);
+      if (playersLine.checkHitCeiling()) {
+        playersLine = null;
+      }
     }
 
     window.popStyle();
@@ -98,6 +125,14 @@ public class Player extends Sprite {
     }
   }
 
+
+  public ShootLine getPlayersLine() {
+    return playersLine;
+  }
+
+  public void setPlayersLine(ShootLine playersLine) {
+    this.playersLine = playersLine;
+  }
 }
 
 

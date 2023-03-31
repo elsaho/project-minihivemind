@@ -10,8 +10,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static processing.core.PConstants.UP;
-
 /**
  * Scene class. The class that contains all the sprites in the game.
  * This class is responsible for updating and displaying all the sprites.
@@ -87,7 +85,6 @@ public class Scene {
         new Color(0, 255, 255), window
     );
 
-    shootLine = null;
 
     try {
       sounds = new SoundEffects();
@@ -148,20 +145,6 @@ public class Scene {
    *
    * @param window game window
    */
-  void UpdateLineInstance(GameWindow window) {
-    if (shootLine == null) {
-      if (window.keyPressed) {
-        if (window.keyCode == UP) {
-          shootLine = new ShootLine(
-              new PVector(player.position.x + player.size / 2, player.position.y),
-              player.direction, player.size, playerSpeed,
-              new Color(0, 255, 255), window
-          );
-          sounds.playShoot();
-        }
-      }
-    }
-  }
 
   /**
    * Displays the game.
@@ -176,9 +159,6 @@ public class Scene {
     for (Sprite sprite : sprites) {
       sprite.display(window);
     }
-    if (shootLine != null) {
-      shootLine.display(window);
-    }
 
     // Displays the scoreBar
     scoreBar.display(window);
@@ -190,12 +170,7 @@ public class Scene {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
-
     player.update(window);
-    if (shootLine != null) {
-      shootLine.update(window);
-    }
-
     ArrayList<Bubble> newBubbles = new ArrayList<>();
     ArrayList<Bubble> bubblesToRemove = new ArrayList<>();
 
@@ -211,9 +186,9 @@ public class Scene {
         isImmune = false;
       }
 
-      if (shootLine != null && bubble.collided(shootLine)) {
+      if (player.getPlayersLine() != null && bubble.collided(player.getPlayersLine())) {
         sounds.playPop();
-        shootLine = null;
+        player.setPlayersLine(null);
         bubblesToRemove.add(bubble);
         if (bubble.size > bubble.MIN_SIZE) {
           newBubbles.addAll(bubble.spawnBubbles());
