@@ -236,22 +236,6 @@ public class Scene {
 
         System.out.println("You popped a bubble!");
       }
-
-//      if (shootLine != null && Sprite.collided(shootLine, bubble)) {
-//        sounds.playPop();
-//        shootLine = null;
-//        bubblesToRemove.add(bubble);
-//        if (bubble.size > bubble.MIN_SIZE) {
-//          newBubbles.addAll(bubble.spawnBubbles());
-//        }
-//        //update score
-//        scoreBar.update(window, bubble, true, false );
-//
-//        //save score to database everytime bubble is popped
-//        databaseHelper.put("score", scoreBar.getValue());
-//
-//        System.out.println("You popped a bubble!");
-//      }
     }
 
     if (timer.getRemaining() <= 0 || lives.getLives() <= 0) {
@@ -274,10 +258,8 @@ public class Scene {
       sounds.playWinAudio();
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
       scoreBar.addScore(lives.getLives() * 1000);
+      System.out.println("Final score is: " + scoreBar.getValue()); //for test
       databaseHelper.put("score", scoreBar.getValue());
-      //for test
-      System.out.println("Final score is: " + scoreBar.getValue());
-
       isVictory = true;
     }
   }

@@ -1,6 +1,5 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PImage;
 
@@ -16,11 +15,12 @@ public class GameOver{
   /**
    * Properties
    */
-  private PImage bg;
+  private final PImage bg;
   private PImage replayButton;
-  private PFont myFont;
-  private Button restart;
+  private final PFont myFont;
+  private final Button restart;
   private DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+  private Scene scene;
 
   /**
    * Constructor
@@ -39,8 +39,9 @@ public class GameOver{
    * @param window GameWindow
    */
   public void display(GameWindow window) {
-    window.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
+    GameWindow.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
+
 
   /**
    * Updates the game over page

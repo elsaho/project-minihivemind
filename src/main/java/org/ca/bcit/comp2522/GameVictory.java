@@ -36,7 +36,7 @@ public class GameVictory {
    * @param window as a Game Window
    */
   public void display(GameWindow window) {
-    window.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
+    GameWindow.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
 
   /**
@@ -51,15 +51,4 @@ public class GameVictory {
       window.setup();
     }
   }
-
-  /**
-   * Draws the victory page
-   * @param window as a GameWindow
-   */
-
-  //Commented out for now as it is not being used, consider for deletion
-  //  public void draw(GameWindow window) {
-  //    window.background(bg);
-  //    restart.display(window);
-  //  }
 }

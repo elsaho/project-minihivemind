@@ -16,8 +16,8 @@ public class InstructionStart{
   private Button startGameBtn;
 
   /**
-   * Constructor
-   * @param window GameWindow main window of game
+   * Constructor for InstructionStart
+   * @param window as a GameWindow
    */
   public InstructionStart(GameWindow window) {
     gameStarted = false;
@@ -27,8 +27,8 @@ public class InstructionStart{
   }
 
   /**
-   * Displays the game over page
-   * @param window
+   * Displays the instruction start page
+   * @param window as a GameWindow
    */
   public void display(GameWindow window) {
     window.background(bg);
@@ -36,8 +36,8 @@ public class InstructionStart{
   }
 
   /**
-   * Updates the game over page
-   * @param window
+   * Updates the instruction start page
+   * @param window as a GameWindow
    */
   public void update(GameWindow window) {
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
@@ -47,7 +47,8 @@ public class InstructionStart{
   }
 
   /**
-   * Draws the game over page
+   * Draws the instruction start page
+   * @param window as a GameWindow
    */
   public void draw(GameWindow window) {
     window.background(bg);

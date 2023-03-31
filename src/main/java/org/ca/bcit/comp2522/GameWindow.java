@@ -53,9 +53,7 @@ public class GameWindow extends PApplet {
     //Game sounds
     try {
       audio = new SoundEffects();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    } catch (LineUnavailableException e) {
+    } catch (FileNotFoundException | LineUnavailableException e) {
       throw new RuntimeException(e);
     }
     //Game start and instructions
