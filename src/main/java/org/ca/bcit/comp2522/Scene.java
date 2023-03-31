@@ -139,7 +139,6 @@ public class Scene {
 
     //starts the timer
     timer.setStart(window.millis() + time);
-
   }
 
   /**
@@ -257,6 +256,8 @@ public class Scene {
 
     if (timer.getRemaining() <= 0 || lives.getLives() <= 0) {
       isGameOver = true;
+      databaseHelper.put("score", scoreBar.getValue());
+      System.out.println("Final score is: " + scoreBar.getValue());
     }
 
     bubbles.removeAll(bubblesToRemove);
@@ -273,8 +274,10 @@ public class Scene {
       sounds.playWinAudio();
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
       scoreBar.addScore(lives.getLives() * 1000);
+      databaseHelper.put("score", scoreBar.getValue());
       //for test
       System.out.println("Final score is: " + scoreBar.getValue());
+
       isVictory = true;
     }
   }
