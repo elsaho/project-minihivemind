@@ -39,19 +39,16 @@ public class InputHandler {
   }
 
   public void update(boolean newState) {
-    System.out.println("in update was called");
     switch (window.keyCode) {
       case PConstants.UP:
         isUp = newState;
         break;
 
       case PConstants.LEFT:
-        System.out.println("in update was called");
         isLeft = newState;
         break;
 
       case PConstants.RIGHT:
-        System.out.println("in update was called");
         isRight = newState;
         break;
 
