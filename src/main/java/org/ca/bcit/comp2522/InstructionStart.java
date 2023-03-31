@@ -1,6 +1,5 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 
 /**
@@ -22,7 +21,7 @@ public class InstructionStart{
   public InstructionStart(GameWindow window) {
     gameStarted = false;
     bg = window.loadImage("../assets/SkyInstruction.png");
-    PImage startButtonImg = window.loadImage("../assets/StartButton.png");
+    PImage startButtonImg = window.loadImage("../assets/newStart.png");
     startGameBtn = new Button(100, 323, 600, 206, startButtonImg);
   }
 
@@ -44,14 +43,5 @@ public class InstructionStart{
       System.out.println("Start Game button clicked!");
       gameStarted = true;
     }
-  }
-
-  /**
-   * Draws the instruction start page
-   * @param window as a GameWindow
-   */
-  public void draw(GameWindow window) {
-    window.background(bg);
-    startGameBtn.display(window);
   }
 }
