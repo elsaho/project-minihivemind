@@ -1,6 +1,5 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PImage;
 
@@ -36,7 +35,7 @@ public class GameVictory {
    * @param window as a Game Window
    */
   public void display(GameWindow window) {
-    GameWindow.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
+    Text.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
 
   /**
@@ -44,12 +43,8 @@ public class GameVictory {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
-    if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      System.out.println("Restart button clicked!");
-      Lives lives = Lives.getInstance();
-      lives.setLives(3);
-      ScoreBar.getInstance().resetValue();
-      window.setup();
-    }
+    Button.restartGame(window, restart);
   }
+
+
 }

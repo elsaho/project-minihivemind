@@ -69,14 +69,14 @@ public class Scene {
    * Game state.
    */
   public static boolean isGameOver = false;
-  public boolean isVictory = false;
+  public static boolean isVictory = false;
 
   /**
    * Constructor for objects of class Scene.
    *
    * @param window as a GameWindow
    */
-  public Scene(GameWindow window) {
+  public Scene(GameWindow window) throws LineUnavailableException, FileNotFoundException {
     inputHandler = window.inputHandler;
     sprites = new ArrayList<>();
     player = Player.getInstance(
@@ -88,9 +88,7 @@ public class Scene {
 
     try {
       sounds = new SoundEffects();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    } catch (LineUnavailableException e) {
+    } catch (FileNotFoundException | LineUnavailableException e) {
       throw new RuntimeException(e);
     }
 
@@ -139,12 +137,6 @@ public class Scene {
     //starts the timer
     timer.setStart(window.millis() + time);
   }
-
-  /**
-   * Creates a shootLine to shoot bubbles.
-   *
-   * @param window game window
-   */
 
   /**
    * Displays the game.

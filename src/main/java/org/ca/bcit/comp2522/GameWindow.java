@@ -1,9 +1,6 @@
 package org.ca.bcit.comp2522;
 
 import  processing.core.PApplet;
-import processing.core.PFont;
-import processing.core.PImage;
-
 import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 
@@ -31,8 +28,10 @@ public class GameWindow extends PApplet {
   public static int getY() {
     return y;
   }
+  /** Landing page */
+  private LandingPage landingPage;
   /** Start page, with instructions */
-  InstructionStart instructionStart;
+  private InstructionStart instructionStart;
   /** Game over page */
   private GameOver gameOver;
   /** Game Victory page */
@@ -43,52 +42,6 @@ public class GameWindow extends PApplet {
   /** Settings of game window */
   public void settings() {
     size(x, y);
-  }
-
-  /**
-   * Sets up the game window
-   */
-  public void setup() {
-    //Game sounds
-    try {
-      audio = new SoundEffects();
-    } catch (FileNotFoundException | LineUnavailableException e) {
-      throw new RuntimeException(e);
-    }
-    //Game start and instructions
-    instructionStart = new InstructionStart(this);
-
-    //Game
-    scene = new Scene(this);
-    scene.setup(this);
-    //Game lose
-    gameOver = new GameOver(this);
-    //Game win
-    gameVictory = new GameVictory(this);
-  }
-
-  /**
-   * Draws the game window
-   */
-  public void draw() {
-    if (!InstructionStart.gameStarted) {
-      instructionStart.update(this);
-      instructionStart.display(this);
-      if (!audio.isBGMPlaying()) {
-        audio.playBGM();
-      }
-    } else if (scene.isGameOver) {
-      gameOver.update(this);
-      gameOver.display(this);
-      audio.stopBGM(); //temp fix
-    } else if (scene.isVictory) {
-      gameVictory.update(this);
-      gameVictory.display(this);
-      audio.stopBGM(); //temp fix
-    } else {
-      scene.display(this);
-      scene.update(this);
-    }
   }
 
   public void keyPressed() {
@@ -119,15 +72,63 @@ public class GameWindow extends PApplet {
     return audio;
   }
 
-  public static void EndGameDisplay(GameWindow window, PImage bg, PFont myFont, DatabaseHelper databaseHelper, Button restart) {
-    window.background(bg);
-    window.textFont(myFont);
-    Text highScoreText = new Text("High Score: " + databaseHelper.getHighestScore() + "\n"
-      + "Your Score: " + ScoreBar.getInstance().getValue(), 20, 55, myFont);
-    if (databaseHelper != null) {
-      highScoreText.display(window);
+  /**
+   * Sets up the game window
+   */
+  public void setup() {
+    //Game sounds
+    try {
+      audio = new SoundEffects();
+    } catch (FileNotFoundException | LineUnavailableException e) {
+      throw new RuntimeException(e);
     }
-    restart.display(window);
+    // Landing page
+    landingPage = new LandingPage(this);
+    //Game start and instructions
+    instructionStart = new InstructionStart(this);
+    //Game
+    try {
+      scene = new Scene(this);
+    } catch (LineUnavailableException | FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+    scene.setup(this);
+    //Game lose
+    gameOver = new GameOver(this);
+    //Game win
+    gameVictory = new GameVictory(this);
+  }
+
+  /**
+   * Draws the game window
+   */
+  public void draw() {
+    if (!LandingPage.gameStarted) {
+      landingPage.update(this);
+      landingPage.display(this);
+      if (!audio.isBGMPlaying()) {
+        audio.playBGM();
+      }
+
+//    if (!InstructionStart.gameStarted) {
+//      instructionStart.update(this);
+//      instructionStart.display(this);
+//      if (!audio.isBGMPlaying()) {
+//        audio.playBGM();
+//      }
+    } else if (scene.isGameOver) {
+      gameOver.update(this);
+      gameOver.display(this);
+      audio.stopBGM(); //temp fix
+    } else if (scene.isVictory) {
+      gameVictory.update(this);
+      gameVictory.display(this);
+      audio.stopBGM(); //temp fix
+    } else {
+      scene.display(this);
+      scene.update(this);
+      audio.stopBGM();
+    }
   }
 
   /**

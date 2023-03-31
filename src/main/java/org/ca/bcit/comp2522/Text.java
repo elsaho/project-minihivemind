@@ -2,15 +2,17 @@ package org.ca.bcit.comp2522;
 
 import processing.core.PConstants;
 import processing.core.PFont;
+import processing.core.PImage;
 
 
 /**
- * The main class for the game.
+ * Text wrapper class for all in-game text needs.
  *
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
 public class Text {
+
   private final PFont font;
   private final String text;
   private final float x;
@@ -30,6 +32,27 @@ public class Text {
     this.font = font;
   }
 
+  /** Getter for font stored */
+  public PFont getFont() {
+    return font;
+  }
+
+  /** Getter for text stored position */
+  public String getText() {
+    return text;
+  }
+
+  /** Getter for x position */
+  public float getX() {
+    return x;
+  }
+
+  /** Getter for y position */
+  public float getY() {
+    return y;
+  }
+
+
   /**
    * Displays text in window
    * @param window GameWindow where text is to be displayed.
@@ -39,5 +62,16 @@ public class Text {
     window.textFont(font);
     window.textAlign(PConstants.LEFT);
     window.text(text, x, y);
+  }
+
+  public static void EndGameDisplay(GameWindow window, PImage bg, PFont myFont, DatabaseHelper databaseHelper, Button restart) {
+    window.background(bg);
+    window.textFont(myFont);
+    Text highScoreText = new Text("High Score: " + databaseHelper.getHighestScore() + "\n"
+        + "Your Score: " + ScoreBar.getInstance().getValue(), 20, 55, myFont);
+    if (databaseHelper != null) {
+      highScoreText.display(window);
+    }
+    restart.display(window);
   }
 }

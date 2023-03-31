@@ -39,7 +39,7 @@ public class GameOver{
    * @param window GameWindow
    */
   public void display(GameWindow window) {
-    GameWindow.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
+    Text.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
 
 
@@ -49,12 +49,7 @@ public class GameOver{
    * @param window GameWindow
    */
   public void update(GameWindow window) {
-    if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      System.out.println("Restart button clicked!");
-      Lives lives = Lives.getInstance();
-      lives.setLives(3);
-      window.setup();
-    }
+    Button.restartGame(window, restart);
   }
 
 }
