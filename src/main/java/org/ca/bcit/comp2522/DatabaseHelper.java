@@ -82,7 +82,7 @@ public class DatabaseHelper {
 
   /** Get the highest score from the database
    *
-   * @return
+   * @return int
    */
   public int getHighestScore() {
     if (instance != null) {
