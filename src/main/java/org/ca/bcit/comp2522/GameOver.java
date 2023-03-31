@@ -51,7 +51,7 @@ public class GameOver{
   public void update(GameWindow window) {
     if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Restart button clicked!");
-      window.setup();
+      scene.setup(window);
     }
   }
 

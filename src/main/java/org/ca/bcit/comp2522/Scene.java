@@ -118,7 +118,9 @@ public class Scene {
     this.lives = Lives.getInstance();
 
     //saves the score 0
-    databaseHelper.put("score", 0);
+    if (databaseHelper != null) {
+      databaseHelper.put("score", 0);
+    }
   }
 
   /**
@@ -232,9 +234,10 @@ public class Scene {
         //update score
         scoreBar.update(window, bubble, true, false );
 
-        //save score to database everytime bubble is popped
-        databaseHelper.put("score", scoreBar.getValue());
-
+        if (databaseHelper != null) {
+          //save score to database everytime bubble is popped
+          databaseHelper.put("score", scoreBar.getValue());
+        }
         System.out.println("You popped a bubble!");
       }
     }
