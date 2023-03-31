@@ -1,8 +1,8 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.*;
-
 import processing.core.PVector;
+
+import java.awt.*;
 
 /**
  * Sprite. The base class for all sprites in the game.
@@ -41,6 +41,11 @@ public abstract class Sprite {
     this.window = window;
     this.color = color;
   }
+
+  public Sprite() {
+
+  }
+
 
   /**
    * Gets direction of sprite
@@ -85,10 +90,10 @@ public abstract class Sprite {
 
   /**
    * Updates position of sprite
+   *
+   * @return
    */
-  public void update() {
-    this.position = this.getPosition().add(this.direction.copy().mult(speed));
-  }
+
 
 //  /**
 //   * Checks if a bubble collides with a player.

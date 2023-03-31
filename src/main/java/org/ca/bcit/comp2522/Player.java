@@ -12,6 +12,8 @@ import java.awt.*;
  * @version 2023
  */
 public class Player extends Sprite {
+
+  ShootLine playersLine;
   private final PImage playerLeft;
   private final PImage playerRight;
   private PImage shootLeft;
@@ -40,6 +42,7 @@ public class Player extends Sprite {
     shootRight = window.loadImage("../assets/ShootRight.png");
     isLeft = true;
     this.window = window;
+    playersLine = null;
   }
 
   /** Updates the player's position based on the arrow key pressed by the user.
@@ -47,6 +50,7 @@ public class Player extends Sprite {
    * @param window the GameWindow instance used to update the player's position.
    */
   public void update(final GameWindow window) {
+
 
     if (window.inputHandler.isLeft()) {
       if (position.x < - size/2) {
@@ -66,9 +70,28 @@ public class Player extends Sprite {
     }
 
       if (window.inputHandler.isUp()) {
-        // Shoot a projectile or perform some other action
+        System.out.println("input up right before shoot");
+        makeLine(window);
+        }
       }
+
+  void makeLine(GameWindow window) {
+    System.out.println("right before null");
+    if (playersLine == null) {
+      System.out.println("after *******");
+          playersLine = new ShootLine(
+              new PVector(this.position.x + this.size / 2, this.position.y),
+              this.size, this.speed, window
+          );
+//          sounds.playShoot();
+        }
+
     }
+
+
+
+
+
 
 
   /** Displays the player on the screen.
@@ -88,8 +111,23 @@ public class Player extends Sprite {
     } else if (window.inputHandler.isRight() || !this.isLeft){
       window.image(playerRight, position.x + 42, position.y, 42, 64);
     }
+    if (playersLine != null) {
+      playersLine.update(window);
+      playersLine.display(window);
+      if (playersLine.checkHitCeiling()) {
+        playersLine = null;
+      }
+    }
 
     window.popStyle();
+  }
+
+  public ShootLine getPlayersLine() {
+    return playersLine;
+  }
+
+  public void setPlayersLine(ShootLine playersLine) {
+    this.playersLine = playersLine;
   }
 }
 

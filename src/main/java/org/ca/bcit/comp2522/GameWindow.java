@@ -88,7 +88,6 @@ public class GameWindow extends PApplet {
       audio.stopBGM(); //temp fix
     } else {
       scene.display(this);
-      scene.UpdateLineInstance(this);
       scene.update(this);
     }
   }

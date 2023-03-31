@@ -2,7 +2,6 @@ package org.ca.bcit.comp2522;
 
 import processing.core.PImage;
 import processing.core.PVector;
-import java.awt.*;
 
 /**
  * ShootLine. The class that creates the shootLine that the player can use to catch the bubbles.
@@ -13,24 +12,16 @@ import java.awt.*;
 
 public class ShootLine extends Sprite {
 
-  private PVector velocity;
   protected final float x;
   protected float thickness;
   protected float increments;
   protected final float y;
   private PImage fireball;
 
-  /**
-   * Constructor for ShootLine shot by the player to pop bubbles
-   * @param position as a PVector
-   * @param direction as a PVector
-   * @param size as a float
-   * @param speed as a float
-   * @param color as a Color
-   * @param window as a GameWindow
-   */
-  public ShootLine(PVector position, PVector direction, float size, float speed, Color color, GameWindow window) {
-    super(position, direction, size, speed, color, window);
+  public ShootLine(PVector position, float size, float speed, GameWindow window) {
+    super();
+    this.position = position.copy();
+    this.speed = speed;
     this.x = position.x + size/2;
     this.y = GameWindow.getY();
     this.position.y = GameWindow.getY();
@@ -77,11 +68,13 @@ public class ShootLine extends Sprite {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
-
-    // hard coded for now, should not go above the scorebar
     if(this.position.y > 100 + thickness / 2) {
       this.position.y = this.position.y - speed;
-    } else {Scene.shootLine = null;}
+    }
+  }
+
+  public boolean checkHitCeiling() {
+    return (this.position.y <= 100 + thickness / 2);
   }
 }
 
