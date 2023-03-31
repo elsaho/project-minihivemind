@@ -21,7 +21,7 @@ public class Bubble extends Sprite implements Collidable{
   /**
    * Minimum size of a bubble
    */
-  public static final float MIN_SIZE = 100f;
+  public static final float MIN_SIZE = 25f;
 
   /**
    * Bubble velocity
