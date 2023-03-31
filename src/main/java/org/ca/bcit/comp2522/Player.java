@@ -63,15 +63,12 @@ public class Player extends Sprite {
     }
 
       if (window.inputHandler.isUp()) {
-        System.out.println("input up right before shoot");
         makeLine(window);
         }
       }
 
   void makeLine(GameWindow window) {
-    System.out.println("right before null");
     if (playersLine == null) {
-      System.out.println("after *******");
           playersLine = new ShootLine(
               new PVector(this.position.x + this.size / 2, this.position.y),
               this.size, this.speed, window
