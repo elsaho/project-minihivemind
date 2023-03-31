@@ -76,7 +76,7 @@ public class Button{
       LandingPage.gameStarted = true;
       Scene.isGameOver = false;
       Scene.isVictory = false;
-      window.setup();
+      window.init();
     }
   }
 
