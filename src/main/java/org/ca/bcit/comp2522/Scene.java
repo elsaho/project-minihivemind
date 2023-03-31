@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static processing.core.PConstants.CENTER;
+
 /**
  * Scene class. The class that contains all the sprites in the game.
  * This class is responsible for updating and displaying all the sprites.
@@ -145,8 +147,6 @@ public class Scene {
    */
   public void display(GameWindow window) {
     window.background(bg);
-    window.fill(0);
-    window.rect(0, 0, GameWindow.getX(), 100);
 
     for (Sprite sprite : sprites) {
       sprite.display(window);
