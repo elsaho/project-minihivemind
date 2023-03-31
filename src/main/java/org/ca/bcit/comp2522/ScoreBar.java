@@ -83,18 +83,18 @@ public class ScoreBar {
     myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 18);
 
     //Text for lives
-    Text livesText = new Text("Lives: ", 10, 55, 255, myFont);
+    Text livesText = new Text("Lives: ", 10, 55, myFont);
     livesText.display(window);
     for (int i = 0; i < lives.getLives(); i++) {
       window.image(heart, 120 + (60 * i), 25, 50, 50);
     }
 
     //Text for timer
-    Text timerText = new Text("Time: " + timer.timeToString(), 350, 55, 255, myFont);
+    Text timerText = new Text("Time: " + timer.timeToString(), 350, 55, myFont);
     timerText.display(window);
 
     //Text for score tracker
-    Text scoreText = new Text("Score: " + this.getValue(), 550, 55, 255, myFont);
+    Text scoreText = new Text("Score: " + this.getValue(), 550, 55, myFont);
     scoreText.display(window);
 
 
