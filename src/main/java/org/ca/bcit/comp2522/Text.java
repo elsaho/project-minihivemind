@@ -14,7 +14,6 @@ public class Text {
   private final String text;
   private final float x;
   private final float y;
-  private final int colour = 255;
 
   /**
    * Constructor for Text object.
@@ -35,7 +34,7 @@ public class Text {
    * @param window GameWindow where text is to be displayed.
    */
   public void display (final GameWindow window) {
-    window.fill(colour);
+    window.fill(255);
     window.textFont(font);
     window.textAlign(PConstants.LEFT);
     window.text(text, x, y);
