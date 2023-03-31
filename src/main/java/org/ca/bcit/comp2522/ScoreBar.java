@@ -34,8 +34,6 @@ public class ScoreBar {
   public static ScoreBar getInstance() {
     if (single_instance == null) {
       single_instance = new ScoreBar();
-    } else {
-      single_instance.resetValue();
     }
     return single_instance;
   }

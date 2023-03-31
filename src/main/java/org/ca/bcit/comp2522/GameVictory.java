@@ -48,6 +48,7 @@ public class GameVictory {
       System.out.println("Restart button clicked!");
       Lives lives = Lives.getInstance();
       lives.setLives(3);
+      ScoreBar.getInstance().resetValue();
       window.setup();
     }
   }
