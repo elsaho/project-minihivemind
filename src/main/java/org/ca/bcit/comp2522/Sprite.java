@@ -16,7 +16,7 @@ public abstract class Sprite {
   //Sprite properties
   protected PVector position;
   protected PVector direction;
-  protected float size;
+  protected PVector size;
   protected float speed;
   protected Color color;
   protected GameWindow window;
@@ -33,7 +33,7 @@ public abstract class Sprite {
    * @param window as a GameWindow
    */
   public Sprite(PVector position, PVector direction,
-                float size, float speed, Color color, GameWindow window) {
+                PVector size, float speed, Color color, GameWindow window) {
     this.position = position;
     this.direction = direction;
     this.size = size;
@@ -67,7 +67,7 @@ public abstract class Sprite {
    * Gets size of sprite
    * @return size as a float
    */
-  public float getSize() {
+  public PVector getSize() {
     return size;
   }
 
@@ -96,7 +96,7 @@ public abstract class Sprite {
   public void display(GameWindow window) {
     window.pushStyle();
     window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
-    window.ellipse(this.position.x, this.position.y, size, size);
+    window.ellipse(this.position.x, this.position.y, size.x, size.y);
     window.popStyle();
   }
 

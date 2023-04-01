@@ -108,7 +108,7 @@ public class ScoreBar {
    */
   public void update(GameWindow window, Bubble bubble, boolean popped, boolean isHit) {
     if (popped) {
-      this.addScore((int) (bubble.size * timer.getRemaining() / 10000));
+      this.addScore((int) (bubble.size.x * timer.getRemaining() / 10000));
     }
     if (isHit) {
       lives.loseLife();

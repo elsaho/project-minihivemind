@@ -45,7 +45,7 @@ public class Bubble extends Sprite implements Collidable{
    * @param window - GameWindow instance
    * @param velocity - velocity of the bubble
    */
-  public Bubble(PVector position, PVector direction, float size,
+  public Bubble(PVector position, PVector direction, PVector size,
                 float speed, Color color, GameWindow window, PVector velocity) {
     super(position, direction, size, speed, color, window);
     this.velocity = velocity;
@@ -60,15 +60,15 @@ public class Bubble extends Sprite implements Collidable{
     float bounceVelocity = -6f;
 
     // Check for floor collision
-    if (this.position.y + size / 2 >= GameWindow.getY()) {
-      this.position.y = GameWindow.getY() - size; // Move bubble to just above the floor
+    if (this.position.y + size.y / 2 >= GameWindow.getY()) {
+      this.position.y = GameWindow.getY() - size.y; // Move bubble to just above the floor
       this.velocity.y = bounceVelocity; // Reverse velocity
     } else {
       this.position.y += this.velocity.y; // Move bubble along y-axis
     }
 
     // Check for wall collision
-    if (this.position.x >= GameWindow.getX() - size || this.position.x <= 0) {
+    if (this.position.x >= GameWindow.getX() - size.x || this.position.x <= 0) {
       this.velocity.x = -this.velocity.x;
     }
     velocity.y += GRAVITY;
@@ -81,7 +81,7 @@ public class Bubble extends Sprite implements Collidable{
    */
   public ArrayList<Bubble> spawnBubbles() {
     ArrayList<Bubble> newBubbles = new ArrayList<>();
-    float newSize = size - MIN_SIZE;
+    PVector newSize = new PVector(size.x -MIN_SIZE, size.y - MIN_SIZE);
     PVector newVelocity1 = new PVector(-velocity.x, velocity.y < 0 ? velocity.y : -velocity.y);
     PVector newVelocity2 = new PVector(velocity.x, velocity.y < 0 ? velocity.y : -velocity.y);
     Bubble bubble1 = new Bubble(new PVector(position.x, position.y), new PVector(-1, -1),
@@ -102,7 +102,7 @@ public class Bubble extends Sprite implements Collidable{
   public void display(GameWindow window) {
     window.pushStyle();
     window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
-    window.image(bubbleImage, this.position.x, this.position.y, size, size);
+    window.image(bubbleImage, this.position.x, this.position.y, size.x, size.y);
     window.popStyle();
   }
 
@@ -117,8 +117,8 @@ public class Bubble extends Sprite implements Collidable{
       // Handle collision with player
       float playerX = player.getPosition().x;
       float playerY = player.getPosition().y;
-      float playerWidth = player.getSize();
-      float playerHeight = player.getSize();
+      float playerWidth = player.getSize().x;
+      float playerHeight = player.getSize().y;
 
       // find the closest point on the player to the bubble
       float closestX = clamp(this.getPosition().x, playerX, playerX + playerWidth);
@@ -129,11 +129,11 @@ public class Bubble extends Sprite implements Collidable{
       float distY = this.getPosition().y - closestY;
       float distance = (float) Math.sqrt((distX * distX) + (distY * distY));
 
-      return (distance <= this.getSize() / 2);
+      return (distance <= this.getSize().y / 2);
 
     } else if (o instanceof ShootLine shootLine) {
       PVector lineTemp = new PVector(shootLine.x, shootLine.getPosition().y);
-      float bubbleRadius = this.getSize() / 2;
+      float bubbleRadius = this.getSize().y / 2;
       PVector bubbleTemp = this.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
       if (lineTemp.y < bubbleTemp.y) {
         lineTemp.y = bubbleTemp.y;
@@ -157,8 +157,6 @@ public class Bubble extends Sprite implements Collidable{
       Scene.lastCollisionTime = System.currentTimeMillis();
     } else {
       Scene.sounds.playLoseAudio();
-//      Scene.isGameOver = true;
-      GameWindow.screen = Screen.lose;
     }
   }
 
