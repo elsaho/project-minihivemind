@@ -157,7 +157,6 @@ public class Bubble extends Sprite implements Collidable{
       Scene.lastCollisionTime = System.currentTimeMillis();
     } else {
       Scene.sounds.playLoseAudio();
-//      Scene.isGameOver = true;
     }
   }
 

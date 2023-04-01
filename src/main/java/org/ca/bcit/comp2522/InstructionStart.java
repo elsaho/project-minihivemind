@@ -7,8 +7,6 @@ import processing.core.PImage;
  * @version 2023
  */
 public class InstructionStart{
-  /** If player has seen the instruction screen */
-  public static boolean gameStarted;
   /** Image imports: background */
   private PImage bg;
   /** Start button function button */
@@ -19,7 +17,6 @@ public class InstructionStart{
    * @param window as a GameWindow
    */
   public InstructionStart(GameWindow window) {
-    gameStarted = false;
     bg = window.loadImage("../assets/SkyInstruction.png");
     PImage startButtonImg = window.loadImage("../assets/newStart.png");
     startGameBtn = new Button(100, 323, 600, 206, startButtonImg);
@@ -41,7 +38,7 @@ public class InstructionStart{
   public void update(GameWindow window) {
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Start Game button clicked!");
-      gameStarted = true;
+      GameWindow.screen = Screen.level1;
     }
   }
 }
