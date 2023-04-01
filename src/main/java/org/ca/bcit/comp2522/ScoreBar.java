@@ -3,10 +3,12 @@ package org.ca.bcit.comp2522;
 import processing.core.PFont;
 import processing.core.PImage;
 
+import static processing.core.PConstants.CENTER;
+
 /**
  * ScoreBar. Singleton class that keeps track of the player's score.
  *
- * @author Troy Calaquian
+ * @author Troy Calaquian, Mai Vu, Haurence Li, Tomek Stojek, and Elsa Ho
  * @version 2023
  */
 public class ScoreBar {
@@ -73,7 +75,6 @@ public class ScoreBar {
    * @param window the GameWindow object
    */
   public void display(final GameWindow window) {
-
     heart = window.loadImage("../assets/pixelHeart.png");
     lives = Lives.getInstance();
     timer = Timer.getInstance();
@@ -83,21 +84,19 @@ public class ScoreBar {
     myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 18);
 
     //Text for lives
-    Text livesText = new Text("Lives: ", 10, 55, myFont);
+    Text livesText = new Text("Lives: ", 40, 60, myFont);
     livesText.display(window);
     for (int i = 0; i < lives.getLives(); i++) {
-      window.image(heart, 120 + (60 * i), 25, 50, 50);
+      window.image(heart, 150 + (60 * i), 30, 50, 50);
     }
 
     //Text for timer
-    Text timerText = new Text("Time: " + timer.timeToString(), 350, 55, myFont);
+    Text timerText = new Text("Time: " + timer.timeToString(), 365, 60, myFont);
     timerText.display(window);
 
     //Text for score tracker
-    Text scoreText = new Text("Score: " + this.getValue(), 550, 55, myFont);
+    Text scoreText = new Text("Score: " + this.getValue(), 560, 60, myFont);
     scoreText.display(window);
-
-
   }
 
   /**
@@ -109,7 +108,7 @@ public class ScoreBar {
    */
   public void update(GameWindow window, Bubble bubble, boolean popped, boolean isHit) {
     if (popped) {
-      this.addScore((int) (bubble.size * timer.getRemaining() / 10000));
+      this.addScore((int) (bubble.size.x * timer.getRemaining() / 10000));
     }
     if (isHit) {
       lives.loseLife();

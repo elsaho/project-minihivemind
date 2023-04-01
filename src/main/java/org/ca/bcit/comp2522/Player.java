@@ -33,7 +33,7 @@ public class Player extends Sprite {
    *@param window the GameWindow instance.
    */
 
-  private Player(final PVector position, final PVector direction, final float size,
+  private Player(final PVector position, final PVector direction, final PVector size,
                 final float speed, final Color color, final GameWindow window)  throws LineUnavailableException, FileNotFoundException {
     super(position, direction, size, speed, color, window);
     playerLeft = window.loadImage("../assets/CharLeft.png");
@@ -45,7 +45,7 @@ public class Player extends Sprite {
     playersLine = null;
   }
 
-  public static Player getInstance(final PVector position, final PVector direction, final float size,
+  public static Player getInstance(final PVector position, final PVector direction, final PVector size,
                                    final float speed, final Color color, final GameWindow window) throws LineUnavailableException, FileNotFoundException {
     if (instance == null) {
       instance = new Player(position, direction, size, speed, color, window);
@@ -64,13 +64,14 @@ public class Player extends Sprite {
 
     // Code to prevent player from moving outside of window bounds
     if (moveLeft) {
-      if (position.x < -size/2) {
-        position.x = -size/2;
+      if (position.x < -size.x) {
+        position.x = -size.x;
       }
       position.x -= speed;
     } else if (window.inputHandler.isRight()) {
-      if (position.x > GameWindow.getX() - size - size/2) {
-        position.x = GameWindow.getX() - size - size/2;
+
+      if (position.x > GameWindow.getX() - size.x * 2) {
+        position.x = GameWindow.getX() - size.x * 2;
       }
       position.x += speed;
     }
@@ -83,8 +84,8 @@ public class Player extends Sprite {
   void makeLine(GameWindow window) {
     if (playersLine == null) {
           playersLine = new ShootLine(
-              new PVector(this.position.x + this.size / 2, this.position.y),
-              this.size, this.speed, window
+              new PVector(this.position.x + this.size.x, this.position.y),
+              this.size.x, this.speed, window
           );
           sounds.playShoot();
         }
@@ -103,9 +104,9 @@ public class Player extends Sprite {
 
 
     if (isUp) {
-      window.image(playerFaceLeft ? shootLeft : shootRight, position.x + 42, position.y, 42, 64);
+      window.image(playerFaceLeft ? shootLeft : shootRight, position.x + size.x, position.y, size.x, size.y);
     } else {
-      window.image(playerFaceLeft ? playerLeft : playerRight, position.x + 42, position.y, 42, 64);
+      window.image(playerFaceLeft ? playerLeft : playerRight, position.x + size.x, position.y, size.x, size.y);
     }
     if (playersLine != null) {
       playersLine.update(window);

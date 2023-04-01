@@ -3,7 +3,7 @@ package org.ca.bcit.comp2522;
 
 import processing.core.PImage;
 import processing.core.PVector;
-
+import static processing.core.PConstants.CENTER;
 import javax.sound.sampled.LineUnavailableException;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -25,13 +25,13 @@ public class Scene {
   /**
    * Player constants.
    */
-  private final int playerSize = 64;
+  private final PVector playerSize = new PVector(42, 64);
   private final int playerSpeed = 5;
 
   /**
    * Bubble constants.
    */
-  private final int bubbleStartSize = 100;
+  private final PVector bubbleStartSize = new PVector(100, 100);
   private final int bubbleStartSpeed = 5;
 
   /**
@@ -80,9 +80,9 @@ public class Scene {
     inputHandler = window.inputHandler;
     sprites = new ArrayList<>();
     player = Player.getInstance(
-      new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize),
-      new PVector(0, 1), playerSize, playerSpeed,
-      new Color(0, 255, 255), window
+        new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize.y),
+        new PVector(0, 1), playerSize, playerSpeed,
+        new Color(0, 255, 255), window
     );
 
 
@@ -145,8 +145,6 @@ public class Scene {
    */
   public void display(GameWindow window) {
     window.background(bg);
-    window.fill(0);
-    window.rect(0, 0, GameWindow.getX(), 100);
 
     for (Sprite sprite : sprites) {
       sprite.display(window);
@@ -182,7 +180,7 @@ public class Scene {
         sounds.playPop();
         player.setPlayersLine(null);
         bubblesToRemove.add(bubble);
-        if (bubble.size > bubble.MIN_SIZE) {
+        if (bubble.size.x > bubble.MIN_SIZE) {
           newBubbles.addAll(bubble.spawnBubbles());
         }
         //update score
