@@ -2,13 +2,9 @@ package org.ca.bcit.comp2522;
 
 
 import processing.core.PImage;
-import processing.core.PVector;
-
 import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Scene class. The class that contains all the sprites in the game.
@@ -23,15 +19,8 @@ public class Scene {
    * Player constants.
    */
 
-  private final ArrayList<Player> players = new ArrayList<>();
-  private final PVector playerSize = new PVector(42, 64);
-  private final int playerSpeed = 5;
+  private final ArrayList<Player> players = GameManager.players;
 
-  /**
-   * Bubble constants.
-   */
-  private final PVector bubbleStartSize = new PVector(100, 100);
-  private final int bubbleStartSpeed = 5;
 
   /**
    * Gameplay constants.
@@ -46,16 +35,12 @@ public class Scene {
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
   public static SoundEffects sounds;
   public static ShootLine shootLine;
-  private final Player player;
-
-  private Player player2;
-  private final ArrayList<Sprite> sprites;
-  private final ArrayList<Bubble> bubbles;
-  private Bubble bubble;
+  private ArrayList<Sprite> sprites = GameManager.sprites;
+  private ArrayList<Bubble> bubbles = GameManager.bubbles;
 
   private PImage bg;
 
-  private ArrayList<Sprite> removedSprites;
+  private ArrayList<Sprite> removedSprites = GameManager.removedSprites;
   public static long lastCollisionTime = 0;
   private final int time = 90000;
   public static boolean isImmune = false;
@@ -67,25 +52,8 @@ public class Scene {
 
   /**
    * Constructor for objects of class Scene.
-   *
-   * @param window as a GameWindow
    */
-  public Scene(GameWindow window) throws LineUnavailableException, FileNotFoundException {
-    sprites = new ArrayList<>();
-    player = new Player(
-        new PVector(GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
-        new PVector(0, 1), playerSize, playerSpeed,
-        new Color(0, 255, 255), window, 37, 39, 38, 1);
-    players.add(player);
-
-    if (SelectMultiPlayer.getIs2P()) {
-      player2 = new Player(
-              new PVector(GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
-              new PVector(0, 1), new PVector(56, 69), playerSpeed,
-              new Color(0, 255, 255), window, 65, 68, 87, 2);
-      players.add(player2);
-    }
-
+  public Scene()  {
 
     try {
       sounds = new SoundEffects();
@@ -93,22 +61,6 @@ public class Scene {
       throw new RuntimeException(e);
     }
 
-    bubbles = new ArrayList<>();
-    removedSprites = new ArrayList<>();
-    //generate random position for the bubble to start dropping
-    Random rand = new Random();
-    int bubbleStartX = 700;
-    int bubbleStartY = rand.nextInt(100) + 100;
-
-    bubble = new Bubble(
-        new PVector(bubbleStartX, bubbleStartY),
-        new PVector(1, 1),
-        bubbleStartSize,
-        bubbleStartSpeed,
-        new Color(0, 0, 255), window,
-        new PVector(2, 5)
-    );
-    bubbles.add(bubble);
     this.scoreBar = ScoreBar.getInstance();
     this.timer = Timer.getInstance();
     this.lives = Lives.getInstance();
@@ -122,14 +74,8 @@ public class Scene {
   /**
    * Loads up the game and resets everything.
    */
-  public void setup(GameWindow window) {
-    sprites.add(player);
-
-    if (SelectMultiPlayer.getIs2P()) {
-      sprites.add(player2);
-    }
-
-
+  public void setup(GameWindow window) throws LineUnavailableException, FileNotFoundException {
+    GameManager.level1(window);
     for (Bubble bubble : bubbles) {
       bubble.setup(window);
       sprites.add(bubble);
@@ -190,7 +136,7 @@ public class Scene {
           sounds.playPop();
           player.setPlayersLine(null);
           bubblesToRemove.add(bubble);
-          if (bubble.size.x > bubble.MIN_SIZE) {
+          if (bubble.size.x > Bubble.MIN_SIZE) {
             newBubbles.addAll(bubble.spawnBubbles());
           }
           //update score
@@ -209,7 +155,6 @@ public class Scene {
       if (databaseHelper != null) {
         databaseHelper.put("score", scoreBar.getValue());
       }
-      System.out.println("Final score is: " + scoreBar.getValue());
     }
 
     //Remove bubbles that have been popped, and add new bubbles
@@ -225,7 +170,6 @@ public class Scene {
       sounds.playWinAudio();
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
       scoreBar.addScore(lives.getLives() * 1000);
-      System.out.println("Final score is: " + scoreBar.getValue()); //for test
       if (databaseHelper != null) {
         databaseHelper.put("score", scoreBar.getValue());
       }
@@ -244,15 +188,11 @@ public class Scene {
   }
 
   public Player getPlayer() {
-    return player;
+    return GameManager.player;
   }
 
   public ArrayList<Sprite> getSprites() {
     return sprites;
-  }
-
-  public Bubble getBubble() {
-    return bubble;
   }
 
   public ArrayList<Sprite> getRemovedSprites() {

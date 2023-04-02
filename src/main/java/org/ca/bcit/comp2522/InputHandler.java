@@ -12,7 +12,6 @@ public class InputHandler {
   private boolean isRight;
   private boolean isUp;
   public InputHandler(GameWindow window, int left, int right, int up) {
-    System.out.println("inputhandler object constructor was invoked");
     this.window = window;
     this.isLeft = false;
     this.isRight = false;

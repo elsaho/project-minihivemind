@@ -50,8 +50,6 @@ public class GameWindow extends PApplet {
   }
 
   public void keyPressed() {
-    int code = this.keyCode;
-    System.out.println(code);
     handlers.forEach(e -> {
       e.update(true);
       //other statements
@@ -97,6 +95,9 @@ public class GameWindow extends PApplet {
   }
 
   public void init() {
+
+    GameManager.clear();
+
     //Game sounds
     try {
       audio = new SoundEffects();
@@ -110,12 +111,14 @@ public class GameWindow extends PApplet {
     //Select multiplayer
     selectMultiPlayer = new SelectMultiPlayer(this);
     //Game
+    scene = new Scene();
     try {
-      scene = new Scene(this);
-    } catch (LineUnavailableException | FileNotFoundException e) {
+      scene.setup(this);
+    } catch (LineUnavailableException e) {
+      throw new RuntimeException(e);
+    } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
-    scene.setup(this);
     //Game lose
     gameOver = new GameOver(this);
     //Game win
