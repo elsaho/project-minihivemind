@@ -16,11 +16,9 @@ public class GameOver{
    * Properties
    */
   private final PImage bg;
-  private PImage replayButton;
   private final PFont myFont;
   private final Button restart;
-  private DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
-  private Scene scene;
+  private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
   /**
    * Constructor
@@ -28,7 +26,7 @@ public class GameOver{
    */
   public GameOver(GameWindow window) {
     bg = window.loadImage("../assets/GameOverScreen.png");
-    replayButton = window.loadImage("../assets/TransparentReplay.png");
+    PImage replayButton = window.loadImage("../assets/TransparentReplay.png");
     restart = new Button(100, 340, 600, 206, replayButton);
     myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
   }

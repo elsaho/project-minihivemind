@@ -138,13 +138,12 @@ public class Bubble extends Sprite implements Collidable{
 
   /** This method update the score and lives of the player
    *
-   * @param window - GameWindow instance
    * @param bubble - Bubble instance
    */
-  public void update (GameWindow window, Bubble bubble) {
+  public void update (Bubble bubble) {
     if (Lives.getInstance().getLives() > 0) {
       Scene.sounds.playOof();
-      ScoreBar.getInstance().update(window, bubble, false, true);
+      ScoreBar.getInstance().update(bubble, false, true);
       Scene.isImmune = true;
       Scene.lastCollisionTime = System.currentTimeMillis();
     } else {

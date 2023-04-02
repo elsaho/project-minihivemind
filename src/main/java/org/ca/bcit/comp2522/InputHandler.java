@@ -7,12 +7,11 @@ public class InputHandler {
 
   private final int up;
 
-  protected static GameWindow window;
+//  protected static GameWindow window;
   private boolean isLeft;
   private boolean isRight;
   private boolean isUp;
-  public InputHandler(GameWindow window, int left, int right, int up) {
-    this.window = window;
+  public InputHandler(int left, int right, int up) {
     this.isLeft = false;
     this.isRight = false;
     this.isUp = false;
@@ -33,7 +32,7 @@ public class InputHandler {
     return isUp;
   }
 
-  public void update(boolean newState) {
+  public void update(GameWindow window, boolean newState) {
     if (window.keyCode == up) {
       isUp = newState;
     } else if (window.keyCode == left) {

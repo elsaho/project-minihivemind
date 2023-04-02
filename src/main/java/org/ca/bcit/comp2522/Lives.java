@@ -23,8 +23,6 @@ public class Lives {
   public static Lives getInstance() {
     if (single_instance == null) {
       single_instance = new Lives();
-    } else {
-      single_instance.getLives();
     }
     return single_instance;
   }

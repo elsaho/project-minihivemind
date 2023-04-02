@@ -3,8 +3,6 @@ package org.ca.bcit.comp2522;
 import processing.core.PFont;
 import processing.core.PImage;
 
-import static processing.core.PConstants.CENTER;
-
 /**
  * ScoreBar. Singleton class that keeps track of the player's score.
  *
@@ -15,10 +13,6 @@ public class ScoreBar {
 
   private static ScoreBar single_instance = null;
   private int value;
-
-  private PImage heart;
-
-  private PFont myFont;
 
   private Lives lives;
   private Timer timer;
@@ -75,13 +69,13 @@ public class ScoreBar {
    * @param window the GameWindow object
    */
   public void display(final GameWindow window) {
-    heart = window.loadImage("../assets/pixelHeart.png");
+    PImage heart = window.loadImage("../assets/pixelHeart.png");
     lives = Lives.getInstance();
     timer = Timer.getInstance(window);
     timer.setRemaining(timer.getStart() - window.millis());
 
     //Creates font
-    myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 18);
+    PFont myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 18);
 
     //Text for lives
     Text livesText = new Text("Lives: ", 20, 60, myFont);
@@ -101,12 +95,12 @@ public class ScoreBar {
 
   /**
    * Updates the score bar.
-   * @param window the GameWindow object
+   *
    * @param bubble the Bubble object
    * @param popped whether the bubble has been popped
    * @param isHit whether the bubble has been hit
    */
-  public void update(GameWindow window, Bubble bubble, boolean popped, boolean isHit) {
+  public void update(Bubble bubble, boolean popped, boolean isHit) {
     if (popped) {
       this.addScore((int) (bubble.size.x * timer.getRemaining() / 10000));
     }

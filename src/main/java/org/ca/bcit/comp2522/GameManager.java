@@ -57,19 +57,19 @@ public class GameManager {
     } else {
       if (!SelectMultiPlayer.getIs2P()) {
         player = new Player(
-                new PVector(GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),
+                new PVector((float)GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),
                 new PVector(0, 1), playerSize, playerSpeed,
                 new Color(0, 255, 255), window, 37, 39, 38, 1);
         players.add(player);
       } else {
         player = new Player(
-                new PVector(GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
+                new PVector((float)GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
                 new PVector(0, 1), playerSize, playerSpeed,
                 new Color(0, 255, 255), window, 37, 39, 38, 1);
         players.add(player);
 
         player2 = new Player(
-            new PVector(GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
+            new PVector((float)GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
             new PVector(0, 1), new PVector(56, 69), playerSpeed,
             new Color(0, 255, 255), window, 65, 68, 87, 2);
         players.add(player2);
@@ -91,11 +91,7 @@ public class GameManager {
       bubbles.add(bubble);
 
     }
-
-    for (Bubble b : bubbles) {
-      b.setup(window);
-      sprites.add(b);
-    }
+    sprites.addAll(bubbles);
     sprites.addAll(players);
 
   }

@@ -18,8 +18,7 @@ public class Player extends Sprite {
   private final int right;
   private final int up;
   private final int playerNo;
-  private InputHandler handler;
-  private static Player instance = null;
+  private final InputHandler handler;
   ShootLine playersLine;
   private PImage playerLeft;
   private PImage playerRight;
@@ -58,7 +57,7 @@ public class Player extends Sprite {
                 final float speed, final Color color, final GameWindow window, int left, int right, int up, int playerNo)
           throws LineUnavailableException, FileNotFoundException {
     super(position, direction, size, speed, color, window);
-    handler = new InputHandler(window, left, right, up);
+    handler = new InputHandler(left, right, up);
     window.addInputHandler(handler);
     this.left = left;
     this.right = right;
@@ -83,11 +82,9 @@ public class Player extends Sprite {
   }
 
   /** Updates the player's position based on the arrow key pressed by the user.
-   *
-   * @param window the GameWindow instance used to update the player's position.
    */
-  public void update(final GameWindow window) {
-    setPlayerDirection(window);
+  public void update() {
+    setPlayerDirection();
     boolean moveLeft = handler.isLeft();
 
     // Code to prevent player from moving outside of window bounds
@@ -113,7 +110,7 @@ public class Player extends Sprite {
     if (playersLine == null) {
           playersLine = new ShootLine(
               new PVector(this.position.x + this.size.x, this.position.y),
-              this.size.x, (float) this.speed, window
+              this.size.x, this.speed, window
           );
           sounds.playShoot();
         }
@@ -137,7 +134,7 @@ public class Player extends Sprite {
       window.image(playerFaceLeft ? playerLeft : playerRight, position.x + size.x, position.y, size.x, size.y);
     }
     if (playersLine != null) {
-      playersLine.update(window);
+      playersLine.update();
       playersLine.display(window);
       if (playersLine.checkHitCeiling()) {
         playersLine = null;
@@ -147,11 +144,9 @@ public class Player extends Sprite {
     window.popStyle();
   }
 
-  /** Sets the player's facing direction
-   *
-   * @param window GameWindow instance used to get the user input.
+  /** Sets the player's facing direction.
    */
-  private void setPlayerDirection(final GameWindow window) {
+  private void setPlayerDirection() {
     if (handler.isLeft()) {
       playerFaceLeft = true;
     } else if (handler.isRight()) {

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class GameWindow extends PApplet {
 
   /** Scene class to handle game scenes */
-  private ArrayList<InputHandler> handlers = new ArrayList<>();
+  private final ArrayList<InputHandler> handlers = new ArrayList<>();
   private Scene scene;
   /** Game screen width */
   private static final int x = 800;
@@ -51,17 +51,11 @@ public class GameWindow extends PApplet {
   }
 
   public void keyPressed() {
-    handlers.forEach(e -> {
-      e.update(true);
-      //other statements
-    });
+    handlers.forEach(e -> e.update(this, true));
   }
 
   public void keyReleased() {
-    handlers.forEach(e -> {
-      e.update(false);
-      //other statements
-    });
+    handlers.forEach(e -> e.update(this, false));
   }
 
   public void addInputHandler(InputHandler handler) {
@@ -133,56 +127,50 @@ public class GameWindow extends PApplet {
    */
   public void draw() {
     switch(screen) {
-      case landing:
+      case landing -> {
         landingPage.display(this);
         landingPage.update(this);
         audio.playBGM();
-        break;
-
-      case pause:
+      }
+      case pause -> {
         pause.display(this);
         try {
           pause.update(this);
-        } catch (LineUnavailableException  | FileNotFoundException e) {
+        } catch (LineUnavailableException | FileNotFoundException e) {
           throw new RuntimeException(e);
         }
-        break;
-
-      case playerSelect:
+      }
+      case playerSelect -> {
         selectMultiPlayer.display(this);
         selectMultiPlayer.update(this);
-        break;
-
-      case instruction:
+      }
+      case instruction -> {
         instructionStart.display(this);
         instructionStart.update(this);
         audio.stopBGM();
-        break;
-
-      case win:
+      }
+      case win -> {
         gameVictory.display(this);
         gameVictory.update(this);
         audio.stopBGM(); //temp fix
-        break;
-
-      case lose:
+      }
+      case lose -> {
         gameOver.display(this);
         gameOver.update(this);
         audio.stopBGM(); //temp fix
-        break;
-
-      case level1:
+      }
+      case level1 -> {
         scene.display(this);
         try {
           scene.update(this);
         } catch (LineUnavailableException | FileNotFoundException e) {
           throw new RuntimeException(e);
         }
-        break;
-
-      default:
+      }
+      default -> {
         landingPage.display(this);
         landingPage.update(this);
+      }
     }
   }
 

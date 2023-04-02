@@ -11,21 +11,18 @@ public class Pause {
    * Properties
    */
   private final PImage bg;
-  private final PFont myFont;
 
-  private final PImage playImg;
-  private final PImage homeImg;
   private final Button resume;
   private final Button home;
   private final Text text;
 
   public Pause(GameWindow window) {
     bg = window.loadImage("../assets/SkyBackground.png");
-    playImg = window.loadImage("../assets/playBtn.png");
-    homeImg = window.loadImage("../assets/homeBtn.png");
+    PImage playImg = window.loadImage("../assets/playBtn.png");
+    PImage homeImg = window.loadImage("../assets/homeBtn.png");
     resume = new Button(169, 281, 125, 125, playImg);
     home = new Button(507, 281, 125, 125, homeImg);
-    myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
+    PFont myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
     text = new Text("Game is Paused...", 160, 130, myFont);
   }
 
