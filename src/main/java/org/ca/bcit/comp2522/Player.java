@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
  * @version 2023
  */
 public class Player extends Sprite {
+  private InputHandler handler;
   private static Player instance = null;
   ShootLine playersLine;
   private final PImage playerLeft;
@@ -33,9 +34,11 @@ public class Player extends Sprite {
    *@param window the GameWindow instance.
    */
 
-  private Player(final PVector position, final PVector direction, final PVector size,
-                final float speed, final Color color, final GameWindow window)  throws LineUnavailableException, FileNotFoundException {
+  public Player(final PVector position, final PVector direction, final PVector size,
+                final float speed, final Color color, final GameWindow window, int left, int right, int up)  throws LineUnavailableException, FileNotFoundException {
     super(position, direction, size, speed, color, window);
+    handler = new InputHandler(window, left, right, up);
+    window.addInputHandler(handler);
     playerLeft = window.loadImage("../assets/CharLeft.png");
     playerRight = window.loadImage("../assets/CharRight.png");
     shootLeft = window.loadImage("../assets/ShootLeft.png");
@@ -45,13 +48,13 @@ public class Player extends Sprite {
     playersLine = null;
   }
 
-  public static Player getInstance(final PVector position, final PVector direction, final PVector size,
-                                   final float speed, final Color color, final GameWindow window) throws LineUnavailableException, FileNotFoundException {
-    if (instance == null) {
-      instance = new Player(position, direction, size, speed, color, window);
-    }
-    return instance;
-  }
+//  public static Player getInstance(final PVector position, final PVector direction, final PVector size,
+//                                   final float speed, final Color color, final GameWindow window) throws LineUnavailableException, FileNotFoundException {
+//    if (instance == null) {
+//      instance = new Player(position, direction, size, speed, color, window);
+//    }
+//    return instance;
+//  }
 
 
   /** Updates the player's position based on the arrow key pressed by the user.
@@ -60,7 +63,7 @@ public class Player extends Sprite {
    */
   public void update(final GameWindow window) {
     setPlayerDirection(window);
-    boolean moveLeft = window.inputHandler.isLeft();
+    boolean moveLeft = handler.isLeft();
 
     // Code to prevent player from moving outside of window bounds
     if (moveLeft) {
@@ -68,7 +71,7 @@ public class Player extends Sprite {
         position.x = -size.x;
       }
       position.x -= speed;
-    } else if (window.inputHandler.isRight()) {
+    } else if (handler.isRight()) {
 
       if (position.x > GameWindow.getX() - size.x * 2) {
         position.x = GameWindow.getX() - size.x * 2;
@@ -76,7 +79,7 @@ public class Player extends Sprite {
       position.x += speed;
     }
 
-      if (window.inputHandler.isUp()) {
+      if (handler.isUp()) {
         makeLine(window);
         }
       }
@@ -100,7 +103,7 @@ public class Player extends Sprite {
   public void display(final GameWindow window) {
     window.pushStyle();
     window.fill(color.getRed(), color.getGreen(), color.getBlue());
-    boolean isUp = window.inputHandler.isUp();
+    boolean isUp = handler.isUp();
 
 
     if (isUp) {
@@ -124,9 +127,9 @@ public class Player extends Sprite {
    * @param window GameWindow instance used to get the user input.
    */
   private void setPlayerDirection(final GameWindow window) {
-    if (window.inputHandler.isLeft()) {
+    if (handler.isLeft()) {
       playerFaceLeft = true;
-    } else if (window.inputHandler.isRight()) {
+    } else if (handler.isRight()) {
       playerFaceLeft = false;
     } else {
       //do nothing (this is on purpose!)

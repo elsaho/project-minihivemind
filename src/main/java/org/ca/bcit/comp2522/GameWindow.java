@@ -3,6 +3,7 @@ package org.ca.bcit.comp2522;
 import  processing.core.PApplet;
 import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 /**
  * The main class for the game.
@@ -13,9 +14,9 @@ import java.io.FileNotFoundException;
 public class GameWindow extends PApplet {
 
   /** Scene class to handle game scenes */
+  private ArrayList<InputHandler> handlers = new ArrayList<>();
   private Scene scene;
   /** Game screen width */
-  protected InputHandler inputHandler = new InputHandler(this);
   private static final int x = 800;
   /** Game screen height */
   private static final int y = 600;
@@ -49,11 +50,23 @@ public class GameWindow extends PApplet {
   }
 
   public void keyPressed() {
-    inputHandler.update(true);
+    int code = this.keyCode;
+    System.out.println(code);
+    handlers.forEach(e -> {
+      e.update(true);
+      //other statements
+    });
   }
 
   public void keyReleased() {
-    inputHandler.update(false);
+    handlers.forEach(e -> {
+      e.update(false);
+      //other statements
+    });
+  }
+
+  public void addInputHandler(InputHandler handler) {
+    handlers.add(handler);
   }
 
   public InstructionStart getInstructionStart() {
