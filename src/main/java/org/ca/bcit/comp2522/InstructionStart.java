@@ -8,9 +8,9 @@ import processing.core.PImage;
  */
 public class InstructionStart{
   /** Image imports: background */
-  private PImage bg;
+  private final PImage bg;
   /** Start button function button */
-  private Button startGameBtn;
+  private final Button startGameBtn;
 
   /**
    * Constructor for InstructionStart
@@ -23,7 +23,8 @@ public class InstructionStart{
   }
 
   /**
-   * Displays the instruction start page
+   * Displays the instruction start page.
+   *
    * @param window as a GameWindow
    */
   public void display(GameWindow window) {
@@ -32,7 +33,8 @@ public class InstructionStart{
   }
 
   /**
-   * Updates the instruction start page
+   * Updates the instruction start page.
+   *
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {

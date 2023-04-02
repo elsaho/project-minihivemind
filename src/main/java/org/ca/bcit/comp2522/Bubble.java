@@ -13,25 +13,17 @@ import processing.core.PVector;
  * @version 2023
  */
 public class Bubble extends Sprite implements Collidable{
-  /**
-   * Gravity constant
-   */
+  //Gravity constant
   private static final float GRAVITY = 0.1f;
 
-  /**
-   * Minimum size of a bubble
-   */
+  //Minimum size of a bubble
   public static final float MIN_SIZE = 25f;
 
-  /**
-   * Bubble velocity
-   */
-  public PVector velocity;
-
-  /**
-   * image of bubble
-   */
+  //Bubble image
   private final PImage bubbleImage;
+
+  //Velocity of the bubble
+  public PVector velocity;
 
 
   /**
@@ -85,9 +77,9 @@ public class Bubble extends Sprite implements Collidable{
     PVector newVelocity1 = new PVector(-velocity.x, velocity.y < 0 ? velocity.y : -velocity.y);
     PVector newVelocity2 = new PVector(velocity.x, velocity.y < 0 ? velocity.y : -velocity.y);
     Bubble bubble1 = new Bubble(new PVector(position.x, position.y), new PVector(-1, -1),
-        newSize, (float) speed, color, window, newVelocity1);
+        newSize, speed, color, window, newVelocity1);
     Bubble bubble2 = new Bubble(new PVector(position.x, position.y), new PVector(1, -1),
-        newSize, (float) speed, color, window, newVelocity2);
+        newSize, speed, color, window, newVelocity2);
     newBubbles.add(bubble1);
     newBubbles.add(bubble2);
     return newBubbles;

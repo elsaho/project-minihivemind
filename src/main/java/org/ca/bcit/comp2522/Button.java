@@ -14,11 +14,11 @@ public class Button{
   /**
    * Button properties
    */
-  private int xPos;
-  private int yPos;
-  private int width;
-  private int height;
-  private PImage img;
+  private final int xPos;
+  private final int yPos;
+  private final int width;
+  private final int height;
+  private final PImage img;
 
   /**
    * Makes a button
@@ -74,6 +74,4 @@ public class Button{
       window.init();
     }
   }
-
-
 }

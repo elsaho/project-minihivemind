@@ -13,11 +13,11 @@ public class GameVictory {
   /**
    * Properties
    */
-  private PImage bg;
-  private PImage replayButton;
-  private PFont myFont;
-  private Button restart;
-  private DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+  private final PImage bg;
+  private final PImage replayButton;
+  private final PFont myFont;
+  private final Button restart;
+  private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
   /**
    * Constructs the game victory page
@@ -31,7 +31,8 @@ public class GameVictory {
   }
 
   /**
-   * Displays the victory page
+   * Displays the victory page.
+   *
    * @param window as a Game Window
    */
   public void display(GameWindow window) {
@@ -39,7 +40,8 @@ public class GameVictory {
   }
 
   /**
-   * Updates the victory page
+   * Updates the victory page.
+   *
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {

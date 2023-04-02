@@ -16,12 +16,12 @@ public class SelectMultiPlayer {
    * Properties
    */
   private final PImage bg;
-  private PImage onePlayerImg;
-  private PImage twoPlayerImg;
+  private final PImage onePlayerImg;
+  private final PImage twoPlayerImg;
   private final PFont myFont;
   private final Button onePlayerBtn;
   private final Button twoPlayerBtn;
-  private Text text;
+  private final Text text;
   private static boolean is2P = false;
 
   public SelectMultiPlayer(GameWindow window) {
@@ -60,13 +60,11 @@ public class SelectMultiPlayer {
       window.init();
       System.out.println("1P");
       GameWindow.screen = Screen.level1;
-      // do stuff
     } else if (twoPlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       is2P = true;
       window.init();
       System.out.println("2P");
       GameWindow.screen = Screen.level1;
-      // do stuff
     }
   }
 
