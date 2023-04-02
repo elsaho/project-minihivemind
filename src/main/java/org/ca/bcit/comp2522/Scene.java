@@ -3,14 +3,12 @@ package org.ca.bcit.comp2522;
 
 import processing.core.PImage;
 import processing.core.PVector;
-import static processing.core.PConstants.CENTER;
+
 import javax.sound.sampled.LineUnavailableException;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import static processing.core.PConstants.CENTER;
 
 /**
  * Scene class. The class that contains all the sprites in the game.
@@ -21,12 +19,11 @@ import static processing.core.PConstants.CENTER;
  */
 
 public class Scene {
-
-  InputHandler inputHandler;
-
   /**
    * Player constants.
    */
+
+  private final ArrayList<Player> players = new ArrayList<>();
   private final PVector playerSize = new PVector(42, 64);
   private final int playerSpeed = 5;
 
@@ -50,6 +47,9 @@ public class Scene {
   public static SoundEffects sounds;
   public static ShootLine shootLine;
   private final Player player;
+
+  private Player player2;
+//  private final ArrayList<Player> players;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
   private Bubble bubble;
@@ -79,13 +79,22 @@ public class Scene {
    * @param window as a GameWindow
    */
   public Scene(GameWindow window) throws LineUnavailableException, FileNotFoundException {
-    inputHandler = window.inputHandler;
     sprites = new ArrayList<>();
-    player = Player.getInstance(
-        new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize.y),
+    player = new Player(
+        new PVector(GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
         new PVector(0, 1), playerSize, playerSpeed,
-        new Color(0, 255, 255), window
+        new Color(0, 255, 255), window, 37, 39, 38
     );
+    players.add(player);
+
+    if (SelectMultiPlayer.getIs2P()) {
+      player2 = new Player(
+              new PVector(GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
+              new PVector(0, 1), playerSize, playerSpeed,
+              new Color(0, 255, 255), window, 65, 68, 87
+      );
+      players.add(player2);
+    }
 
 
     try {
@@ -126,6 +135,11 @@ public class Scene {
   public void setup(GameWindow window) {
     sprites.add(player);
 
+    if (SelectMultiPlayer.getIs2P()) {
+      sprites.add(player2);
+    }
+
+
     for (Bubble bubble : bubbles) {
       bubble.setup(window);
       sprites.add(bubble);
@@ -162,35 +176,40 @@ public class Scene {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
-    player.update(window);
+    for(Player player: players) {
+      player.update(window);
+    }
     ArrayList<Bubble> newBubbles = new ArrayList<>();
     ArrayList<Bubble> bubblesToRemove = new ArrayList<>();
 
     for (Bubble bubble : bubbles) {
       bubble.bounce();
       bubble.display(window);
-      if (bubble.collided(player) && !isImmune) {
-        bubble.update(window, bubble);
-      }
 
-      // Check if the player's immunity has expired
-      if (isImmune && System.currentTimeMillis() - lastCollisionTime > 1500) {
-        isImmune = false;
-      }
-
-      if (player.getPlayersLine() != null && bubble.collided(player.getPlayersLine())) {
-        sounds.playPop();
-        player.setPlayersLine(null);
-        bubblesToRemove.add(bubble);
-        if (bubble.size.x > bubble.MIN_SIZE) {
-          newBubbles.addAll(bubble.spawnBubbles());
+      for (Player player : players) {
+        if (bubble.collided(player) && !isImmune) {
+          bubble.update(window, bubble);
         }
-        //update score
-        scoreBar.update(window, bubble, true, false );
 
-        if (databaseHelper != null) {
-          //save score to database everytime bubble is popped
-          databaseHelper.put("score", scoreBar.getValue());
+        // Check if the player's immunity has expired
+        if (isImmune && System.currentTimeMillis() - lastCollisionTime > 1500) {
+          isImmune = false;
+        }
+
+        if (player.getPlayersLine() != null && bubble.collided(player.getPlayersLine())) {
+          sounds.playPop();
+          player.setPlayersLine(null);
+          bubblesToRemove.add(bubble);
+          if (bubble.size.x > bubble.MIN_SIZE) {
+            newBubbles.addAll(bubble.spawnBubbles());
+          }
+          //update score
+          scoreBar.update(window, bubble, true, false);
+
+          if (databaseHelper != null) {
+            //save score to database everytime bubble is popped
+            databaseHelper.put("score", scoreBar.getValue());
+          }
         }
       }
     }
@@ -225,9 +244,6 @@ public class Scene {
   }
 
   /** Methods for testing purposes. */
-  public InputHandler getInputHandler() {
-    return inputHandler;
-  }
 
   public SoundEffects getSounds() {
     return sounds;
