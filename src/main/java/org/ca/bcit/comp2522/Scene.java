@@ -49,7 +49,6 @@ public class Scene {
   private final Player player;
 
   private Player player2;
-//  private final ArrayList<Player> players;
   private final ArrayList<Sprite> sprites;
   private final ArrayList<Bubble> bubbles;
   private Bubble bubble;
@@ -65,13 +64,6 @@ public class Scene {
    * Scorebar.
    */
   private ScoreBar scoreBar;
-
-
-  /**
-   * Game state.
-   */
-//  public static boolean isGameOver = false;
-//  public static boolean isVictory = false;
 
   /**
    * Constructor for objects of class Scene.
