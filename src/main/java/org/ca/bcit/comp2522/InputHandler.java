@@ -1,31 +1,27 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PConstants;
-
 public class InputHandler {
+  private final int left;
 
-  public static InputHandler inputHandler;
+  private final int right;
+
+  private final int up;
 
   protected static GameWindow window;
   private boolean isLeft;
   private boolean isRight;
   private boolean isUp;
-
-  public InputHandler(GameWindow window) {
+  public InputHandler(GameWindow window, int left, int right, int up) {
     System.out.println("inputhandler object constructor was invoked");
     this.window = window;
     this.isLeft = false;
     this.isRight = false;
     this.isUp = false;
+    this.left = left;
+    this.right = right;
+    this.up = up;
   }
 
-  public static InputHandler GetInputHandlerInstance() {
-    System.out.println("getInputinstance was called");
-    if (inputHandler == null) {
-      inputHandler = new InputHandler(window);
-    }
-    return inputHandler;
-  }
   public boolean isLeft() {
     return isLeft;
   }
@@ -39,24 +35,13 @@ public class InputHandler {
   }
 
   public void update(boolean newState) {
-    switch (window.keyCode) {
-      case PConstants.UP:
-        isUp = newState;
-        break;
-
-      case PConstants.LEFT:
-        isLeft = newState;
-        break;
-
-      case PConstants.RIGHT:
-        isRight = newState;
-        break;
-
-      default: break;
-
+    if (window.keyCode == up) {
+      isUp = newState;
+    } else if (window.keyCode == left) {
+      isLeft = newState;
+    } else if (window.keyCode == right) {
+      isRight = newState;
     }
-
-
+  }
   }
 
-}
