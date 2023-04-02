@@ -147,6 +147,7 @@ public class GameWindow extends PApplet {
           throw new RuntimeException(e);
         }
         break;
+
       case playerSelect:
         selectMultiPlayer.display(this);
         selectMultiPlayer.update(this);

@@ -1,3 +1,4 @@
+![My Image](assets/TitleCropped.png)
 # Bubble Trouble
 
 *We are the bane of bubbles!*
@@ -7,7 +8,8 @@ Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
 ## Instructions
 
 1. Run GameWindow.java
-2. Pop all the bubbles! Use the up arrow to shoot the bubbles and the L/R keys to avoid getting hit
+2. Select 1p or 2p
+3. Pop all the bubbles! Use the up/W key to shoot the bubbles and the L+R/A+D keys to avoid getting hit
 
 ## Contributions
 
