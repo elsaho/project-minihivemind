@@ -81,18 +81,20 @@ public class Scene {
   public Scene(GameWindow window) throws LineUnavailableException, FileNotFoundException {
     sprites = new ArrayList<>();
     player = new Player(
-        new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize.y),
+        new PVector(GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
         new PVector(0, 1), playerSize, playerSpeed,
         new Color(0, 255, 255), window, 37, 39, 38
     );
     players.add(player);
 
-    player2 = new Player(
-        new PVector(GameWindow.getX() / 2, GameWindow.getY() - playerSize.y),
-        new PVector(0, 1), playerSize, playerSpeed,
-        new Color(0, 255, 255), window, 65, 68, 87
-    );
-    players.add(player2);
+    if (SelectMultiPlayer.getIs2P()) {
+      player2 = new Player(
+              new PVector(GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
+              new PVector(0, 1), playerSize, playerSpeed,
+              new Color(0, 255, 255), window, 65, 68, 87
+      );
+      players.add(player2);
+    }
 
 
     try {
@@ -132,7 +134,11 @@ public class Scene {
    */
   public void setup(GameWindow window) {
     sprites.add(player);
-    sprites.add(player2);
+
+    if (SelectMultiPlayer.getIs2P()) {
+      sprites.add(player2);
+    }
+
 
     for (Bubble bubble : bubbles) {
       bubble.setup(window);
@@ -179,28 +185,31 @@ public class Scene {
     for (Bubble bubble : bubbles) {
       bubble.bounce();
       bubble.display(window);
-      if (bubble.collided(player) && !isImmune) {
-        bubble.update(window, bubble);
-      }
 
-      // Check if the player's immunity has expired
-      if (isImmune && System.currentTimeMillis() - lastCollisionTime > 1500) {
-        isImmune = false;
-      }
-
-      if (player.getPlayersLine() != null && bubble.collided(player.getPlayersLine())) {
-        sounds.playPop();
-        player.setPlayersLine(null);
-        bubblesToRemove.add(bubble);
-        if (bubble.size.x > bubble.MIN_SIZE) {
-          newBubbles.addAll(bubble.spawnBubbles());
+      for (Player player : players) {
+        if (bubble.collided(player) && !isImmune) {
+          bubble.update(window, bubble);
         }
-        //update score
-        scoreBar.update(window, bubble, true, false );
 
-        if (databaseHelper != null) {
-          //save score to database everytime bubble is popped
-          databaseHelper.put("score", scoreBar.getValue());
+        // Check if the player's immunity has expired
+        if (isImmune && System.currentTimeMillis() - lastCollisionTime > 1500) {
+          isImmune = false;
+        }
+
+        if (player.getPlayersLine() != null && bubble.collided(player.getPlayersLine())) {
+          sounds.playPop();
+          player.setPlayersLine(null);
+          bubblesToRemove.add(bubble);
+          if (bubble.size.x > bubble.MIN_SIZE) {
+            newBubbles.addAll(bubble.spawnBubbles());
+          }
+          //update score
+          scoreBar.update(window, bubble, true, false);
+
+          if (databaseHelper != null) {
+            //save score to database everytime bubble is popped
+            databaseHelper.put("score", scoreBar.getValue());
+          }
         }
       }
     }
