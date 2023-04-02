@@ -80,8 +80,8 @@ public class Scene {
    */
   public void setup(GameWindow window) throws LineUnavailableException, FileNotFoundException {
 
-    PImage pauseImage = window.loadImage("../assets/pause.png");
-    pause = new Button(760, 10, 30, 30, pauseImage);
+    PImage pauseImage = window.loadImage("../assets/pauseBtn.png");
+    pause = new Button(760, 30, 30, 30, pauseImage);
 
     GameManager.level1(window);
     /* If you want to change the image,

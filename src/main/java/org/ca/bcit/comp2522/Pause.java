@@ -22,11 +22,11 @@ public class Pause {
   public Pause(GameWindow window) {
     bg = window.loadImage("../assets/SkyBackground.png");
     playImg = window.loadImage("../assets/playBtn.png");
-    homeImg = window.loadImage("../assets/home.png");
+    homeImg = window.loadImage("../assets/homeBtn.png");
     resume = new Button(169, 281, 125, 125, playImg);
     home = new Button(507, 281, 125, 125, homeImg);
     myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
-    text = new Text("Pause", 260, 120, myFont);
+    text = new Text("Game is Paused...", 160, 130, myFont);
   }
 
 //  public static boolean getIs2P() {
