@@ -37,7 +37,6 @@ public class InstructionStart{
    */
   public void update(GameWindow window) {
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      System.out.println("Start Game button clicked!");
       GameWindow.screen = Screen.level1;
     }
   }

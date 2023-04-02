@@ -55,11 +55,9 @@ public class SelectMultiPlayer {
    */
   public void update(GameWindow window) {
     if (onePlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      System.out.println("One player button was clicked!");
       is2P = false;
       // do stuff
     } else if (twoPlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      System.out.println("Two player button was clicked!");
       is2P = true;
       // do stuff
     }

@@ -112,7 +112,6 @@ public class ScoreBar {
     }
     if (isHit) {
       lives.loseLife();
-      System.out.println("Lives: " + lives.getLives());
     }
   }
 }

@@ -69,7 +69,6 @@ public class Button{
    */
   public static void restartGame(GameWindow window, Button restart) {
     if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      System.out.println("Restart button clicked!");
       Lives lives = Lives.getInstance();
       lives.setLives(3);
       ScoreBar.getInstance().resetValue();
