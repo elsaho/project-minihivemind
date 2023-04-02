@@ -37,7 +37,8 @@ public class InstructionStart{
    */
   public void update(GameWindow window) {
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      GameWindow.screen = Screen.level1;
+      System.out.println("Select player button clicked!");
+      GameWindow.screen = Screen.playerSelect;
     }
   }
 }

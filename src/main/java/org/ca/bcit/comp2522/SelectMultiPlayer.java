@@ -22,7 +22,7 @@ public class SelectMultiPlayer {
   private final Button onePlayerBtn;
   private final Button twoPlayerBtn;
   private Text text;
-  private static boolean is2P = true;
+  private static boolean is2P = false;
 
   public SelectMultiPlayer(GameWindow window) {
     bg = window.loadImage("../assets/SkyBackground.png");
@@ -31,7 +31,7 @@ public class SelectMultiPlayer {
     onePlayerBtn = new Button(169, 381, 125, 125, onePlayerImg);
     twoPlayerBtn = new Button(507, 381, 125, 125, twoPlayerImg);
     myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
-    text = new Text("1p or 2p?", 100, 100, myFont);
+    text = new Text("1p or 2p?", 260, 120, myFont);
   }
 
   public static boolean getIs2P() {
@@ -56,9 +56,15 @@ public class SelectMultiPlayer {
   public void update(GameWindow window) {
     if (onePlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       is2P = false;
+      System.out.println("One player button was clicked!" + is2P);
+      window.init();
+      GameWindow.screen = Screen.level1;
       // do stuff
     } else if (twoPlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       is2P = true;
+      System.out.println("Two player button was clicked!" + is2P);
+      window.init();
+      GameWindow.screen = Screen.level1;
       // do stuff
     }
   }

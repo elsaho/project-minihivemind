@@ -32,7 +32,7 @@ public class LandingPage {
    */
   public void update(GameWindow window) {
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      GameWindow.screen = Screen.level1;
+      GameWindow.screen = Screen.playerSelect;
       window.init();
     } else if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.instruction;
