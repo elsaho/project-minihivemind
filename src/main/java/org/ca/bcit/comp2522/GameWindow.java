@@ -36,6 +36,7 @@ public class GameWindow extends PApplet {
   private LandingPage landingPage;
   /** Start page, with instructions */
   private InstructionStart instructionStart;
+  private SelectMultiPlayer selectMultiPlayer;
   /** Game over page */
   private GameOver gameOver;
   /** Game Victory page */
@@ -106,6 +107,8 @@ public class GameWindow extends PApplet {
     landingPage = new LandingPage(this);
     //Game start and instructions
     instructionStart = new InstructionStart(this);
+    //Select multiplayer
+    selectMultiPlayer = new SelectMultiPlayer(this);
     //Game
     try {
       scene = new Scene(this);
@@ -135,6 +138,11 @@ public class GameWindow extends PApplet {
       case instruction:
         instructionStart.update(this);
         instructionStart.display(this);
+        break;
+
+      case playerSelect:
+        selectMultiPlayer.update(this);
+        selectMultiPlayer.display(this);
         break;
 
       case win:
