@@ -67,7 +67,7 @@ public class Text {
   public static void EndGameDisplay(GameWindow window, PImage bg, PFont myFont, DatabaseHelper databaseHelper, Button restart) {
     window.background(bg);
     window.textFont(myFont);
-    Text highScoreText = new Text("High Score: " + databaseHelper.getHighestScore() + "\n"
+    Text highScoreText = new Text("High Score: " + databaseHelper.getHighestScore("scores", "score", Integer.class) + "\n"
         + "Your Score: " + ScoreBar.getInstance().getValue(), 20, 55, myFont);
     if (databaseHelper != null) {
       highScoreText.display(window);

@@ -14,6 +14,10 @@ import java.io.FileNotFoundException;
  * @version 2023
  */
 public class Player extends Sprite {
+  private final int left;
+  private final int right;
+  private final int up;
+  private final int playerNo;
   private InputHandler handler;
   private static Player instance = null;
   ShootLine playersLine;
@@ -23,6 +27,22 @@ public class Player extends Sprite {
   private PImage shootRight;
   private boolean playerFaceLeft;
   private final SoundEffects sounds = new SoundEffects();
+
+  public int getLeft() {
+    return left;
+  }
+
+  public int getRight() {
+    return right;
+  }
+
+  public int getUp() {
+    return up;
+  }
+
+  public int getPlayerNo() {
+    return playerNo;
+  }
 
   /** Constructor for Player class.
    *
@@ -35,13 +55,17 @@ public class Player extends Sprite {
    */
 
   public Player(final PVector position, final PVector direction, final PVector size,
-                final float speed, final Color color, final GameWindow window, int left, int right, int up, int player)
+                final float speed, final Color color, final GameWindow window, int left, int right, int up, int playerNo)
           throws LineUnavailableException, FileNotFoundException {
     super(position, direction, size, speed, color, window);
     handler = new InputHandler(window, left, right, up);
     window.addInputHandler(handler);
+    this.left = left;
+    this.right = right;
+    this.up = up;
+    this.playerNo = playerNo;
 
-    if (player == 1) {
+    if (playerNo == 1) {
       playerLeft = window.loadImage("../assets/CharLeft.png");
       playerRight = window.loadImage("../assets/CharRight.png");
       shootLeft = window.loadImage("../assets/ShootLeft.png");
@@ -89,7 +113,7 @@ public class Player extends Sprite {
     if (playersLine == null) {
           playersLine = new ShootLine(
               new PVector(this.position.x + this.size.x, this.position.y),
-              this.size.x, this.speed, window
+              this.size.x, (float) this.speed, window
           );
           sounds.playShoot();
         }

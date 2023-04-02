@@ -15,12 +15,11 @@ import java.util.ArrayList;
  */
 
 public class Scene {
+
   /**
    * Player constants.
    */
-
-  private final ArrayList<Player> players = GameManager.players;
-
+  private static ArrayList<Player> players = GameManager.players;
 
   /**
    * Gameplay constants.
@@ -35,8 +34,8 @@ public class Scene {
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
   public static SoundEffects sounds;
   public static ShootLine shootLine;
-  private ArrayList<Sprite> sprites = GameManager.sprites;
-  private ArrayList<Bubble> bubbles = GameManager.bubbles;
+  private static ArrayList<Sprite> sprites = GameManager.sprites;
+  private static ArrayList<Bubble> bubbles = GameManager.bubbles;
 
   private PImage bg;
 
@@ -45,10 +44,16 @@ public class Scene {
   private final int time = 90000;
   public static boolean isImmune = false;
 
+  public static Button pause;
+//  private LandingPage landingPage;
+
+//  private Pause pauseScreen;
+
   /**
    * Scorebar.
    */
   private ScoreBar scoreBar;
+  public static boolean isPaused = false;
 
   /**
    * Constructor for objects of class Scene.
@@ -62,7 +67,6 @@ public class Scene {
     }
 
     this.scoreBar = ScoreBar.getInstance();
-    this.timer = Timer.getInstance();
     this.lives = Lives.getInstance();
 
     //saves the score 0
@@ -75,19 +79,18 @@ public class Scene {
    * Loads up the game and resets everything.
    */
   public void setup(GameWindow window) throws LineUnavailableException, FileNotFoundException {
-    GameManager.level1(window);
-    for (Bubble bubble : bubbles) {
-      bubble.setup(window);
-      sprites.add(bubble);
-    }
 
+    PImage pauseImage = window.loadImage("../assets/pause.png");
+    pause = new Button(760, 10, 30, 30, pauseImage);
+
+    GameManager.level1(window);
     /* If you want to change the image,
      * you must make the image the exact size of the window (800 x 600)
      */
     bg = window.loadImage("../assets/SkyBackground.png");
 
     //starts the timer
-    timer.setStart(window.millis() + time);
+    this.timer = Timer.getInstance(window);
   }
 
   /**
@@ -97,6 +100,8 @@ public class Scene {
    */
   public void display(GameWindow window) {
     window.background(bg);
+
+    pause.display(window);
 
     for (Sprite sprite : sprites) {
       sprite.display(window);
@@ -111,7 +116,9 @@ public class Scene {
    *
    * @param window as a GameWindow
    */
-  public void update(GameWindow window) {
+  public void update(GameWindow window) throws LineUnavailableException, FileNotFoundException {
+    GameManager.pause(window);
+
     for(Player player: players) {
       player.update(window);
     }
