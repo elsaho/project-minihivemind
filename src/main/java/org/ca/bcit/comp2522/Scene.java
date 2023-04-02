@@ -83,16 +83,14 @@ public class Scene {
     player = new Player(
         new PVector(GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
         new PVector(0, 1), playerSize, playerSpeed,
-        new Color(0, 255, 255), window, 37, 39, 38
-    );
+        new Color(0, 255, 255), window, 37, 39, 38, 1);
     players.add(player);
 
     if (SelectMultiPlayer.getIs2P()) {
       player2 = new Player(
               new PVector(GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
-              new PVector(0, 1), playerSize, playerSpeed,
-              new Color(0, 255, 255), window, 65, 68, 87
-      );
+              new PVector(0, 1), new PVector(56, 69), playerSpeed,
+              new Color(0, 255, 255), window, 65, 68, 87, 2);
       players.add(player2);
     }
 
