@@ -17,10 +17,10 @@ public class Player extends Sprite {
   private InputHandler handler;
   private static Player instance = null;
   ShootLine playersLine;
-  private final PImage playerLeft;
-  private final PImage playerRight;
-  private final PImage shootLeft;
-  private final PImage shootRight;
+  private PImage playerLeft;
+  private PImage playerRight;
+  private PImage shootLeft;
+  private PImage shootRight;
   private boolean playerFaceLeft;
   private final SoundEffects sounds = new SoundEffects();
 
@@ -35,14 +35,24 @@ public class Player extends Sprite {
    */
 
   public Player(final PVector position, final PVector direction, final PVector size,
-                final float speed, final Color color, final GameWindow window, int left, int right, int up)  throws LineUnavailableException, FileNotFoundException {
+                final float speed, final Color color, final GameWindow window, int left, int right, int up, int player)
+          throws LineUnavailableException, FileNotFoundException {
     super(position, direction, size, speed, color, window);
     handler = new InputHandler(window, left, right, up);
     window.addInputHandler(handler);
-    playerLeft = window.loadImage("../assets/CharLeft.png");
-    playerRight = window.loadImage("../assets/CharRight.png");
-    shootLeft = window.loadImage("../assets/ShootLeft.png");
-    shootRight = window.loadImage("../assets/ShootRight.png");
+
+    if (player == 1) {
+      playerLeft = window.loadImage("../assets/CharLeft.png");
+      playerRight = window.loadImage("../assets/CharRight.png");
+      shootLeft = window.loadImage("../assets/ShootLeft.png");
+      shootRight = window.loadImage("../assets/ShootRight.png");
+    } else {
+      playerLeft = window.loadImage("../assets/P2Left.png");
+      playerRight = window.loadImage("../assets/P2Right.png");
+      shootLeft = window.loadImage("../assets/P2ShootLeft.png");
+      shootRight = window.loadImage("../assets/P2ShootRight.png");
+    }
+
     playerFaceLeft = true;
     this.window = window;
     playersLine = null;
@@ -134,6 +144,22 @@ public class Player extends Sprite {
 
   public void setPlayersLine(ShootLine playersLine) {
     this.playersLine = playersLine;
+  }
+
+  public void setPlayerLeft(PImage i) {
+    playerLeft = i;
+  }
+
+  public void setPlayerRight(PImage i) {
+    playerRight = i;
+  }
+
+  public void setShootLeft(PImage i) {
+    shootLeft = i;
+  }
+
+  public void setShootRight(PImage i) {
+    shootRight = i;
   }
 }
 
