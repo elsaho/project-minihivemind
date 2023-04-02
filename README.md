@@ -1,4 +1,4 @@
-![My Image](assets/Title.png)
+![My Image](assets/TitleCropped.png)
 # Bubble Trouble
 
 *We are the bane of bubbles!*
