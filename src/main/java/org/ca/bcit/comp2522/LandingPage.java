@@ -32,8 +32,8 @@ public class LandingPage {
    */
   public void update(GameWindow window) {
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      System.out.println("Start Game button clicked!");
-      GameWindow.screen = Screen.level1;
+      System.out.println("Player select button clicked!");
+      GameWindow.screen = Screen.playerSelect;
       window.init();
     } else if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       System.out.println("Instruct button clicked!");
