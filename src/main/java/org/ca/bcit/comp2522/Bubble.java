@@ -49,7 +49,7 @@ public class Bubble extends Sprite implements Collidable {
    */
   public void bounce() {
     // set bounce velocity, change to static final if we don't want to have diff bounce velocity
-    float bounceVelocity = -6f;
+    float bounceVelocity = -2.7f - (this.size.y / MIN_SIZE);
 
     // Check for floor collision
     if (this.position.y + size.y / 2 >= GameWindow.getY()) {
