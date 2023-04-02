@@ -8,11 +8,11 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.bson.Document;
+import processing.core.PVector;
 
 /**
  * A helper class for connecting to MongoDB.
@@ -56,7 +56,8 @@ public class DatabaseHelper {
   public static DatabaseHelper getInstance() {
     if (instance == null) {
       try {
-        instance = new DatabaseHelper("mongodb+srv://Bubble:comp2522@2522.w2dd0ev.mongodb.net/?retryWrites=true&w=majority");
+        instance = new DatabaseHelper("mongodb+srv://Bubble:comp2522@2522"
+            + ".w2dd0ev.mongodb.net/?retryWrites=true&w=majority");
       } catch (Exception e) {
         System.out.println("Unable to connect to MongoDB: " + e.getMessage());
       }
@@ -80,14 +81,17 @@ public class DatabaseHelper {
   }
 
 
-  /** Get the highest score from the database
+  /** Get the highest score from the database.
    *
-   * @return int
+   * @return int highest score
    */
   public <T> T getHighestScore(String collectionName, String fieldName, Class<T> clazz) {
     if (instance != null) {
+      //get Collection
       MongoCollection<Document> scoresCollection = database.getCollection(collectionName);
-      Document highestScoreDocument = scoresCollection.find().sort(new Document(fieldName, -1)).limit(1).first();
+      //get highest score
+      Document highestScoreDocument = scoresCollection.find()
+          .sort(new Document(fieldName, -1)).limit(1).first();
       if (highestScoreDocument != null) {
         return highestScoreDocument.get(fieldName, clazz);
       }
@@ -95,6 +99,10 @@ public class DatabaseHelper {
     return null;
   }
 
+  /** Save current game data to the database.
+   *
+   * @param window GameWindow
+   */
   public void saveGame(GameWindow window) {
     if (instance != null) {
       Document document = new Document();
@@ -116,7 +124,7 @@ public class DatabaseHelper {
 
       // Save the player
       ArrayList<Document> playerDocuments = new ArrayList<>();
-      for (Player player: GameManager.players) {
+      for (Player player : GameManager.players) {
         Document playerDoc = new Document()
             .append("position.x", player.getPosition().x)
             .append("position.y", player.getPosition().y)
@@ -135,7 +143,7 @@ public class DatabaseHelper {
 
       // Save the bubbles
       ArrayList<Document> bubbleDocuments = new ArrayList<>();
-      for (Bubble bubble: GameManager.bubbles) {
+      for (Bubble bubble : GameManager.bubbles) {
         Document bubbleDoc = new Document()
             .append("position.x", bubble.getPosition().x)
             .append("position.y", bubble.getPosition().y)
@@ -155,6 +163,11 @@ public class DatabaseHelper {
     }
   }
 
+  /**Load the game state from the database.
+   *
+   * @param players current players
+   * @param bubbles current bubbles
+   */
   public void loadGame(ArrayList<Player> players, ArrayList<Bubble> bubbles) {
     if (instance != null) {
       // Query the collection for the latest saved game state
@@ -175,7 +188,7 @@ public class DatabaseHelper {
 
         // Load the players
         List<Document> playerDocuments = savedGameState.getList("players", Document.class);
-        for (int i = playerDocuments.size() - 1; i >=0; i--) {
+        for (int i = playerDocuments.size() - 1; i >= 0; i--) {
           Document playerDoc = playerDocuments.get(i);
           Player player = players.get(i);
           player.position.x = playerDoc.getDouble("position.x").floatValue();

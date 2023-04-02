@@ -1,14 +1,15 @@
 package org.ca.bcit.comp2522;
 
+import java.io.FileNotFoundException;
+import javax.sound.sampled.LineUnavailableException;
 import processing.core.PFont;
 import processing.core.PImage;
 
-import javax.sound.sampled.LineUnavailableException;
-import java.io.FileNotFoundException;
-
+/** Pause class. The class that manages the pause screen.
+ */
 public class Pause {
   /**
-   * Properties
+   * Properties.
    */
   private final PImage bg;
 
@@ -16,6 +17,10 @@ public class Pause {
   private final Button home;
   private final Text text;
 
+  /** Constructor for Pause.
+   *
+   * @param window as a GameWindow
+   */
   public Pause(GameWindow window) {
     bg = window.loadImage("../assets/SkyBackground.png");
     PImage playImg = window.loadImage("../assets/playBtn.png");

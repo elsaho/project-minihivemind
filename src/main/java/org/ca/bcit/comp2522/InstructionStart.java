@@ -3,28 +3,29 @@ package org.ca.bcit.comp2522;
 import processing.core.PFont;
 import processing.core.PImage;
 
-/**
+/** Manages instruction start screen.
+ *
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class InstructionStart{
-  /** Image imports: background */
+public class InstructionStart {
+  /** Image imports: background. */
   private final PImage bg;
-  /** Start button function button */
+  /** Start button function button. */
   private final Button startGameBtn;
-  private final PFont myFont;
   private final Text text;
 
 
   /**
-   * Constructor for InstructionStart
+   * Constructor for InstructionStart.
+   *
    * @param window as a GameWindow
    */
   public InstructionStart(GameWindow window) {
     bg = window.loadImage("../assets/newInstruct.png");
     PImage startButtonImg = window.loadImage("../assets/newStart.png");
     startGameBtn = new Button(195, 400, 400, 138, startButtonImg);
-    myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 30);
+    PFont myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 30);
     text = new Text("Pop the Bubbles!", 180, 85, myFont);
   }
 

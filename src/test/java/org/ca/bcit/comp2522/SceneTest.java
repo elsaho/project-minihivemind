@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import processing.core.PApplet;
 
+import javax.sound.sampled.LineUnavailableException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +32,6 @@ public class SceneTest {
 
   @Test
   public void testSceneConstructor() {
-    assertNotNull(sceneTest.getInputHandler());
     assertNotNull(sceneTest.getSounds());
     assertNull(Scene.getShootLine());
     assertNotNull(sceneTest.getPlayer());
@@ -42,7 +43,7 @@ public class SceneTest {
   }
 
   @Test
-  public void testSetup() {
+  public void testSetup() throws LineUnavailableException, FileNotFoundException {
     sceneTest.setup(gameWindow);
     assertNotNull(sceneTest.getBg());
     ArrayList<Sprite> sprites = sceneTest.getSprites();

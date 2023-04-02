@@ -12,7 +12,7 @@ import processing.core.PVector;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class Bubble extends Sprite implements Collidable{
+public class Bubble extends Sprite implements Collidable {
   //Gravity constant
   private static final float GRAVITY = 0.1f;
 
@@ -67,13 +67,13 @@ public class Bubble extends Sprite implements Collidable{
     position.add(velocity);
   }
 
-  /** This method returns an arraylist of bubbles containing 2 smaller bubbles.
+  /** Returns an arraylist of bubbles containing 2 smaller bubbles.
    *
    * @return newBubbles - arraylist of bubbles
    */
   public ArrayList<Bubble> spawnBubbles() {
     ArrayList<Bubble> newBubbles = new ArrayList<>();
-    PVector newSize = new PVector(size.x -MIN_SIZE, size.y - MIN_SIZE);
+    PVector newSize = new PVector(size.x - MIN_SIZE, size.y - MIN_SIZE);
     PVector newVelocity1 = new PVector(-velocity.x, velocity.y < 0 ? velocity.y : -velocity.y);
     PVector newVelocity2 = new PVector(velocity.x, velocity.y < 0 ? velocity.y : -velocity.y);
     Bubble bubble1 = new Bubble(new PVector(position.x, position.y), new PVector(-1, -1),
@@ -99,7 +99,8 @@ public class Bubble extends Sprite implements Collidable{
   }
 
   /**
-   * Handles collisions between bubbles and other objects
+   * Handles collisions between bubbles and other objects.
+   *
    * @param o as an Object
    * @return true if collided
    */
@@ -136,11 +137,11 @@ public class Bubble extends Sprite implements Collidable{
     return false;
   }
 
-  /** This method update the score and lives of the player
+  /** This method update the score and lives of the player.
    *
    * @param bubble - Bubble instance
    */
-  public void update (Bubble bubble) {
+  public void update(Bubble bubble) {
     if (Lives.getInstance().getLives() > 0) {
       Scene.sounds.playOof();
       ScoreBar.getInstance().update(bubble, false, true);

@@ -1,10 +1,9 @@
 package org.ca.bcit.comp2522;
 
-
-import processing.core.PImage;
-import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.sound.sampled.LineUnavailableException;
+import processing.core.PImage;
 
 /**
  * Scene class. The class that contains all the sprites in the game.
@@ -16,40 +15,27 @@ import java.util.ArrayList;
 
 public class Scene {
 
-  /**
-   * Player constants.
-   */
-  private final static ArrayList<Player> players = GameManager.players;
+  // Fields
+  private static final ArrayList<Bubble> bubbles = GameManager.bubbles;
+  private static final ArrayList<Player> players = GameManager.players;
+  private static final ArrayList<Sprite> sprites = GameManager.sprites;
+  private final ArrayList<Sprite> removedSprites = GameManager.removedSprites;
+  private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
-  /**
-   * Gameplay constants.
-   */
   private final Lives lives;
+  private final ScoreBar scoreBar;
 
   private Timer timer;
-
-  /**
-   * Gameplay.
-   */
-  private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
-  public static SoundEffects sounds;
-  public static ShootLine shootLine;
-  private final static ArrayList<Sprite> sprites = GameManager.sprites;
-  private final static ArrayList<Bubble> bubbles = GameManager.bubbles;
-
   private PImage bg;
 
-  private final ArrayList<Sprite> removedSprites = GameManager.removedSprites;
-  public static long lastCollisionTime = 0;
-  public static boolean isImmune = false;
-
-  public static Button pause;
-
-  /**
-   * Scorebar.
-   */
-  private final ScoreBar scoreBar;
+  // Static fields
   public static boolean isPaused = false;
+  public static boolean isImmune = false;
+  public static long lastCollisionTime = 0;
+
+  public static ShootLine shootLine;
+  public static SoundEffects sounds;
+  public static Button pause;
 
   /**
    * Constructor for objects of class Scene.
@@ -118,7 +104,7 @@ public class Scene {
     }
 
 
-    for(Player player: players) {
+    for (Player player : players) {
       player.update();
     }
     ArrayList<Bubble> newBubbles = new ArrayList<>();

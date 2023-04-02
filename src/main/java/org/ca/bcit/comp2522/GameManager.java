@@ -1,13 +1,14 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PVector;
-
-import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.sound.sampled.LineUnavailableException;
+import processing.core.PVector;
 
+/** GameManager class. The class that manages the game scene.
+ */
 public class GameManager {
   public static ArrayList<Player> players = new ArrayList<>();
   public static PVector playerSize = new PVector(42, 64);
@@ -33,6 +34,9 @@ public class GameManager {
   public static ArrayList<Sprite> removedSprites = new ArrayList<>();
 
 
+  /** Called to clear the game.
+   *
+   */
   public static void clear() {
     players.clear();
     sprites.clear();
@@ -40,36 +44,46 @@ public class GameManager {
     removedSprites.clear();
   }
 
+  /** Called when the game is paused to save data to the database.
+   *
+   * @param window game window
+   */
   public static void pause(GameWindow window) {
     if (Scene.pause.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       Scene.isPaused = true;
-      System.out.println("pause button clicked");
       databaseHelper.saveGame(window);
       GameWindow.screen = Screen.pause;
       window.init();
     }
   }
 
-  public static void level1 (GameWindow window) throws LineUnavailableException, FileNotFoundException {
+  /** Called to start the game.
+   *
+   * @param window game window
+   * @throws LineUnavailableException if the line cannot be opened due to resource restrictions
+   * @throws FileNotFoundException if the file is not found
+   */
+  public static void level1(GameWindow window)
+      throws LineUnavailableException, FileNotFoundException {
 
     if (Scene.isPaused) {
       databaseHelper.loadGame(GameManager.players, GameManager.bubbles);
     } else {
       if (!SelectMultiPlayer.getIs2P()) {
         player = new Player(
-                new PVector((float)GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),
+                new PVector((float) GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),
                 new PVector(0, 1), playerSize, playerSpeed,
                 new Color(0, 255, 255), window, 37, 39, 38, 1);
         players.add(player);
       } else {
         player = new Player(
-                new PVector((float)GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
+                new PVector((float) GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
                 new PVector(0, 1), playerSize, playerSpeed,
                 new Color(0, 255, 255), window, 37, 39, 38, 1);
         players.add(player);
 
         player2 = new Player(
-            new PVector((float)GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
+            new PVector((float) GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
             new PVector(0, 1), new PVector(56, 69), playerSpeed,
             new Color(0, 255, 255), window, 65, 68, 87, 2);
         players.add(player2);
@@ -93,9 +107,12 @@ public class GameManager {
     }
     sprites.addAll(bubbles);
     sprites.addAll(players);
-
   }
 
+  /** Callled to reset the game.
+   *
+   * @param window game window
+   */
   public static void gameReset(GameWindow window) {
     Lives lives = Lives.getInstance();
     lives.setLives(3);

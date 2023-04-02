@@ -1,11 +1,10 @@
 package org.ca.bcit.comp2522;
 
+import java.awt.Color;
+import java.io.FileNotFoundException;
+import javax.sound.sampled.LineUnavailableException;
 import processing.core.PImage;
 import processing.core.PVector;
-
-import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
-import java.io.FileNotFoundException;
 
 /** Player class. The sprite that the user controls.
  * Can move left and right and shoot bullets. Extends Sprite class.
@@ -19,29 +18,17 @@ public class Player extends Sprite {
   private final int up;
   private final int playerNo;
   private final InputHandler handler;
-  ShootLine playersLine;
-  private PImage playerLeft;
-  private PImage playerRight;
-  private PImage shootLeft;
-  private PImage shootRight;
-  private boolean playerFaceLeft;
   private final SoundEffects sounds = new SoundEffects();
 
-  public int getLeft() {
-    return left;
-  }
+  private final PImage playerLeft;
+  private final PImage playerRight;
+  private final PImage shootLeft;
+  private final PImage shootRight;
 
-  public int getRight() {
-    return right;
-  }
+  private boolean playerFaceLeft;
 
-  public int getUp() {
-    return up;
-  }
-
-  public int getPlayerNo() {
-    return playerNo;
-  }
+  private final GameWindow window;
+  private ShootLine playersLine;
 
   /** Constructor for Player class.
    *
@@ -52,9 +39,9 @@ public class Player extends Sprite {
    *@param color the color of the player as a Color.
    *@param window the GameWindow instance.
    */
-
   public Player(final PVector position, final PVector direction, final PVector size,
-                final float speed, final Color color, final GameWindow window, int left, int right, int up, int playerNo)
+                final float speed, final Color color, final GameWindow window,
+                int left, int right, int up, int playerNo)
           throws LineUnavailableException, FileNotFoundException {
     super(position, direction, size, speed, color, window);
     handler = new InputHandler(left, right, up);
@@ -81,6 +68,23 @@ public class Player extends Sprite {
     playersLine = null;
   }
 
+
+  public int getLeft() {
+    return left;
+  }
+
+  public int getRight() {
+    return right;
+  }
+
+  public int getUp() {
+    return up;
+  }
+
+  public int getPlayerNo() {
+    return playerNo;
+  }
+
   /** Updates the player's position based on the arrow key pressed by the user.
    */
   public void update() {
@@ -94,28 +98,27 @@ public class Player extends Sprite {
       }
       position.x -= speed;
     } else if (handler.isRight()) {
-
       if (position.x > GameWindow.getX() - size.x * 2) {
         position.x = GameWindow.getX() - size.x * 2;
       }
       position.x += speed;
     }
 
-      if (handler.isUp()) {
-        makeLine(window);
-        }
-      }
+    if (handler.isUp()) {
+      makeLine(window);
+    }
+  }
 
   void makeLine(GameWindow window) {
     if (playersLine == null) {
-          playersLine = new ShootLine(
-              new PVector(this.position.x + this.size.x, this.position.y),
-              this.size.x, this.speed, window
-          );
-          sounds.playShoot();
-        }
-
+      playersLine = new ShootLine(
+          new PVector(this.position.x + this.size.x, this.position.y),
+          this.size.x, this.speed, window
+      );
+      sounds.playShoot();
     }
+
+  }
 
   /** Displays the player on the screen.
    *
@@ -126,12 +129,12 @@ public class Player extends Sprite {
     window.pushStyle();
     window.fill(color.getRed(), color.getGreen(), color.getBlue());
     boolean isUp = handler.isUp();
-
-
     if (isUp) {
-      window.image(playerFaceLeft ? shootLeft : shootRight, position.x + size.x, position.y, size.x, size.y);
+      window.image(playerFaceLeft ? shootLeft : shootRight,
+          position.x + size.x, position.y, size.x, size.y);
     } else {
-      window.image(playerFaceLeft ? playerLeft : playerRight, position.x + size.x, position.y, size.x, size.y);
+      window.image(playerFaceLeft ? playerLeft : playerRight,
+          position.x + size.x, position.y, size.x, size.y);
     }
     if (playersLine != null) {
       playersLine.update();
@@ -151,11 +154,8 @@ public class Player extends Sprite {
       playerFaceLeft = true;
     } else if (handler.isRight()) {
       playerFaceLeft = false;
-    } else {
-      //do nothing (this is on purpose!)
     }
   }
-
 
   public ShootLine getPlayersLine() {
     return playersLine;
@@ -165,21 +165,6 @@ public class Player extends Sprite {
     this.playersLine = playersLine;
   }
 
-  public void setPlayerLeft(PImage i) {
-    playerLeft = i;
-  }
-
-  public void setPlayerRight(PImage i) {
-    playerRight = i;
-  }
-
-  public void setShootLeft(PImage i) {
-    shootLeft = i;
-  }
-
-  public void setShootRight(PImage i) {
-    shootRight = i;
-  }
 }
 
 

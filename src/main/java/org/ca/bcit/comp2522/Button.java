@@ -9,60 +9,60 @@ import processing.core.PImage;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class Button{
+public class Button {
 
   /**
-   * Button properties
+   * Button properties.
    */
-  private final int xPos;
-  private final int yPos;
+  private final int xpos;
+  private final int ypos;
   private final int width;
   private final int height;
   private final PImage img;
 
   /**
-   * Makes a button
-   * @param xPos as an int
-   * @param yPos as an int
+   * Makes a button.
+   *
+   * @param xpos as an int
+   * @param ypos as an int
    * @param width as an int
    * @param height as an int
    * @param img as a PImage
    */
-  public Button(int xPos, int yPos, int width, int height, PImage img) {
-    this.xPos = xPos;
-    this.yPos = yPos;
+  public Button(int xpos, int ypos, int width, int height, PImage img) {
+    this.xpos = xpos;
+    this.ypos = ypos;
     this.width = width;
     this.height = height;
     this.img = img;
   }
 
   /**
-   * Checks if button is clicked
+   * Checks if button is clicked.
+   *
    * @param mouseX as a float
    * @param mouseY as a float
    * @param mousePressed as a boolean
    * @return boolean
    */
   public boolean isClicked(float mouseX, float mouseY, boolean mousePressed) {
-    return mousePressed &&
-            mouseX >= xPos &&
-            mouseX <= xPos + width &&
-            mouseY >= yPos &&
-            mouseY <= yPos + height;
+    return mousePressed && mouseX >= xpos && mouseX <= xpos + width
+        && mouseY >= ypos && mouseY <= ypos + height;
   }
 
   /**
-   * Displays buttons onto the window
+   * Displays buttons onto the window.
+   *
    * @param window as a GameWindow
    */
   public void display(GameWindow window) {
-    window.image(img, xPos, yPos, width, height);
+    window.image(img, xpos, ypos, width, height);
     window.textAlign(PApplet.CENTER, PApplet.CENTER);
     window.fill(0);
   }
 
   /**
-   * Restarts the game
+   * Restarts the game.
    *
    * @param window as a GameWindow
    * @param restart as a Button
