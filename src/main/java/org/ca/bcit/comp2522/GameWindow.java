@@ -114,9 +114,7 @@ public class GameWindow extends PApplet {
     scene = new Scene();
     try {
       scene.setup(this);
-    } catch (LineUnavailableException e) {
-      throw new RuntimeException(e);
-    } catch (FileNotFoundException e) {
+    } catch (LineUnavailableException | FileNotFoundException e) {
       throw new RuntimeException(e);
     }
     //Game lose
@@ -133,14 +131,13 @@ public class GameWindow extends PApplet {
       case landing:
         landingPage.update(this);
         landingPage.display(this);
-        if (!audio.isBGMPlaying()) {
-          audio.playBGM();
-        }
+        audio.playBGM();
         break;
 
       case instruction:
         instructionStart.update(this);
         instructionStart.display(this);
+        audio.stopBGM();
         break;
 
       case playerSelect:
