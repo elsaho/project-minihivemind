@@ -72,12 +72,6 @@ public abstract class Sprite {
   }
 
   /**
-   * Updates position of sprite
-   *
-   * @return
-   */
-
-  /**
    * Helper method for the collided function to find the closest point of player to bubble
    * @param value as a float
    * @param min as a float
@@ -98,13 +92,6 @@ public abstract class Sprite {
     window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
     window.ellipse(this.position.x, this.position.y, size.x, size.y);
     window.popStyle();
-  }
-
-  /**
-   * Sets up the sprite, fully implemented in the child classes
-   * @param window as a GameWindow
-   */
-  public void setup(GameWindow window) {
   }
 }
 

@@ -14,7 +14,6 @@ public class GameVictory {
    * Properties
    */
   private final PImage bg;
-  private final PImage replayButton;
   private final PFont myFont;
   private final Button restart;
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
@@ -25,7 +24,7 @@ public class GameVictory {
    */
   public GameVictory(GameWindow window) {
     bg = window.loadImage("../assets/VictoryScreen.png");
-    replayButton = window.loadImage("../assets/TransparentReplay.png");
+    PImage replayButton = window.loadImage("../assets/TransparentReplay.png");
     restart = new Button(100, 280, 600, 206, replayButton);
     myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
   }

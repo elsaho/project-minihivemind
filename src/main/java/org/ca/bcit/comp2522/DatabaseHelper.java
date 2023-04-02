@@ -12,6 +12,7 @@ import org.bson.Document;
 import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * A helper class for connecting to MongoDB.
@@ -27,7 +28,7 @@ public class DatabaseHelper {
   private static final String DATABASE_NAME = "BubbleTrouble";
   private static DatabaseHelper instance = null;
 
-  private final MongoClient mongoClient;
+  public final MongoClient mongoClient;
   private final MongoDatabase database;
 
   /**
@@ -87,14 +88,11 @@ public class DatabaseHelper {
     if (instance != null) {
       MongoCollection<Document> scoresCollection = database.getCollection(collectionName);
       Document highestScoreDocument = scoresCollection.find().sort(new Document(fieldName, -1)).limit(1).first();
-      return highestScoreDocument.get(fieldName, clazz);
+      if (highestScoreDocument != null) {
+        return highestScoreDocument.get(fieldName, clazz);
+      }
     }
     return null;
-  }
-
-
-  public void close() {
-    mongoClient.close();
   }
 
   public void saveGame(GameWindow window) {
@@ -176,7 +174,7 @@ public class DatabaseHelper {
         Scene.isImmune = savedGameState.getBoolean("isImmune");
 
         // Load the players
-        ArrayList<Document> playerDocuments = savedGameState.get("players", ArrayList.class);
+        List<Document> playerDocuments = savedGameState.getList("players", Document.class);
         for (int i = playerDocuments.size() - 1; i >=0; i--) {
           Document playerDoc = playerDocuments.get(i);
           Player player = players.get(i);
@@ -188,7 +186,7 @@ public class DatabaseHelper {
         }
 
         // Load the bubbles
-        ArrayList<Document> bubbleDocuments = savedGameState.get("bubbles", ArrayList.class);
+        List<Document> bubbleDocuments = savedGameState.getList("bubbles", Document.class);
         for (int i = 0; i < bubbleDocuments.size(); i++) {
           Document bubbleDoc = bubbleDocuments.get(i);
           Bubble bubble = bubbles.get(i);
@@ -205,4 +203,3 @@ public class DatabaseHelper {
     }
   }
 }
-

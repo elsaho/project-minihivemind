@@ -16,9 +16,6 @@ public class SelectMultiPlayer {
    * Properties
    */
   private final PImage bg;
-  private final PImage onePlayerImg;
-  private final PImage twoPlayerImg;
-  private final PFont myFont;
   private final Button onePlayerBtn;
   private final Button twoPlayerBtn;
   private final Text text;
@@ -26,11 +23,11 @@ public class SelectMultiPlayer {
 
   public SelectMultiPlayer(GameWindow window) {
     bg = window.loadImage("../assets/SkyBackground.png");
-    onePlayerImg = window.loadImage("../assets/1PlayerBtn.png");
-    twoPlayerImg = window.loadImage("../assets/2PlayerBtn.png");
+    PImage onePlayerImg = window.loadImage("../assets/1PlayerBtn.png");
+    PImage twoPlayerImg = window.loadImage("../assets/2PlayerBtn.png");
     onePlayerBtn = new Button(169, 381, 125, 125, onePlayerImg);
     twoPlayerBtn = new Button(507, 381, 125, 125, twoPlayerImg);
-    myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
+    PFont myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
     text = new Text("1p or 2p?", 260, 120, myFont);
   }
 

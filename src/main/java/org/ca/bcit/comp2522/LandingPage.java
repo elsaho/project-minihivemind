@@ -5,8 +5,8 @@ import processing.core.PImage;
 public class LandingPage {
 
   private final PImage bg;
-  private Button startGameBtn;
-  private Button instructBtn;
+  private final Button startGameBtn;
+  private final Button instructBtn;
 
   public LandingPage(GameWindow window) {
     bg = window.loadImage("../assets/Landing.png");

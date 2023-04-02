@@ -19,12 +19,12 @@ public class Scene {
   /**
    * Player constants.
    */
-  private static ArrayList<Player> players = GameManager.players;
+  private final static ArrayList<Player> players = GameManager.players;
 
   /**
    * Gameplay constants.
    */
-  private Lives lives;
+  private final Lives lives;
 
   private Timer timer;
 
@@ -34,25 +34,21 @@ public class Scene {
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
   public static SoundEffects sounds;
   public static ShootLine shootLine;
-  private static ArrayList<Sprite> sprites = GameManager.sprites;
-  private static ArrayList<Bubble> bubbles = GameManager.bubbles;
+  private final static ArrayList<Sprite> sprites = GameManager.sprites;
+  private final static ArrayList<Bubble> bubbles = GameManager.bubbles;
 
   private PImage bg;
 
-  private ArrayList<Sprite> removedSprites = GameManager.removedSprites;
+  private final ArrayList<Sprite> removedSprites = GameManager.removedSprites;
   public static long lastCollisionTime = 0;
-  private final int time = 90000;
   public static boolean isImmune = false;
 
   public static Button pause;
-//  private LandingPage landingPage;
-
-//  private Pause pauseScreen;
 
   /**
    * Scorebar.
    */
-  private ScoreBar scoreBar;
+  private final ScoreBar scoreBar;
   public static boolean isPaused = false;
 
   /**
@@ -117,10 +113,13 @@ public class Scene {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) throws LineUnavailableException, FileNotFoundException {
-    GameManager.pause(window);
+    if (!(databaseHelper == null)) {
+      GameManager.pause(window);
+    }
+
 
     for(Player player: players) {
-      player.update(window);
+      player.update();
     }
     ArrayList<Bubble> newBubbles = new ArrayList<>();
     ArrayList<Bubble> bubblesToRemove = new ArrayList<>();
@@ -131,7 +130,7 @@ public class Scene {
 
       for (Player player : players) {
         if (bubble.collided(player) && !isImmune) {
-          bubble.update(window, bubble);
+          bubble.update(bubble);
         }
 
         // Check if the player's immunity has expired
@@ -147,7 +146,7 @@ public class Scene {
             newBubbles.addAll(bubble.spawnBubbles());
           }
           //update score
-          scoreBar.update(window, bubble, true, false);
+          scoreBar.update(bubble, true, false);
 
           if (databaseHelper != null) {
             //save score to database everytime bubble is popped
