@@ -11,13 +11,13 @@ public class Pause {
    * Properties
    */
   private final PImage bg;
-  private PImage playImg;
-  private PImage homeImg;
   private final PFont myFont;
+
+  private final PImage playImg;
+  private final PImage homeImg;
   private final Button resume;
   private final Button home;
-  private Text text;
-//  private static boolean is2P = false;
+  private final Text text;
 
   public Pause(GameWindow window) {
     bg = window.loadImage("../assets/SkyBackground.png");
@@ -29,17 +29,12 @@ public class Pause {
     text = new Text("Game is Paused...", 160, 130, myFont);
   }
 
-//  public static boolean getIs2P() {
-//    return is2P;
-//  }
-
   /**
-   * Displays the select multiplayer page
+   * Displays the pause page.
    *
-   * @param window as a GameWindow
-   * @param scene
+   * @param window as a GameWindowq
    */
-  public void display(GameWindow window, Scene scene) {
+  public void display(GameWindow window) {
     window.background(bg);
     resume.display(window);
     home.display(window);
@@ -47,12 +42,11 @@ public class Pause {
   }
 
   /**
-   * Updates the select pause screen
+   * Updates the select pause screen.
    *
    * @param window as a GameWindow
-   * @param scene as a Scene
    */
-  public void update(GameWindow window, Scene scene) throws LineUnavailableException, FileNotFoundException {
+  public void update(GameWindow window) throws LineUnavailableException, FileNotFoundException {
     if (resume.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.level1;
       window.init();
