@@ -29,7 +29,7 @@ public class GameManager {
   /**
    * Gameplay.
    */
-  private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+  private static DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
   public static ShootLine shootLine;
   public static Player player;
 
@@ -46,37 +46,68 @@ public class GameManager {
     bubbles.clear();
     removedSprites.clear();
   }
-  public static void level1 (GameWindow window) throws LineUnavailableException, FileNotFoundException {
-    player = new Player(
-        new PVector(GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
-        new PVector(0, 1), playerSize, playerSpeed,
-        new Color(0, 255, 255), window, 37, 39, 38, 1);
-    players.add(player);
 
-    if (SelectMultiPlayer.getIs2P()) {
-      player2 = new Player(
-          new PVector(GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
-          new PVector(0, 1), new PVector(56, 69), playerSpeed,
-          new Color(0, 255, 255), window, 65, 68, 87, 2);
-      players.add(player2);
+  public static void pause(GameWindow window) {
+    if (Scene.pause.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
+      Scene.isPaused = true;
+      System.out.println("pause button clicked");
+      databaseHelper.saveGame(window);
+      GameWindow.screen = Screen.pause;
+      window.init();
+    }
+  }
+
+  public static void level1 (GameWindow window) throws LineUnavailableException, FileNotFoundException {
+
+    if (Scene.isPaused) {
+      databaseHelper.loadGame(GameManager.players, GameManager.bubbles);
+    } else {
+      player = new Player(
+          new PVector(GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
+          new PVector(0, 1), playerSize, playerSpeed,
+          new Color(0, 255, 255), window, 37, 39, 38, 1);
+      players.add(player);
+
+      if (SelectMultiPlayer.getIs2P()) {
+        player2 = new Player(
+            new PVector(GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
+            new PVector(0, 1), new PVector(56, 69), playerSpeed,
+            new Color(0, 255, 255), window, 65, 68, 87, 2);
+        players.add(player2);
+      }
+
+      //generate random position for the bubble to start dropping
+      Random rand = new Random();
+      int bubbleStartX = 200;
+      int bubbleStartY = rand.nextInt(100) + 100;
+
+      Bubble bubble = new Bubble(
+          new PVector(bubbleStartX, bubbleStartY),
+          new PVector(1, 1),
+          bubbleStartSize,
+          bubbleStartSpeed,
+          new Color(0, 0, 255), window,
+          new PVector(2, 5)
+      );
+      bubbles.add(bubble);
+
     }
 
-    //generate random position for the bubble to start dropping
-    Random rand = new Random();
-    int bubbleStartX = 700;
-    int bubbleStartY = rand.nextInt(100) + 100;
-
-    Bubble bubble = new Bubble(
-        new PVector(bubbleStartX, bubbleStartY),
-        new PVector(1, 1),
-        bubbleStartSize,
-        bubbleStartSpeed,
-        new Color(0, 0, 255), window,
-        new PVector(2, 5)
-    );
-    bubbles.add(bubble);
+    for (Bubble b : bubbles) {
+      b.setup(window);
+      sprites.add(b);
+    }
     sprites.addAll(players);
 
+  }
+
+  public static void gameReset(GameWindow window) {
+    Lives lives = Lives.getInstance();
+    lives.setLives(3);
+    ScoreBar.getInstance().resetValue();
+    Timer.getInstance(window).resetTimer(window);
+    GameManager.clear();
+    Scene.isPaused = false;
   }
 
 }

@@ -77,7 +77,7 @@ public class ScoreBar {
   public void display(final GameWindow window) {
     heart = window.loadImage("../assets/pixelHeart.png");
     lives = Lives.getInstance();
-    timer = Timer.getInstance();
+    timer = Timer.getInstance(window);
     timer.setRemaining(timer.getStart() - window.millis());
 
     //Creates font

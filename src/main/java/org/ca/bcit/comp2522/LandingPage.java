@@ -5,8 +5,8 @@ import processing.core.PImage;
 public class LandingPage {
 
   private final PImage bg;
-  private final Button startGameBtn;
-  private final Button instructBtn;
+  private Button startGameBtn;
+  private Button instructBtn;
 
   public LandingPage(GameWindow window) {
     bg = window.loadImage("../assets/Landing.png");
@@ -31,11 +31,14 @@ public class LandingPage {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
+    GameManager.gameReset(window);
     if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.playerSelect;
+      System.out.println("start button clicked");
       window.init();
     } else if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.instruction;
+      System.out.println("instruction button clicked");
       window.init();
     }
   }

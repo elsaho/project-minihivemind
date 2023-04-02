@@ -1,5 +1,6 @@
 package org.ca.bcit.comp2522;
 
+
 /**
  * Timer to keep track in game time.
  *
@@ -15,18 +16,28 @@ public class Timer {
    * Remaining time in game.
    */
   private long remaining;
+
+  private final int time = 90000;
+
   /**
    * Singleton check.
    */
   private static Timer single_instance = null;
 
   /**
+   * Constructor for Timer.
+   */
+  private Timer(GameWindow window) {
+    this.start = window.millis() + time;
+  }
+
+  /**
    * Initiates singleton Timer
    * @return single_instance Timer
    */
-  public static Timer getInstance() {
+  public static Timer getInstance(GameWindow window) {
     if (single_instance == null) {
-      single_instance = new Timer();
+      single_instance = new Timer(window);
     }
     return single_instance;
   }
@@ -61,6 +72,11 @@ public class Timer {
    */
   public void setRemaining(long remaining) {
     this.remaining = remaining;
+  }
+
+  /** Resets the timer to the original time. */
+  public void resetTimer(GameWindow window) {
+    this.start = window.millis() + time;
   }
 
   /**
