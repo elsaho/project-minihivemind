@@ -140,9 +140,9 @@ public class GameWindow extends PApplet {
         break;
 
       case pause:
-        pause.display(this, scene);
+        pause.display(this);
         try {
-          pause.update(this, scene);
+          pause.update(this);
         } catch (LineUnavailableException  | FileNotFoundException e) {
           throw new RuntimeException(e);
         }
@@ -175,9 +175,7 @@ public class GameWindow extends PApplet {
         scene.display(this);
         try {
           scene.update(this);
-        } catch (LineUnavailableException e) {
-          throw new RuntimeException(e);
-        } catch (FileNotFoundException e) {
+        } catch (LineUnavailableException | FileNotFoundException e) {
           throw new RuntimeException(e);
         }
         break;

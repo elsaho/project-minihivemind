@@ -20,17 +20,10 @@ public class GameManager {
   public static int bubbleStartSpeed = 5;
 
   /**
-   * Gameplay constants.
-   */
-  private Lives lives;
-
-  private Timer timer;
-
-  /**
    * Gameplay.
    */
-  private static DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
-  public static ShootLine shootLine;
+  private static final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+
   public static Player player;
 
   public static Player player2;

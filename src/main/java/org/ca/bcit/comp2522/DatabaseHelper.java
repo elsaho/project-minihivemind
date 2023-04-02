@@ -10,8 +10,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import processing.core.PVector;
-import javax.sound.sampled.LineUnavailableException;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -26,10 +24,6 @@ import java.util.Date;
  */
 public class DatabaseHelper {
 
-  public static ArrayList<Player> players = GameManager.players;
-  public static PVector playerSize = new PVector(42, 64);
-  public static int playerSpeed = 5;
-  public static ArrayList<Bubble> bubbles = GameManager.bubbles;
   private static final String DATABASE_NAME = "BubbleTrouble";
   private static DatabaseHelper instance = null;
 
@@ -163,7 +157,7 @@ public class DatabaseHelper {
     }
   }
 
-  public void loadGame(ArrayList<Player> players, ArrayList<Bubble> bubbles) throws LineUnavailableException, FileNotFoundException {
+  public void loadGame(ArrayList<Player> players, ArrayList<Bubble> bubbles) {
     if (instance != null) {
       // Query the collection for the latest saved game state
       Document savedGameState = database.getCollection("state").find()
@@ -204,7 +198,8 @@ public class DatabaseHelper {
           bubble.direction.y = bubbleDoc.getDouble("direction.y").floatValue();
           bubble.size.x = bubbleDoc.getDouble("size.x").floatValue();
           bubble.speed = bubbleDoc.getDouble("speed").floatValue();
-          bubble.velocity = new PVector(bubbleDoc.getDouble("velocity.x").floatValue(), bubbleDoc.getDouble("velocity.y").floatValue());
+          bubble.velocity = new PVector(bubbleDoc.getDouble("velocity.x").floatValue(),
+              bubbleDoc.getDouble("velocity.y").floatValue());
         }
       }
     }
