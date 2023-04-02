@@ -24,6 +24,7 @@ public class SoundEffects {
   protected final Clip shootAudio;
   protected final Clip loseAudio;
   protected final Clip winAudio;
+  public static boolean isBGMPlaying = false;
 
 
   /**
@@ -57,7 +58,10 @@ public class SoundEffects {
    * Starts playing the background music
    */
   public void playBGM(){
-    bgm.loop(Clip.LOOP_CONTINUOUSLY);
+    if (!isBGMPlaying) {
+      bgm.loop(Clip.LOOP_CONTINUOUSLY);
+      isBGMPlaying = true;
+    }
   }
 
   /**
@@ -105,14 +109,6 @@ public class SoundEffects {
    */
   public void stopBGM(){
     bgm.stop();
-  }
-
-  /**
-   * Returns true if background music is playing
-   * @return boolean
-   */
-  public boolean isBGMPlaying() {
-    return bgm.isActive();
   }
 
   Clip loadAudio(Path path) throws  LineUnavailableException {
