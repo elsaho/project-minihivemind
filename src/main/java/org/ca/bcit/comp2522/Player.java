@@ -48,15 +48,6 @@ public class Player extends Sprite {
     playersLine = null;
   }
 
-//  public static Player getInstance(final PVector position, final PVector direction, final PVector size,
-//                                   final float speed, final Color color, final GameWindow window) throws LineUnavailableException, FileNotFoundException {
-//    if (instance == null) {
-//      instance = new Player(position, direction, size, speed, color, window);
-//    }
-//    return instance;
-//  }
-
-
   /** Updates the player's position based on the arrow key pressed by the user.
    *
    * @param window the GameWindow instance used to update the player's position.
