@@ -50,11 +50,6 @@ public class Scene {
 
     this.scoreBar = ScoreBar.getInstance();
     this.lives = Lives.getInstance();
-
-    //saves the score 0
-    if (databaseHelper != null) {
-      databaseHelper.put("score", 0);
-    }
   }
 
   /**
@@ -99,10 +94,10 @@ public class Scene {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) throws LineUnavailableException, FileNotFoundException {
+    //check if the game is paused
     if (!(databaseHelper == null)) {
       GameManager.pause(window);
     }
-
 
     for (Player player : players) {
       player.update();

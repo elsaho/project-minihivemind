@@ -67,8 +67,14 @@ public class Text {
   public static void EndGameDisplay(GameWindow window, PImage bg, PFont myFont, DatabaseHelper databaseHelper, Button restart) {
     window.background(bg);
     window.textFont(myFont);
+    String colName;
+    if (SelectMultiPlayer.getIs2P()) {
+      colName = "score2P";
+    } else {
+      colName = "score1P";
+    }
     Text highScoreText = new Text("High Score: "
-        + databaseHelper.getHighestScore("scores", "score", Integer.class) + "\n"
+        + databaseHelper.getHighestScore(colName, "score", Integer.class) + "\n"
         + "Your Score: " + ScoreBar.getInstance().getValue(), 20, 55, myFont);
 
     highScoreText.display(window);

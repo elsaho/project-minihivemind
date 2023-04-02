@@ -69,7 +69,11 @@ public class GameManager {
     if (Scene.isPaused) {
       databaseHelper.loadGame(GameManager.players, GameManager.bubbles);
     } else {
+      if (databaseHelper != null) {
+        databaseHelper.put("score", 0);
+      }
       if (!SelectMultiPlayer.getIs2P()) {
+        //saves the score 0
         player = new Player(
                 new PVector((float) GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),
                 new PVector(0, 1), playerSize, playerSpeed,

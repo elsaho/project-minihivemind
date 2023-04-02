@@ -73,10 +73,16 @@ public class DatabaseHelper {
    * @param value the value
    */
   public <T> void put(String key, T value) {
+    String colName;
+    if (SelectMultiPlayer.getIs2P()) {
+      colName = "score2P";
+    } else {
+      colName = "score1P";
+    }
     if (instance != null) {
       Document document = new Document(key, value)
           .append("timestamp", new Date());
-      new Thread(() -> database.getCollection("scores").insertOne(document)).start();
+      new Thread(() -> database.getCollection(colName).insertOne(document)).start();
     }
   }
 
