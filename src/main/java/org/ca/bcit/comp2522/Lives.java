@@ -28,7 +28,8 @@ public class Lives {
   }
 
   /**
-   * Gets lives
+   * Gets lives.
+   *
    * @return lives as an int
    */
   public int getLives() {
@@ -37,6 +38,7 @@ public class Lives {
 
   /**
    * Sets lives.
+   *
    * @param lives as an int
    */
   public void setLives(int lives) {

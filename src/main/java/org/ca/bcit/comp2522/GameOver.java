@@ -10,10 +10,10 @@ import processing.core.PImage;
  * @version 2023
  */
 
-public class GameOver{
+public class GameOver {
 
   /**
-   * Properties
+   * Properties.
    */
   private final PImage bg;
   private final PFont myFont;
@@ -21,7 +21,8 @@ public class GameOver{
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
   /**
-   * Constructor
+   * Constructor for GameOver.
+   *
    * @param window GameWindow
    */
   public GameOver(GameWindow window) {
@@ -32,7 +33,7 @@ public class GameOver{
   }
 
   /**
-   * Displays the game over page
+   * Displays the game over page.
    *
    * @param window GameWindow
    */
@@ -42,7 +43,7 @@ public class GameOver{
 
 
   /**
-   * Updates the game over page
+   * Updates the game over page.
    *
    * @param window GameWindow
    */

@@ -2,12 +2,19 @@ package org.ca.bcit.comp2522;
 
 import processing.core.PImage;
 
+/** Manages the landing page.
+ *
+ */
 public class LandingPage {
 
   private final PImage bg;
   private final Button startGameBtn;
   private final Button instructBtn;
 
+  /** Constructor for LandingPage.
+   *
+   * @param window as a GameWindow
+   */
   public LandingPage(GameWindow window) {
     bg = window.loadImage("../assets/Landing.png");
     PImage startButtonImg = window.loadImage("../assets/playBtn.png");
@@ -17,7 +24,8 @@ public class LandingPage {
   }
 
   /**
-   * Displays the landing page
+   * Displays the landing page.
+   *
    * @param window as a GameWindow
    */
   public void display(GameWindow window) {
@@ -27,7 +35,8 @@ public class LandingPage {
   }
 
   /**
-   * Updates the landing page
+   * Updates the landing page.
+   *
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {

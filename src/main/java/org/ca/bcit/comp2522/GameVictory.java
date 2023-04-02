@@ -11,7 +11,7 @@ import processing.core.PImage;
  */
 public class GameVictory {
   /**
-   * Properties
+   * Properties.
    */
   private final PImage bg;
   private final PFont myFont;
@@ -19,7 +19,8 @@ public class GameVictory {
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
   /**
-   * Constructs the game victory page
+   * Constructs the game victory page.
+   *
    * @param window as a GameWindow
    */
   public GameVictory(GameWindow window) {

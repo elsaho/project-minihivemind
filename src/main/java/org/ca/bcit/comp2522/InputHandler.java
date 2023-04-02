@@ -1,5 +1,7 @@
 package org.ca.bcit.comp2522;
 
+/** Handles input from the user.
+ */
 public class InputHandler {
   private final int left;
 
@@ -7,10 +9,16 @@ public class InputHandler {
 
   private final int up;
 
-//  protected static GameWindow window;
   private boolean isLeft;
   private boolean isRight;
   private boolean isUp;
+
+  /** Creates a new input handler.
+   *
+   * @param left the key code for the left key
+   * @param right the key code for the right key
+   * @param up the key code for the up key
+   */
   public InputHandler(int left, int right, int up) {
     this.isLeft = false;
     this.isRight = false;
@@ -32,6 +40,11 @@ public class InputHandler {
     return isUp;
   }
 
+  /** Updates the state of the input handler.
+   *
+   * @param window the window to update
+   * @param newState the new state of the input handler
+   */
   public void update(GameWindow window, boolean newState) {
     if (window.keyCode == up) {
       isUp = newState;
@@ -41,5 +54,5 @@ public class InputHandler {
       isRight = newState;
     }
   }
-  }
+}
 

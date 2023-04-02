@@ -1,9 +1,9 @@
 package org.ca.bcit.comp2522;
 
-import  processing.core.PApplet;
-import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.sound.sampled.LineUnavailableException;
+import  processing.core.PApplet;
 
 /**
  * The main class for the game.
@@ -13,39 +13,41 @@ import java.util.ArrayList;
  */
 public class GameWindow extends PApplet {
 
-  /** Scene class to handle game scenes */
+  /** Scene class to handle game scenes. */
   private final ArrayList<InputHandler> handlers = new ArrayList<>();
   private Scene scene;
-  /** Game screen width */
+  /** Game screen width. */
   private static final int x = 800;
-  /** Game screen height */
+  /** Game screen height. */
   private static final int y = 600;
-  /** Enum representing game state*/
+  /** Enum representing game state.*/
   static Screen screen = Screen.landing;
 
-  /** Getter for screen width */
+  /** Getter for screen width. */
   public static int getX() {
     return x;
   }
 
-  /** Getter for screen height */
+  /** Getter for screen height. */
   public static int getY() {
     return y;
   }
-  /** Landing page */
+
+  /** Landing page. */
   private LandingPage landingPage;
-  /** Start page, with instructions */
+  /** Start page, with instructions. */
   private InstructionStart instructionStart;
   private SelectMultiPlayer selectMultiPlayer;
   private Pause pause;
-  /** Game over page */
+  /** Game over page. */
   private GameOver gameOver;
-  /** Game Victory page */
+  /** Game Victory page. */
   private GameVictory gameVictory;
-  /** audio class*/
+
+  /** audio class.*/
   private SoundEffects audio;
 
-  /** Settings of game window */
+  /** Settings of game window. */
   public void settings() {
     size(x, y);
   }
@@ -89,10 +91,12 @@ public class GameWindow extends PApplet {
     this.init();
   }
 
+  /** Initializes the game window.
+   */
   public void init() {
     //Game manager
     if (!Scene.isPaused) {
-      GameManager.clear();
+      GameManager.gameReset(this);
     }
 
     //Game sounds
@@ -123,10 +127,10 @@ public class GameWindow extends PApplet {
   }
 
   /**
-   * Draws the game window
+   * Draws the game window.
    */
   public void draw() {
-    switch(screen) {
+    switch (screen) {
       case landing -> {
         landingPage.display(this);
         landingPage.update(this);
