@@ -15,6 +15,7 @@ public class GamePause extends GameScreen{
 
   private final Button resume;
   private final Button home;
+  private final Button restart;
   private final Text text;
 
   /** Constructor for GamePause.
@@ -25,8 +26,10 @@ public class GamePause extends GameScreen{
     bg = window.loadImage("../assets/SkyBackground.png");
     PImage playImg = window.loadImage("../assets/playBtn.png");
     PImage homeImg = window.loadImage("../assets/homeBtn.png");
-    resume = new Button(169, 281, 125, 125, playImg);
-    home = new Button(507, 281, 125, 125, homeImg);
+    PImage restartImg = window.loadImage("../assets/restartBtn.png");
+    resume = new Button(144, 281, 125, 125, playImg);
+    home = new Button(532, 281, 125, 125, homeImg);
+    restart = new Button(338, 281, 125, 125, restartImg);
     PFont myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 32);
     text = new Text("Game is Paused...", 160, 130, myFont);
   }
@@ -40,6 +43,7 @@ public class GamePause extends GameScreen{
     window.background(bg);
     resume.display(window);
     home.display(window);
+    restart.display(window);
     text.display(window);
   }
 
@@ -55,6 +59,10 @@ public class GamePause extends GameScreen{
     } else if (home.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.landing;
       GameManager.gameReset(window);
+      window.init();
+    } else if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
+      GameManager.gameReset(window);
+      GameWindow.screen = Screen.level1;
       window.init();
     }
   }
