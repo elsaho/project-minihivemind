@@ -5,9 +5,9 @@ import javax.sound.sampled.LineUnavailableException;
 import processing.core.PFont;
 import processing.core.PImage;
 
-/** Pause class. The class that manages the pause screen.
+/** GamePause class. The class that manages the pause screen.
  */
-public class Pause {
+public class GamePause extends GameScreen{
   /**
    * Properties.
    */
@@ -17,11 +17,11 @@ public class Pause {
   private final Button home;
   private final Text text;
 
-  /** Constructor for Pause.
+  /** Constructor for GamePause.
    *
    * @param window as a GameWindow
    */
-  public Pause(GameWindow window) {
+  public GamePause(GameWindow window) {
     bg = window.loadImage("../assets/SkyBackground.png");
     PImage playImg = window.loadImage("../assets/playBtn.png");
     PImage homeImg = window.loadImage("../assets/homeBtn.png");

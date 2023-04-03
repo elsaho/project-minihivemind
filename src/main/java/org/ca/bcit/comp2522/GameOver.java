@@ -10,7 +10,7 @@ import processing.core.PImage;
  * @version 2023
  */
 
-public class GameOver {
+public class GameOver extends GameScreen{
 
   /**
    * Properties.
