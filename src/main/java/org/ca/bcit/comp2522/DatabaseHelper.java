@@ -8,8 +8,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-
-import java.awt.*;
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,10 +17,7 @@ import java.util.Random;
 
 import org.bson.Document;
 import processing.core.PVector;
-
 import javax.sound.sampled.LineUnavailableException;
-
-import static org.ca.bcit.comp2522.GameManager.bubbleStartSize;
 import static org.ca.bcit.comp2522.GameManager.bubbleStartSpeed;
 
 /**
@@ -40,9 +36,6 @@ public class DatabaseHelper {
 
   public final MongoClient mongoClient;
   private final MongoDatabase database;
-
-  public static PVector playerSize = new PVector(42, 64);
-  public static int playerSpeed = 5;
 
   /**
    * Private constructor to prevent outside instantiation.
@@ -163,17 +156,7 @@ public class DatabaseHelper {
       // Save the bubbles
       ArrayList<Document> bubbleDocuments = new ArrayList<>();
       for (Bubble bubble : GameManager.bubbles) {
-        Document bubbleDoc = new Document()
-            .append("position.x", bubble.getPosition().x)
-            .append("position.y", bubble.getPosition().y)
-            .append("direction.x", bubble.getDirection().x)
-            .append("direction.y", bubble.getDirection().y)
-            .append("size.x", bubble.getSize().x)
-            .append("size.y", bubble.getSize().y)
-            .append("speed", bubble.speed)
-            .append("velocity.x", bubble.velocity.x)
-            .append("velocity.y", bubble.velocity.y);
-        bubbleDocuments.add(bubbleDoc);
+        saveBubble(bubbleDocuments, bubble);
       }
       document.append("bubbles", bubbleDocuments);
 
@@ -182,91 +165,74 @@ public class DatabaseHelper {
     }
   }
 
-  /** Load levels to datatbase.
+  /** Load levels to datatbase.This only needs calling once.DO NOT DELETE
    *
    */
   public void uploadLevels(GameWindow window) throws LineUnavailableException, FileNotFoundException {
     Document document = new Document();
-    ArrayList<Player> players = new ArrayList<>();
     ArrayList<Bubble> bubbles = new ArrayList<>();
-    Player playerSolo = new Player(
-          new PVector((float) GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),
-          new PVector(0, 1), playerSize, playerSpeed,
-          new Color(0, 255, 255), window, 37, 39, 38, 1);
-    players.add(playerSolo);
-    Player player1 = new Player(
-          new PVector((float) GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
-          new PVector(0, 1), playerSize, playerSpeed,
-          new Color(0, 255, 255), window, 37, 39, 38, 1);
-    players.add(player1);
-    Player player2 = new Player(
-          new PVector((float) GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),
-          new PVector(0, 1), new PVector(56, 69), playerSpeed,
-          new Color(0, 255, 255), window, 65, 68, 87, 2);
-    players.add(player2);
-
-
-    // Save the player
-    ArrayList<Document> playerDocuments = new ArrayList<>();
-    for (Player player : players) {
-      Document playerDoc = new Document()
-          .append("position.x", player.getPosition().x)
-          .append("position.y", player.getPosition().y)
-          .append("direction.x", player.getDirection().x)
-          .append("direction.y", player.getDirection().y)
-          .append("size.x", player.getSize().x)
-          .append("size.y", player.getSize().y)
-          .append("speed", player.speed)
-          .append("left", player.getLeft())
-          .append("right", player.getRight())
-          .append("up", player.getUp())
-          .append("player", player.getPlayerNo());
-      playerDocuments.add(playerDoc);
-    }
-    document.append("players", playerDocuments);
 
     Random rand = new Random();
-    int bubbleStartX = 200;
     int bubbleStartY = rand.nextInt(100) + 100;
 
     Bubble bubble1 = new Bubble(
-        new PVector(507, bubbleStartY),
+        new PVector(150, bubbleStartY),
         new PVector(1, 1),
-        bubbleStartSize,
+        new PVector(50,50),
         bubbleStartSpeed,
-        new Color(0, 0, 255), window,
+        new Color(255, 0, 0), window,
         new PVector(2, 5)
     );
     bubbles.add(bubble1);
 
     Bubble bubble2 = new Bubble(
-        new PVector(169, bubbleStartY),
+        new PVector(400, bubbleStartY),
         new PVector(1, 1),
-        bubbleStartSize,
+        new PVector(50,50),
         bubbleStartSpeed,
         new Color(0, 0, 255), window,
-        new PVector(2, 5)
+        new PVector(-2, 5)
     );
     bubbles.add(bubble2);
+
+    Bubble bubble3 = new Bubble(
+        new PVector(600, bubbleStartY),
+        new PVector(1, 1),
+        new PVector(50,50),
+        bubbleStartSpeed,
+        new Color(255, 0, 0), window,
+        new PVector(-2, 5)
+    );
+    bubbles.add(bubble3);
 
     // Save the bubbles
     ArrayList<Document> bubbleDocuments = new ArrayList<>();
     for (Bubble bubble : bubbles) {
-      Document bubbleDoc = new Document()
-          .append("position.x", bubble.getPosition().x)
-          .append("position.y", bubble.getPosition().y)
-          .append("direction.x", bubble.getDirection().x)
-          .append("direction.y", bubble.getDirection().y)
-          .append("size.x", bubble.getSize().x)
-          .append("size.y", bubble.getSize().y)
-          .append("speed", bubble.speed)
-          .append("velocity.x", bubble.velocity.x)
-          .append("velocity.y", bubble.velocity.y);
-      bubbleDocuments.add(bubbleDoc);
+      saveBubble(bubbleDocuments, bubble);
     }
     document.append("bubbles", bubbleDocuments);
 
-    new Thread(() -> database.getCollection("level2").insertOne(document)).start();
+    new Thread(() -> database.getCollection("level1").insertOne(document)).start();
+  }
+
+  /** Save a bubble specs to the database.
+   *
+   * @param bubbleDocuments bubble documents
+   * @param bubble current bubble
+   */
+  public void saveBubble(ArrayList<Document> bubbleDocuments, Bubble bubble) {
+    Document bubbleDoc = new Document()
+        .append("position.x", bubble.getPosition().x)
+        .append("position.y", bubble.getPosition().y)
+        .append("direction.x", bubble.getDirection().x)
+        .append("direction.y", bubble.getDirection().y)
+        .append("size.x", bubble.getSize().x)
+        .append("size.y", bubble.getSize().y)
+        .append("speed", bubble.speed)
+        .append("color", bubble.getColorR())
+        .append("velocity.x", bubble.velocity.x)
+        .append("velocity.y", bubble.velocity.y);
+    bubbleDocuments.add(bubbleDoc);
   }
 
   /**Load the game state from the database.
@@ -295,7 +261,6 @@ public class DatabaseHelper {
         // Load the players
         List<Document> playerDocuments = savedGameState.getList("players", Document.class);
         for (int i = playerDocuments.size() - 1; i >= 0; i--) {
-          System.out.println("Loading player " + i);
           Document playerDoc = playerDocuments.get(i);
           Player player = players.get(i);
           player.position.x = playerDoc.getDouble("position.x").floatValue();
@@ -316,6 +281,7 @@ public class DatabaseHelper {
           bubble.direction.y = bubbleDoc.getDouble("direction.y").floatValue();
           bubble.size.x = bubbleDoc.getDouble("size.x").floatValue();
           bubble.speed = bubbleDoc.getDouble("speed").floatValue();
+//          bubble.color = new Color(bubbleDoc.getInteger("red"), 0, 0);
           bubble.velocity = new PVector(bubbleDoc.getDouble("velocity.x").floatValue(),
               bubbleDoc.getDouble("velocity.y").floatValue());
         }
@@ -327,13 +293,13 @@ public class DatabaseHelper {
    *
    * @param bubbles current bubbles
    */
-  public void loadLevel(ArrayList<Bubble> bubbles, GameWindow window) {
+  public void loadLevel(ArrayList<Bubble> bubbles, GameWindow window, String level) {
 
-    Document savedGameState = database.getCollection("level2").find().first();
-
+    Document savedGameState = database.getCollection(level).find().first();
         // Load the bubbles
         List<Document> bubbleDocuments = savedGameState.getList("bubbles", Document.class);
         for (int i = 0; i < bubbleDocuments.size(); i++) {
+          int red = (i == 0) ? 255 : 0;
           Document bubbleDoc = bubbleDocuments.get(i);
           Bubble bubble = new Bubble(
               new PVector(bubbleDoc.getDouble("position.x").floatValue(),
@@ -342,7 +308,7 @@ public class DatabaseHelper {
                   bubbleDoc.getDouble("direction.y").floatValue()),
               new PVector(bubbleDoc.getDouble("size.x").floatValue(),
                   bubbleDoc.getDouble("size.y").floatValue()),
-              bubbleDoc.getDouble("speed").floatValue(), new Color(255, 255, 255), window,
+              bubbleDoc.getDouble("speed").floatValue(), new Color(red, 0, 255), window,
               new PVector(bubbleDoc.getDouble("velocity.x").floatValue(),
                   bubbleDoc.getDouble("velocity.y").floatValue()));
           bubbles.add(bubble);

@@ -61,7 +61,7 @@ public class Scene {
     PImage pauseImage = window.loadImage("../assets/pauseBtn.png");
     pause = new Button(760, 30, 30, 30, pauseImage);
 
-    GameManager.level1(window);
+    GameManager.level0(window);
     /* If you want to change the image,
      * you must make the image the exact size of the window (800 x 600)
      */
@@ -153,20 +153,35 @@ public class Scene {
     }
 
     //Game victory
-    if (bubbles.isEmpty() && levelCount < 1) {
+    if (bubbles.isEmpty()) {
+      switch (levelCount) {
+        case 0:
+          for (Player player : players) {
+            player.position.x = GameWindow.getX() - player.size.x * 2;
+          }
+          databaseHelper.loadLevel(bubbles, window, "level1");
+          break;
+        case 1:
+          databaseHelper.loadLevel(bubbles, window, "level2");
+          break;
+        case 2:
+          sounds.playWinAudio();
+          scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
+          scoreBar.addScore(lives.getLives() * 1000);
+          if (databaseHelper != null) {
+            databaseHelper.put("score", scoreBar.getValue());
+          }
+          levelCount = 0;
+          GameWindow.screen = Screen.win;
+          break;
+        default:
+          System.err.println("Level count is not valid");
+          break;
+      }
       levelCount++;
       timer.resetTimer(window);
-      databaseHelper.loadLevel(bubbles, window);
-    } else if (bubbles.isEmpty() && levelCount == 1) {
-      sounds.playWinAudio();
-      scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
-      scoreBar.addScore(lives.getLives() * 1000);
-      if (databaseHelper != null) {
-        databaseHelper.put("score", scoreBar.getValue());
-        levelCount = 0;
-        GameWindow.screen = Screen.win;
-      }
     }
+
   }
 
   /** Methods for testing purposes. */
