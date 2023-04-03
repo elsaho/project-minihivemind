@@ -51,14 +51,6 @@ public class Timer {
   }
 
   /**
-   * Setter start time.
-   * @param start long
-   */
-  public void setStart(long start) {
-    this.start = start;
-  }
-
-  /**
    * Getter for remaining time.
    * @return remaining long
    */

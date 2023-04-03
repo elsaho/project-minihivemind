@@ -25,6 +25,8 @@ public class Scene {
   private final Lives lives;
   private final ScoreBar scoreBar;
 
+  public static int levelCount = 0;
+
   private Timer timer;
   private PImage bg;
 
@@ -33,7 +35,6 @@ public class Scene {
   public static boolean isImmune = false;
   public static long lastCollisionTime = 0;
 
-//  public static ShootLine shootLine;
   public static SoundEffects sounds;
   public static Button pause;
 
@@ -83,7 +84,6 @@ public class Scene {
     for (Sprite sprite : sprites) {
       sprite.display(window);
     }
-
     // Displays the scoreBar
     scoreBar.display(window);
   }
@@ -153,14 +153,19 @@ public class Scene {
     }
 
     //Game victory
-    if (bubbles.isEmpty()) {
+    if (bubbles.isEmpty() && levelCount < 1) {
+      levelCount++;
+      timer.resetTimer(window);
+      databaseHelper.loadLevel(bubbles, window);
+    } else if (bubbles.isEmpty() && levelCount == 1) {
       sounds.playWinAudio();
       scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
       scoreBar.addScore(lives.getLives() * 1000);
       if (databaseHelper != null) {
         databaseHelper.put("score", scoreBar.getValue());
+        levelCount = 0;
+        GameWindow.screen = Screen.win;
       }
-      GameWindow.screen = Screen.win;
     }
   }
 
@@ -170,9 +175,6 @@ public class Scene {
     return sounds;
   }
 
-//  public static ShootLine getShootLine() {
-//    return shootLine;
-//  }
 
   public Player getPlayer() {
     return GameManager.player;
