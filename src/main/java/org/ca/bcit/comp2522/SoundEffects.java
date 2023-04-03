@@ -1,5 +1,8 @@
 package org.ca.bcit.comp2522;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.sound.sampled.AudioInputStream;
@@ -7,12 +10,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
 /**
  * Class for handling background music.
+ *
  * @author Haurence Li, Elsa Ho, Mai Vu, Tomek Stojek, and Troy Calaquian
  */
 public class SoundEffects {
@@ -28,7 +29,8 @@ public class SoundEffects {
 
 
   /**
-   * Constructor for the SouneEffects class
+   * Constructor for the SouneEffects class.
+   *
    * @throws FileNotFoundException e
    * @throws LineUnavailableException e
    */
@@ -55,9 +57,9 @@ public class SoundEffects {
 
 
   /**
-   * Starts playing the background music
+   * Starts playing the background music.
    */
-  public void playBGM(){
+  public void playBgm() {
     if (!isBGMPlaying) {
       bgm.loop(Clip.LOOP_CONTINUOUSLY);
       isBGMPlaying = true;
@@ -65,55 +67,56 @@ public class SoundEffects {
   }
 
   /**
-   * Plays pop sound effect
+   * Plays pop sound effect.
    */
-  public void playPop(){
+  public void playPop() {
     popAudio.setFramePosition(0);
     popAudio.start();
   }
 
   /**
-   * Plays oof sound effect
+   * Plays oof sound effect.
    */
-  public void playOof(){
+  public void playOof() {
     oofAudio.setFramePosition(0);
     oofAudio.start();
   }
 
   /**
-   * Plays shooting sound effect
+   * Plays shooting sound effect.
    */
-  public void playShoot(){
+  public void playShoot() {
     shootAudio.setFramePosition(0);
     shootAudio.start();
   }
 
   /**
-   * Plays oof sound effect
+   * Plays oof sound effect.
    */
-  public void playLoseAudio(){
+  public void playLoseAudio() {
     loseAudio.setFramePosition(0);
     loseAudio.start();
   }
 
   /**
-   * Plays oof sound effect
+   * Plays oof sound effect.
    */
-  public void playWinAudio(){
+  public void playWinAudio() {
     winAudio.setFramePosition(0);
     winAudio.start();
   }
 
   /**
-   * Stops playing the background music
+   * Stops playing the background music.
    */
-  public void stopBGM(){
+  public void stopBgm() {
     bgm.stop();
   }
 
   Clip loadAudio(Path path) throws  LineUnavailableException {
     try {
-      AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path.toFile().toURI()));
+      AudioInputStream audioInputStream =
+          AudioSystem.getAudioInputStream(new File(path.toFile().toURI()));
       Clip clip = AudioSystem.getClip();
       clip.open(audioInputStream);
       return clip;
