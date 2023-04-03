@@ -1,11 +1,12 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.Color;
+import processing.core.PVector;
+
+import javax.sound.sampled.LineUnavailableException;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.sound.sampled.LineUnavailableException;
-import processing.core.PVector;
 
 /** GameManager class. The class that manages the game levels.
  */

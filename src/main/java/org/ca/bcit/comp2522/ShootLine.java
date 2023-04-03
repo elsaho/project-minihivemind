@@ -14,15 +14,17 @@ public class ShootLine {
   private PVector position;
   private final float speed;
 
-  private final float x;
-  private final float thickness;
-  private final float increments;
-  private final float y;
+  public final static float LINESPEED = 5;
+
+  protected final float x;
+  protected float thickness;
+  protected float increments;
+  protected final float y;
   private final PImage fireball;
 
   public ShootLine(PVector position, float size, float speed, GameWindow window) {
     this.position = position.copy();
-    this.speed = speed;
+    this.speed = LINESPEED;
     this.x = position.x + size/2;
     this.y = GameWindow.getY();
     this.position.y = GameWindow.getY();
@@ -42,10 +44,10 @@ public class ShootLine {
     PVector currRed = new PVector(x - thickness /2, y);
     PVector prevYellow = new PVector(x - thickness /2, y);
     PVector prevRed = new PVector(x + thickness /2, y);
-    float maxIncrements = (increments - this.getPosition().y / this.speed);
-    for(float i = 0; i < maxIncrements - speed; i++) {
-      currYellow.y = (prevYellow.y - this.speed);
-      currRed.y = (prevRed.y - this.speed);
+    float maxIncrements = (increments - this.getPosition().y / this.LINESPEED);
+    for(float i = 0; i < maxIncrements - LINESPEED; i++) {
+      currYellow.y = (prevYellow.y - this.LINESPEED);
+      currRed.y = (prevRed.y - this.LINESPEED);
       window.stroke(255, 204, 0);
       window.line(currYellow.x, currYellow.y, prevYellow.x, prevYellow.y);
       window.stroke(255, 0, 0);
@@ -74,7 +76,7 @@ public class ShootLine {
    */
   public void update() {
     if(this.position.y > 100 + thickness / 2) {
-      this.position.y = (this.position.y - speed);
+      this.position.y = (this.position.y - LINESPEED);
     }
   }
 

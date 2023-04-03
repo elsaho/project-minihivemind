@@ -1,10 +1,11 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.Color;
-import java.io.FileNotFoundException;
-import javax.sound.sampled.LineUnavailableException;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import javax.sound.sampled.LineUnavailableException;
+import java.awt.*;
+import java.io.FileNotFoundException;
 
 /** Player class. The sprite that the user controls.
  * Can move left and right and shoot bullets. Extends Sprite class.
@@ -88,7 +89,14 @@ public class Player extends Sprite {
   /** Updates the player's position based on the arrow key pressed by the user.
    */
   public void update() {
+    System.out.println("size of handlers is " + GameWindow.getHandlers().size());
     setPlayerDirection();
+    if(playersLine != null) {
+      playersLine.update();
+    if (playersLine.checkHitCeiling()) {
+        playersLine = null;
+      }
+    }
     boolean moveLeft = handler.isLeft();
 
     // Code to prevent player from moving outside of window bounds
@@ -137,11 +145,7 @@ public class Player extends Sprite {
           position.x + size.x, position.y, size.x, size.y);
     }
     if (playersLine != null) {
-      playersLine.update();
       playersLine.display(window);
-      if (playersLine.checkHitCeiling()) {
-        playersLine = null;
-      }
     }
 
     window.popStyle();

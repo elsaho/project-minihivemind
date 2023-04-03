@@ -1,9 +1,10 @@
 package org.ca.bcit.comp2522;
 
+import processing.core.PImage;
+
+import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import javax.sound.sampled.LineUnavailableException;
-import processing.core.PImage;
 
 /**
  * Scene class. The class that contains all the sprites in the game.
@@ -14,6 +15,8 @@ import processing.core.PImage;
  */
 
 public class Scene {
+  public static int counter = 0;
+  public final int id = counter++;
 
   // Fields
   private static final ArrayList<Bubble> bubbles = GameManager.bubbles;
@@ -95,6 +98,7 @@ public class Scene {
    */
   public void update(GameWindow window) throws LineUnavailableException, FileNotFoundException {
     //check if the game is paused
+    System.out.println("id = " + id );
     if (!(databaseHelper == null)) {
       GameManager.pause(window);
     }
