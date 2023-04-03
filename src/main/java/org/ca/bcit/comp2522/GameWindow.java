@@ -134,7 +134,7 @@ public class GameWindow extends PApplet {
       case landing -> {
         landingPage.display(this);
         landingPage.update(this);
-        audio.playBGM();
+        audio.playBgm();
       }
       case pause -> {
         pause.display(this);
@@ -151,17 +151,17 @@ public class GameWindow extends PApplet {
       case instruction -> {
         instructionStart.display(this);
         instructionStart.update(this);
-        audio.stopBGM();
+        audio.stopBgm();
       }
       case win -> {
         gameVictory.display(this);
         gameVictory.update(this);
-        audio.stopBGM(); //temp fix
+        audio.stopBgm(); //temp fix
       }
       case lose -> {
         gameOver.display(this);
         gameOver.update(this);
-        audio.stopBGM(); //temp fix
+        audio.stopBgm(); //temp fix
       }
       case level1 -> {
         scene.display(this);
