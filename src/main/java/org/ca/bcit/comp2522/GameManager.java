@@ -95,7 +95,14 @@ public class GameManager {
 
       //generate random position for the bubble to start dropping
       Random rand = new Random();
-      int bubbleStartX = 200;
+      int bubbleStartX;
+      if (!GameLanding.getIs2P()) {
+        //if 1p
+        bubbleStartX = 200;
+      } else {
+        // if 2p
+        bubbleStartX = 300;
+      }
       int bubbleStartY = rand.nextInt(100) + 100;
 
       Bubble bubble = new Bubble(

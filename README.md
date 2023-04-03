@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="460" height="300" src="assets/Graphic.png">
+  <img width="800" height="600" src="assets/Graphic.png">
   
   *We are the bane of bubbles!*
 
