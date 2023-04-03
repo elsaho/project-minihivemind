@@ -8,7 +8,7 @@ import processing.core.PImage;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class InstructionStart {
+public class GameInstruction extends GameScreen{
   /** Image imports: background. */
   private final PImage bg;
   /** Start button function button. */
@@ -17,11 +17,11 @@ public class InstructionStart {
 
 
   /**
-   * Constructor for InstructionStart.
+   * Constructor for GameInstruction.
    *
    * @param window as a GameWindow
    */
-  public InstructionStart(GameWindow window) {
+  public GameInstruction(GameWindow window) {
     bg = window.loadImage("../assets/newInstruct.png");
     PImage startButtonImg = window.loadImage("../assets/newStart.png");
     startGameBtn = new Button(195, 400, 400, 138, startButtonImg);

@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.sound.sampled.LineUnavailableException;
 import processing.core.PVector;
 
-/** GameManager class. The class that manages the game scene.
+/** GameManager class. The class that manages the game levels.
  */
 public class GameManager {
   public static ArrayList<Player> players = new ArrayList<>();

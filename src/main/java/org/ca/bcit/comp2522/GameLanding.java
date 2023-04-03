@@ -5,17 +5,17 @@ import processing.core.PImage;
 /** Manages the landing page.
  *
  */
-public class LandingPage {
+public class GameLanding extends GameScreen{
 
   private final PImage bg;
   private final Button startGameBtn;
   private final Button instructBtn;
 
-  /** Constructor for LandingPage.
+  /** Constructor for GameLanding.
    *
    * @param window as a GameWindow
    */
-  public LandingPage(GameWindow window) {
+  public GameLanding(GameWindow window) {
     bg = window.loadImage("../assets/Landing.png");
     PImage startButtonImg = window.loadImage("../assets/playBtn.png");
     PImage instructBtnImg = window.loadImage("../assets/instructBtn.png");
