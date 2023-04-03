@@ -74,7 +74,7 @@ public class DatabaseHelper {
    */
   public <T> void put(String key, T value) {
     String colName;
-    if (SelectMultiPlayer.getIs2P()) {
+    if (GameLanding.getIs2P()) {
       colName = "score2P";
     } else {
       colName = "score1P";

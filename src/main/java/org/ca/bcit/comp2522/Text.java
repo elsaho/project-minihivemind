@@ -68,7 +68,7 @@ public class Text {
     window.background(bg);
     window.textFont(myFont);
     String colName;
-    if (SelectMultiPlayer.getIs2P()) {
+    if (GameLanding.getIs2P()) {
       colName = "score2P";
     } else {
       colName = "score1P";
