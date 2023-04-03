@@ -35,11 +35,11 @@ public class GameWindow extends PApplet {
   }
 
   /** Landing page. */
-  private LandingPage landingPage;
+  private GameLanding landingPage;
   /** Start page, with instructions. */
-  private InstructionStart instructionStart;
+  private GameInstruction instructionStart;
   private SelectMultiPlayer selectMultiPlayer;
-  private Pause pause;
+  private GamePause pause;
   /** Game over page. */
   private GameOver gameOver;
   /** Game Victory page. */
@@ -65,7 +65,7 @@ public class GameWindow extends PApplet {
     handlers.add(handler);
   }
 
-  public InstructionStart getInstructionStart() {
+  public GameInstruction getInstructionStart() {
     return instructionStart;
   }
 
@@ -107,13 +107,13 @@ public class GameWindow extends PApplet {
       throw new RuntimeException(e);
     }
     // Landing page
-    landingPage = new LandingPage(this);
+    landingPage = new GameLanding(this);
     //Game start and instructions
-    instructionStart = new InstructionStart(this);
+    instructionStart = new GameInstruction(this);
     //Select multiplayer
     selectMultiPlayer = new SelectMultiPlayer(this);
 
-    pause = new Pause(this);
+    pause = new GamePause(this);
     //Game
     scene = new Scene();
     try {

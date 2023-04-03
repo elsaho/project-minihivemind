@@ -10,7 +10,9 @@ import processing.core.PVector;
  * @version 2023
  */
 
-public class ShootLine extends Sprite {
+public class ShootLine {
+  private PVector position;
+  private final float speed;
 
   public final static float LINESPEED = 5;
 
@@ -21,7 +23,6 @@ public class ShootLine extends Sprite {
   private final PImage fireball;
 
   public ShootLine(PVector position, float size, float speed, GameWindow window) {
-    super();
     this.position = position.copy();
     this.speed = LINESPEED;
     this.x = position.x + size/2;
@@ -63,6 +64,10 @@ public class ShootLine extends Sprite {
     }
     window.stroke(0);
 
+  }
+
+  public PVector getPosition() {
+    return position;
   }
 
   /**

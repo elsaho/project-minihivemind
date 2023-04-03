@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
-/** GameManager class. The class that manages the game scene.
+/** GameManager class. The class that manages the game levels.
  */
 public class GameManager {
   public static ArrayList<Player> players = new ArrayList<>();
@@ -73,7 +73,7 @@ public class GameManager {
       if (databaseHelper != null) {
         databaseHelper.put("score", 0);
       }
-      if (!SelectMultiPlayer.getIs2P()) {
+      if (!GameLanding.getIs2P()) {
         //saves the score 0
         player = new Player(
                 new PVector((float) GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),

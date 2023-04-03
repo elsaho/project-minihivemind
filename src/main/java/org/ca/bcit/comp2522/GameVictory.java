@@ -9,7 +9,7 @@ import processing.core.PImage;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class GameVictory {
+public class GameVictory extends GameScreen{
   /**
    * Properties.
    */

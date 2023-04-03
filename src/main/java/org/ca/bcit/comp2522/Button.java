@@ -74,4 +74,23 @@ public class Button {
       window.init();
     }
   }
+
+  /**
+   * Selects the number of players.
+   *
+   * @param window as a GameWindow
+   * @param onePlayerBtn as a Button
+   * @param twoPlayerBtn as a Button
+   */
+  public static void selectMultiPlayer(GameWindow window, Button onePlayerBtn, Button twoPlayerBtn) {
+    if (onePlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
+      GameLanding.setIs2P(false);
+      window.init();
+      GameWindow.screen = Screen.level1;
+    } else if (twoPlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
+      GameLanding.setIs2P(true);
+      window.init();
+      GameWindow.screen = Screen.level1;
+    }
+  }
 }
