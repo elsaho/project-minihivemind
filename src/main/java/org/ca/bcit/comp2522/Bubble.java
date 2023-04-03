@@ -125,7 +125,7 @@ public class Bubble extends Sprite implements Collidable {
       return (distance <= this.getSize().y / 2);
 
     } else if (o instanceof ShootLine shootLine) {
-      PVector lineTemp = new PVector(shootLine.x, shootLine.getPosition().y);
+      PVector lineTemp = new PVector(shootLine.lineX, shootLine.getPosition().y);
       float bubbleRadius = this.getSize().y / 2;
       PVector bubbleTemp = this.getPosition().copy().add(new PVector(bubbleRadius, bubbleRadius));
       if (lineTemp.y < bubbleTemp.y) {

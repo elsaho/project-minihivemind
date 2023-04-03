@@ -15,56 +15,68 @@ public class Text {
 
   private final PFont font;
   private final String text;
-  private final float x;
-  private final float y;
+  private final float textX;
+  private final float textY;
 
   /**
    * Constructor for Text object.
+   *
    * @param text String for the actual text
-   * @param x float positioning on screen
-   * @param y float positioning on screen
+   * @param textX float positioning on screen
+   * @param textY float positioning on screen
    * @param font PFont
    */
-  public Text(String text, float x, float y,PFont font){
+  public Text(String text, float textX, float textY, PFont font) {
     this.text = text;
-    this.x = x;
-    this.y = y;
+    this.textX = textX;
+    this.textY = textY;
     this.font = font;
   }
 
-  /** Getter for font stored */
+  /** Getter for font stored. */
   public PFont getFont() {
     return font;
   }
 
-  /** Getter for text stored position */
+  /** Getter for text stored position. */
   public String getText() {
     return text;
   }
 
-  /** Getter for x position */
-  public float getX() {
-    return x;
+  /** Getter for x position. */
+  public float getTextX() {
+    return textX;
   }
 
-  /** Getter for y position */
-  public float getY() {
-    return y;
+  /** Getter for y position. */
+  public float getTextY() {
+    return textY;
   }
 
 
   /**
-   * Displays text in window
+   * Displays text in window.
+   *
    * @param window GameWindow where text is to be displayed.
    */
-  public void display (final GameWindow window) {
+  public void display(final GameWindow window) {
     window.fill(255);
     window.textFont(font);
     window.textAlign(PConstants.LEFT);
-    window.text(text, x, y);
+    window.text(text, textX, textY);
   }
 
-  public static void EndGameDisplay(GameWindow window, PImage bg, PFont myFont, DatabaseHelper databaseHelper, Button restart) {
+  /**
+   * Launches end game display.
+   *
+   * @param window GameWindow
+   * @param bg PImage
+   * @param myFont PFont
+   * @param databaseHelper DatabaseHelper
+   * @param restart Button
+   */
+  public static void endGameDisplay(
+      GameWindow window, PImage bg, PFont myFont, DatabaseHelper databaseHelper, Button restart) {
     window.background(bg);
     window.textFont(myFont);
     String colName;

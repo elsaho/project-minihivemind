@@ -88,14 +88,6 @@ public class GameWindow extends PApplet {
    * Sets up the game window.
    */
   public void setup() {
-//    DatabaseHelper dh = DatabaseHelper.getInstance();
-//    try {
-//      dh.uploadLevels(this);
-//    } catch (LineUnavailableException e) {
-//      throw new RuntimeException(e);
-//    } catch (FileNotFoundException e) {
-//      throw new RuntimeException(e);
-//    }
     this.init();
   }
 

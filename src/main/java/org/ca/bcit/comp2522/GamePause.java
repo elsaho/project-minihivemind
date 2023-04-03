@@ -7,12 +7,11 @@ import processing.core.PImage;
 
 /** GamePause class. The class that manages the pause screen.
  */
-public class GamePause extends GameScreen{
+public class GamePause extends GameScreen {
   /**
    * Properties.
    */
   private final PImage bg;
-
   private final Button resume;
   private final Button home;
   private final Button restart;

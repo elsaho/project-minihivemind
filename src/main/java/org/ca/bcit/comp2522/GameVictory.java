@@ -9,7 +9,7 @@ import processing.core.PImage;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class GameVictory extends GameScreen{
+public class GameVictory extends GameScreen {
   /**
    * Properties.
    */
@@ -36,7 +36,7 @@ public class GameVictory extends GameScreen{
    * @param window as a Game Window
    */
   public void display(GameWindow window) {
-    Text.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
+    Text.endGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
 
   /**

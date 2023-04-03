@@ -4,11 +4,8 @@ package org.ca.bcit.comp2522;
  */
 public class InputHandler {
   private final int left;
-
   private final int right;
-
   private final int up;
-
   private boolean isLeft;
   private boolean isRight;
   private boolean isUp;
