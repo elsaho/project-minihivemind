@@ -1,17 +1,20 @@
-![My Image](assets/TitleCropped.png)
-# Bubble Trouble
+<p align="center">
+  <img width="460" height="300" src="assets/Graphic.png">
+</p>
 
+<p align="center">
 *We are the bane of bubbles!*
 
 Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
+</p>
 
 ## Instructions
 
 1. Run GameWindow.java
 2. Select 1p or 2p
-3. Pop all the bubbles! Use the up/W key to shoot the bubbles and the L+R/A+D keys to avoid getting hit
+3. Pop all the bubbles! Use the up or 'w' key to shoot and the l/r or a/d keys to avoid getting hit. Pop the bubbles as fast as you can to get a higher score!
 
-## Contributions
+## Roles and Contributions
 
 **Mai Vu**
 - Gameplay mechanics
@@ -40,14 +43,13 @@ Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
 - Debugger
 - Git issues go-to 
 
-
 ## References and Citations
 
 Soundtrack composed by Elsa Ho
 
-Sound effects credit - 
+[Background art credit](https://www.gamedevmarket.net/asset/pixel-skies-demo-background-pack)
 
-Background art and character art credit -
+[Character art credit](https://www.gamedevmarket.net/member/badim)
 
 
 --------------------
