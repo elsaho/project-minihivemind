@@ -12,7 +12,8 @@ public class GameInstruction extends GameScreen{
   /** Image imports: background. */
   private final PImage bg;
   /** Start button function button. */
-  private final Button startGameBtn;
+  private final Button onePlayerBtn;
+  private final Button twoPlayerBtn;
   private final Text text;
 
 
@@ -23,8 +24,10 @@ public class GameInstruction extends GameScreen{
    */
   public GameInstruction(GameWindow window) {
     bg = window.loadImage("../assets/newInstruct.png");
-    PImage startButtonImg = window.loadImage("../assets/newStart.png");
-    startGameBtn = new Button(195, 400, 400, 138, startButtonImg);
+    PImage onePlayerImg = window.loadImage("../assets/1PlayerBtn.png");
+    PImage twoPlayerImg = window.loadImage("../assets/2PlayerBtn.png");
+    onePlayerBtn = new Button(150, 400, 125, 125, onePlayerImg);
+    twoPlayerBtn = new Button(550, 400, 125, 125, twoPlayerImg);
     PFont myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 30);
     text = new Text("Pop the Bubbles!", 180, 85, myFont);
   }
@@ -36,7 +39,8 @@ public class GameInstruction extends GameScreen{
    */
   public void display(GameWindow window) {
     window.background(bg);
-    startGameBtn.display(window);
+    onePlayerBtn.display(window);
+    twoPlayerBtn.display(window);
     text.display(window);
   }
 
@@ -46,10 +50,6 @@ public class GameInstruction extends GameScreen{
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
-    if (startGameBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      GameManager.gameReset(window);
-      System.out.println("Select player button clicked!");
-      GameWindow.screen = Screen.playerSelect;
-    }
+    Button.selectMultiPlayer(window, onePlayerBtn, twoPlayerBtn);
   }
 }
