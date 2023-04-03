@@ -21,13 +21,13 @@ public class ShootLine extends Sprite {
   public ShootLine(PVector position, float size, float speed, GameWindow window) {
     super();
     this.position = position.copy();
-    this.speed = speed;
+    this.speed = speed + 1;
     this.x = position.x + size/2;
     this.y = GameWindow.getY();
     this.position.y = GameWindow.getY();
     this.thickness = 10;
     fireball = window.loadImage("../assets/fireball.png");
-    this.increments = GameWindow.getY() / speed;
+    this.increments = GameWindow.getY() / this.speed;
   }
 
   /**
@@ -68,12 +68,12 @@ public class ShootLine extends Sprite {
    *
    */
   public void update() {
-    if(this.position.y > 100 + thickness / 2) {
+    if(this.position.y > thickness / 2) {
       this.position.y = (this.position.y - speed);
     }
   }
 
   public boolean checkHitCeiling() {
-    return (this.position.y <= 100 + thickness / 2);
+    return (this.position.y <= thickness / 2);
   }
 }
