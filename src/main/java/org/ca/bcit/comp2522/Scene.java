@@ -33,7 +33,7 @@ public class Scene {
   public static boolean isImmune = false;
   public static long lastCollisionTime = 0;
 
-  public static ShootLine shootLine;
+//  public static ShootLine shootLine;
   public static SoundEffects sounds;
   public static Button pause;
 
@@ -170,9 +170,9 @@ public class Scene {
     return sounds;
   }
 
-  public static ShootLine getShootLine() {
-    return shootLine;
-  }
+//  public static ShootLine getShootLine() {
+//    return shootLine;
+//  }
 
   public Player getPlayer() {
     return GameManager.player;
