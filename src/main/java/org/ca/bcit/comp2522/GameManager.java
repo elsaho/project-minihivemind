@@ -17,7 +17,7 @@ public class GameManager {
   /**
    * Bubble constants.
    */
-  public static PVector bubbleStartSize = new PVector(100, 100);
+  public static PVector bubbleStartSize = new PVector(75, 75);
   public static int bubbleStartSpeed = 5;
 
   /**
@@ -50,7 +50,6 @@ public class GameManager {
    */
   public static void pause(GameWindow window) {
     if (Scene.pause.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      System.out.println("Game Paused");
       Scene.isPaused = true;
       databaseHelper.saveGame(window);
       GameWindow.screen = Screen.pause;
@@ -64,7 +63,7 @@ public class GameManager {
    * @throws LineUnavailableException if the line cannot be opened due to resource restrictions
    * @throws FileNotFoundException if the file is not found
    */
-  public static void level1(GameWindow window)
+  public static void level0(GameWindow window)
       throws LineUnavailableException, FileNotFoundException {
 
     if (Scene.isPaused) {

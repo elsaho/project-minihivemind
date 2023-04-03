@@ -20,7 +20,7 @@ public class Bubble extends Sprite implements Collidable {
   public static final float MIN_SIZE = 25f;
 
   //Bubble image
-  private final PImage bubbleImage;
+  private PImage bubbleImage;
 
   //Velocity of the bubble
   public PVector velocity;
@@ -41,7 +41,11 @@ public class Bubble extends Sprite implements Collidable {
                 float speed, Color color, GameWindow window, PVector velocity) {
     super(position, direction, size, speed, color, window);
     this.velocity = velocity;
-    this.bubbleImage = window.loadImage("../assets/bubble.png");
+    if (this.color.getRed() == 255) {
+      this.bubbleImage = window.loadImage("../assets/pinkBubble.png");
+    } else if (this.color.getRed() == 0) {
+      this.bubbleImage = window.loadImage("../assets/bubble.png");
+    }
   }
 
   /**
@@ -152,4 +156,7 @@ public class Bubble extends Sprite implements Collidable {
     }
   }
 
+  public int getColorR() {
+    return this.color.getRed();
+  }
 }
