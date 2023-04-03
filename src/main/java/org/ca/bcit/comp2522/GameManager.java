@@ -72,7 +72,7 @@ public class GameManager {
       if (databaseHelper != null) {
         databaseHelper.put("score", 0);
       }
-      if (!SelectMultiPlayer.getIs2P()) {
+      if (!GameLanding.getIs2P()) {
         //saves the score 0
         player = new Player(
                 new PVector((float) GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),
