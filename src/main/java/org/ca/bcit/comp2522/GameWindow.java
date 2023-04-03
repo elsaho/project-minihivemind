@@ -1,10 +1,9 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PApplet;
-
-import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.sound.sampled.LineUnavailableException;
+import  processing.core.PApplet;
 
 /**
  * The main class for the game.
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 public class GameWindow extends PApplet {
 
   /** Scene class to handle game scenes. */
-  private static ArrayList<InputHandler> handlers = new ArrayList<>();
+  private final ArrayList<InputHandler> handlers = new ArrayList<>();
   private Scene scene;
   /** Game screen width. */
   private static final int x = 800;
@@ -177,21 +176,6 @@ public class GameWindow extends PApplet {
         landingPage.update(this);
       }
     }
-  }
-
-  public static ArrayList<InputHandler> getHandlers() {
-    return handlers;
-  }
-
-  public static void setHandlers(ArrayList<InputHandler> handlers) {
-    GameWindow.handlers = handlers;
-  }
-
-  /**
-   * Clears the handlers.
-   */
-  public static void clearHandlers() {
-    handlers.clear();
   }
 
   /**
