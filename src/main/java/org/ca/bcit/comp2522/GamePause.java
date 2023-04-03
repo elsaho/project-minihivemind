@@ -8,6 +8,7 @@ import processing.core.PImage;
 /** GamePause class. The class that manages the pause screen.
  */
 public class GamePause extends GameScreen{
+
   /**
    * Properties.
    */
