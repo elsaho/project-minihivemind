@@ -50,6 +50,7 @@ public class GameManager {
    */
   public static void pause(GameWindow window) {
     if (Scene.pause.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
+      System.out.println("Game Paused");
       Scene.isPaused = true;
       databaseHelper.saveGame(window);
       GameWindow.screen = Screen.pause;
@@ -125,6 +126,7 @@ public class GameManager {
    * @param window game window
    */
   public static void gameReset(GameWindow window) {
+    Scene.levelCount = 0;
     Lives lives = Lives.getInstance();
     lives.setLives(3);
     ScoreBar.getInstance().resetValue();
