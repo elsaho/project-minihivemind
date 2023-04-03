@@ -1,12 +1,14 @@
 <p align="center">
   <img width="460" height="300" src="assets/Graphic.png">
-</p>
-
-<p align="center">
-*We are the bane of bubbles!*
+  
+  *We are the bane of bubbles!*
 
 Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
 </p>
+
+
+
+
 
 ## Instructions
 
