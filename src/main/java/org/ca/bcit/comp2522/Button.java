@@ -82,7 +82,8 @@ public class Button {
    * @param onePlayerBtn as a Button
    * @param twoPlayerBtn as a Button
    */
-  public static void selectMultiPlayer(GameWindow window, Button onePlayerBtn, Button twoPlayerBtn) {
+  public static void selectMultiPlayer(GameWindow window,
+                                       Button onePlayerBtn, Button twoPlayerBtn) {
     if (onePlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameLanding.setIs2P(false);
       window.init();

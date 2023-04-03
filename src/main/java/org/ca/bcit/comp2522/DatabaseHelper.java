@@ -1,5 +1,8 @@
 package org.ca.bcit.comp2522;
 
+import static org.ca.bcit.comp2522.GameManager.bubbleStartSize;
+import static org.ca.bcit.comp2522.GameManager.bubbleStartSpeed;
+
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerApi;
@@ -8,21 +11,15 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-
-import java.awt.*;
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
+import javax.sound.sampled.LineUnavailableException;
 import org.bson.Document;
 import processing.core.PVector;
-
-import javax.sound.sampled.LineUnavailableException;
-
-import static org.ca.bcit.comp2522.GameManager.bubbleStartSize;
-import static org.ca.bcit.comp2522.GameManager.bubbleStartSpeed;
 
 /**
  * A helper class for connecting to MongoDB.
@@ -185,14 +182,12 @@ public class DatabaseHelper {
   /** Load levels to datatbase.
    *
    */
-  public void uploadLevels(GameWindow window) throws LineUnavailableException, FileNotFoundException {
-    Document document = new Document();
+  public void uploadLvls(GameWindow window) throws LineUnavailableException, FileNotFoundException {
     ArrayList<Player> players = new ArrayList<>();
-    ArrayList<Bubble> bubbles = new ArrayList<>();
     Player playerSolo = new Player(
-          new PVector((float) GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),
-          new PVector(0, 1), playerSize, playerSpeed,
-          new Color(0, 255, 255), window, 37, 39, 38, 1);
+        new PVector((float) GameWindow.getX() / 2 - 50, GameWindow.getY() - playerSize.y),
+        new PVector(0, 1), playerSize, playerSpeed,
+        new Color(0, 255, 255), window, 37, 39, 38, 1);
     players.add(playerSolo);
     Player player1 = new Player(
           new PVector((float) GameWindow.getX() / 2 + 50, GameWindow.getY() - playerSize.y),
@@ -205,8 +200,8 @@ public class DatabaseHelper {
           new Color(0, 255, 255), window, 65, 68, 87, 2);
     players.add(player2);
 
-
     // Save the player
+    Document document = new Document();
     ArrayList<Document> playerDocuments = new ArrayList<>();
     for (Player player : players) {
       Document playerDoc = new Document()
@@ -225,8 +220,8 @@ public class DatabaseHelper {
     }
     document.append("players", playerDocuments);
 
+    ArrayList<Bubble> bubbles = new ArrayList<>();
     Random rand = new Random();
-    int bubbleStartX = 200;
     int bubbleStartY = rand.nextInt(100) + 100;
 
     Bubble bubble1 = new Bubble(
@@ -331,21 +326,21 @@ public class DatabaseHelper {
 
     Document savedGameState = database.getCollection("level2").find().first();
 
-        // Load the bubbles
-        List<Document> bubbleDocuments = savedGameState.getList("bubbles", Document.class);
-        for (int i = 0; i < bubbleDocuments.size(); i++) {
-          Document bubbleDoc = bubbleDocuments.get(i);
-          Bubble bubble = new Bubble(
-              new PVector(bubbleDoc.getDouble("position.x").floatValue(),
-                  bubbleDoc.getDouble("position.y").floatValue()),
-              new PVector(bubbleDoc.getDouble("direction.x").floatValue(),
-                  bubbleDoc.getDouble("direction.y").floatValue()),
-              new PVector(bubbleDoc.getDouble("size.x").floatValue(),
-                  bubbleDoc.getDouble("size.y").floatValue()),
-              bubbleDoc.getDouble("speed").floatValue(), new Color(255, 255, 255), window,
-              new PVector(bubbleDoc.getDouble("velocity.x").floatValue(),
-                  bubbleDoc.getDouble("velocity.y").floatValue()));
-          bubbles.add(bubble);
-        }
+    // Load the bubbles
+    List<Document> bubbleDocuments = savedGameState.getList("bubbles", Document.class);
+    for (int i = 0; i < bubbleDocuments.size(); i++) {
+      Document bubbleDoc = bubbleDocuments.get(i);
+      Bubble bubble = new Bubble(
+          new PVector(bubbleDoc.getDouble("position.x").floatValue(),
+              bubbleDoc.getDouble("position.y").floatValue()),
+          new PVector(bubbleDoc.getDouble("direction.x").floatValue(),
+              bubbleDoc.getDouble("direction.y").floatValue()),
+          new PVector(bubbleDoc.getDouble("size.x").floatValue(),
+              bubbleDoc.getDouble("size.y").floatValue()),
+          bubbleDoc.getDouble("speed").floatValue(), new Color(255, 255, 255), window,
+          new PVector(bubbleDoc.getDouble("velocity.x").floatValue(),
+              bubbleDoc.getDouble("velocity.y").floatValue()));
+      bubbles.add(bubble);
     }
+  }
 }
