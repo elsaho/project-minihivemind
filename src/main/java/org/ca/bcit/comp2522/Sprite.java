@@ -42,6 +42,10 @@ public abstract class Sprite {
     this.color = color;
   }
 
+  public Sprite() {
+
+  }
+
   /**
    * Gets direction of sprite
    * @return PVector
