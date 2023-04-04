@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="17">
+      <module name="BubbleTrouble" target="17" />
+      <module name="BubbleTrouble.main" target="17" />
+      <module name="BubbleTrouble.test" target="17" />
+      <module name="Game" target="17" />
+      <module name="Game.main" target="17" />
+      <module name="Game.test" target="17" />
+      <module name="Test" target="17" />
+      <module name="Test.main" target="17" />
+      <module name="Test.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

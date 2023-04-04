@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="library">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../../EclipseWorkspace/TestGame/library" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="jar://$PROJECT_DIR$/Game/library/core.jar!/" />
+    </excluded>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../EclipseWorkspace/TestGame/library" recursive="false" />
+  </library>
+</component>

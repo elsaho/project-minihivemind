@@ -1,3 +1,61 @@
+<p align="center">
+  <img width="800" height="600" src="assets/Graphic.png">
+  
+  *We are the bane of bubbles!*
+
+Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
+</p>
+
+
+
+
+
+## Instructions
+
+1. Run GameWindow.java
+2. Select 1p or 2p
+3. Pop all the bubbles! Use the up or 'w' key to shoot and the l/r or a/d keys to avoid getting hit. Pop the bubbles as fast as you can to get a higher score!
+
+## Roles and Contributions
+
+**Mai Vu**
+- Gameplay mechanics
+- Backend 
+- Debugger
+
+**Elsa Ho**
+- Gameplay mechanics
+- UI/UX
+- Soundtrack composer
+- Debugger
+
+**Tomek Stojek**
+- Gameplay mechanics
+- Debugger
+
+**Troy Calaquian**
+- Gameplay mechanics
+- Test maker
+- Debugger
+
+**Haurence Li**
+- Gameplay mechanics
+- Sound specialist
+- Test maker
+- Debugger
+- Git issues go-to 
+
+## References and Citations
+
+Soundtrack composed by Elsa Ho
+
+[Background art credit](https://www.gamedevmarket.net/asset/pixel-skies-demo-background-pack)
+
+[Character art credit](https://www.gamedevmarket.net/member/badim)
+
+
+--------------------
+
 # Project
 
 ## Technical Project Requirements
@@ -52,7 +110,7 @@ Submission is here, on GitHub, in the `README.md` file.
 
 ## Final Product (group, 5%)
 
-The Final Product will be evaluated for overall code design and documentation and evaluated on the same design principles as individual contributions. If you are below the 1000 line minimum contribution, your mark will be scaled down for this portion.
+The Final Product will be evaluated for overall code design and documentation and evaluated on the same design principles as individual contributions. If you are below the 1000 shootLine minimum contribution, your mark will be scaled down for this portion.
 
 Submission is here, on GitHub.
 
@@ -107,7 +165,7 @@ You must use pull requests to manage your code integration:
 - make your commits, e.g., `git add .` and `git commit -m "fixed issue 71 by reloading gradle for the 100th time"` and `git push origin pb_71_demo`.
 - merge `main` into your branch, and NOT the other way around. E.g., `git merge main`. YOU fix all the merge conflicts or problems that arise. Commit and push again.
 - go to GitHub.com and make a pull request
-- one other person (NOT YOU) needs to review the code and either approve or reject your changes with detailed line-by-line comments.
+- one other person (NOT YOU) needs to review the code and either approve or reject your changes with detailed shootLine-by-shootLine comments.
 - If needed, make the requested fixes and commit and push again.
 - the other person (NOT YOU) will merge your PR into `main`
 - the other person (NOT YOU) will delete your branch
