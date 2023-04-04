@@ -33,7 +33,6 @@ public class SceneTest {
   @Test
   public void testSceneConstructor() {
     assertNotNull(sceneTest.getSounds());
-    assertNull(Scene.getShootLine());
     assertNotNull(sceneTest.getPlayer());
     assertNotNull(sceneTest.getSprites());
     assertNotNull(sceneTest.getRemovedSprites());

@@ -49,12 +49,10 @@ public class GameLanding extends GameScreen {
     if (onePlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       is2P = false;
       window.init();
-      System.out.println("1P");
       GameWindow.screen = Screen.level1;
     } else if (twoPlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       is2P = true;
       window.init();
-      System.out.println("2P");
       GameWindow.screen = Screen.level1;
     } else if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.instruction;
