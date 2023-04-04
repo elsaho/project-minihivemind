@@ -19,14 +19,11 @@ public class Player extends Sprite {
   private final int playerNo;
   private final InputHandler handler;
   private final SoundEffects sounds = new SoundEffects();
-
   private final PImage playerLeft;
   private final PImage playerRight;
   private final PImage shootLeft;
   private final PImage shootRight;
-
   private boolean playerFaceLeft;
-
   private final GameWindow window;
   private ShootLine playersLine;
 

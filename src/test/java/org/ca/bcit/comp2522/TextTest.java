@@ -31,8 +31,8 @@ class TextTest {
   @Test
   public void testConstructor() {
     assertEquals("Hello!", text.getText());
-    assertEquals(200, text.getX());
-    assertEquals(300, text.getY());
+    assertEquals(200, text.getTextX());
+    assertEquals(300, text.getTextY());
     assertEquals(font, text.getFont());
   }
 

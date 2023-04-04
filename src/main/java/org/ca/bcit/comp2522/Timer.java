@@ -9,7 +9,7 @@ package org.ca.bcit.comp2522;
  */
 public class Timer {
   /**
-   * Start time var
+   * Start time var.
    */
   private long start;
   /**
@@ -32,7 +32,8 @@ public class Timer {
   }
 
   /**
-   * Initiates singleton Timer
+   * Initiates singleton Timer.
+   *
    * @return single_instance Timer
    */
   public static Timer getInstance(GameWindow window) {
@@ -44,6 +45,7 @@ public class Timer {
 
   /**
    * Getter for start time.
+   *
    * @return start long
    */
   public long getStart() {
@@ -52,6 +54,7 @@ public class Timer {
 
   /**
    * Getter for remaining time.
+   *
    * @return remaining long
    */
   public long getRemaining() {
@@ -60,6 +63,7 @@ public class Timer {
 
   /**
    * Setter for remaining time, initalized at game start.
+   *
    * @param remaining long
    */
   public void setRemaining(long remaining) {
@@ -73,6 +77,7 @@ public class Timer {
 
   /**
    * converts current time in seconds to String.
+   *
    * @return timeString String
    */
   public String timeToString() {

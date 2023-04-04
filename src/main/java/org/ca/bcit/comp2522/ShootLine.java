@@ -12,18 +12,26 @@ import processing.core.PVector;
 
 public class ShootLine extends Sprite {
 
-  protected final float x;
+  protected final float lineX;
   protected float thickness;
   protected float increments;
-  protected final float y;
+  protected final float lineY;
   private final PImage fireball;
 
+  /**
+   * Constructor for the Line shooting action.
+   *
+   * @param position PVector
+   * @param size float
+   * @param speed float
+   * @param window GameWindow
+   */
   public ShootLine(PVector position, float size, float speed, GameWindow window) {
     super();
     this.position = position.copy();
     this.speed = speed + 1;
-    this.x = position.x + size/2;
-    this.y = GameWindow.getY();
+    this.lineX = position.x + size / 2;
+    this.lineY = GameWindow.getY();
     this.position.y = GameWindow.getY();
     this.thickness = 10;
     fireball = window.loadImage("../assets/fireball.png");
@@ -31,18 +39,19 @@ public class ShootLine extends Sprite {
   }
 
   /**
-   * Displays shootLine onto the window
+   * Displays shootLine onto the window.
+   *
    * @param window as a GameWindow
    */
   public void display(GameWindow window) {
     window.strokeWeight(1);
-    window.image(fireball, this.x - thickness * 2, position.y - thickness, 42, 64);
-    PVector currYellow = new PVector(x + thickness /2, y);
-    PVector currRed = new PVector(x - thickness /2, y);
-    PVector prevYellow = new PVector(x - thickness /2, y);
-    PVector prevRed = new PVector(x + thickness /2, y);
+    window.image(fireball, this.lineX - thickness * 2, position.y - thickness, 42, 64);
+    PVector currYellow = new PVector(lineX + thickness / 2, lineY);
+    PVector currRed = new PVector(lineX - thickness / 2, lineY);
+    PVector prevYellow = new PVector(lineX - thickness / 2, lineY);
+    PVector prevRed = new PVector(lineX + thickness / 2, lineY);
     float maxIncrements = (increments - this.getPosition().y / this.speed);
-    for(float i = 0; i < maxIncrements - speed; i++) {
+    for (float i = 0; i < maxIncrements - speed; i++) {
       currYellow.y = (prevYellow.y - this.speed);
       currRed.y = (prevRed.y - this.speed);
       window.stroke(255, 204, 0);
@@ -52,10 +61,10 @@ public class ShootLine extends Sprite {
       prevYellow.y = currYellow.y;
       prevRed.y = currRed.y;
       float tempX = prevYellow.x;
-      float tempX2 = prevRed.x;
       prevYellow.x = currYellow.x;
       prevRed.x = currRed.x;
       currYellow.x = tempX;
+      float tempX2 = prevRed.x;
       currRed.x = tempX2;
 
     }
@@ -68,7 +77,7 @@ public class ShootLine extends Sprite {
    *
    */
   public void update() {
-    if(this.position.y > thickness / 2) {
+    if (this.position.y > thickness / 2) {
       this.position.y = (this.position.y - speed);
     }
   }

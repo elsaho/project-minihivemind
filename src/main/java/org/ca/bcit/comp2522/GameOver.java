@@ -10,7 +10,7 @@ import processing.core.PImage;
  * @version 2023
  */
 
-public class GameOver extends GameScreen{
+public class GameOver extends GameScreen {
 
   /**
    * Properties.
@@ -38,7 +38,7 @@ public class GameOver extends GameScreen{
    * @param window GameWindow
    */
   public void display(GameWindow window) {
-    Text.EndGameDisplay(window, bg, myFont, databaseHelper, restart);
+    Text.endGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
 
 

@@ -1,8 +1,7 @@
 package org.ca.bcit.comp2522;
 
+import java.awt.Color;
 import processing.core.PVector;
-
-import java.awt.*;
 
 /**
  * Sprite. The base class for all sprites in the game.
@@ -47,7 +46,8 @@ public abstract class Sprite {
   }
 
   /**
-   * Gets direction of sprite
+   * Gets direction of sprite.
+   *
    * @return PVector
    */
   public PVector getDirection() {
@@ -55,7 +55,8 @@ public abstract class Sprite {
   }
 
   /**
-   * Gets position of sprite
+   * Gets position of sprite.
+   *
    * @return PVector
    */
   public PVector getPosition() {
@@ -63,7 +64,8 @@ public abstract class Sprite {
   }
 
   /**
-   * Gets size of sprite
+   * Gets size of sprite.
+   *
    * @return size as a float
    */
   public PVector getSize() {
@@ -71,7 +73,8 @@ public abstract class Sprite {
   }
 
   /**
-   * Helper method for the collided function to find the closest point of player to bubble
+   * Helper method for the collided function to find the closest point of player to bubble.
+   *
    * @param value as a float
    * @param min as a float
    * @param max as a float

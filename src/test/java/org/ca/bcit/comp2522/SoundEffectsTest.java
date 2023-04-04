@@ -26,7 +26,7 @@ class SoundEffectsTest {
 
   @Test
   void playBGMTest() throws InterruptedException {
-    testSound.playBGM();
+    testSound.playBgm();
     Thread.sleep(100);
     assertTrue(testSound.bgm.isActive());
   }
@@ -61,11 +61,11 @@ class SoundEffectsTest {
 
   @Test
   void stopBGMTest() throws InterruptedException {
-    testSound.playBGM();
+    testSound.playBgm();
     Thread.sleep(100);
     Assertions.assertTrue(testSound.bgm.isActive());
 
-    testSound.stopBGM();
+    testSound.stopBgm();
     Thread.sleep(100);
     Assertions.assertFalse(testSound.bgm.isActive());
   }

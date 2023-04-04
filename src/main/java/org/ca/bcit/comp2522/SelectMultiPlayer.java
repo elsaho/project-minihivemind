@@ -4,7 +4,7 @@ import processing.core.PFont;
 import processing.core.PImage;
 
 /**
- * Manages select multiplayer screen
+ * Manages select multiplayer screen.
  *
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
@@ -13,13 +13,18 @@ import processing.core.PImage;
 public class SelectMultiPlayer {
 
   /**
-   * Properties
+   * Properties of the Select Multiple player class.
    */
   private final PImage bg;
   private final Button onePlayerBtn;
   private final Button twoPlayerBtn;
   private final Text text;
 
+  /**
+   * Constructor for the screen.
+   *
+   * @param window GameWindow
+   */
   public SelectMultiPlayer(GameWindow window) {
     bg = window.loadImage("../assets/SkyBackground.png");
     PImage onePlayerImg = window.loadImage("../assets/1PlayerBtn.png");
@@ -31,7 +36,8 @@ public class SelectMultiPlayer {
   }
 
   /**
-   * Displays the select multiplayer page
+   * Displays the select multiplayer page.
+   *
    * @param window as a GameWindow
    */
   public void display(GameWindow window) {
@@ -42,7 +48,8 @@ public class SelectMultiPlayer {
   }
 
   /**
-   * Updates the select multiplayer page
+   * Updates the select multiplayer page.
+   *
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {

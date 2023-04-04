@@ -34,7 +34,8 @@ public class ScoreBar {
   }
 
   /**
-   * Add to scoreboard value based on time
+   * Add to scoreboard value based on time.
+   *
    * @param time as an int
    */
   public void finishedLevel(int time) {
@@ -42,7 +43,8 @@ public class ScoreBar {
   }
 
   /**
-   * Gets score value
+   * Gets score value.
+   *
    * @return value as an int
    */
   public int getValue() {
@@ -50,14 +52,15 @@ public class ScoreBar {
   }
 
   /**
-   * Resets score value
+   * Resets score value.
    */
   public void resetValue() {
     this.value = 0;
   }
 
   /**
-   * Adds to score value
+   * Adds to score value.
+   *
    * @param i as an int
    */
   public void addScore(int i) {
