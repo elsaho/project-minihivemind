@@ -190,7 +190,6 @@ public class Scene {
     return sounds;
   }
 
-
   public Player getPlayer() {
     return GameManager.player;
   }
@@ -222,5 +221,10 @@ public class Scene {
   public ArrayList<Bubble> getBubbles() {
     return bubbles;
   }
+
+  public static Button getPause() {
+    return pause;
+  }
+
 
 }
