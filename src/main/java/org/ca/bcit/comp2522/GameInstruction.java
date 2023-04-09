@@ -16,7 +16,6 @@ public class GameInstruction extends GameScreen {
   private final Button twoPlayerBtn;
   private final Text text;
 
-
   /**
    * Constructor for GameInstruction.
    *
@@ -30,6 +29,38 @@ public class GameInstruction extends GameScreen {
     twoPlayerBtn = new Button(550, 400, 125, 125, twoPlayerImg);
     PFont myFont = window.createFont("../assets/PressStart2P-Regular.ttf", 30);
     text = new Text("Pop the Bubbles!", 180, 85, myFont);
+  }
+
+  /**
+   * Getter for BG image, setup for test.
+   * @return bg PImage
+   */
+  public PImage getBg() {
+    return bg;
+  }
+
+  /**
+   * Getter for P1 Button, setup for test.
+   * @return onePlayerBtn Button
+   */
+  public Button getOnePlayerBtn() {
+    return onePlayerBtn;
+  }
+
+  /**
+   * Getter for P2 Button, setup for test.
+   * @return twoPlayerBtn Button
+   */
+  public Button getTwoPlayerBtn() {
+    return twoPlayerBtn;
+  }
+
+  /**
+   * Getter for text, setup for test.
+   * @return text Text
+   */
+  public Text getText() {
+    return text;
   }
 
   /**

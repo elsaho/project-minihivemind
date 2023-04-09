@@ -6,17 +6,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TimerTest {
-
+  GameWindow window;
   Timer timerTest;
 
   @BeforeEach
   public void setUp() {
-    timerTest = Timer.getInstance();
+    window = new GameWindow();
+    timerTest = Timer.getInstance(window);
   }
 
   @Test
   public void testGetTimer() {
-    assert(timerTest.getStart() == 0);
+    assertEquals(90000, timerTest.getStart());
   }
 
   @Test
@@ -39,8 +40,9 @@ public class TimerTest {
 
   @Test
   public void testGetInstance() {
-    Timer timerTest2 = Timer.getInstance();
-    assert(timerTest2.getStart() == 0);
+    GameWindow window = new GameWindow();
+    Timer timerTest2 = Timer.getInstance(window);
+    assertEquals(90000, timerTest2.getStart());
   }
 
 }
