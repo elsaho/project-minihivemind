@@ -44,6 +44,14 @@ public class Timer {
   }
 
   /**
+   * Setter for start
+   * @param i int
+   */
+  public void setStart(int i) {
+    start = i;
+  }
+
+  /**
    * Getter for start time.
    *
    * @return start long
@@ -84,5 +92,4 @@ public class Timer {
     int seconds = (int) (single_instance.remaining / 1000);
     return String.format("%02d", seconds);
   }
-
 }
