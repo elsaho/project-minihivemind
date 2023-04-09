@@ -120,7 +120,7 @@ public class Scene {
         }
 
         if (player.getPlayersLine() != null && bubble.collided(player.getPlayersLine())) {
-          sounds.playPop();
+          sounds.playSfx(sounds.popAudio);
           player.setPlayersLine(null);
           bubblesToRemove.add(bubble);
           if (bubble.size.x > Bubble.MIN_SIZE) {
@@ -165,7 +165,7 @@ public class Scene {
           databaseHelper.loadLevel(bubbles, window, "level2");
           break;
         case 2:
-          sounds.playWinAudio();
+          sounds.playSfx(sounds.winAudio);
           scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
           scoreBar.addScore(lives.getLives() * 1000);
           if (databaseHelper != null) {

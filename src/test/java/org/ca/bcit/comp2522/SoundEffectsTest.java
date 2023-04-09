@@ -32,10 +32,16 @@ class SoundEffectsTest {
   }
 
   @Test
-  void playPopTest() throws InterruptedException {
-    testSound.playPop();
+  void playSfxTest() throws InterruptedException {
+    testSound.playSfx(testSound.popAudio);
     Thread.sleep(100);
     assertTrue(testSound.popAudio.isActive());
+    testSound.playSfx(testSound.shootAudio);
+    Thread.sleep(100);
+    assertTrue(testSound.shootAudio.isActive());
+    testSound.playSfx(testSound.winAudio);
+    Thread.sleep(100);
+    assertTrue(testSound.winAudio.isActive());
   }
 
   @Test
@@ -50,13 +56,6 @@ class SoundEffectsTest {
     testSound.playLoseAudio();
     Thread.sleep(100);
     assertTrue(testSound.loseAudio.isActive());
-  }
-
-  @Test
-  void playWinAudioTest() throws InterruptedException {
-    testSound.playWinAudio();
-    Thread.sleep(100);
-    assertTrue(testSound.winAudio.isActive());
   }
 
   @Test

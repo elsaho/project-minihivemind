@@ -55,6 +55,13 @@ public class SoundEffects {
     winAudio = loadAudio(winPath);
   }
 
+  /**
+   * Reset the audio and play the clip.
+   */
+  public void playSfx(Clip clip) {
+    clip.setFramePosition(0);
+    clip.start();
+  }
 
   /**
    * Starts playing the background music.
@@ -67,14 +74,6 @@ public class SoundEffects {
   }
 
   /**
-   * Plays pop sound effect.
-   */
-  public void playPop() {
-    popAudio.setFramePosition(0);
-    popAudio.start();
-  }
-
-  /**
    * Plays oof sound effect.
    */
   public void playOof() {
@@ -83,27 +82,11 @@ public class SoundEffects {
   }
 
   /**
-   * Plays shooting sound effect.
-   */
-  public void playShoot() {
-    shootAudio.setFramePosition(0);
-    shootAudio.start();
-  }
-
-  /**
    * Plays oof sound effect.
    */
   public void playLoseAudio() {
     loseAudio.setFramePosition(0);
     loseAudio.start();
-  }
-
-  /**
-   * Plays oof sound effect.
-   */
-  public void playWinAudio() {
-    winAudio.setFramePosition(0);
-    winAudio.start();
   }
 
   /**
