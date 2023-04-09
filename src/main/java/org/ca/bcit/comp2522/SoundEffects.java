@@ -58,7 +58,7 @@ public class SoundEffects {
   /**
    * Reset the audio and play the clip.
    */
-  public void playSfx(Clip clip){
+  public void playSfx(Clip clip) {
     clip.setFramePosition(0);
     clip.start();
   }
