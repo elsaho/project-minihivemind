@@ -7,7 +7,7 @@ import processing.core.PApplet;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TimerTest {
-
+  GameWindow window;
   Timer timerTest;
   GameWindow gameWindowTest;
 
@@ -29,5 +29,4 @@ public class TimerTest {
     timerTest.setRemaining(1000);
     assert(timerTest.timeToString().equals("01"));
   }
-
 }

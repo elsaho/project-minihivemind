@@ -56,7 +56,6 @@ public class GameLanding extends GameScreen {
       GameWindow.screen = Screen.level1;
     } else if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.instruction;
-      System.out.println("instruction button clicked");
       window.init();
     }
   }
