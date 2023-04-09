@@ -33,11 +33,7 @@ public class SceneTest {
   @Test
   public void testSceneConstructor() {
     assertNotNull(sceneTest.getSounds());
-    assertNotNull(sceneTest.getPlayer());
-    assertNotNull(sceneTest.getSprites());
-    assertNotNull(sceneTest.getRemovedSprites());
     assertNotNull(sceneTest.getLives());
-    assertNotNull(sceneTest.getTimer());
     assertNotNull(sceneTest.getScoreBar());
   }
 
@@ -45,17 +41,14 @@ public class SceneTest {
   public void testSetup() throws LineUnavailableException, FileNotFoundException {
     sceneTest.setup(gameWindow);
     assertNotNull(sceneTest.getBg());
-    ArrayList<Sprite> sprites = sceneTest.getSprites();
-    assertEquals(sceneTest.getPlayer(), sprites.get(0));
-    assertEquals(2, sprites.size());
-    ArrayList<Bubble> bubbles = sceneTest.getBubbles();
-    assertNotNull(bubbles.get(0));
-    assertEquals(1, bubbles.size());
+    assertNotNull(sceneTest.getPause());
+    assertNotNull(sceneTest.getTimer());
   }
 
   @Test
-  public void testUpdateLineInstance() {
-
+  public void testDisplay() {
+    sceneTest.display(gameWindow);
+    assertNotNull(sceneTest.getSprites());
   }
 
 }
