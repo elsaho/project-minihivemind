@@ -1,10 +1,9 @@
 package org.ca.bcit.comp2522;
 
+import java.awt.Color;
+import java.util.ArrayList;
 import processing.core.PImage;
 import processing.core.PVector;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * Bubble class creates the bubbles that the player can pop.

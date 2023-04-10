@@ -264,7 +264,8 @@ public class DatabaseHelper {
    * @param bubbles current bubbles
    * @param sprites current sprites
    */
-  public void loadLevel(ArrayList<Bubble> bubbles, ArrayList<Sprite> sprites, GameWindow window, String level) {
+  public void loadLevel(ArrayList<Bubble> bubbles, ArrayList<Sprite> sprites,
+                        GameWindow window, String level) {
     Document savedGameState = database.getCollection(level).find().first();
     // Load the bubbles
     List<Document> bubbleDocuments = savedGameState.getList("bubbles", Document.class);
