@@ -1,11 +1,10 @@
 package org.ca.bcit.comp2522;
 
+import java.awt.Color;
+import java.io.FileNotFoundException;
+import javax.sound.sampled.LineUnavailableException;
 import processing.core.PImage;
 import processing.core.PVector;
-
-import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
-import java.io.FileNotFoundException;
 
 /** Player class. The sprite that the user controls.
  * Can move left and right and shoot bullets. Extends Sprite class.
