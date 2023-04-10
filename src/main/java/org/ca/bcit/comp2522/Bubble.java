@@ -1,9 +1,10 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.Color;
-import java.util.ArrayList;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Bubble class creates the bubbles that the player can pop.
@@ -51,7 +52,7 @@ public class Bubble extends Sprite implements Collidable {
   /**
    * Bounce method allows bubbles to bounce off floors and walls.
    */
-  public void bounce() {
+  public void update() {
     // set bounce velocity, change to static final if we don't want to have diff bounce velocity
     float bounceVelocity = -2.7f - (this.size.y / MIN_SIZE);
 

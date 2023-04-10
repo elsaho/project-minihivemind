@@ -1,7 +1,8 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.Color;
 import processing.core.PVector;
+
+import java.awt.*;
 
 /**
  * Sprite. The base class for all sprites in the game.
@@ -10,7 +11,7 @@ import processing.core.PVector;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public abstract class Sprite {
+public abstract class Sprite implements Displayable, Updatable {
 
   //Sprite properties
   protected PVector position;

@@ -6,5 +6,5 @@ package org.ca.bcit.comp2522;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public abstract class GameScreen {
+public abstract class GameScreen implements Displayable {
 }
