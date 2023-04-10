@@ -1,7 +1,7 @@
 package org.ca.bcit.comp2522;
 
-import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
+import javax.sound.sampled.LineUnavailableException;
 
 /**
  * Abstract class for all Game Screens.
@@ -14,7 +14,8 @@ public abstract class GameScreen implements Displayable {
   public void display(GameWindow window) {
   }
 
-  public void screenUpdate(GameWindow window) throws LineUnavailableException, FileNotFoundException {
+  public void screenUpdate(GameWindow window)
+          throws LineUnavailableException, FileNotFoundException {
   }
 
   }

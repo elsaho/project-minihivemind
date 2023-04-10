@@ -1,12 +1,12 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PVector;
-
-import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.sound.sampled.LineUnavailableException;
+import processing.core.PVector;
+
 
 /** GameManager class. The class that manages the game levels.
  */
@@ -51,7 +51,7 @@ public class GameManager {
    * @throws FileNotFoundException if the file is not found
    */
   public static void level0(GameWindow window)
-      throws LineUnavailableException, FileNotFoundException {
+          throws LineUnavailableException, FileNotFoundException, FileNotFoundException {
 
     if (Scene.isPaused) {
       databaseHelper.loadGame(GameManager.players, GameManager.bubbles);
@@ -108,6 +108,11 @@ public class GameManager {
     sprites.addAll(players);
   }
 
+  /**
+   * Loads the next level.
+   *
+   * @param window as a GameWindow
+   */
   public static void levelUpdate(GameWindow window) {
     switch (Scene.levelCount) {
       case 0 -> {

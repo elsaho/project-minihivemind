@@ -53,7 +53,8 @@ public class GamePause extends GameScreen {
    * @param window as a GameWindow
    */
   @Override
-  public void screenUpdate(GameWindow window) throws LineUnavailableException, FileNotFoundException {
+  public void screenUpdate(GameWindow window)
+          throws LineUnavailableException, FileNotFoundException {
     if (resume.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.level1;
       window.init();
