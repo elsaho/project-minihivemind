@@ -117,7 +117,7 @@ public class Bubble extends Sprite implements Collidable {
       float playerHeight = player.getSize().y;
 
       // find the closest point on the player to the bubble
-      float closestX = clamp(this.getPosition().x, playerX, playerX + playerWidth);
+      float closestX = clamp(this.getPosition().x, playerX + playerWidth / 2, playerX + playerWidth);
       float closestY = clamp(this.getPosition().y, playerY, playerY + playerHeight);
 
       // calculate the distance between the closest point and the bubble center
