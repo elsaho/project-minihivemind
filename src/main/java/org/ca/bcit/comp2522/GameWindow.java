@@ -164,12 +164,12 @@ public class GameWindow extends PApplet {
       case win -> {
         gameVictory.display(this);
         gameVictory.screenUpdate(this);
-        audio.stopBgm(); //temp fix
+        audio.stopBgm();
       }
       case lose -> {
         gameOver.display(this);
         gameOver.screenUpdate(this);
-        audio.stopBgm(); //temp fix
+        audio.stopBgm();
       }
       case level1 -> {
         scene.display(this);
