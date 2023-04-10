@@ -49,8 +49,7 @@ public class Bubble extends Sprite implements Collidable {
     }
   }
 
-  /**
-   * Bounce method allows bubbles to bounce off floors and walls.
+  /** Bounce method allows bubbles to bounce off floors and walls.
    */
   public void update() {
     // set bounce velocity, change to static final if we don't want to have diff bounce velocity
@@ -146,7 +145,7 @@ public class Bubble extends Sprite implements Collidable {
    *
    * @param bubble - Bubble instance
    */
-  public void update(Bubble bubble) {
+  public void scoreUpdate(Bubble bubble) {
     if (Lives.getInstance().getLives() > 0) {
       Scene.sounds.playOof();
       ScoreBar.getInstance().update(bubble, false, true);

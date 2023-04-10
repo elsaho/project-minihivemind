@@ -55,7 +55,6 @@ public class SelectMultiPlayer implements Displayable{
 
   //TODO: this update should be called something else, does not function like our other update where they are continuously called
   public void update(GameWindow window) {
-    GameManager.gameReset(window);
     Button.selectMultiPlayer(window, onePlayerBtn, twoPlayerBtn);
   }
 

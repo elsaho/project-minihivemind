@@ -55,12 +55,13 @@ public class GamePause extends GameScreen {
     if (resume.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.level1;
       window.init();
+      Scene.isPaused = false;
     } else if (home.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
+      Scene.isPaused = false;
       GameWindow.screen = Screen.landing;
-      GameManager.gameReset(window);
       window.init();
     } else if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      GameManager.gameReset(window);
+      Scene.isPaused = false;
       GameWindow.screen = Screen.level1;
       window.init();
     }

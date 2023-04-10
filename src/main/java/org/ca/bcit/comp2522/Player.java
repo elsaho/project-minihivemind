@@ -120,7 +120,7 @@ public class Player extends Sprite {
           new PVector(this.position.x + this.size.x, this.position.y),
           this.size.x, this.speed, window
       );
-      sounds.playShoot();
+      sounds.playSfx(sounds.shootAudio);
     }
 
   }

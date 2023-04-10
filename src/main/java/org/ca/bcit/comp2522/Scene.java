@@ -113,7 +113,7 @@ public class Scene implements Displayable{
 
       for (Player player : players) {
         if (bubble.collided(player) && !isImmune) {
-          bubble.update(bubble);
+          bubble.scoreUpdate(bubble);
         }
 
         // Check if the player's immunity has expired
@@ -122,7 +122,7 @@ public class Scene implements Displayable{
         }
         // checks if players only line exists and if it has collided with a bubble
         if (player.getPlayersLine() != null && bubble.collided(player.getPlayersLine())) {
-          sounds.playPop();
+          sounds.playSfx(sounds.popAudio);
           player.setPlayersLine(null);
           bubblesToRemove.add(bubble);
           if (bubble.size.x > Bubble.MIN_SIZE) {
@@ -168,7 +168,7 @@ public class Scene implements Displayable{
           databaseHelper.loadLevel(bubbles, sprites, window, "level2");
           break;
         case 2:
-          sounds.playWinAudio();
+          sounds.playSfx(sounds.winAudio);
           scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
           scoreBar.addScore(lives.getLives() * 1000);
           if (databaseHelper != null) {

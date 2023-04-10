@@ -45,7 +45,6 @@ public class GameLanding extends GameScreen {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
-    GameManager.gameReset(window);
     if (onePlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       is2P = false;
       window.init();
@@ -56,7 +55,6 @@ public class GameLanding extends GameScreen {
       GameWindow.screen = Screen.level1;
     } else if (instructBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.instruction;
-      System.out.println("instruction button clicked");
       window.init();
     }
   }

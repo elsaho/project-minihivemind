@@ -39,7 +39,7 @@ public class ShootLine extends Sprite implements Displayable, Updatable {
   }
 
   /**
-   * Displays shootLine onto the window.
+   * Displays shootLine onto the window
    *
    * @param window as a GameWindow
    */
@@ -61,10 +61,10 @@ public class ShootLine extends Sprite implements Displayable, Updatable {
       prevYellow.y = currYellow.y;
       prevRed.y = currRed.y;
       float tempX = prevYellow.x;
+      float tempX2 = prevRed.x;
       prevYellow.x = currYellow.x;
       prevRed.x = currRed.x;
       currYellow.x = tempX;
-      float tempX2 = prevRed.x;
       currRed.x = tempX2;
 
     }

@@ -69,7 +69,7 @@ public class Button implements Displayable {
    */
   public static void restartGame(GameWindow window, Button restart) {
     if (restart.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
-      GameManager.gameReset(window);
+      Scene.isPaused = false;
       GameWindow.screen = Screen.level1;
       window.init();
     }
