@@ -2,7 +2,7 @@ package org.ca.bcit.comp2522;
 
 /** Handles input from the user.
  */
-public class InputHandler {
+public class PlayerInputHandler {
   private final int left;
   private final int right;
   private final int up;
@@ -16,7 +16,7 @@ public class InputHandler {
    * @param right the key code for the right key
    * @param up the key code for the up key
    */
-  public InputHandler(int left, int right, int up) {
+  public PlayerInputHandler(int left, int right, int up) {
     this.isLeft = false;
     this.isRight = false;
     this.isUp = false;

@@ -9,12 +9,10 @@ package org.ca.bcit.comp2522;
  * @version 2023
  */
 public interface Collidable {
-
   /**
-   * Checks if a collision has happened.
+   * Checks if the object has collided with another object.
    *
    * @param o as an Object
-   *
    * @return boolean
    */
   boolean collided(Object o);

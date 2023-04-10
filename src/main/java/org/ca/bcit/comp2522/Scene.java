@@ -112,7 +112,7 @@ public class Scene implements Displayable {
 
       for (Player player : players) {
         if (bubble.collided(player) && !isImmune) {
-          bubble.scoreUpdate(bubble);
+          bubble.scoreUpdate(bubble); //update score
         }
 
         // Check if the player's immunity has expired
