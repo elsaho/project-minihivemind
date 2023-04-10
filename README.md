@@ -83,7 +83,7 @@ Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
   * Gameplay mechanics
   * Test maker
   * Debugger
- - Contributions
+- Contributions
   * GameWindow
   * Lives
   * Scene
@@ -104,7 +104,7 @@ Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
   * Debugger
   * Refactorer
   * Git issues go-to guy
- - Contributions
+- Contributions
   * GameInstruction
   * GameWindow
   * Scene
