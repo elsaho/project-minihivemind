@@ -34,16 +34,6 @@ public class GameManager {
   public static ArrayList<Sprite> removedSprites = new ArrayList<>();
 
 
-  /** Called to clear the game.
-   *
-   */
-  public static void clear() {
-    players.clear();
-    sprites.clear();
-    bubbles.clear();
-    removedSprites.clear();
-  }
-
   /** Called when the game is paused to save data to the database.
    *
    * @param window game window
@@ -130,9 +120,11 @@ public class GameManager {
     lives.setLives(3);
     ScoreBar.getInstance().resetValue();
     Timer.getInstance(window).resetTimer(window);
-    GameManager.clear();
+    players.clear();
+    sprites.clear();
+    bubbles.clear();
+    removedSprites.clear();
     Scene.isPaused = false;
   }
-
 }
 

@@ -214,7 +214,7 @@ public class DatabaseHelper {
     new Thread(() -> database.getCollection("level1").insertOne(document)).start();
   }
 
-  /** Save a bubble specs to the database.
+  /** Helper method to save a bubble specs to the database.
    *
    * @param bubbleDocuments bubble documents
    * @param bubble current bubble
