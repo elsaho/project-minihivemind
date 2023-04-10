@@ -19,31 +19,99 @@ Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
 ## Roles and Contributions
 
 **Mai Vu**
-- Gameplay mechanics
-- Backend 
-- Debugger
+- Roles
+  * Gameplay mechanics
+  * Backend 
+  * Debugger
+  * Refactorer
+- Contributions
+  * Bubble
+  * DatabaseHelper
+  * GameManager
+  * GamePause
+  * GameWindow
+  * Player
+  * Scene
+  * ScoreBar
+  * SoundEffects
+  * Sprite
 
 **Elsa Ho**
-- Gameplay mechanics
-- UI/UX
-- Soundtrack composer
-- Debugger
+- Roles
+  * Gameplay mechanics
+  * UI/UX
+  * Soundtrack composer
+  * Debugger
+  * Refactorer
+- Contributions
+  * Bubble
+  * Button
+  * GameInstruction
+  * GameLanding
+  * GameOver
+  * GameScreen
+  * GameVictory
+  * GameWindow
+  * Lives
+  * Player
+  * Scene
+  * Screen
+  * SelectMultiPlayer
+  * SoundEffects
+  * Sprite
+  * Timer 
 
 **Tomek Stojek**
-- Gameplay mechanics
-- Debugger
+- Roles
+  * Gameplay mechanics
+  * Debugger
+  * Refactorer
+- Contributions
+  * Bubble
+  * Collidable
+  * Displayable
+  * GameWindow
+  * Player
+  * PlayerInputHandler
+  * Scene
+  * ShootLine
+  * Sprite
+  * Updatable 
 
 **Troy Calaquian**
-- Gameplay mechanics
-- Test maker
-- Debugger
+- Roles
+  * Gameplay mechanics
+  * Test maker
+  * Debugger
+ - Contributions
+  * GameWindow
+  * Lives
+  * Scene
+  * ScoreBar
+  * Timer
+  * ButtonTest
+  * GameWindowTest
+  * LivesTest
+  * SceneTest
+  * ScoreBarTest
+  * TimerTest
 
 **Haurence Li**
-- Gameplay mechanics
-- Sound specialist
-- Test maker
-- Debugger
-- Git issues go-to 
+- Roles
+  * Gameplay mechanics
+  * Sound specialist
+  * Test maker
+  * Debugger
+  * Refactorer
+  * Git issues go-to guy
+ - Contributions
+  * GameInstruction
+  * GameWindow
+  * Scene
+  * SoundEffects
+  * Text
+  * SoundEffectsTest
+  * TextTest
 
 ## References and Citations
 
