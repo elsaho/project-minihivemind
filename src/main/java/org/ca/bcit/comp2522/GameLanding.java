@@ -32,6 +32,7 @@ public class GameLanding extends GameScreen {
    *
    * @param window as a GameWindow
    */
+  @Override
   public void display(GameWindow window) {
     window.background(bg);
     onePlayerBtn.display(window);
@@ -44,7 +45,8 @@ public class GameLanding extends GameScreen {
    *
    * @param window as a GameWindow
    */
-  public void update(GameWindow window) {
+  @Override
+  public void screenUpdate(GameWindow window) {
     if (onePlayerBtn.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       is2P = false;
       window.init();
