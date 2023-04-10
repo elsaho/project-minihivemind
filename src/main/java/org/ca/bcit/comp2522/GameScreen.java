@@ -18,4 +18,4 @@ public abstract class GameScreen implements Displayable {
           throws LineUnavailableException, FileNotFoundException {
   }
 
-  }
+}
