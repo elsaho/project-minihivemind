@@ -63,13 +63,13 @@ public class ShootLine extends Sprite {
     for (float i = 0; i < maxIncrements - speed; i++) {
       currYellow.y = (prevYellow.y - this.speed);
       currRed.y = (prevRed.y - this.speed);
-      if(playerNum == 1) {
+      if (playerNum == 1) {
         window.stroke(255, 204, 0);
       } else {
         window.stroke(255, 0, 255);
       }
       window.line(currYellow.x, currYellow.y, prevYellow.x, prevYellow.y);
-      if(playerNum == 1) {
+      if (playerNum == 1) {
         window.stroke(255, 0, 0);
       } else {
         window.stroke(0, 0, 255);
