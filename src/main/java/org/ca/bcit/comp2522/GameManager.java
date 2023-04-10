@@ -20,9 +20,6 @@ public class GameManager {
   public static PVector bubbleStartSize = new PVector(75, 75);
   public static int bubbleStartSpeed = 5;
 
-  /**
-   * Gameplay.
-   */
   private static final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
   public static Player player;
