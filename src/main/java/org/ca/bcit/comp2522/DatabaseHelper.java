@@ -58,9 +58,10 @@ public class DatabaseHelper {
    * @return the singleton instance of DatabaseHelper
    */
   public static DatabaseHelper getInstance() {
+    String pw = System.getenv("MONGO_PW");
     if (instance == null) {
       try {
-        instance = new DatabaseHelper("mongodb+srv://Bubble:comp2522@2522"
+        instance = new DatabaseHelper("mongodb+srv://Bubble:" + pw +"@2522"
             + ".w2dd0ev.mongodb.net/?retryWrites=true&w=majority");
       } catch (Exception e) {
         System.out.println("Unable to connect to MongoDB: " + e.getMessage());
