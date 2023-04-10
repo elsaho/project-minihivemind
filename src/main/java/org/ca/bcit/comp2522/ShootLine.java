@@ -61,7 +61,7 @@ public class ShootLine extends Sprite implements Displayable, Updatable {
       prevYellow.y = currYellow.y;
       prevRed.y = currRed.y;
       float tempX = prevYellow.x;
-      float tempX2 = prevRed.x;
+      final float tempX2 = prevRed.x;
       prevYellow.x = currYellow.x;
       prevRed.x = currRed.x;
       currYellow.x = tempX;

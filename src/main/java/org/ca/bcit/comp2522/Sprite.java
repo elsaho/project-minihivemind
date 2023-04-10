@@ -1,8 +1,7 @@
 package org.ca.bcit.comp2522;
 
+import java.awt.Color;
 import processing.core.PVector;
-
-import java.awt.*;
 
 /**
  * Sprite. The base class for all sprites in the game.
