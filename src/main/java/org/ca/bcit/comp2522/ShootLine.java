@@ -10,7 +10,7 @@ import processing.core.PVector;
  * @version 2023
  */
 
-public class ShootLine extends Sprite implements Displayable, Updatable {
+public class ShootLine extends Sprite {
 
   protected final float lineX;
   protected float thickness;

@@ -16,7 +16,6 @@ import processing.core.PImage;
 public class Scene implements Displayable {
 
   // Fields
-
   private static final ArrayList<Bubble> bubbles = GameManager.bubbles;
   private static final ArrayList<Player> players = GameManager.players;
   private static final ArrayList<Sprite> sprites = GameManager.sprites;
