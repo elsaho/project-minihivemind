@@ -39,7 +39,7 @@ public class ShootLine extends Sprite implements Displayable, Updatable {
   }
 
   /**
-   * Displays shootLine onto the window.
+   * Displays shootLine onto the window
    *
    * @param window as a GameWindow
    */
