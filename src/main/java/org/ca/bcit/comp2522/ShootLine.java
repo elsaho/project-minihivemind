@@ -17,6 +17,9 @@ public class ShootLine extends Sprite {
   protected float increments;
   protected final float lineY;
   private final PImage fireball;
+  protected final int playerNum;
+
+
 
   /**
    * Constructor for the Line shooting action.
@@ -26,15 +29,21 @@ public class ShootLine extends Sprite {
    * @param speed float
    * @param window GameWindow
    */
-  public ShootLine(PVector position, float size, float speed, GameWindow window) {
+  public ShootLine(PVector position, float size, float speed, GameWindow window, int playerNum) {
     super();
     this.position = position.copy();
     this.speed = speed + 1;
     this.lineX = position.x + size / 2;
     this.lineY = GameWindow.getY();
     this.position.y = GameWindow.getY();
+    this.playerNum = playerNum;
     this.thickness = 10;
-    fireball = window.loadImage("../assets/fireball.png");
+    if (playerNum == 1) {
+      fireball = window.loadImage("../assets/fireball.png");
+    } else {
+      fireball = window.loadImage("../assets/fireball2.png");
+    }
+
     this.increments = GameWindow.getY() / this.speed;
   }
 
@@ -55,9 +64,17 @@ public class ShootLine extends Sprite {
     for (float i = 0; i < maxIncrements - speed; i++) {
       currYellow.y = (prevYellow.y - this.speed);
       currRed.y = (prevRed.y - this.speed);
-      window.stroke(255, 204, 0);
+      if (playerNum == 1) {
+        window.stroke(255, 204, 0);
+      } else {
+        window.stroke(255, 0, 255);
+      }
       window.line(currYellow.x, currYellow.y, prevYellow.x, prevYellow.y);
-      window.stroke(255, 0, 0);
+      if (playerNum == 1) {
+        window.stroke(255, 0, 0);
+      } else {
+        window.stroke(0, 0, 255);
+      }
       window.line(currRed.x, currRed.y, prevRed.x, prevRed.y);
       prevYellow.y = currYellow.y;
       prevRed.y = currRed.y;
