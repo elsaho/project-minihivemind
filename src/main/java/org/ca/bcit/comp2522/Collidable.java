@@ -10,5 +10,12 @@ package org.ca.bcit.comp2522;
  */
 public interface Collidable {
 
+  /**
+   * Checks if a collision has happened.
+   *
+   * @param o as an Object
+   *
+   * @return boolean
+   */
   boolean collided(Object o);
 }

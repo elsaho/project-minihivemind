@@ -33,6 +33,7 @@ public class GameInstruction extends GameScreen {
 
   /**
    * Getter for BG image, setup for test.
+   *
    * @return bg PImage
    */
   public PImage getBg() {
@@ -41,6 +42,7 @@ public class GameInstruction extends GameScreen {
 
   /**
    * Getter for P1 Button, setup for test.
+   *
    * @return onePlayerBtn Button
    */
   public Button getOnePlayerBtn() {
@@ -49,6 +51,7 @@ public class GameInstruction extends GameScreen {
 
   /**
    * Getter for P2 Button, setup for test.
+   *
    * @return twoPlayerBtn Button
    */
   public Button getTwoPlayerBtn() {
@@ -57,6 +60,7 @@ public class GameInstruction extends GameScreen {
 
   /**
    * Getter for text, setup for test.
+   *
    * @return text Text
    */
   public Text getText() {
