@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @version 2023
  */
 
-public class Scene implements Displayable{
+public class Scene implements Displayable {
 
   // Fields
 
