@@ -50,10 +50,10 @@ public class Bubble extends Sprite implements Collidable {
 
   /** Bounce method allows bubbles to bounce off floors and walls.
    */
+  @Override
   public void update() {
     // set bounce velocity, change to static final if we don't want to have diff bounce velocity
     float bounceVelocity = -2.7f - (this.size.y / MIN_SIZE);
-
     // Check for floor collision
     if (this.position.y + size.y / 2 >= GameWindow.getY()) {
       this.position.y = GameWindow.getY() - size.y; // Move bubble to just above the floor

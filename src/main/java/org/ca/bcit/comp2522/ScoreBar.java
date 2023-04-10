@@ -71,6 +71,7 @@ public class ScoreBar implements Displayable {
    *
    * @param window the GameWindow object
    */
+  @Override
   public void display(final GameWindow window) {
     PImage heart = window.loadImage("../assets/pixelHeart.png");
     lives = Lives.getInstance();

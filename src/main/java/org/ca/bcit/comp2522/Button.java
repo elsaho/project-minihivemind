@@ -55,6 +55,7 @@ public class Button implements Displayable {
    *
    * @param window as a GameWindow
    */
+  @Override
   public void display(GameWindow window) {
     window.image(img, xpos, ypos, width, height);
     window.textAlign(PApplet.CENTER, PApplet.CENTER);

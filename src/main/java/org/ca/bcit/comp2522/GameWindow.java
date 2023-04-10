@@ -174,7 +174,7 @@ public class GameWindow extends PApplet {
       case level1 -> {
         scene.display(this);
         try {
-          scene.update(this);
+          scene.screenUpdate(this);
         } catch (LineUnavailableException | FileNotFoundException e) {
           throw new RuntimeException(e);
         }

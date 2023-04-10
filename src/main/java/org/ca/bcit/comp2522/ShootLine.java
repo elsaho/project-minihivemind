@@ -43,6 +43,7 @@ public class ShootLine extends Sprite {
    *
    * @param window as a GameWindow
    */
+  @Override
   public void display(GameWindow window) {
     window.strokeWeight(1);
     window.image(fireball, this.lineX - thickness * 2, position.y - thickness, 42, 64);
@@ -76,6 +77,7 @@ public class ShootLine extends Sprite {
    * Updates the shootLine.
    *
    */
+  @Override
   public void update() {
     if (this.position.y > thickness / 2) {
       this.position.y = (this.position.y - speed);
