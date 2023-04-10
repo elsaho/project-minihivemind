@@ -4,7 +4,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 /**
- * ShootLine. The class that creates the shootLine that the player can use to catch the bubbles.
+ * Represents the fireball line that the player shoots.
  *
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
@@ -39,7 +39,7 @@ public class ShootLine extends Sprite implements Displayable, Updatable {
   }
 
   /**
-   * Displays shootLine onto the window
+   * Displays shootLine onto the window.
    *
    * @param window as a GameWindow
    */
@@ -82,6 +82,11 @@ public class ShootLine extends Sprite implements Displayable, Updatable {
     }
   }
 
+  /**
+   * Checks if the shootLine has hit the ceiling.
+   *
+   * @return boolean
+   */
   public boolean checkHitCeiling() {
     return (this.position.y <= thickness / 2);
   }

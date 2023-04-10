@@ -18,7 +18,7 @@ public class Player extends Sprite {
   private final int right;
   private final int up;
   private final int playerNo;
-  private final InputHandler handler;
+  private final PlayerInputHandler handler;
   private final SoundEffects sounds = new SoundEffects();
   private final PImage playerLeft;
   private final PImage playerRight;
@@ -42,7 +42,7 @@ public class Player extends Sprite {
                 int left, int right, int up, int playerNo)
           throws LineUnavailableException, FileNotFoundException {
     super(position, direction, size, speed, color, window);
-    handler = new InputHandler(left, right, up);
+    handler = new PlayerInputHandler(left, right, up);
     window.addInputHandler(handler);
     this.left = left;
     this.right = right;
@@ -66,24 +66,40 @@ public class Player extends Sprite {
     playersLine = null;
   }
 
-
+  /** Getter for the players left key.
+   *
+   * @return the left key as an int.
+   */
   public int getLeft() {
     return left;
   }
 
+  /** Getter for the players right key.
+   *
+   * @return the right key as an int.
+   */
   public int getRight() {
     return right;
   }
 
+  /** Getter for the players up key.
+   *
+   * @return the up key as an int.
+   */
   public int getUp() {
     return up;
   }
 
+  /** Getter for the players number.
+   *
+   * @return the player number as an int.
+   */
   public int getPlayerNo() {
     return playerNo;
   }
 
-  /** Updates the player's position based on the arrow key pressed by the user.
+  /** Updates the player's position based on the arrow key pressed by the user
+   * and creates a line if the up key is pressed and line is not null.
    */
   public void update() {
     if (playersLine != null) {
@@ -114,6 +130,10 @@ public class Player extends Sprite {
     }
   }
 
+  /** Creates a new ShootLine object.
+   *
+   * @param window the GameWindow instance used to display the player.
+   */
   void makeLine(GameWindow window) {
     if (playersLine == null) {
       playersLine = new ShootLine(
@@ -155,10 +175,18 @@ public class Player extends Sprite {
     }
   }
 
+  /** Gets the players ShootLine object.
+   *
+   * @return the players ShootLine object.
+   */
   public ShootLine getPlayersLine() {
     return playersLine;
   }
 
+  /** Sets the players ShootLine object.
+   *
+   * @param playersLine the ShootLine object to be set.
+   */
   public void setPlayersLine(ShootLine playersLine) {
     this.playersLine = playersLine;
   }
