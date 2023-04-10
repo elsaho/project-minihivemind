@@ -140,34 +140,34 @@ public class GameWindow extends PApplet {
     switch (screen) {
       case landing -> {
         landingPage.display(this);
-        landingPage.update(this);
+        landingPage.screenUpdate(this);
         audio.playBgm();
       }
       case pause -> {
         pause.display(this);
         try {
-          pause.update(this);
+          pause.screenUpdate(this);
         } catch (LineUnavailableException | FileNotFoundException e) {
           throw new RuntimeException(e);
         }
       }
       case playerSelect -> {
         selectMultiPlayer.display(this);
-        selectMultiPlayer.update(this);
+        selectMultiPlayer.screenUpdate(this);
       }
       case instruction -> {
         instructionStart.display(this);
-        instructionStart.update(this);
+        instructionStart.screenUpdate(this);
         audio.stopBgm();
       }
       case win -> {
         gameVictory.display(this);
-        gameVictory.update(this);
+        gameVictory.screenUpdate(this);
         audio.stopBgm(); //temp fix
       }
       case lose -> {
         gameOver.display(this);
-        gameOver.update(this);
+        gameOver.screenUpdate(this);
         audio.stopBgm(); //temp fix
       }
       case level1 -> {
@@ -180,7 +180,7 @@ public class GameWindow extends PApplet {
       }
       default -> {
         landingPage.display(this);
-        landingPage.update(this);
+        landingPage.screenUpdate(this);
       }
     }
   }

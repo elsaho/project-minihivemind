@@ -37,6 +37,7 @@ public class GameOver extends GameScreen {
    *
    * @param window GameWindow
    */
+  @Override
   public void display(GameWindow window) {
     Text.endGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
@@ -47,8 +48,8 @@ public class GameOver extends GameScreen {
    *
    * @param window GameWindow
    */
-  public void update(GameWindow window) {
+  @Override
+  public void screenUpdate(GameWindow window) {
     Button.restartGame(window, restart);
   }
-
 }

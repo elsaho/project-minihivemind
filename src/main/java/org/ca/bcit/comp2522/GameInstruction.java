@@ -68,6 +68,7 @@ public class GameInstruction extends GameScreen {
    *
    * @param window as a GameWindow
    */
+  @Override
   public void display(GameWindow window) {
     window.background(bg);
     onePlayerBtn.display(window);
@@ -80,7 +81,8 @@ public class GameInstruction extends GameScreen {
    *
    * @param window as a GameWindow
    */
-  public void update(GameWindow window) {
+  @Override
+  public void screenUpdate(GameWindow window) {
     Button.selectMultiPlayer(window, onePlayerBtn, twoPlayerBtn);
   }
 }
