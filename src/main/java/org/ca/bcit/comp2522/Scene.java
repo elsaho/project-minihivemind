@@ -1,9 +1,10 @@
 package org.ca.bcit.comp2522;
 
+import processing.core.PImage;
+
+import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import javax.sound.sampled.LineUnavailableException;
-import processing.core.PImage;
 
 /**
  * Scene class. The class that contains all the sprites in the game.
@@ -49,8 +50,8 @@ public class Scene implements Displayable {
       throw new RuntimeException(e);
     }
 
-    this.scoreBar = ScoreBar.getInstance();
-    this.lives = Lives.getInstance();
+    scoreBar = ScoreBar.getInstance();
+    lives = Lives.getInstance();
   }
 
   /**
@@ -68,7 +69,7 @@ public class Scene implements Displayable {
     bg = window.loadImage("../assets/SkyBackground.png");
 
     //starts the timer
-    this.timer = Timer.getInstance(window);
+    timer = Timer.getInstance(window);
   }
 
   /**
