@@ -10,7 +10,7 @@ import processing.core.PImage;
  * @version 2023
  */
 
-public class SelectMultiPlayer extends GameScreen implements Displayable {
+public class SelectMultiPlayer extends GameScreen {
 
   /**
    * Properties of the Select Multiple player class.
