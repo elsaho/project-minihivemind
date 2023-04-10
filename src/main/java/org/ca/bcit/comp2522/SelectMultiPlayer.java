@@ -10,7 +10,7 @@ import processing.core.PImage;
  * @version 2023
  */
 
-public class SelectMultiPlayer implements Displayable{
+public class SelectMultiPlayer extends GameScreen implements Displayable{
 
   /**
    * Properties of the Select Multiple player class.
@@ -40,6 +40,7 @@ public class SelectMultiPlayer implements Displayable{
    *
    * @param window as a GameWindow
    */
+  @Override
   public void display(GameWindow window) {
     window.background(bg);
     onePlayerBtn.display(window);
@@ -52,8 +53,8 @@ public class SelectMultiPlayer implements Displayable{
    *
    * @param window as a GameWindow
    */
-  //TODO: this update should be called something else, does not function like our other update where they are continuously called
-  public void update(GameWindow window) {
+  @Override
+  public void screenUpdate(GameWindow window) {
     Button.selectMultiPlayer(window, onePlayerBtn, twoPlayerBtn);
   }
 

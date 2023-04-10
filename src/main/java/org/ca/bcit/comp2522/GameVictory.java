@@ -35,6 +35,7 @@ public class GameVictory extends GameScreen {
    *
    * @param window as a Game Window
    */
+  @Override
   public void display(GameWindow window) {
     Text.endGameDisplay(window, bg, myFont, databaseHelper, restart);
   }
@@ -44,7 +45,8 @@ public class GameVictory extends GameScreen {
    *
    * @param window as a GameWindow
    */
-  public void update(GameWindow window) {
+  @Override
+  public void screenUpdate(GameWindow window) {
     Button.restartGame(window, restart);
   }
 

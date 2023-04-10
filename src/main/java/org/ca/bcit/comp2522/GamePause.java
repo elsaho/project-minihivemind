@@ -38,6 +38,7 @@ public class GamePause extends GameScreen {
    *
    * @param window as a GameWindowq
    */
+  @Override
   public void display(GameWindow window) {
     window.background(bg);
     resume.display(window);
@@ -51,7 +52,8 @@ public class GamePause extends GameScreen {
    *
    * @param window as a GameWindow
    */
-  public void update(GameWindow window) throws LineUnavailableException, FileNotFoundException {
+  @Override
+  public void screenUpdate(GameWindow window) throws LineUnavailableException, FileNotFoundException {
     if (resume.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       GameWindow.screen = Screen.level1;
       window.init();
