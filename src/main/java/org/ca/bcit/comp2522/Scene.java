@@ -1,10 +1,9 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PImage;
-
-import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.sound.sampled.LineUnavailableException;
+import processing.core.PImage;
 
 /**
  * Scene class. The class that contains all the sprites in the game.
@@ -95,7 +94,8 @@ public class Scene implements Displayable {
    *
    * @param window as a GameWindow
    */
-  public void screenUpdate(GameWindow window) throws LineUnavailableException, FileNotFoundException{
+  public void screenUpdate(GameWindow window)
+          throws LineUnavailableException, FileNotFoundException {
     //check if the game is paused
     if (!(databaseHelper == null)) {
       GameManager.pause(window);
