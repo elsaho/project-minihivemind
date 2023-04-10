@@ -1,10 +1,9 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PImage;
-
-import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.sound.sampled.LineUnavailableException;
+import processing.core.PImage;
 
 /**
  * Scene class. The class that contains all the sprites in the game.
@@ -104,7 +103,7 @@ public class Scene implements Displayable {
     ArrayList<Bubble> newBubbles = new ArrayList<>();
     ArrayList<Bubble> bubblesToRemove = new ArrayList<>();
 
-    for(Player player : players) {
+    for (Player player : players) {
       player.update();
     }
 
