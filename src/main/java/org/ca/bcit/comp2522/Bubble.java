@@ -150,8 +150,6 @@ public class Bubble extends Sprite implements Collidable {
       ScoreBar.getInstance().update(bubble, false, true);
       Scene.isImmune = true;
       Scene.lastCollisionTime = System.currentTimeMillis();
-    } else {
-      Scene.sounds.playLoseAudio();
     }
   }
 
