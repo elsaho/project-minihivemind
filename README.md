@@ -26,14 +26,21 @@ Mai Vu, Elsa Ho, Tomek Stojek, Troy Calaquian, and Haurence Li
   * Refactorer
 - Contributions
   * Bubble
+  * Button
   * DatabaseHelper
+  * GameInstruction
+  * GameLanding
+  * GameOver
+  * GameVictory
   * GameManager
   * GamePause
   * GameWindow
+  * Lives
   * Player
   * Scene
   * ScoreBar
-  * SoundEffects
+  * Text
+  * Timer
   * Sprite
 
 **Elsa Ho**
