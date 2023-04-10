@@ -89,6 +89,7 @@ public abstract class Sprite implements Displayable, Updatable {
    *
    * @param window as a GameWindow
    */
+  @Override
   public void display(GameWindow window) {
     window.pushStyle();
     window.fill(this.color.getRed(), this.color.getGreen(), this.color.getBlue());

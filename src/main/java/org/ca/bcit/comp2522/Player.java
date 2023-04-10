@@ -100,6 +100,7 @@ public class Player extends Sprite {
   /** Updates the player's position based on the arrow key pressed by the user
    * and creates a line if the up key is pressed and line is not null.
    */
+  @Override
   public void update() {
     if (playersLine != null) {
       playersLine.update();

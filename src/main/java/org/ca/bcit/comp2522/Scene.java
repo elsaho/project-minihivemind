@@ -76,6 +76,7 @@ public class Scene implements Displayable {
    *
    * @param window as a GameWindow
    */
+  @Override
   public void display(GameWindow window) {
     window.background(bg);
 
@@ -93,7 +94,7 @@ public class Scene implements Displayable {
    *
    * @param window as a GameWindow
    */
-  public void update(GameWindow window) throws LineUnavailableException, FileNotFoundException {
+  public void screenUpdate(GameWindow window) throws LineUnavailableException, FileNotFoundException{
     //check if the game is paused
     if (!(databaseHelper == null)) {
       GameManager.pause(window);
