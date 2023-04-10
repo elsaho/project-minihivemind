@@ -106,12 +106,12 @@ public class Scene {
     ArrayList<Bubble> bubblesToRemove = new ArrayList<>();
 
     for (Bubble bubble : bubbles) {
-      bubble.bounce();
+      bubble.update();
       bubble.display(window);
 
       for (Player player : players) {
         if (bubble.collided(player) && !isImmune) {
-          bubble.update(bubble);
+          bubble.scoreUpdate(bubble);
         }
 
         // Check if the player's immunity has expired

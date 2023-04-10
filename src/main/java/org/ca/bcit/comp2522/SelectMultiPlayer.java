@@ -53,7 +53,6 @@ public class SelectMultiPlayer {
    * @param window as a GameWindow
    */
   public void update(GameWindow window) {
-    GameManager.gameReset(window);
     Button.selectMultiPlayer(window, onePlayerBtn, twoPlayerBtn);
   }
 
