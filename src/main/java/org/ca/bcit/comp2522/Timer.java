@@ -44,7 +44,8 @@ public class Timer {
   }
 
   /**
-   * Setter for start
+   * Setter for start.
+   *
    * @param i int
    */
   public void setStart(int i) {
