@@ -13,7 +13,7 @@ import processing.core.PImage;
  * @version 2023
  */
 
-public class Scene {
+public class Scene implements Displayable{
 
   // Fields
   private static final ArrayList<Bubble> bubbles = GameManager.bubbles;
@@ -22,12 +22,12 @@ public class Scene {
   private final ArrayList<Sprite> removedSprites = GameManager.removedSprites;
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
-  private final Lives lives;
-  private final ScoreBar scoreBar;
+  public static  Lives lives;
+  public static ScoreBar scoreBar;
 
   public static int levelCount = 0;
 
-  private Timer timer;
+  public static Timer timer;
   private PImage bg;
 
   // Static fields
@@ -99,15 +99,15 @@ public class Scene {
       GameManager.pause(window);
     }
 
-    for (Player player : players) {
-      player.update();
-    }
     ArrayList<Bubble> newBubbles = new ArrayList<>();
     ArrayList<Bubble> bubblesToRemove = new ArrayList<>();
 
+    for(Player player : players) {
+      player.update();
+    }
+
     for (Bubble bubble : bubbles) {
       bubble.update();
-      bubble.display(window);
 
       for (Player player : players) {
         if (bubble.collided(player) && !isImmune) {
@@ -118,7 +118,7 @@ public class Scene {
         if (isImmune && System.currentTimeMillis() - lastCollisionTime > 1500) {
           isImmune = false;
         }
-
+        // checks if players only line exists and if it has collided with a bubble
         if (player.getPlayersLine() != null && bubble.collided(player.getPlayersLine())) {
           sounds.playSfx(sounds.popAudio);
           player.setPlayersLine(null);
@@ -147,6 +147,7 @@ public class Scene {
     //Remove bubbles that have been popped, and add new bubbles
     bubbles.removeAll(bubblesToRemove);
     bubbles.addAll(newBubbles);
+    sprites.addAll(newBubbles);
     removedSprites.addAll(bubblesToRemove);
     for (Sprite sprite : removedSprites) {
       sprites.remove(sprite);
@@ -154,32 +155,7 @@ public class Scene {
 
     //Game victory
     if (bubbles.isEmpty()) {
-      switch (levelCount) {
-        case 0:
-          for (Player player : players) {
-            player.position.x = GameWindow.getX() - player.size.x * 2;
-          }
-          databaseHelper.loadLevel(bubbles, window, "level1");
-          break;
-        case 1:
-          databaseHelper.loadLevel(bubbles, window, "level2");
-          break;
-        case 2:
-          sounds.playSfx(sounds.winAudio);
-          scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
-          scoreBar.addScore(lives.getLives() * 1000);
-          if (databaseHelper != null) {
-            databaseHelper.put("score", scoreBar.getValue());
-          }
-          levelCount = 0;
-          GameWindow.screen = Screen.win;
-          break;
-        default:
-          System.err.println("Level count is not valid");
-          break;
-      }
-      levelCount++;
-      timer.resetTimer(window);
+      GameManager.levelUpdate(window);
     }
 
   }
@@ -222,5 +198,4 @@ public class Scene {
   public ArrayList<Bubble> getBubbles() {
     return bubbles;
   }
-
 }

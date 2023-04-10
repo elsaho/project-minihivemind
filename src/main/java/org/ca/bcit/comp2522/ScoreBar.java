@@ -9,7 +9,7 @@ import processing.core.PImage;
  * @author Troy Calaquian, Mai Vu, Haurence Li, Tomek Stojek, and Elsa Ho
  * @version 2023
  */
-public class ScoreBar {
+public class ScoreBar implements Displayable{
 
   private static ScoreBar single_instance = null;
   private int value;
