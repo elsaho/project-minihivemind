@@ -9,7 +9,7 @@ import processing.core.PImage;
  * @author Mai Vu, Elsa Ho, Tomasz Stojek, Haurence Li, Troy Calaquian
  * @version 2023
  */
-public class Button {
+public class Button implements Displayable {
 
   /**
    * Button properties.

@@ -1,11 +1,12 @@
 package org.ca.bcit.comp2522;
 
-import java.awt.Color;
+import processing.core.PVector;
+
+import javax.sound.sampled.LineUnavailableException;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.sound.sampled.LineUnavailableException;
-import processing.core.PVector;
 
 /** GameManager class. The class that manages the game levels.
  */
@@ -32,6 +33,7 @@ public class GameManager {
   public static ArrayList<Bubble> bubbles = new ArrayList<>();
 
   public static ArrayList<Sprite> removedSprites = new ArrayList<>();
+
 
 
   /** Called when the game is paused to save data to the database.
@@ -75,6 +77,7 @@ public class GameManager {
                 new PVector(0, 1), playerSize, playerSpeed,
                 new Color(0, 255, 255), window, 37, 39, 38, 1);
         players.add(player);
+
 
         player2 = new Player(
             new PVector((float) GameWindow.getX() / 2 - 175, GameWindow.getY() - playerSize.y),

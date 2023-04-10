@@ -1,9 +1,10 @@
 package org.ca.bcit.comp2522;
 
+import processing.core.PImage;
+
+import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import javax.sound.sampled.LineUnavailableException;
-import processing.core.PImage;
 
 /**
  * Scene class. The class that contains all the sprites in the game.
@@ -13,9 +14,10 @@ import processing.core.PImage;
  * @version 2023
  */
 
-public class Scene {
+public class Scene implements Displayable{
 
   // Fields
+
   private static final ArrayList<Bubble> bubbles = GameManager.bubbles;
   private static final ArrayList<Player> players = GameManager.players;
   private static final ArrayList<Sprite> sprites = GameManager.sprites;
@@ -99,15 +101,15 @@ public class Scene {
       GameManager.pause(window);
     }
 
-    for (Player player : players) {
-      player.update();
-    }
     ArrayList<Bubble> newBubbles = new ArrayList<>();
     ArrayList<Bubble> bubblesToRemove = new ArrayList<>();
 
+    for(Player player : players) {
+      player.update();
+    }
+
     for (Bubble bubble : bubbles) {
       bubble.update();
-      bubble.display(window);
 
       for (Player player : players) {
         if (bubble.collided(player) && !isImmune) {
@@ -118,7 +120,7 @@ public class Scene {
         if (isImmune && System.currentTimeMillis() - lastCollisionTime > 1500) {
           isImmune = false;
         }
-
+        // checks if players only line exists and if it has collided with a bubble
         if (player.getPlayersLine() != null && bubble.collided(player.getPlayersLine())) {
           sounds.playSfx(sounds.popAudio);
           player.setPlayersLine(null);
@@ -147,6 +149,7 @@ public class Scene {
     //Remove bubbles that have been popped, and add new bubbles
     bubbles.removeAll(bubblesToRemove);
     bubbles.addAll(newBubbles);
+    sprites.addAll(newBubbles);
     removedSprites.addAll(bubblesToRemove);
     for (Sprite sprite : removedSprites) {
       sprites.remove(sprite);
@@ -159,10 +162,10 @@ public class Scene {
           for (Player player : players) {
             player.position.x = GameWindow.getX() - player.size.x * 2;
           }
-          databaseHelper.loadLevel(bubbles, window, "level1");
+          databaseHelper.loadLevel(bubbles, sprites, window, "level1");
           break;
         case 1:
-          databaseHelper.loadLevel(bubbles, window, "level2");
+          databaseHelper.loadLevel(bubbles, sprites, window, "level2");
           break;
         case 2:
           sounds.playSfx(sounds.winAudio);
@@ -222,5 +225,6 @@ public class Scene {
   public ArrayList<Bubble> getBubbles() {
     return bubbles;
   }
+
 
 }

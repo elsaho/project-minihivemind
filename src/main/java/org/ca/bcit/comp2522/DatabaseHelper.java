@@ -1,7 +1,5 @@
 package org.ca.bcit.comp2522;
 
-import static org.ca.bcit.comp2522.GameManager.bubbleStartSpeed;
-
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerApi;
@@ -10,15 +8,18 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import java.awt.Color;
+import org.bson.Document;
+import processing.core.PVector;
+
+import javax.sound.sampled.LineUnavailableException;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import javax.sound.sampled.LineUnavailableException;
-import org.bson.Document;
-import processing.core.PVector;
+
+import static org.ca.bcit.comp2522.GameManager.bubbleStartSpeed;
 
 /**
  * A helper class for connecting to MongoDB.
@@ -288,11 +289,13 @@ public class DatabaseHelper {
     }
   }
 
-  /**Pull the game level from the database.
+  /**
+   * Pull the game level from the database.
    *
    * @param bubbles current bubbles
+   * @param sprites
    */
-  public void loadLevel(ArrayList<Bubble> bubbles, GameWindow window, String level) {
+  public void loadLevel(ArrayList<Bubble> bubbles, ArrayList<Sprite> sprites, GameWindow window, String level) {
     Document savedGameState = database.getCollection(level).find().first();
     // Load the bubbles
     List<Document> bubbleDocuments = savedGameState.getList("bubbles", Document.class);
@@ -310,6 +313,7 @@ public class DatabaseHelper {
           new PVector(bubbleDoc.getDouble("velocity.x").floatValue(),
               bubbleDoc.getDouble("velocity.y").floatValue()));
       bubbles.add(bubble);
+      sprites.add(bubble);
     }
   }
 }
