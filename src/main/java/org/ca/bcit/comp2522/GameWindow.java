@@ -1,10 +1,9 @@
 package org.ca.bcit.comp2522;
 
-import processing.core.PApplet;
-
-import javax.sound.sampled.LineUnavailableException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.sound.sampled.LineUnavailableException;
+import processing.core.PApplet;
 
 /**
  * The main class for the game.
