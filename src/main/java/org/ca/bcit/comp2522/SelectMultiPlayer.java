@@ -52,7 +52,6 @@ public class SelectMultiPlayer implements Displayable{
    *
    * @param window as a GameWindow
    */
-
   //TODO: this update should be called something else, does not function like our other update where they are continuously called
   public void update(GameWindow window) {
     Button.selectMultiPlayer(window, onePlayerBtn, twoPlayerBtn);

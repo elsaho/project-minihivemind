@@ -24,12 +24,12 @@ public class Scene implements Displayable{
   private final ArrayList<Sprite> removedSprites = GameManager.removedSprites;
   private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
-  private final Lives lives;
-  private final ScoreBar scoreBar;
+  public static  Lives lives;
+  public static ScoreBar scoreBar;
 
   public static int levelCount = 0;
 
-  private Timer timer;
+  public static Timer timer;
   private PImage bg;
 
   // Static fields
@@ -157,32 +157,7 @@ public class Scene implements Displayable{
 
     //Game victory
     if (bubbles.isEmpty()) {
-      switch (levelCount) {
-        case 0:
-          for (Player player : players) {
-            player.position.x = GameWindow.getX() - player.size.x * 2;
-          }
-          databaseHelper.loadLevel(bubbles, sprites, window, "level1");
-          break;
-        case 1:
-          databaseHelper.loadLevel(bubbles, sprites, window, "level2");
-          break;
-        case 2:
-          sounds.playSfx(sounds.winAudio);
-          scoreBar.finishedLevel((int) timer.getRemaining() / 10000);
-          scoreBar.addScore(lives.getLives() * 1000);
-          if (databaseHelper != null) {
-            databaseHelper.put("score", scoreBar.getValue());
-          }
-          levelCount = 0;
-          GameWindow.screen = Screen.win;
-          break;
-        default:
-          System.err.println("Level count is not valid");
-          break;
-      }
-      levelCount++;
-      timer.resetTimer(window);
+      GameManager.levelUpdate(window);
     }
 
   }
@@ -225,6 +200,4 @@ public class Scene implements Displayable{
   public ArrayList<Bubble> getBubbles() {
     return bubbles;
   }
-
-
 }

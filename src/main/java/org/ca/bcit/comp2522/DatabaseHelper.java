@@ -1,5 +1,7 @@
 package org.ca.bcit.comp2522;
 
+import static org.ca.bcit.comp2522.GameManager.bubbleStartSpeed;
+
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerApi;
@@ -8,18 +10,13 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-import processing.core.PVector;
-
-import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
-import java.io.FileNotFoundException;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
-import static org.ca.bcit.comp2522.GameManager.bubbleStartSpeed;
+import org.bson.Document;
+import processing.core.PVector;
 
 /**
  * A helper class for connecting to MongoDB.
@@ -113,27 +110,10 @@ public class DatabaseHelper {
   }
 
   /** Save current game data to the database.
-   *
-   * @param window GameWindow
    */
-  public void saveGame(GameWindow window) {
+  public void saveGame() {
     if (instance != null) {
       Document document = new Document();
-
-      // Save the game timer
-      document.append("timer", Timer.getInstance(window).getRemaining());
-
-      // Save the number of lives
-      document.append("lives", Lives.getInstance().getLives());
-
-      // Save the score bar
-      document.append("scoreBar", ScoreBar.getInstance().getValue());
-
-      // Save the last collision time
-      document.append("lastCollisionTime", Scene.lastCollisionTime);
-
-      // Save the immune status
-      document.append("isImmune", Scene.isImmune);
 
       // Save the player
       ArrayList<Document> playerDocuments = new ArrayList<>();
@@ -169,7 +149,7 @@ public class DatabaseHelper {
   /** Load levels to datatbase.This only needs calling once.DO NOT DELETE
    *
    */
-  public void uploadLvls(GameWindow window) throws LineUnavailableException, FileNotFoundException {
+  public void uploadLvls(GameWindow window) {
     ArrayList<Bubble> bubbles = new ArrayList<>();
     Random rand = new Random();
     int bubbleStartY = rand.nextInt(100) + 100;
@@ -249,15 +229,6 @@ public class DatabaseHelper {
 
       if (savedGameState != null) {
 
-        // Load the number of lives
-        Lives.getInstance().setLives(savedGameState.getInteger("lives"));
-
-        // Load the last collision time
-        Scene.lastCollisionTime = savedGameState.getLong("lastCollisionTime");
-
-        // Load the immune status
-        Scene.isImmune = savedGameState.getBoolean("isImmune");
-
         // Load the players
         List<Document> playerDocuments = savedGameState.getList("players", Document.class);
         for (int i = playerDocuments.size() - 1; i >= 0; i--) {
@@ -281,7 +252,6 @@ public class DatabaseHelper {
           bubble.direction.y = bubbleDoc.getDouble("direction.y").floatValue();
           bubble.size.x = bubbleDoc.getDouble("size.x").floatValue();
           bubble.speed = bubbleDoc.getDouble("speed").floatValue();
-          // bubble.color = new Color(bubbleDoc.getInteger("red"), 0, 0);
           bubble.velocity = new PVector(bubbleDoc.getDouble("velocity.x").floatValue(),
               bubbleDoc.getDouble("velocity.y").floatValue());
         }
@@ -289,11 +259,10 @@ public class DatabaseHelper {
     }
   }
 
-  /**
-   * Pull the game level from the database.
+  /** Pull the game level from the database.
    *
    * @param bubbles current bubbles
-   * @param sprites
+   * @param sprites current sprites
    */
   public void loadLevel(ArrayList<Bubble> bubbles, ArrayList<Sprite> sprites, GameWindow window, String level) {
     Document savedGameState = database.getCollection(level).find().first();

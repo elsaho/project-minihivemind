@@ -21,9 +21,6 @@ public class GameManager {
   public static PVector bubbleStartSize = new PVector(75, 75);
   public static int bubbleStartSpeed = 5;
 
-  /**
-   * Gameplay.
-   */
   private static final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
   public static Player player;
@@ -33,9 +30,7 @@ public class GameManager {
   public static ArrayList<Bubble> bubbles = new ArrayList<>();
 
   public static ArrayList<Sprite> removedSprites = new ArrayList<>();
-
-
-
+  
   /** Called when the game is paused to save data to the database.
    *
    * @param window game window
@@ -43,7 +38,7 @@ public class GameManager {
   public static void pause(GameWindow window) {
     if (Scene.pause.isClicked(window.mouseX, window.mouseY, window.mousePressed)) {
       Scene.isPaused = true;
-      databaseHelper.saveGame(window);
+      databaseHelper.saveGame();
       GameWindow.screen = Screen.pause;
       window.init();
     }
@@ -111,6 +106,31 @@ public class GameManager {
     }
     sprites.addAll(bubbles);
     sprites.addAll(players);
+  }
+
+  public static void levelUpdate(GameWindow window) {
+    switch (Scene.levelCount) {
+      case 0 -> {
+        for (Player player : players) {
+          player.position.x = GameWindow.getX() - player.size.x * 2;
+        }
+        databaseHelper.loadLevel(bubbles, sprites, window, "level1");
+      }
+      case 1 -> databaseHelper.loadLevel(bubbles, sprites, window, "level2");
+      case 2 -> {
+        Scene.sounds.playSfx(Scene.sounds.winAudio);
+        Scene.scoreBar.finishedLevel((int) Scene.timer.getRemaining() / 10000);
+        Scene.scoreBar.addScore(Scene.lives.getLives() * 1000);
+        if (databaseHelper != null) {
+          databaseHelper.put("score", Scene.scoreBar.getValue());
+        }
+        Scene.levelCount = 0;
+        GameWindow.screen = Screen.win;
+      }
+      default -> System.err.println("Level count is not valid");
+    }
+    Scene.levelCount++;
+    Scene.timer.resetTimer(window);
   }
 
   /** Callled to reset the game.
