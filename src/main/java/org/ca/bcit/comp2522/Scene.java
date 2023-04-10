@@ -112,6 +112,9 @@ public class Scene implements Displayable {
       for (Player player : players) {
         if (bubble.collided(player) && !isImmune) {
           bubble.scoreUpdate(bubble); //update score
+          if (lives.getLives() == 0) {
+            Scene.sounds.playLoseAudio();
+          }
         }
 
         // Check if the player's immunity has expired
@@ -155,6 +158,7 @@ public class Scene implements Displayable {
 
     //Game victory
     if (bubbles.isEmpty()) {
+      Scene.sounds.playSfx(Scene.sounds.winAudio);
       GameManager.levelUpdate(window);
     }
 
